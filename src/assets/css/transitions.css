@@ -1,0 +1,19 @@
+/* Vue slide-down transition */
+.slide-down-enter-active,
+.slide-down-leave-active {
+    will-change: max-height;
+    transition: all 0.28s ease;
+}
+.slide-down-enter,
+.slide-down-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+.slide-down-move {
+    position: absolute;
+}
+
+/* Input transitions */
+.fvl-has-error .fvl-input-text {
+    transition: border 0.28s ease;
+}
