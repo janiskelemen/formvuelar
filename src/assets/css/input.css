@@ -7,10 +7,3 @@
 .fvl-input-text {
     @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
 }
-
-.fvl-has-error .fvl-input-text {
-    @apply border-red-light;
-}
-.fvl-input-error-message {
-    @apply text-red-light font-bold pt-1;
-}

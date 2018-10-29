@@ -1,20 +1,23 @@
 <template>
-    <div class="fvl-input-wrapper" :class="hasError">
-        <label v-if="label" class="fvl-input-label" :class="labelClass" :for="name" v-html="label"/>
+    <div class="fvl-checkbox-wrapper" :class="hasError">
         <input
-            :value="value"
-            @input="$emit('update:value', $event.target.value)"
+            type="checkbox"
             :name="name"
             :id="name"
-            :type="type"
-            :placeholder="placeholder"
-            :autocomplete="autocomplete"
-            class="fvl-input-text"
-            :class="fieldClass"
+            @input="$emit('update:checked', $event.target.checked)"
+            class="fvl-checkbox"
+            :class="{'checked': checked, fieldClass}"
         >
+        <label
+            v-if="label"
+            class="fvl-checkbox-label"
+            :class="labelClass"
+            :for="name"
+            v-html="label"
+        />
         <slot name="hint"/>
         <transition name="slide-down" appear>
-            <div v-if="errors[0]" class="fvl-input-error-message" v-html="errors[0]"></div>
+            <div v-if="errors[0]" class="fvl-checkbox-error-message" v-html="errors[0]"></div>
         </transition>
     </div>
 </template>
@@ -41,20 +44,9 @@ export default {
             type: String,
             required: true
         },
-        value: {
-            type: String
-        },
-        type: {
-            type: String,
-            default: 'text'
-        },
-        placeholder: {
-            type: String,
-            required: false
-        },
-        autocomplete: {
-            type: String,
-            required: false
+        checked: {
+            type: Boolean,
+            default: false
         },
         fieldClass: {
             type: String,

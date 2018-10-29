@@ -1,5 +1,7 @@
 @tailwind preflight;
 @tailwind components;
 @tailwind utilities;
+@import 'errors.css';
 @import 'input.css';
+@import 'checkbox.css';
 @import 'transitions.css';

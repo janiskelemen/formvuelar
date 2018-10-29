@@ -1,0 +1,26 @@
+.fvl-checkbox-wrapper {
+    @apply p-2;
+}
+.fvl-checkbox {
+    @apply absolute opacity-0;
+}
+.fvl-checkbox + label {
+    @apply relative cursor-pointer p-0;
+}
+.fvl-checkbox + label:before {
+    content: '';
+    @apply inline-block align-text-bottom bg-grey-lighter text-teal border border-grey-lighter rounded mr-4 h-6 w-6;
+}
+.fvl-checkbox:focus + label:before {
+    @apply border-white;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+}
+.fvl-checkbox.checked + label:before {
+    @apply bg-teal border-teal;
+}
+.fvl-checkbox:disabled + label {
+    @apply text-grey-light cursor-auto;
+}
+.fvl-checkbox:disabled + label:before {
+    @apply bg-grey-lighter shadow-none;
+}
