@@ -6,7 +6,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build-site": "vue-cli-service build --dest site; cp site/index.html index.html; sed -i'index.bak' 's/\\/js/site\\/js/g' index.html",
+        "build-site": "vue-cli-service build --dest site; cp site/index.html index.html; sed -i'.bak' 's/\\/js/site\\/js/g' index.html",
         "bundle": "vue-cli-service build --target lib --name lib ./src/components/MyComponent.vue",
         "lint": "vue-cli-service lint",
         "test:e2e": "vue-cli-service test:e2e",
