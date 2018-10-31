@@ -1,9 +1,4 @@
 <p align="center">
-![Formvuelar](https://janiskelemen.github.io/formvuelar/site/Formvuelar.svg)
+<img  src="https://janiskelemen.github.io/formvuelar/site/Formvuelar.svg" alt="Formvuelar" />
 </p>
 # ...
-
-
-
-
-
