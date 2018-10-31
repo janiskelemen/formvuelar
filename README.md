@@ -1,4 +1,5 @@
-![Formvuelar](https://janiskelemen.github.io/formvuelar/site/Formvuelar.svg)
+
+![Formvuelar](https://raw.githubusercontent.com/janiskelemen/formvuelar/src/assets/Formvuelar.svg)
 
 # formvuelar
 
