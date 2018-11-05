@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <a href="https://github.com/janiskelemen/formvuelar" class="absolute pin-r pin-t m-4" title="View on Github">
+      <img alt="View on Github" width="40" height="40" src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png">
+    </a>
     <h1 class="text-center mb-16">
       <svg width="340" height="81" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -46,6 +49,7 @@
         @click="getErrors()"
       >Validate</button>
     </fvl-form>
+
   </div>
 </template>
 
