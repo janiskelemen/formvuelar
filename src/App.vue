@@ -15,7 +15,9 @@
         ></path>
       </svg>
     </h1>
+
     <fvl-form :errors="errors">
+
       <fvl-input
         label="Name"
         name="name"
@@ -23,6 +25,7 @@
         :value.sync="name"
         placeholder="Type your name"
       />
+
       <fvl-input
         label="Password"
         name="password"
@@ -38,16 +41,22 @@
           />
         </template>
       </fvl-input>
+
+      <fvl-radio
+        label="Select any option"
+        name="options"
+        :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
+        :option.sync="option"
+        class="w-1/2"
+      />
+
       <fvl-checkbox
         label="I agree with your terms of use"
         name="agree"
         :checked.sync="agree"
         class="w-1/2"
       />
-      <button
-        class="bg-teal-dark hover:bg-teal mt-8 px-6 py-3 text-white font-bold rounded"
-        @click="getErrors()"
-      >Validate</button>
+      <fvl-submit @submit="getErrors()">Validate</fvl-submit>
     </fvl-form>
 
   </div>
@@ -57,18 +66,23 @@
 import FvlForm from './components/FvlForm.vue';
 import FvlInput from './components/FvlInput.vue';
 import FvlCheckbox from './components/FvlCheckbox.vue';
+import FvlRadio from './components/FvlRadio.vue';
+import FvlSubmit from './components/FvlSubmit.vue';
 
 export default {
     name: 'app',
     components: {
         FvlForm,
         FvlInput,
-        FvlCheckbox
+        FvlCheckbox,
+        FvlRadio,
+        FvlSubmit
     },
     data() {
         return {
             name: '',
             password: '',
+            option: '',
             agree: false,
             errors: {}
         };
@@ -80,7 +94,7 @@ export default {
                 errors.name = ['Please enter your Name!'];
             }
             if (this.password === '') {
-                errors.password = ['Your Password cannot be blank!', 'Password needs to have at least 8 characters'];
+                errors.password = ['Your Password cannot be blank!'];
             }
             if (this.agree === false) {
                 errors.agree = ['Your need to accept our terms!'];

@@ -1,0 +1,8 @@
+input:focus, 
+texarea:focus, 
+.fvl-radio:focus + label:before,
+.fvl-checkbox:focus + label:before
+{
+    outline:none;
+    box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
+}

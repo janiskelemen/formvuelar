@@ -1,7 +1,10 @@
 @tailwind preflight;
 @tailwind components;
 @tailwind utilities;
+@import 'focus.css';
 @import 'errors.css';
 @import 'input.css';
 @import 'checkbox.css';
+@import 'radio.css';
 @import 'transitions.css';
+@import 'submit.css';

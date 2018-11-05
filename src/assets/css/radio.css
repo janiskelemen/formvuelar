@@ -1,0 +1,35 @@
+.fvl-radio-wrapper {
+    @apply p-2;
+}
+.fvl-radio-group-label{
+    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+}
+.fvl-radio-label{
+    @apply block tracking-wide text-grey-darker mb-2;
+}
+.fvl-radio-group {
+    @apply leading-normal;
+}
+.fvl-radio {
+    @apply absolute opacity-0;
+}
+.fvl-radio + label {
+    @apply relative cursor-pointer p-0;
+}
+.fvl-radio + label:before {
+    content: '';
+    @apply inline-block align-text-bottom bg-grey-lighter text-teal border border-grey-lighter rounded-full mr-4 h-6 w-6;
+}
+.fvl-radio:focus + label:before {
+    @apply border-white;
+}
+.fvl-radio:checked + label:before {
+    @apply bg-teal border-4 border-grey-lighter;
+    
+}
+.fvl-radio:disabled + label {
+    @apply text-grey-light cursor-auto;
+}
+.fvl-radio:disabled + label:before {
+    @apply bg-grey-lighter shadow-none;
+}
