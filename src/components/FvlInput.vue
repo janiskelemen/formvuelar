@@ -13,14 +13,18 @@
             :class="fieldClass"
         >
         <slot name="hint"/>
-        <transition name="slide-down" appear>
-            <div v-if="errors[0]" class="fvl-input-error-message" v-html="errors[0]"></div>
-        </transition>
+        <slot name="errors" v-bind:errors="errors">
+            <validation-errors :errors="errors"/>
+        </slot>
     </div>
 </template>
 
 <script>
+import ValidationErrors from './FvlErrors.vue';
 export default {
+    components: {
+        ValidationErrors
+    },
     computed: {
         errors() {
             return this.$parent.errors[this.name]

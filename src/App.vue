@@ -29,10 +29,18 @@
         class="w-1/2"
       >
         <template slot="hint">
-          <div class="h-1 mt-1 rounded bg-grey" :class="password.length > 10 ? 'bg-green' : 'bg-grey'"/>
+          <div
+            class="h-1 mt-1 rounded bg-grey"
+            :class="password.length > 10 ? 'bg-green' : 'bg-grey'"
+          />
         </template>
       </fvl-input>
-      <fvl-checkbox label="I agree with your terms of use" name="agree" :checked.sync="agree" class="w-1/2"/>
+      <fvl-checkbox
+        label="I agree with your terms of use"
+        name="agree"
+        :checked.sync="agree"
+        class="w-1/2"
+      />
       <button
         class="bg-teal-dark hover:bg-teal mt-8 px-6 py-3 text-white font-bold rounded"
         @click="getErrors()"
@@ -68,7 +76,7 @@ export default {
                 errors.name = ['Please enter your Name!'];
             }
             if (this.password === '') {
-                errors.password = ['Your Password cannot be blank!'];
+                errors.password = ['Your Password cannot be blank!', 'Password needs to have at least 8 characters'];
             }
             if (this.agree === false) {
                 errors.agree = ['Your need to accept our terms!'];
