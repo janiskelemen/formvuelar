@@ -51,6 +51,16 @@
         </template>
       </fvl-input>
 
+      <fvl-select
+        label="Select your favorite color"
+        name="color"
+        placeholder="-- Select any color --"
+        :allowEmpty="true"
+        :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
+        :checked.sync="form.color"
+        class="w-1/2"
+      />
+
       <fvl-radio
         label="Select any option"
         name="option"
@@ -76,6 +86,7 @@ import FvlForm from './components/FvlForm.vue';
 import FvlInput from './components/FvlInput.vue';
 import FvlCheckbox from './components/FvlCheckbox.vue';
 import FvlRadio from './components/FvlRadio.vue';
+import FvlSelect from './components/FvlSelect.vue';
 import FvlSubmit from './components/FvlSubmit.vue';
 
 export default {
@@ -85,6 +96,7 @@ export default {
         FvlInput,
         FvlCheckbox,
         FvlRadio,
+        FvlSelect,
         FvlSubmit
     },
     data() {
@@ -92,6 +104,7 @@ export default {
           form: {
             name: '',
             password: '',
+            color: '',
             option: '',
             agree: false,
           }

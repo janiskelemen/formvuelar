@@ -27,6 +27,9 @@ export default {
             if (this.$parent.form.option === '') {
                 errors.option = ['Your need to select one option!'];
             }
+            if (this.$parent.form.color === '') {
+                errors.color = ['Your need to select a color!'];
+            }
             this.errors = errors;
         },
         dirty(name){

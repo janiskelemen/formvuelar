@@ -1,6 +1,7 @@
 input:focus, 
 texarea:focus,
 button:focus,
+select:focus,
 .fvl-radio:focus + label:before,
 .fvl-checkbox:focus + label:before
 {
