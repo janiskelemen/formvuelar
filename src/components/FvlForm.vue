@@ -1,15 +1,36 @@
 <template>
-  <form @submit.prevent="">
+  <form @submit.prevent="getErrors()">
     <slot></slot>
   </form>
 </template>
 
 <script>
 export default {
-    props: {
-        errors: {
-            type: Object,
-            default: () => {}
+    data() {
+        return {
+            errors: {}
+        }
+    },
+
+    methods: {
+        getErrors() {
+            var errors = {};
+            if (this.$parent.form.name === '') {
+                errors.name = ['Please enter your Name!'];
+            }
+            if (this.$parent.form.password === '') {
+                errors.password = ['Your Password cannot be blank!'];
+            }
+            if (this.$parent.form.agree === false) {
+                errors.agree = ['Your need to accept our terms!'];
+            }
+            if (this.$parent.form.option === '') {
+                errors.option = ['Your need to select one option!'];
+            }
+            this.errors = errors;
+        },
+        dirty(name){
+            this.errors[name] = false;
         }
     }
 };

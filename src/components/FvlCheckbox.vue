@@ -1,10 +1,10 @@
 <template>
-    <div class="fvl-checkbox-wrapper" :class="hasError">
+    <div class="fvl-checkbox-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
         <input
             type="checkbox"
             :name="name"
             :id="name"
-            @input="$emit('update:checked', $event.target.checked)"
+            @input="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
             class="fvl-checkbox"
             :class="{'checked': checked, fieldClass}"
         >
@@ -16,8 +16,8 @@
             v-html="label"
         />
         <slot name="hint"/>
-        <slot name="errors">
-            <validation-errors :errors="errors"/>
+        <slot name="errors" :errors="this.$parent.errors[this.name]">
+            <validation-errors :errors="this.$parent.errors[this.name]"/>
         </slot>
     </div>
 </template>
@@ -27,16 +27,6 @@ import ValidationErrors from './FvlErrors.vue';
 export default {
     components: {
         ValidationErrors
-    },
-    computed: {
-        errors() {
-            return this.$parent.errors[this.name]
-                ? this.$parent.errors[this.name]
-                : false;
-        },
-        hasError() {
-            return this.$parent.errors[this.name] ? 'fvl-has-error' : '';
-        }
     },
     props: {
         label: {

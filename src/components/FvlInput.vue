@@ -1,9 +1,10 @@
 <template>
-    <div class="fvl-input-wrapper" :class="hasError">
+    <div class="fvl-input-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
         <label v-if="label" class="fvl-input-label" :class="labelClass" :for="name" v-html="label"/>
         <input
             :value="value"
             @input="$emit('update:value', $event.target.value)"
+            @change="$parent.dirty(name)"
             :name="name"
             :id="name"
             :type="type"
@@ -13,8 +14,8 @@
             :class="fieldClass"
         >
         <slot name="hint"/>
-        <slot name="errors" v-bind:errors="errors">
-            <validation-errors :errors="errors"/>
+        <slot name="errors" :errors="this.$parent.errors[this.name]">
+            <validation-errors :errors="this.$parent.errors[this.name]"/>
         </slot>
     </div>
 </template>
@@ -24,16 +25,6 @@ import ValidationErrors from './FvlErrors.vue';
 export default {
     components: {
         ValidationErrors
-    },
-    computed: {
-        errors() {
-            return this.$parent.errors[this.name]
-                ? this.$parent.errors[this.name]
-                : false;
-        },
-        hasError() {
-            return this.$parent.errors[this.name] ? 'fvl-has-error' : '';
-        }
     },
     props: {
         label: {
@@ -68,9 +59,6 @@ export default {
             type: String,
             required: false
         }
-    },
-    data() {
-        return {};
     }
 };
 </script>

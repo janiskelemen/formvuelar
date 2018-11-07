@@ -16,13 +16,13 @@
       </svg>
     </h1>
 
-    <fvl-form :errors="errors">
+    <fvl-form>
 
       <fvl-input
         label="Name"
         name="name"
         type="text"
-        :value.sync="name"
+        :value.sync="form.name"
         placeholder="Type your name"
       />
 
@@ -30,33 +30,42 @@
         label="Password"
         name="password"
         type="passowrd"
-        :value.sync="password"
+        :value.sync="form.password"
         placeholder="Type password"
-        class="w-1/2"
+        class="w-1/2 relative"
+        fieldClass="pr-8"
       >
         <template slot="hint">
           <div
             class="h-1 mt-1 rounded bg-grey"
-            :class="password.length > 10 ? 'bg-green' : 'bg-grey'"
+            :class="{'bg-red-light': form.password.length > 0, 'bg-orange': form.password.length > 6, 'bg-green': form.password.length > 10}"
           />
+          <div class="absolute pin-r pin-t mt-12 mr-4">
+            <transition name="slide-down">
+              <span v-if="form.password.length > 0 && form.password.length < 6">😔</span>
+              <span v-if="form.password.length >= 6 && form.password.length < 10">😌</span>
+              <span v-if="form.password.length >= 10 && form.password.length < 15">😃</span>
+              <span v-if="form.password.length >= 15">😍</span>
+            </transition>
+          </div>
         </template>
       </fvl-input>
 
       <fvl-radio
         label="Select any option"
-        name="options"
+        name="option"
         :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
-        :option.sync="option"
+        :checked.sync="form.option"
         class="w-1/2"
       />
 
       <fvl-checkbox
         label="I agree with your terms of use"
         name="agree"
-        :checked.sync="agree"
+        :checked.sync="form.agree"
         class="w-1/2"
       />
-      <fvl-submit @submit="getErrors()">Validate</fvl-submit>
+      <fvl-submit>Validate</fvl-submit>
     </fvl-form>
 
   </div>
@@ -80,27 +89,13 @@ export default {
     },
     data() {
         return {
+          form: {
             name: '',
             password: '',
             option: '',
             agree: false,
-            errors: {}
+          }
         };
-    },
-    methods: {
-        getErrors() {
-            var errors = {};
-            if (this.name === '') {
-                errors.name = ['Please enter your Name!'];
-            }
-            if (this.password === '') {
-                errors.password = ['Your Password cannot be blank!'];
-            }
-            if (this.agree === false) {
-                errors.agree = ['Your need to accept our terms!'];
-            }
-            this.errors = errors;
-        }
     }
 };
 </script>

@@ -1,5 +1,6 @@
 .fvl-has-error .fvl-input-text,
-.fvl-has-error .fvl-checkbox + label:before {
+.fvl-has-error .fvl-checkbox + label:before,
+.fvl-has-error .fvl-radio + label:before {
     @apply border-red-light;
 }
 .fvl-input-error-message,

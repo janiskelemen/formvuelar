@@ -1,5 +1,5 @@
 <template>
-    <div class="fvl-radio-wrapper" :class="hasError">
+    <div class="fvl-radio-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
         <span v-html="label" class="fvl-radio-group-label"></span>
         <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
             <input
@@ -7,8 +7,9 @@
                 :name="name"
                 :id="key"
                 :value="key"
-                @change="$emit('update:option', $event.target.value)"
+                @change="$emit('update:checked', $event.target.value); $parent.dirty(name);"
                 class="fvl-radio"
+                :checked="checked == key"
                 :class="fieldClass"
             >
             <label
@@ -19,8 +20,8 @@
             />
         </div>
         <slot name="hint"/>
-        <slot name="errors">
-            <validation-errors :errors="errors"/>
+        <slot name="errors" :errors="this.$parent.errors[this.name]">
+            <validation-errors :errors="this.$parent.errors[this.name]"/>
         </slot>
     </div>
 </template>
@@ -42,6 +43,9 @@ export default {
         }
     },
     props: {
+        checked: {
+            type: String
+        },
         name: {
             type: String,
             required: true
@@ -62,9 +66,6 @@ export default {
             type: String,
             required: false
         }
-    },
-    data() {
-        return {};
     }
 };
 </script>
