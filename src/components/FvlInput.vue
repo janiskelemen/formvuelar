@@ -10,7 +10,7 @@
             :type="type"
             :placeholder="placeholder"
             :autocomplete="autocomplete"
-            class="fvl-input-text"
+            class="fvl-input"
             :class="fieldClass"
             :required="required"
         >

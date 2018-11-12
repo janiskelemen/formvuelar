@@ -4,6 +4,6 @@
 .fvl-input-label {
     @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
 }
-.fvl-input-text {
+.fvl-input {
     @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
 }

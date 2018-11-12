@@ -12,5 +12,31 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 <h2>Getting Started</h2>
 
 ```bash
-    npm install formvuelar --save
+npm install formvuelar --save
 ```
+
+<h2>Styling</h2>
+<p>
+The styling is totally up to you. All components have their own classes so you have full constroll over the look feel of every component.
+</p>
+<p>
+Every component is wrapped with a div and the coresponding class .fvl-{type}-wrapper. 
+Labels have a class name of .fvl-{type}-label.
+The field itself has a class name of .fvl-{type}
+
+<h3>Example classes of the text input component<h3>
+```css
+.fvl-input-wrapper {
+    @apply p-2;
+}
+.fvl-input-label {
+    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+}
+.fvl-input {
+    @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
+}
+```
+
+I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
+Feel free to use the predefined css component classes.
+</p>
