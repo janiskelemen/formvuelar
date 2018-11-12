@@ -15,7 +15,7 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "build-site": "vue-cli-service build --dest site; cp site/index.html index.html; sed -i'.bak' 's/\\/js/site\\/js/g' index.html",
-        "bundle": "vue-cli-service build --target lib --name lib ./src/components/*",
+        "bundle": "vue-cli-service build --target lib --name lib ./src/Component.vue",
         "lint": "vue-cli-service lint",
         "test:e2e": "vue-cli-service test:e2e",
         "test:unit": "vue-cli-service test:unit"
