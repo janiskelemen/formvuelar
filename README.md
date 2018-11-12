@@ -23,8 +23,8 @@ The styling is totally up to you. All components have their own classes so you h
 Every component is wrapped with a div and the coresponding class .fvl-{type}-wrapper. 
 Labels have a class name of .fvl-{type}-label.
 The field itself has a class name of .fvl-{type}
-
-<h3>Example classes of the text input component<h3>
+</p>
+<h3>Example classes of the text input component (using Tailwind)</h3>
 ```css
 .fvl-input-wrapper {
     @apply p-2;
@@ -36,7 +36,7 @@ The field itself has a class name of .fvl-{type}
     @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
 }
 ```
-
+<p>
 I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
 Feel free to use the predefined css component classes.
 </p>
