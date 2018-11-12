@@ -2,14 +2,14 @@
     "name": "formvuelar",
     "description": "Vue form components with server side validation in mind.",
     "keywords": [
-    "vue",
-    "form",
-    "validation",
-    "tailwind",
-    "laravel"
-  ],
+        "vue",
+        "form",
+        "validation",
+        "tailwind",
+        "laravel"
+    ],
     "main": "./dist/lib.common.js",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",
