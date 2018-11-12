@@ -7,7 +7,8 @@
 FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
 </p>
 
-<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Demo</a>
+<h2>Demo</h2>
+<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Try the demo form!</a>
 
 <h2>Getting Started</h2>
 
@@ -39,5 +40,5 @@ The field itself has a class name of .fvl-{type}
 ```
 <p>
 I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
-Feel free to use the predefined css component classes.
+Feel free to use the predefined css component classes for your own projects.
 </p>
