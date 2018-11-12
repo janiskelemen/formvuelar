@@ -10,8 +10,7 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 <a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Demo</a>
 
 <h2>Getting Started<h2>
-<p>
-    <pre><code>
-        npm install formvuelar --save
-    </code></pre>
-</p>
+
+```bash
+    npm install formvuelar --save
+```
