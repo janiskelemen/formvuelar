@@ -13,7 +13,8 @@
         "test:unit": "vue-cli-service test:unit"
     },
     "dependencies": {
-        "vue": "^2.5.17"
+        "vue": "^2.5.17",
+        "vue-highlightjs": "^1.3.3"
     },
     "devDependencies": {
         "@cypress/webpack-preprocessor": "^3.0.0",

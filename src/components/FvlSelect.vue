@@ -10,6 +10,7 @@
                 :autocomplete="autocomplete"
                 :class="fieldClass"
                 class="fvl-select" 
+                :required="required"
             >
                 <option v-if="allowEmpty" disabled selected value v-text="placeholder"/>
                 <option v-for="(option, key) in options" :key="key" :value="key" v-text="option"/>
@@ -65,6 +66,10 @@ export default {
         },
         labelClass: {
             type: String,
+            required: false
+        },
+        required: {
+            type: Boolean,
             required: false
         }
     }

@@ -16,31 +16,37 @@
       </svg>
     </h1>
 
-    <fvl-form>
+    <h1>Server side validation</h1>
+    <fvl-form class="relative">
 
+      <a @click.prevent="toggleSource('input')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+        <svg class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer" width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero"><path d="M15.73647 6.65293l-3.18745-3.19441c-.31059-.31127-.81569-.31127-1.12627 0-.3106.31126-.3106.81746 0 1.12873l2.62274 2.62847-2.62588 2.63162c-.31059.31126-.31059.81746 0 1.12873.2447.24524.8502.27668 1.12627 0l3.18745-3.19441c.31373-.31127.31373-.81432.00314-1.12873zM4.5804 3.45852c-.3106-.31127-.8157-.31127-1.12628 0l-3.1906 3.1944c-.31058.31127-.31058.81747 0 1.12874l3.18746 3.19755c.27608.27669.88157.24524 1.12627 0 .3106-.31126.3106-.81746 0-1.12873L1.95451 7.22201l2.62588-2.63162c.31059-.3144.31059-.81746 0-1.13187zM10.23059.05345c-.4204-.13205-.86588.10061-.99765.52507L5.24863 13.35616c-.13177.4213.09725.8835.52392.99982.4549.12262.89098-.18236.99765-.52506L10.7545 1.05328c.12863-.42131-.10353-.86778-.52392-.99983z"/></g></svg>  
+      </a>
       <fvl-input
         label="Name"
         name="name"
         type="text"
+        autocomplete="name"
         :value.sync="form.name"
         placeholder="Type your name"
       />
+      <pre v-if="showSource == 'input'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.input"><code class="html"></code></pre>
 
+      <a @click.prevent="toggleSource('password')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+        <svg class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer" width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero"><path d="M15.73647 6.65293l-3.18745-3.19441c-.31059-.31127-.81569-.31127-1.12627 0-.3106.31126-.3106.81746 0 1.12873l2.62274 2.62847-2.62588 2.63162c-.31059.31126-.31059.81746 0 1.12873.2447.24524.8502.27668 1.12627 0l3.18745-3.19441c.31373-.31127.31373-.81432.00314-1.12873zM4.5804 3.45852c-.3106-.31127-.8157-.31127-1.12628 0l-3.1906 3.1944c-.31058.31127-.31058.81747 0 1.12874l3.18746 3.19755c.27608.27669.88157.24524 1.12627 0 .3106-.31126.3106-.81746 0-1.12873L1.95451 7.22201l2.62588-2.63162c.31059-.3144.31059-.81746 0-1.13187zM10.23059.05345c-.4204-.13205-.86588.10061-.99765.52507L5.24863 13.35616c-.13177.4213.09725.8835.52392.99982.4549.12262.89098-.18236.99765-.52506L10.7545 1.05328c.12863-.42131-.10353-.86778-.52392-.99983z"/></g></svg>  
+      </a>
       <fvl-input
         label="Password"
         name="password"
-        type="passowrd"
+        type="password"
+        autocomplete="new-password"
         :value.sync="form.password"
         placeholder="Type password"
         class="w-1/2 relative"
         fieldClass="pr-8"
       >
         <template slot="hint">
-          <div
-            class="h-1 mt-1 rounded bg-grey"
-            :class="{'bg-red-light': form.password.length > 0, 'bg-orange': form.password.length > 6, 'bg-green': form.password.length > 10}"
-          />
-          <div class="absolute pin-r pin-t mt-12 mr-4">
+          <div class="absolute pin-r pin-t mt-11 mr-4">
             <transition name="slide-down">
               <span v-if="form.password.length > 0 && form.password.length < 6">😔</span>
               <span v-if="form.password.length >= 6 && form.password.length < 10">😌</span>
@@ -50,7 +56,11 @@
           </div>
         </template>
       </fvl-input>
-
+      <pre v-if="showSource == 'password'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.password"><code class="html"></code></pre>
+      
+      <a @click.prevent="toggleSource('color')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+        <svg class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer" width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero"><path d="M15.73647 6.65293l-3.18745-3.19441c-.31059-.31127-.81569-.31127-1.12627 0-.3106.31126-.3106.81746 0 1.12873l2.62274 2.62847-2.62588 2.63162c-.31059.31126-.31059.81746 0 1.12873.2447.24524.8502.27668 1.12627 0l3.18745-3.19441c.31373-.31127.31373-.81432.00314-1.12873zM4.5804 3.45852c-.3106-.31127-.8157-.31127-1.12628 0l-3.1906 3.1944c-.31058.31127-.31058.81747 0 1.12874l3.18746 3.19755c.27608.27669.88157.24524 1.12627 0 .3106-.31126.3106-.81746 0-1.12873L1.95451 7.22201l2.62588-2.63162c.31059-.3144.31059-.81746 0-1.13187zM10.23059.05345c-.4204-.13205-.86588.10061-.99765.52507L5.24863 13.35616c-.13177.4213.09725.8835.52392.99982.4549.12262.89098-.18236.99765-.52506L10.7545 1.05328c.12863-.42131-.10353-.86778-.52392-.99983z"/></g></svg>  
+      </a>
       <fvl-select
         label="Select your favorite color"
         name="color"
@@ -60,7 +70,11 @@
         :checked.sync="form.color"
         class="w-1/2"
       />
+      <pre v-if="showSource == 'color'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.color"><code class="html"></code></pre>
 
+      <a @click.prevent="toggleSource('option')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+        <svg class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer" width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero"><path d="M15.73647 6.65293l-3.18745-3.19441c-.31059-.31127-.81569-.31127-1.12627 0-.3106.31126-.3106.81746 0 1.12873l2.62274 2.62847-2.62588 2.63162c-.31059.31126-.31059.81746 0 1.12873.2447.24524.8502.27668 1.12627 0l3.18745-3.19441c.31373-.31127.31373-.81432.00314-1.12873zM4.5804 3.45852c-.3106-.31127-.8157-.31127-1.12628 0l-3.1906 3.1944c-.31058.31127-.31058.81747 0 1.12874l3.18746 3.19755c.27608.27669.88157.24524 1.12627 0 .3106-.31126.3106-.81746 0-1.12873L1.95451 7.22201l2.62588-2.63162c.31059-.3144.31059-.81746 0-1.13187zM10.23059.05345c-.4204-.13205-.86588.10061-.99765.52507L5.24863 13.35616c-.13177.4213.09725.8835.52392.99982.4549.12262.89098-.18236.99765-.52506L10.7545 1.05328c.12863-.42131-.10353-.86778-.52392-.99983z"/></g></svg>  
+      </a>
       <fvl-radio
         label="Select any option"
         name="option"
@@ -68,13 +82,19 @@
         :checked.sync="form.option"
         class="w-1/2"
       />
+      <pre v-if="showSource == 'option'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.option"><code class="html"></code></pre>
 
+      <a @click.prevent="toggleSource('agree')" class="absolute pin-l -ml-4 mt-1 pt-2" title="show code">
+        <svg class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer" width="16" height="15" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero"><path d="M15.73647 6.65293l-3.18745-3.19441c-.31059-.31127-.81569-.31127-1.12627 0-.3106.31126-.3106.81746 0 1.12873l2.62274 2.62847-2.62588 2.63162c-.31059.31126-.31059.81746 0 1.12873.2447.24524.8502.27668 1.12627 0l3.18745-3.19441c.31373-.31127.31373-.81432.00314-1.12873zM4.5804 3.45852c-.3106-.31127-.8157-.31127-1.12628 0l-3.1906 3.1944c-.31058.31127-.31058.81747 0 1.12874l3.18746 3.19755c.27608.27669.88157.24524 1.12627 0 .3106-.31126.3106-.81746 0-1.12873L1.95451 7.22201l2.62588-2.63162c.31059-.3144.31059-.81746 0-1.13187zM10.23059.05345c-.4204-.13205-.86588.10061-.99765.52507L5.24863 13.35616c-.13177.4213.09725.8835.52392.99982.4549.12262.89098-.18236.99765-.52506L10.7545 1.05328c.12863-.42131-.10353-.86778-.52392-.99983z"/></g></svg>  
+      </a>
       <fvl-checkbox
         label="I agree with your terms of use"
         name="agree"
         :checked.sync="form.agree"
         class="w-1/2"
       />
+      <pre v-if="showSource == 'agree'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.agree"><code class="html"></code></pre>
+
       <fvl-submit>Validate</fvl-submit>
     </fvl-form>
 
@@ -89,6 +109,7 @@ import FvlRadio from './components/FvlRadio.vue';
 import FvlSelect from './components/FvlSelect.vue';
 import FvlSubmit from './components/FvlSubmit.vue';
 
+
 export default {
     name: 'app',
     components: {
@@ -99,6 +120,11 @@ export default {
         FvlSelect,
         FvlSubmit
     },
+    methods: {
+      toggleSource(field) {
+        this.showSource = this.showSource == field ? '' : field;
+      }
+    },
     data() {
         return {
           form: {
@@ -107,7 +133,75 @@ export default {
             color: '',
             option: '',
             agree: false,
-          }
+          },
+        showSource: '',
+        sourcecode:{
+          input: `
+  <fvl-input
+    label="Name"
+    name="name"
+    type="text"
+    autocomplete="name"
+    :value.sync="form.name"
+    placeholder="Type your name"
+  />
+    `,
+          password: `
+  <fvl-input
+    label="Password"
+    name="password"
+    type="password"
+    autocomplete="new-password"
+    :value.sync="form.password"
+    placeholder="Type password"
+    class="w-1/2 relative"
+    fieldClass="pr-8"
+  >
+    <!-- Optional Password Meter -->
+    <template slot="hint">
+      <div class="absolute pin-r pin-t mt-12 mr-4">
+          <span v-if="form.password.length > 0 && 
+                      form.password.length < 6">😔</span>
+          <span v-if="form.password.length >= 6 && 
+                      form.password.length < 10">😌</span>
+          <span v-if="form.password.length >= 10 && 
+                      form.password.length < 15">😃</span>
+          <span v-if="form.password.length >= 15">😍</span>
+      </div>
+    </template>
+  </fvl-input>
+          `,
+          color: `
+  <fvl-select
+    label="Select your favorite color"
+    name="color"
+    placeholder="-- Select any color --"
+    :allowEmpty="true"
+    :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
+    :checked.sync="form.color"
+    class="w-1/2"
+  />
+          `,
+          option: `
+  <fvl-radio
+    label="Select any option"
+    name="option"
+    :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
+    :checked.sync="form.option"
+    class="w-1/2"
+  />
+        `,
+
+        agree: `
+  <fvl-checkbox
+    label="I agree with your terms of use"
+    name="agree"
+    :checked.sync="form.agree"
+    class="w-1/2"
+  />
+        `
+        }
+        
         };
     }
 };

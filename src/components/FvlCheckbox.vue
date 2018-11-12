@@ -7,6 +7,7 @@
             @input="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
             class="fvl-checkbox"
             :class="{'checked': checked, fieldClass}"
+            :required="required"
         >
         <label
             v-if="label"
@@ -48,6 +49,10 @@ export default {
         },
         labelClass: {
             type: String,
+            required: false
+        },
+        required: {
+            type: Boolean,
             required: false
         }
     },

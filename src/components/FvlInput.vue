@@ -12,6 +12,7 @@
             :autocomplete="autocomplete"
             class="fvl-input-text"
             :class="fieldClass"
+            :required="required"
         >
         <slot name="hint"/>
         <slot name="errors" :errors="this.$parent.errors[this.name]">
@@ -57,6 +58,10 @@ export default {
         },
         labelClass: {
             type: String,
+            required: false
+        },
+        required: {
+            type: Boolean,
             required: false
         }
     }
