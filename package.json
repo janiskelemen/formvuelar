@@ -7,14 +7,13 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "build-site": "vue-cli-service build --dest site; cp site/index.html index.html; sed -i'.bak' 's/\\/js/site\\/js/g' index.html",
-        "bundle": "vue-cli-service build --target lib --name lib ./src/components/MyComponent.vue",
+        "bundle": "vue-cli-service build --target lib --name lib ./src/components/*",
         "lint": "vue-cli-service lint",
         "test:e2e": "vue-cli-service test:e2e",
         "test:unit": "vue-cli-service test:unit"
     },
     "dependencies": {
-        "vue": "^2.5.17",
-        "vue-highlightjs": "^1.3.3"
+        "vue": "^2.5.17"
     },
     "devDependencies": {
         "@cypress/webpack-preprocessor": "^3.0.0",
@@ -29,6 +28,7 @@
         "node-sass": "^4.9.0",
         "sass-loader": "^7.0.1",
         "tailwindcss": "^0.6.6",
+        "vue-highlightjs": "^1.3.3",
         "vue-template-compiler": "^2.5.17"
     },
     "files": [
