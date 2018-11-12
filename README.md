@@ -18,7 +18,7 @@ npm install formvuelar --save
 
 <h2>Styling</h2>
 <p>
-The styling is totally up to you. All components have their own classes so you have full constroll over the look feel of every component.
+The styling is totally up to you. All components have their own classes so you have full controll over the look feel of every component.
 </p>
 <p>
 Every component is wrapped with a div and the coresponding class .fvl-{type}-wrapper. 

@@ -1,5 +1,13 @@
 {
     "name": "formvuelar",
+    "description": "Vue form components with server side validation in mind.",
+    "keywords": [
+    "vue",
+    "form",
+    "validation",
+    "tailwind",
+    "laravel"
+  ],
     "main": "./dist/lib.common.js",
     "version": "0.1.1",
     "private": false,
