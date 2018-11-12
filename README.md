@@ -25,7 +25,7 @@ Labels have a class name of .fvl-{type}-label.
 The field itself has a class name of .fvl-{type}
 </p>
 <h3>Example classes of the text input component (using Tailwind)</h3>
-```css
+```CSS
 .fvl-input-wrapper {
     @apply p-2;
 }
