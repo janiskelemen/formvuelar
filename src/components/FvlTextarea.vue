@@ -1,7 +1,7 @@
 <template>
-    <div class="fvl-input-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
-        <label v-if="label" class="fvl-input-label" :class="labelClass" :for="name" v-html="label"/>
-        <input
+    <div class="fvl-textarea-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
+        <label v-if="label" class="fvl-textarea-label" :class="labelClass" :for="name" v-html="label"/>
+        <textarea
             :value="value"
             @input="$emit('update:value', $event.target.value)"
             @change="$parent.dirty(name)"
@@ -10,10 +10,10 @@
             :type="type"
             :placeholder="placeholder"
             :autocomplete="autocomplete"
-            class="fvl-input"
+            class="fvl-textarea"
             :class="fieldClass"
             :required="required"
-        >
+        />
         <slot name="hint"/>
         <slot name="errors" :errors="this.$parent.errors[this.name]">
             <validation-errors :errors="this.$parent.errors[this.name]"/>

@@ -4,6 +4,8 @@
 @import 'focus.css';
 @import 'errors.css';
 @import 'input.css';
+@import 'textarea.css';
+@import 'file.css';
 @import 'select.css';
 @import 'checkbox.css';
 @import 'radio.css';

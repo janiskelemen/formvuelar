@@ -1,6 +1,20 @@
 .fvl-submit-button {
-  @apply bg-teal-dark mt-8 px-6 py-3 text-white font-bold rounded;
+  transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  @apply relative bg-teal-dark mt-8 px-6 py-3 text-white font-bold rounded;
 }
-.fvl-submit-button:hover {
+.fvl-submit-button:hover, .fvl-submit-button:disabled{
   @apply bg-teal;
+}
+ .fvl-submit-button:disabled{
+   @apply cursor-default bg-grey;
+ }
+.fvl-submit-button-loader {
+  @apply absolute pin-l pin-t h-full w-full rounded overflow-hidden z-10;
+}
+.fvl-submit-button-loader-progress {
+  @apply h-full rounded-l bg-teal-dark;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fvl-submit-text{
+  @apply relative z-20;
 }

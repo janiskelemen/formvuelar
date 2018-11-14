@@ -1,0 +1,27 @@
+.fvl-file-wrapper {
+    @apply relative p-2;
+}
+.fvl-form-drag-over > .fvl-file-wrapper > .fvl-file-button{
+    transition: box-shadow 0.28s ease;
+    box-shadow: 0 0 0px 2px rgb(255, 255, 255), 0 0 7px 6px rgb(175, 228, 224);
+}
+.fvl-file-label {
+    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
+}
+.fvl-file-button{
+    @apply inline-block bg-teal px-4 py-2 rounded cursor-pointer;
+}
+.fvl-file-wrapper:focus-within .fvl-file-button{
+    box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
+}
+.fvl-file-name{
+    @apply pl-2 text-grey-darker;
+}
+.fvl-file{
+    @apply appearance-none absolute opacity-0 pin-l h-12 w-16 cursor-pointer;
+}
+.fvl-file::-webkit-file-upload-button{
+    cursor: pointer;
+    visibility: hidden;
+}
+
