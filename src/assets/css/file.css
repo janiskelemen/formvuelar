@@ -8,6 +8,9 @@
 .fvl-file-label {
     @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
 }
+.fvl-file-button-wrapper{
+
+}
 .fvl-file-button{
     @apply inline-block bg-teal px-4 py-2 rounded cursor-pointer;
 }
