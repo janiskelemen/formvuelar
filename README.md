@@ -1,5 +1,5 @@
 <p align="center">
-    <img  src="https://janiskelemen.github.io/formvuelar/site/Formvuelar.svg" alt="Formvuelar" />
+    <img  src="https://janiskelemen.github.io/formvuelar/example/Formvuelar.svg" alt="Formvuelar" />
 </p>
 <h3 align="center">Vue form components with server side validation in mind</h3>
 
@@ -8,7 +8,7 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 </p>
 
 <h2>Demo</h2>
-<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Try the demo form!</a>
+<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Try the example!</a>
 
 <h2>Getting Started</h2>
 

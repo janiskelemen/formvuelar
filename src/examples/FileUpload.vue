@@ -3,16 +3,17 @@
     <div class="mt-16">
         <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
             File Upload
-            <a href="#" target="_blank" class="float-right text-grey-dark hover:text-teal text-xs no-underline">Form Source Code</a>
+            <a href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue" target="_blank" class="float-right text-grey-dark hover:text-teal text-xs no-underline">Form Source Code</a>
         </h3>
         <fvl-form :data="form" url="/upload" class="relative" multipart>
         <source-toggle @toggle="showSource = !showSource"/>
+
         <fvl-file
             label="Avatar"
             name="avatar"
             :file.sync="form.file.avatar"
-            placeholder="Select any file to upload"
         />
+        
         <source-box :show-source="showSource" :source="source"/>
 
         <fvl-submit loader>Upload</fvl-submit>
@@ -50,7 +51,6 @@ export default {
     label="Avatar"
     name="avatar"
     :file.sync="form2.file.avatar"
-    placeholder="Select any file to upload"
   />
               `
         }
