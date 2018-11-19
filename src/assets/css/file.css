@@ -1,30 +1,47 @@
 .fvl-file-wrapper {
     @apply relative p-2;
 }
-.fvl-form-drag-over > .fvl-file-wrapper > .fvl-file-button{
-    transition: box-shadow 0.28s ease;
-    box-shadow: 0 0 0px 2px rgb(255, 255, 255), 0 0 7px 6px rgb(175, 228, 224);
+.fvl-form-drag-over > .fvl-file-wrapper > .fvl-file-button-wrapper{
+    animation: pulse 1.4s infinite;
+    @apply rounded;
 }
 .fvl-file-label {
     @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
 }
 .fvl-file-button-wrapper{
-
+    @apply inline-flex w-full;
 }
 .fvl-file-button{
-    @apply inline-block bg-teal px-4 py-2 rounded cursor-pointer;
+    @apply inline-flex items-center font-bold text-white bg-teal-dark border border-teal-dark py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
 }
-.fvl-file-wrapper:focus-within .fvl-file-button{
+.fvl-file-wrapper:focus-within .fvl-file-button-wrapper{
     box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
+    @apply rounded;
+}
+.fvl-file-wrapper:hover .fvl-file-button{
+    @apply bg-teal border-teal;
 }
 .fvl-file-name{
-    @apply pl-2 text-grey-darker;
+    @apply pl-2 bg-grey-lighter text-grey-darker border border-grey-lighter flex-grow py-3 px-4 leading-tight rounded-r truncate;
 }
 .fvl-file{
-    @apply appearance-none absolute opacity-0 pin-l h-12 w-16 cursor-pointer;
+    @apply appearance-none absolute opacity-0 pin-l py-3 px-4 w-full cursor-pointer;
 }
+
 .fvl-file::-webkit-file-upload-button{
     cursor: pointer;
     visibility: hidden;
 }
 
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #38a89d;
+  }
+  70% {
+      box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0);
+  }
+  100% {
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}

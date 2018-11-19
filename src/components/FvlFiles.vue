@@ -1,8 +1,8 @@
 <template>
-    <div class="fvl-file-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
-        <label v-if="label" class="fvl-file-label" :class="labelClass" :for="name" v-html="label"/>
-        <div class="fvl-file-button-wrapper">
-            <button @click.prevent class="fvl-file-button" tabindex="-1">
+    <div class="fvl-files-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
+        <label v-if="label" class="fvl-files-label" :class="labelClass" :for="name" v-html="label"/>
+        <div class="fvl-files-button-wrapper">
+            <button @click.prevent class="fvl-files-button" tabindex="-1">
                 <slot name="button">
                     <svg
                         class="fill-current text-white mr-2"
@@ -19,10 +19,10 @@
                             ></path>
                         </g>
                     </svg>
-                    <span>Select File</span>
+                    <span>Select min 2 files</span>
                 </slot>
             </button>
-            <span class="fvl-file-name" v-text="fileName"/>
+            <span class="fvl-files-name" v-text="fileName"/>
             <input
                 @change="handleFileChange(); $parent.dirty(name);"
                 type="file"
@@ -30,10 +30,11 @@
                 :id="name"
                 :ref="name"
                 :placeholder="placeholder"
-                class="fvl-file"
+                class="fvl-files"
                 :class="fieldClass"
                 :required="required"
                 :accept="accept"
+                multible="multiple"
                 :disabled="this.$parent.isLoading"
             >
         </div>

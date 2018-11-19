@@ -14,8 +14,8 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build-site": "vue-cli-service build --dest site; cp site/index.html index.html; sed -i'.bak' 's/\\/js/site\\/js/g' index.html",
-        "bundle": "vue-cli-service build --target lib --name lib ./src/Component.vue",
+        "build-site": "vue-cli-service build --dest docs",
+        "bundle": "vue-cli-service build --target lib --name lib ./src/Components.vue",
         "lint": "vue-cli-service lint",
         "test:e2e": "vue-cli-service test:e2e",
         "test:unit": "vue-cli-service test:unit"
@@ -32,6 +32,7 @@
         "@vue/cli-plugin-unit-jest": "^3.0.5",
         "@vue/cli-service": "^3.0.5",
         "@vue/test-utils": "^1.0.0-beta.20",
+        "axios-mock-adapter": "^1.15.0",
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "^23.0.1",
         "node-sass": "^4.9.0",

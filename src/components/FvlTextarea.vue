@@ -1,6 +1,12 @@
 <template>
     <div class="fvl-textarea-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
-        <label v-if="label" class="fvl-textarea-label" :class="labelClass" :for="name" v-html="label"/>
+        <label
+            v-if="label"
+            class="fvl-textarea-label"
+            :class="labelClass"
+            :for="name"
+            v-html="label"
+        />
         <textarea
             :value="value"
             @input="$emit('update:value', $event.target.value)"
@@ -14,12 +20,8 @@
             :class="fieldClass"
             :required="required"
         />
-        <slot name="hint"/>
-        <slot name="errors" :errors="this.$parent.errors[this.name]">
-            <validation-errors :errors="this.$parent.errors[this.name]"/>
-        </slot>
     </div>
-</template>8
+</template>
 
 <script>
 import ValidationErrors from './FvlErrors.vue';

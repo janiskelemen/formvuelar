@@ -12,12 +12,7 @@
                 :checked="checked == key"
                 :class="fieldClass"
             >
-            <label
-                class="fvl-radio-label"
-                :class="labelClass"
-                :for="key"
-                v-html="option"
-            />
+            <label class="fvl-radio-label" :class="labelClass" :for="key" v-html="option"/>
         </div>
         <slot name="hint"/>
         <slot name="errors" :errors="this.$parent.errors[this.name]">

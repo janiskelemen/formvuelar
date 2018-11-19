@@ -1,5 +1,5 @@
 input:focus, 
-texarea:focus,
+textarea:focus,
 button:focus,
 select:focus,
 .fvl-radio:focus + label:before,
