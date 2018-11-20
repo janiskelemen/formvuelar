@@ -7,14 +7,31 @@
 FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
 </p>
 
-<h2>Demo</h2>
-<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Try the example!</a>
+<h2>Examples</h2>
+<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Give it a try!</a>
 
 <h2>Getting Started</h2>
 
 ```bash
 npm install formvuelar --save
 ```
+
+<h2>Available Components</h2>
+
+<p>
+The following components are shipped with FormVuelar:
+</p>
+
+| Name               | Description          |
+| ------------------ | -------------------- |
+| `<fvl-form />`     | Form wrapper element |
+| `<fvl-input />`    | Input field          |
+| `<fvl-textarea />` | Text Area field      |
+| `<fvl-Radio />`    | Radio input field    |
+| `<fvl-checkbox />` | Checkbox input field |
+| `<fvl-select />`   | Select input field   |
+| `<fvl-file />`     | File input field     |
+| `<fvl-submit />`   | Submit button        |
 
 <h2>Error Response</h2>
 
@@ -40,10 +57,10 @@ The response from your Backend should contain a Json error object and have a sta
 
 <h2>Client side validation</h2>
 <p>
-You can still use the default HTML5 validation rules for all input fields like 'accept' and 'require' for file inputs:
+You can still use the default HTML5 validation rules for all input fields like 'accept' and 'required' for file inputs:
 </p>
 
-```javascript
+```html
     <fvl-file
         label="Avatar"
         name="avatar"
