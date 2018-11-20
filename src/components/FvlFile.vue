@@ -1,15 +1,10 @@
 <template>
-    <div class="fvl-file-wrapper" :class="{'fvl-has-error' : this.$parent.errors[this.name]}">
-        <label v-if="label" class="fvl-file-label" :class="labelClass" :for="name" v-html="label"/>
+    <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-file-wrapper">
+        <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label" v-html="label"/>
         <div class="fvl-file-button-wrapper">
-            <button @click.prevent class="fvl-file-button" tabindex="-1">
+            <button class="fvl-file-button" tabindex="-1" @click.prevent>
                 <slot name="button">
-                    <svg
-                        class="fill-current text-white mr-2"
-                        width="18"
-                        height="16"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
+                    <svg class="fill-current text-white mr-2" width="18" height="16" xmlns="http://www.w3.org/2000/svg">
                         <g fill-rule="nonzero">
                             <path
                                 d="M17.0591 6.85227c-.47046 0-.83865.36818-.83865.83864v5.76818H1.7591V7.67045c0-.47045-.36818-.83863-.83864-.83863-.47045 0-.83863.36818-.83863.83863v6.62728c0 .47045.36818.83863.83863.83863H17.0591c.47046 0 .83864-.36818.83864-.83863V7.67045c0-.45-.36818-.81818-.83864-.81818z"
@@ -24,81 +19,86 @@
             </button>
             <span class="fvl-file-name" v-text="fileName"/>
             <input
-                @change="handleFileChange(); $parent.dirty(name);"
-                type="file"
                 :name="name"
                 :id="name"
                 :ref="name"
                 :placeholder="placeholder"
-                class="fvl-file"
                 :class="fieldClass"
                 :required="required"
                 :accept="accept"
                 :disabled="this.$parent.isLoading"
+                type="file"
+                class="fvl-file"
+                @change="handleFileChange(); $parent.dirty(name);"
             >
         </div>
         <slot name="hint"/>
-        <slot name="errors" :errors="this.$parent.errors[this.name]">
-            <validation-errors :errors="this.$parent.errors[this.name]"/>
+        <slot :errors="this.$parent.getErrors(name)" name="errors">
+            <validation-errors :errors="this.$parent.getErrors(name)"/>
         </slot>
     </div>
 </template>
 
 <script>
-import ValidationErrors from './FvlErrors.vue';
-export default {
-    components: {
-        ValidationErrors
-    },
-    props: {
-        label: {
-            type: String,
-            required: false,
-            default: ''
+    import ValidationErrors from './FvlErrors.vue'
+    export default {
+        components: {
+            ValidationErrors
         },
-        name: {
-            type: String,
-            required: true
+        props: {
+            label: {
+                type: String,
+                required: false,
+                default: ''
+            },
+            name: {
+                type: String,
+                required: true
+            },
+            accept: {
+                type: String,
+                default: ''
+            },
+            multiple: {
+                type: Boolean,
+                default: false
+            },
+            placeholder: {
+                type: String,
+                required: false,
+                default: ''
+            },
+            fieldClass: {
+                type: String,
+                required: false,
+                default: ''
+            },
+            labelClass: {
+                type: String,
+                required: false,
+                default: ''
+            },
+            required: {
+                type: Boolean,
+                required: false,
+                default: false
+            }
         },
-        accept: {
-            type: String
+        data() {
+            return {
+                fileName: ''
+            }
         },
-        multiple: {
-            type: Boolean,
-            default: false
-        },
-        placeholder: {
-            type: String,
-            required: false
-        },
-        fieldClass: {
-            type: String,
-            required: false
-        },
-        labelClass: {
-            type: String,
-            required: false
-        },
-        required: {
-            type: Boolean,
-            required: false
-        }
-    },
-    data() {
-        return {
-            fileName: ''
-        };
-    },
-    methods: {
-        /*
-        Handles a change on the file upload
-      */
-        handleFileChange() {
-            let file = this.$refs[this.name].files[0];
-            this.fileName = file.name;
-            this.$emit('update:file', file);
+        methods: {
+            /*
+                                        Handles a change on the file upload
+                                      */
+            handleFileChange() {
+                let file = this.$refs[this.name].files[0]
+                this.fileName = file.name
+                this.$emit('update:file', file)
+            }
         }
     }
-};
 </script>
 

@@ -10,16 +10,17 @@
 </template>
 
 <script>
-export default {
-    props: {
-        errors: {
-            default: () => []
-        }
-    },
-    computed: {
-        multible() {
-            return this.errors.length > 1 ? '- ' : '';
+    export default {
+        props: {
+            errors: {
+                type: Array,
+                default: () => []
+            }
+        },
+        computed: {
+            multible() {
+                return this.errors.length > 1 ? '- ' : ''
+            }
         }
     }
-};
 </script>
