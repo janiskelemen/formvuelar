@@ -7,7 +7,7 @@
                 href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue"
                 target="_blank"
                 class="float-right text-grey-dark hover:text-teal text-xs no-underline"
-            >Form Source Code</a>
+            >Full Source Code</a>
         </h3>
         <!-- Setup multipart form to support file uploads -->
         <fvl-form :data="form" url="/upload" multipart class="relative">

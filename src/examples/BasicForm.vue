@@ -2,12 +2,12 @@
 <template>
     <div class="mt-16">
         <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
-            Basic form with server side validation
+            Basic Form
             <a
-                href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/BaiscForm.vue"
+                href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/BasicForm.vue"
                 target="_blank"
                 class="float-right text-grey-dark hover:text-teal text-xs no-underline"
-            >Form Source Code</a>
+            >Full Source Code</a>
         </h3>
         <!-- Setup basic form -->
         <fvl-form :data="form" url="/basic" class="relative">

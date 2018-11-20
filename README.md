@@ -16,6 +16,43 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 npm install formvuelar --save
 ```
 
+<h2>Error Response</h2>
+
+<p>
+The response from your Backend should contain a Json error object and have a status of 422 in order to show the error messages below the input fields. This response format is default for Laravel and will work out of the box.
+</p>
+
+```javascript
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "field-1": [
+      "Error 1",
+      "Error 2"
+    ],
+    "field-2": [
+      "Error 1",
+      "Error 2"
+    ]
+  }
+}
+```
+
+<h2>Client side validation</h2>
+<p>
+You can still use the default HTML5 validation rules for all input fields like 'accept' and 'require' for file inputs:
+</p>
+
+```javascript
+    <fvl-file
+        label="Avatar"
+        name="avatar"
+        :file.sync="form.file.avatar"
+        accept="image/*"
+        required
+    />
+```
+
 <h2>Styling</h2>
 <p>
 The styling is totally up to you. All components have their own classes so you have full controll over the look feel of every component.
@@ -27,7 +64,7 @@ The field itself has a class name of .fvl-{type}
 </p>
 <h3>Example classes of the text input component (using Tailwind)</h3>
 
-```CSS 
+```CSS
 .fvl-input-wrapper {
     @apply p-2;
 }
@@ -38,6 +75,7 @@ The field itself has a class name of .fvl-{type}
     @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
 }
 ```
+
 <p>
 I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
 Feel free to use the predefined css component classes for your own projects.
