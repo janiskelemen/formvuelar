@@ -22,16 +22,16 @@ npm install formvuelar --save
 The following components are shipped with FormVuelar:
 </p>
 
-| Name               | Description          |
-| ------------------ | -------------------- |
-| `<fvl-form />`     | Form wrapper element |
-| `<fvl-input />`    | Input field          |
-| `<fvl-textarea />` | Text Area field      |
-| `<fvl-Radio />`    | Radio input field    |
-| `<fvl-checkbox />` | Checkbox input field |
-| `<fvl-select />`   | Select input field   |
-| `<fvl-file />`     | File input field     |
-| `<fvl-submit />`   | Submit button        |
+| Name               | Description          | Import Name                                |
+| ------------------ | -------------------- | ------------------------------------------ |
+| `<fvl-form />`     | Form wrapper element | `import { FvlForm } from 'formvuelar'`     |
+| `<fvl-input />`    | Input field          | `import { FvlInput } from 'formvuelar'`    |
+| `<fvl-textarea />` | Text Area field      | `import { FvlTextarea } from 'formvuelar'` |
+| `<fvl-Radio />`    | Radio input field    | `import { FvlRadio } from 'formvuelar'`    |
+| `<fvl-checkbox />` | Checkbox input field | `import { FvlCheckbox } from 'formvuelar'` |
+| `<fvl-select />`   | Select input field   | `import { FvlSelect } from 'formvuelar'`   |
+| `<fvl-file />`     | File input field     | `import { FvlFile } from 'formvuelar'`     |
+| `<fvl-submit />`   | Submit button        | `import { FvlSubmit } from 'formvuelar'`   |
 
 <h2>Error Response</h2>
 
