@@ -46,6 +46,7 @@
     "files": [
         "dist/*",
         "src/*",
+        "styles/*",
         "*.json"
     ],
     "eslintConfig": {
