@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <a href="https://github.com/janiskelemen/formvuelar" class="absolute pin-r pin-t m-4" title="View on Github">
+    <a
+      href="https://github.com/janiskelemen/formvuelar"
+      class="absolute pin-r pin-t m-4"
+      title="View on Github"
+    >
       <img
         alt="View on Github"
         width="40"
@@ -22,7 +26,11 @@
     </h1>
     <h2 class="mb-2">Server side validation</h2>
     <fvl-form :data="form" url="/" class="relative">
-      <a @click.prevent="toggleSource('input')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+      <a
+        @click.prevent="toggleSource('input')"
+        class="absolute pin-l -ml-4 mt-1 pt-px"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -44,8 +52,16 @@
         :value.sync="form.name"
         placeholder="Type your name"
       />
-      <pre v-if="showSource == 'input'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.input"><code class="html"></code></pre>
-      <a @click.prevent="toggleSource('text')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+      <pre
+        v-if="showSource == 'input'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.input"
+      ><code class="html"></code></pre>
+      <a
+        @click.prevent="toggleSource('text')"
+        class="absolute pin-l -ml-4 mt-1 pt-px"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -59,9 +75,22 @@
           </g>
         </svg>
       </a>
-      <fvl-textarea label="Text" name="text" :value.sync="form.text" placeholder="Type your story..."/>
-      <pre v-if="showSource == 'text'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.text"><code class="html"></code></pre>
-      <a @click.prevent="toggleSource('password')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+      <fvl-textarea
+        label="Text"
+        name="text"
+        :value.sync="form.text"
+        placeholder="Type your story..."
+      />
+      <pre
+        v-if="showSource == 'text'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.text"
+      ><code class="html"></code></pre>
+      <a
+        @click.prevent="toggleSource('password')"
+        class="absolute pin-l -ml-4 mt-1 pt-px"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -96,8 +125,16 @@
           </div>
         </template>
       </fvl-input>
-      <pre v-if="showSource == 'password'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.password"><code class="html"></code></pre>
-      <a @click.prevent="toggleSource('color')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+      <pre
+        v-if="showSource == 'password'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.password"
+      ><code class="html"></code></pre>
+      <a
+        @click.prevent="toggleSource('color')"
+        class="absolute pin-l -ml-4 mt-1 pt-px"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -120,8 +157,16 @@
         :selected.sync="form.color"
         class="w-1/2"
       />
-      <pre v-if="showSource == 'color'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.color"><code class="html"></code></pre>
-      <a @click.prevent="toggleSource('option')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+      <pre
+        v-if="showSource == 'color'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.color"
+      ><code class="html"></code></pre>
+      <a
+        @click.prevent="toggleSource('option')"
+        class="absolute pin-l -ml-4 mt-1 pt-px"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -142,8 +187,16 @@
         :checked.sync="form.option"
         class="w-1/2"
       />
-      <pre v-if="showSource == 'option'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.option"><code class="html"></code></pre>
-      <a @click.prevent="toggleSource('agree')" class="absolute pin-l -ml-4 mt-1 pt-2" title="show code">
+      <pre
+        v-if="showSource == 'option'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.option"
+      ><code class="html"></code></pre>
+      <a
+        @click.prevent="toggleSource('agree')"
+        class="absolute pin-l -ml-4 mt-1 pt-2"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -157,13 +210,26 @@
           </g>
         </svg>
       </a>
-      <fvl-checkbox label="I agree with your terms of use" name="agree" :checked.sync="form.agree" class="w-1/2"/>
-      <pre v-if="showSource == 'agree'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.agree"><code class="html"></code></pre>
+      <fvl-checkbox
+        label="I agree with your terms of use"
+        name="agree"
+        :checked.sync="form.agree"
+        class="w-1/2"
+      />
+      <pre
+        v-if="showSource == 'agree'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.agree"
+      ><code class="html"></code></pre>
       <fvl-submit>Validate</fvl-submit>
     </fvl-form>
     <h2 class="mt-8 mb-2">File Upload</h2>
     <fvl-form :data="form2" url="/" class="relative" multipart @uploadProgress="uploadProgress">
-      <a @click.prevent="toggleSource('file')" class="absolute pin-l -ml-4 mt-1 pt-px" title="show code">
+      <a
+        @click.prevent="toggleSource('file')"
+        class="absolute pin-l -ml-4 mt-1 pt-px"
+        title="show code"
+      >
         <svg
           class="fill-current text-grey-light hover:text-teal-dark hover:cursor-pointer"
           width="16"
@@ -184,134 +250,154 @@
         :file.sync="form2.file.avatar"
         placeholder="Select any file to upload"
       />
-      <pre v-if="showSource == 'file'" class="m-2 rounded overflow-hidden" v-highlightjs="sourcecode.file"><code class="html"></code></pre>
+      <pre
+        v-if="showSource == 'file'"
+        class="m-2 rounded overflow-hidden"
+        v-highlightjs="sourcecode.file"
+      ><code class="html"></code></pre>
       <fvl-submit loader>Upload</fvl-submit>
     </fvl-form>
   </div>
 </template>
 
 <script>
-  import { FvlForm } from './Components.vue'
+import FvlForm from './components/FvlForm.vue';
+import FvlInput from './components/FvlInput.vue';
+import FvlTextarea from './components/FvlTextarea.vue';
+import FvlCheckbox from './components/FvlCheckbox.vue';
+import FvlRadio from './components/FvlRadio.vue';
+import FvlSelect from './components/FvlSelect.vue';
+import FvlFile from './components/FvlFile.vue';
+import FvlSubmit from './components/FvlSubmit.vue';
 
-  export default {
+export default {
     name: 'app',
-    components: { FvlForm },
+    components: {
+        FvlForm,
+        FvlInput,
+        FvlTextarea,
+        FvlCheckbox,
+        FvlRadio,
+        FvlSelect,
+        FvlFile,
+        FvlSubmit
+    },
     methods: {
-      toggleSource(field) {
-        this.showSource = this.showSource == field ? '' : field
-      },
-      uploadProgress(percent) {
-        this.uploadPercentage = percent
-      }
+        toggleSource(field) {
+            this.showSource = this.showSource == field ? '' : field;
+        },
+        uploadProgress(percent) {
+            this.uploadPercentage = percent;
+        }
     },
     data() {
-      return {
-        form: {
-          name: '',
-          text: '',
-          password: '',
-          color: '',
-          option: '',
-          agree: false
-        },
-        form2: {
-          name: 'John Doe',
-          file: {
-            avatar: ''
-          }
-        },
-        uploadPercentage: 0,
-        showSource: '',
-        sourcecode: {
-          input: `
-                                                        <fvl-input
-                                                          label="Name"
-                                                          name="name"
-                                                          type="text"
-                                                          autocomplete="name"
-                                                          :value.sync="form.name"
-                                                          placeholder="Type your name"
-                                                        />
-                                                          `,
-          text: `
-                                                        <fvl-textarea
-                                                          label="Text"
-                                                          name="text"
-                                                          :value.sync="form.text"
-                                                          placeholder="Type your story..."
-                                                        />
-                                                          `,
-          password: `
-                                                        <fvl-input
-                                                          label="Password"
-                                                          name="password"
-                                                          type="password"
-                                                          autocomplete="new-password"
-                                                          :value.sync="form.password"
-                                                          placeholder="Type password"
-                                                          class="w-1/2 relative"
-                                                          fieldClass="pr-8"
-                                                        >
-                                                          <!-- Optional Password Meter -->
-                                                          <template slot="hint">
-                                                            <div class="absolute pin-r pin-t mt-12 mr-4">
-                                                                <span v-if="form.password.length > 0 && 
-                                                                            form.password.length < 6">😔</span>
-                                                                <span v-if="form.password.length >= 6 && 
-                                                                            form.password.length < 10">😌</span>
-                                                                <span v-if="form.password.length >= 10 && 
-                                                                            form.password.length < 15">😃</span>
-                                                                <span v-if="form.password.length >= 15">😍</span>
-                                                            </div>
-                                                          </template>
-                                                        </fvl-input>
-                                                                `,
-          color: `
-                                                        <fvl-select
-                                                          label="Select your favorite color"
-                                                          name="color"
-                                                          placeholder="-- Select any color --"
-                                                          :allowEmpty="true"
-                                                          :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
-                                                          :selected.sync="form.color"
-                                                          class="w-1/2"
-                                                        />
-                                                                `,
-          option: `
-                                                        <fvl-radio
-                                                          label="Select any option"
-                                                          name="option"
-                                                          :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
-                                                          :checked.sync="form.option"
-                                                          class="w-1/2"
-                                                        />
-                                                              `,
+        return {
+            form: {
+                name: '',
+                text: '',
+                password: '',
+                color: '',
+                option: '',
+                agree: false
+            },
+            form2: {
+                name: 'John Doe',
+                file: {
+                    avatar: ''
+                }
+            },
+            uploadPercentage: 0,
+            showSource: '',
+            sourcecode: {
+                input: `
+  <fvl-input
+    label="Name"
+    name="name"
+    type="text"
+    autocomplete="name"
+    :value.sync="form.name"
+    placeholder="Type your name"
+  />
+    `,
+                text: `
+  <fvl-textarea
+    label="Text"
+    name="text"
+    :value.sync="form.text"
+    placeholder="Type your story..."
+  />
+    `,
+                password: `
+  <fvl-input
+    label="Password"
+    name="password"
+    type="password"
+    autocomplete="new-password"
+    :value.sync="form.password"
+    placeholder="Type password"
+    class="w-1/2 relative"
+    fieldClass="pr-8"
+  >
+    <!-- Optional Password Meter -->
+    <template slot="hint">
+      <div class="absolute pin-r pin-t mt-12 mr-4">
+          <span v-if="form.password.length > 0 && 
+                      form.password.length < 6">😔</span>
+          <span v-if="form.password.length >= 6 && 
+                      form.password.length < 10">😌</span>
+          <span v-if="form.password.length >= 10 && 
+                      form.password.length < 15">😃</span>
+          <span v-if="form.password.length >= 15">😍</span>
+      </div>
+    </template>
+  </fvl-input>
+          `,
+                color: `
+  <fvl-select
+    label="Select your favorite color"
+    name="color"
+    placeholder="-- Select any color --"
+    :allowEmpty="true"
+    :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
+    :checked.sync="form.color"
+    class="w-1/2"
+  />
+          `,
+                option: `
+  <fvl-radio
+    label="Select any option"
+    name="option"
+    :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
+    :checked.sync="form.option"
+    class="w-1/2"
+  />
+        `,
 
-          agree: `
-                                                        <fvl-checkbox
-                                                          label="I agree with your terms of use"
-                                                          name="agree"
-                                                          :checked.sync="form.agree"
-                                                          class="w-1/2"
-                                                        />
-                                                              `,
-          file: `
-                                                        <fvl-file
-                                                          label="Avatar"
-                                                          name="avatar"
-                                                          :multible="false"
-                                                          :file.sync="form2.file.avatar"
-                                                          placeholder="Select any file to upload"
-                                                        />
-                                                                    `
-        }
-      }
+                agree: `
+  <fvl-checkbox
+    label="I agree with your terms of use"
+    name="agree"
+    :checked.sync="form.agree"
+    class="w-1/2"
+  />
+        `,
+                file: `
+  <fvl-file
+    label="Avatar"
+    name="avatar"
+    :multible="false"
+    :file.sync="form2.file.avatar"
+    placeholder="Select any file to upload"
+  />
+              `
+            }
+        };
     }
-  }
+};
 </script>
 
 <style lang="scss">
-  #app {
+#app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -319,5 +405,5 @@
     margin-top: 60px;
     max-width: 600px;
     margin: 60px auto;
-  }
+}
 </style>
