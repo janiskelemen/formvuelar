@@ -9,13 +9,13 @@
         "laravel"
     ],
     "main": "./dist/lib.common.js",
-    "version": "0.1.3",
+    "version": "0.1.5",
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build-site": "vue-cli-service build --dest site; cp site/index.html index.html; sed -i'.bak' 's/\\/js/site\\/js/g' index.html",
-        "bundle": "vue-cli-service build --target lib --name lib ./src/Component.vue",
+        "build-examples": "vue-cli-service build --dest example; cp example/index.html index.html; sed -i \\.bak 's/\\/js/example\\/js/g' index.html; rm index.html.bak",
+        "bundle": "vue-cli-service build --target lib --name lib ./src/formvuelar.js",
         "lint": "vue-cli-service lint",
         "test:e2e": "vue-cli-service test:e2e",
         "test:unit": "vue-cli-service test:unit"
@@ -32,8 +32,11 @@
         "@vue/cli-plugin-unit-jest": "^3.0.5",
         "@vue/cli-service": "^3.0.5",
         "@vue/test-utils": "^1.0.0-beta.20",
+        "axios-mock-adapter": "^1.15.0",
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "^23.0.1",
+        "eslint-config-prettier": "^3.3.0",
+        "eslint-plugin-prettier": "^3.0.0",
         "node-sass": "^4.9.0",
         "sass-loader": "^7.0.1",
         "tailwindcss": "^0.6.6",
@@ -43,6 +46,7 @@
     "files": [
         "dist/*",
         "src/*",
+        "styles/*",
         "*.json"
     ],
     "eslintConfig": {
@@ -51,10 +55,24 @@
             "node": true
         },
         "extends": [
-            "plugin:vue/essential",
-            "eslint:recommended"
+            "eslint:recommended",
+            "plugin:vue/recommended"
         ],
-        "rules": {},
+        "rules": {
+            "vue/html-self-closing": "on",
+            "vue/html-indent": "on",
+            "vue/max-attributes-per-line": "120",
+            "vue/html-closing-bracket-spacing": [
+                "error",
+                {
+                    "startTag": "never",
+                    "selfClosingTag": "never"
+                }
+            ],
+            "import/no-unresolved": 0,
+            "import/no-unassigned-import": 0,
+            "semi": 0
+        },
         "parserOptions": {
             "parser": "babel-eslint"
         }

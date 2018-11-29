@@ -1,5 +1,5 @@
 <p align="center">
-    <img  src="https://janiskelemen.github.io/formvuelar/site/Formvuelar.svg" alt="Formvuelar" />
+    <img  src="https://janiskelemen.github.io/formvuelar/example/Formvuelar.svg" alt="Formvuelar" />
 </p>
 <h3 align="center">Vue form components with server side validation in mind</h3>
 
@@ -7,13 +7,67 @@
 FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
 </p>
 
-<h2>Demo</h2>
-<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Try the demo form!</a>
+<h2>Examples</h2>
+<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Give it a try!</a>
 
 <h2>Getting Started</h2>
 
 ```bash
 npm install formvuelar --save
+```
+
+<h2>Available Components</h2>
+
+<p>
+The following components are shipped with FormVuelar:
+</p>
+
+| Name               | Description          | Import Name                                |
+| ------------------ | -------------------- | ------------------------------------------ |
+| `<fvl-form />`     | Form wrapper element | `import { FvlForm } from 'formvuelar'`     |
+| `<fvl-input />`    | Input field          | `import { FvlInput } from 'formvuelar'`    |
+| `<fvl-textarea />` | Text Area field      | `import { FvlTextarea } from 'formvuelar'` |
+| `<fvl-Radio />`    | Radio input field    | `import { FvlRadio } from 'formvuelar'`    |
+| `<fvl-checkbox />` | Checkbox input field | `import { FvlCheckbox } from 'formvuelar'` |
+| `<fvl-select />`   | Select input field   | `import { FvlSelect } from 'formvuelar'`   |
+| `<fvl-file />`     | File input field     | `import { FvlFile } from 'formvuelar'`     |
+| `<fvl-submit />`   | Submit button        | `import { FvlSubmit } from 'formvuelar'`   |
+
+<h2>Error Response</h2>
+
+<p>
+The response from your Backend should contain a Json error object and have a status of 422 in order to show the error messages below the input fields. This response format is default for Laravel and will work out of the box.
+</p>
+
+```javascript
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "field-1": [
+      "Error 1",
+      "Error 2"
+    ],
+    "field-2": [
+      "Error 1",
+      "Error 2"
+    ]
+  }
+}
+```
+
+<h2>Client side validation</h2>
+<p>
+You can still use the default HTML5 validation rules for all input fields like 'accept' and 'required' for file inputs:
+</p>
+
+```html
+    <fvl-file
+        label="Avatar"
+        name="avatar"
+        :file.sync="form.file.avatar"
+        accept="image/*"
+        required
+    />
 ```
 
 <h2>Styling</h2>
@@ -27,7 +81,7 @@ The field itself has a class name of .fvl-{type}
 </p>
 <h3>Example classes of the text input component (using Tailwind)</h3>
 
-```CSS 
+```CSS
 .fvl-input-wrapper {
     @apply p-2;
 }
@@ -38,6 +92,7 @@ The field itself has a class name of .fvl-{type}
     @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
 }
 ```
+
 <p>
 I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
 Feel free to use the predefined css component classes for your own projects.

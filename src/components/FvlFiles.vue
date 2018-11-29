@@ -1,8 +1,8 @@
 <template>
-    <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-file-wrapper">
-        <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label" v-html="label"/>
-        <div class="fvl-file-button-wrapper">
-            <button class="fvl-file-button" tabindex="-1" @click.prevent>
+    <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-files-wrapper">
+        <label v-if="label" :class="labelClass" :for="name" class="fvl-files-label" v-html="label"/>
+        <div class="fvl-files-button-wrapper">
+            <button class="fvl-files-button" tabindex="-1" @click.prevent>
                 <slot name="button">
                     <svg class="fill-current text-white mr-2" width="18" height="16" xmlns="http://www.w3.org/2000/svg">
                         <g fill-rule="nonzero">
@@ -14,10 +14,10 @@
                             ></path>
                         </g>
                     </svg>
-                    <span>Select File</span>
+                    <span>Select min 2 files</span>
                 </slot>
             </button>
-            <span class="fvl-file-name" v-text="fileName"/>
+            <span class="fvl-files-name" v-text="fileName"/>
             <input
                 :name="name"
                 :id="name"
@@ -28,7 +28,8 @@
                 :accept="accept"
                 :disabled="this.$parent.isLoading"
                 type="file"
-                class="fvl-file"
+                class="fvl-files"
+                multible="multiple"
                 @change="handleFileChange(); $parent.dirty(name);"
             >
         </div>
@@ -91,8 +92,8 @@
         },
         methods: {
             /*
-                                        Handles a change on the file upload
-                                      */
+                        Handles a change on the file upload
+                      */
             handleFileChange() {
                 let file = this.$refs[this.name].files[0]
                 this.fileName = file.name

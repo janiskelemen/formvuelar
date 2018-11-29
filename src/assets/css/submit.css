@@ -1,3 +1,6 @@
+.fvl-submit-wrapper {
+  
+}
 .fvl-submit-button {
   transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1);
   @apply relative bg-teal-dark mt-8 px-6 py-3 text-white font-bold rounded;
