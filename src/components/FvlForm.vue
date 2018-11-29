@@ -19,7 +19,7 @@ export default {
             validator: function(value) {
                 // The value must match one of the axios methods
                 return (
-                    ['get', 'post', 'put', 'patch', 'delete'].indexOf(value) !==
+                    ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].indexOf(value.toUpperCase()) !==
                     -1
                 );
             }
