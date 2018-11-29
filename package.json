@@ -14,7 +14,7 @@
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "build-examples": "vue-cli-service build --dest example; cp example/index.html index.html; sed -i \\.bak 's/\\/js/example\\/js/g' index.html; rm index.html.bak",
+        "build-examples": "vue-cli-service build --dest example; cp example/index.html index.html; sed -i \\.bak 's/\\/js/\\/formvuelar\\/example\\/js/g' index.html; rm index.html.bak; sed -i \\.bak 's/\\/css/\\/formvuelar\\/example\\/css/g' index.html; rm index.html.bak",
         "bundle": "vue-cli-service build --target lib --name lib ./src/formvuelar.js",
         "lint": "vue-cli-service lint",
         "test:e2e": "vue-cli-service test:e2e",
