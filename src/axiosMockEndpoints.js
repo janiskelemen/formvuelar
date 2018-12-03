@@ -45,9 +45,33 @@ mock.onPost( '/basic' ).reply( function ( config ) {
 // Mock POST request to /upload
 mock.onPost( '/upload' ).reply( function ( config ) {
     var errors = {}
-
     if ( config.data.get( 'avatar' ) === '' ) {
         errors.avatar = [ 'Please select an image!' ]
+    }
+
+    if ( errors === {} ) {
+        return [ 200, {
+            "message": "All good!",
+        } ]
+    }
+    return [ 422, {
+        "message": "The given data was invalid.",
+        "errors": errors
+    } ]
+} )
+
+// Mock POST request to /update
+mock.onPost( '/update' ).reply( function ( config ) {
+    var errors = {}
+    var data = JSON.parse( config.data )
+    if ( data.fullname === '' ) {
+        errors.fullname = [ 'Please enter your full name!' ]
+    }
+    if ( data.bio === '' ) {
+        errors.bio = [ 'Please type something!' ]
+    }
+    if ( data.pet === '' ) {
+        errors.pet = [ 'Your need to select a pet!' ]
     }
 
     if ( errors === {} ) {

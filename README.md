@@ -1,5 +1,5 @@
 <p align="center">
-    <img  src="https://janiskelemen.github.io/formvuelar/example/Formvuelar.svg" alt="Formvuelar" />
+    <img src="https://janiskelemen.github.io/formvuelar/example/Formvuelar.svg" alt="Formvuelar" />
 </p>
 <h3 align="center">Vue form components with server side validation in mind</h3>
 
