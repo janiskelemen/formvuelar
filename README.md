@@ -39,7 +39,7 @@ You can still use the default HTML5 validation rules for all input fields like '
 </p>
 
 ```html
-    <!-- form input  -->
+    <!-- form wrapper -->
     <fvl-form method="post" :data="form" url="/create">
 
       <!-- Text input component -->
@@ -70,6 +70,7 @@ You can still use the default HTML5 validation rules for all input fields like '
 
       <!-- Submit button -->
       <fvl-submit>Validate</fvl-submit>
+
     </fvl-form>
 ```
 
