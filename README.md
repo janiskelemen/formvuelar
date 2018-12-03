@@ -45,11 +45,8 @@ Create a form and sent it via post request to your server.
       <!-- Text input component -->
       <fvl-input
         :value.sync="form.fullname"
-        autocomplete="fullname"
         label="Full Name"
         name="fullname"
-        placeholder="Type your full name"
-        type="text"
       />
 
       <!-- Textarea component -->
@@ -57,7 +54,6 @@ Create a form and sent it via post request to your server.
         :value.sync="form.bio"
         label="Bio"
         name="bio"
-        placeholder="Type your story..."
       />
 
       <!-- Radio component with options -->
