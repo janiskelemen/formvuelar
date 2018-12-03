@@ -26,9 +26,9 @@ The following components are shipped with FormVuelar:
 | ------------------ | -------------------- | ------------------------------------------ |
 | `<fvl-form />`     | Form wrapper element | `import { FvlForm } from 'formvuelar'`     |
 | `<fvl-input />`    | Input field          | `import { FvlInput } from 'formvuelar'`    |
-| `<fvl-textarea />` | Text Area field      | `import { FvlTextarea } from 'formvuelar'` |
+| `<fvl-textarea />` | Text area field      | `import { FvlTextarea } from 'formvuelar'` |
 | `<fvl-Radio />`    | Radio input field    | `import { FvlRadio } from 'formvuelar'`    |
-| `<fvl-checkbox />` | Checkbox input field | `import { FvlCheckbox } from 'formvuelar'` |
+| `<fvl-checkbox />` | Check box input field | `import { FvlCheckbox } from 'formvuelar'` |
 | `<fvl-select />`   | Select input field   | `import { FvlSelect } from 'formvuelar'`   |
 | `<fvl-file />`     | File input field     | `import { FvlFile } from 'formvuelar'`     |
 | `<fvl-submit />`   | Submit button        | `import { FvlSubmit } from 'formvuelar'`   |
@@ -72,10 +72,10 @@ You can still use the default HTML5 validation rules for all input fields like '
 
 <h2>Styling</h2>
 <p>
-The styling is totally up to you. All components have their own classes so you have full controll over the look feel of every component.
+The styling is totally up to you. All components have their own classes so you have full control over the look feel of every component.
 </p>
 <p>
-Every component is wrapped with a div and the coresponding class .fvl-{type}-wrapper. 
+Every component is wrapped with a div and the corresponding class .fvl-{type}-wrapper.
 Labels have a class name of .fvl-{type}-label.
 The field itself has a class name of .fvl-{type}
 </p>
