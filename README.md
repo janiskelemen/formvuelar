@@ -34,35 +34,44 @@ The following components are shipped with FormVuelar:
 | `<fvl-submit />`   | Submit button         | `import { FvlSubmit } from 'formvuelar'`   |
 
 <h2>Components Props & Events</h2>
-uploadProgress
-success
-error
 
-| Name          | Prop/Event       | Type     | Default | Possible values               |
-| ------------- | ---------------- | -------- | ------- | ----------------------------- |
-| **fvl-form**  | :method          | String   | 'post'  | get\|post\|put\|patch\|delete |
-|               | :data            | Object   | {}      | {}                            |
-|               | :url             | String   | null    |                               |
-|               | :multipart       | Boolean  | false   | true\|false                   |
-|               | @success         | Function |         | axios response                |
-|               | @error           | Function |         | axios error response          |
-|               | @upload-progress | Function |         | 0-100                         |
-|               |                  |          |         |                               |
-| **fvl-input** | :value           | String   | ''      |                               |
-|               | :id              | String   | null    |                               |
-|               | :name            | String   | ''      |                               |
-|               | :type            | String   | 'text'  |                               |
-|               | :placeholder     | String   | null    |                               |
-|               | :autocomplete    | String   | null    |                               |
-|               | :field-class     | String   | null    |                               |
-|               | :min             | Number   | null    |                               |
-|               | :max             | Number   | null    |                               |
-|               | :size            | Number   | null    |                               |
-|               | :step            | Number   | null    |                               |
-|               | :required        | Boolean  | false   | true\|false                   |
-|               | :readonly        | Boolean  | false   | true\|false                   |
-|               | :disabled        | Boolean  | false   | true\|false                   |
-|               | :pattern         | String   | null    | regex                         |
+| Name           | Prop/Event       | Type     | Default | Possible values               |
+| -------------- | ---------------- | -------- | ------- | ----------------------------- |
+| **fvl-form**   | :method          | String   | 'post'  | get\|post\|put\|patch\|delete |
+|                | :data            | Object   | {}      | {}                            |
+|                | :url             | String   | null    |                               |
+|                | :multipart       | Boolean  | false   | true\|false                   |
+|                | @success         | Function |         | axios response                |
+|                | @error           | Function |         | axios error response          |
+|                | @upload-progress | Function |         | 0-100                         |
+|                |                  |          |         |                               |
+| **fvl-input**  | :value.sync      | String   | ''      |                               |
+|                | :id              | String   | null    |                               |
+|                | :name            | String   | ''      |                               |
+|                | :type            | String   | 'text'  |                               |
+|                | :placeholder     | String   | null    |                               |
+|                | :autocomplete    | String   | null    |                               |
+|                | :field-class     | String   | null    |                               |
+|                | :min             | Number   | null    |                               |
+|                | :max             | Number   | null    |                               |
+|                | :size            | Number   | null    |                               |
+|                | :step            | Number   | null    |                               |
+|                | :required        | Boolean  | false   | true\|false                   |
+|                | :readonly        | Boolean  | false   | true\|false                   |
+|                | :disabled        | Boolean  | false   | true\|false                   |
+|                | :pattern         | String   | null    | regex                         |
+|                |                  |          |         |                               |
+| **fvl-select** | :allow-empty     | Boolean  | false   | true\|false                   |
+|                | :options         | Object   | {}      | {'key': 'value', ...}         |
+|                | :selected.sync   | String   | null    | options.key                   |
+|                | :disabled        | Boolean  | false   | true\|false                   |
+|                |                  |          |         |                               |
+| **fvl-submit** | :loader          | Boolean  | false   | true\|false                   |
+|                | :disabled        | Boolean  | false   | true\|false                   |
+
+:allow-empty="true"
+:options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
+:selected.sync="form.color"
 
 <h2>Basic Form Template</h2>
 <p>
