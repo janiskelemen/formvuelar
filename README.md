@@ -33,9 +33,9 @@ The following components are shipped with FormVuelar:
 | `<fvl-file />`     | File input field      | `import { FvlFile } from 'formvuelar'`     |
 | `<fvl-submit />`   | Submit button         | `import { FvlSubmit } from 'formvuelar'`   |
 
-<h2>Basic Form</h2>
+<h2>Basic Form Template</h2>
 <p>
-You can still use the default HTML5 validation rules for all input fields like 'accept' and 'required' for file inputs:
+Create a form and sent it via post request to your server.
 </p>
 
 ```html
@@ -72,6 +72,23 @@ You can still use the default HTML5 validation rules for all input fields like '
       <fvl-submit>Validate</fvl-submit>
 
     </fvl-form>
+```
+
+<h3>Form Object</h3>
+<p>
+The form object you would pass into the form above would look like this:
+</p>
+
+```javascript
+...
+    data() {
+      return {
+        form: {
+          fullname: '',
+          bio: '',
+          pet: ''
+        },
+        ...
 ```
 
 <h2>Error Response</h2>
