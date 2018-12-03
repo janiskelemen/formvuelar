@@ -39,35 +39,35 @@ Create a form and sent it via post request to your server.
 </p>
 
 ```html
-    <!-- form wrapper -->
-    <fvl-form method="post" :data="form" url="/create">
+<!-- form wrapper -->
+<fvl-form method="post" :data="form" url="/create">
 
-      <!-- Text input component -->
-      <fvl-input
-        :value.sync="form.fullname"
-        label="Full Name"
-        name="fullname"
-      />
+    <!-- Text input component -->
+    <fvl-input
+    :value.sync="form.fullname"
+    label="Full Name"
+    name="fullname"
+    />
 
-      <!-- Textarea component -->
-      <fvl-textarea
-        :value.sync="form.bio"
-        label="Bio"
-        name="bio"
-      />
+    <!-- Textarea component -->
+    <fvl-textarea
+    :value.sync="form.bio"
+    label="Bio"
+    name="bio"
+    />
 
-      <!-- Radio component with options -->
-      <fvl-radio
-        :checked.sync="form.pet"
-        :options="{'cat': 'Cat', 'dog': 'Dog'}"
-        label="Favorite pet"
-        name="pet"
-      />
+    <!-- Radio component with options -->
+    <fvl-radio
+    :checked.sync="form.pet"
+    :options="{'cat': 'Cat', 'dog': 'Dog'}"
+    label="Favorite pet"
+    name="pet"
+    />
 
-      <!-- Submit button -->
-      <fvl-submit>Validate</fvl-submit>
+    <!-- Submit button -->
+    <fvl-submit>Validate</fvl-submit>
 
-    </fvl-form>
+</fvl-form>
 ```
 
 <p>
@@ -75,23 +75,23 @@ The form object you pass into the form component above would look like this:
 </p>
 
 ```javascript
-    import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
-    ...
-        components: {
-            FvlForm,
-            FvlInput,
-            FvlTextarea,
-            FvlRadio,
-            FvlSubmit,
-        },
-        data() {
-            return {
-                form: {
-                fullname: '',
-                bio: '',
-                pet: ''
-                },
-            ...
+import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
+...
+    components: {
+        FvlForm,
+        FvlInput,
+        FvlTextarea,
+        FvlRadio,
+        FvlSubmit,
+    },
+    data() {
+        return {
+            form: {
+            fullname: '',
+            bio: '',
+            pet: ''
+            },
+        ...
 ```
 
 <h2>Error Response</h2>
