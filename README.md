@@ -33,30 +33,36 @@ The following components are shipped with FormVuelar:
 | `<fvl-file />`     | File input field      | `import { FvlFile } from 'formvuelar'`     |
 | `<fvl-submit />`   | Submit button         | `import { FvlSubmit } from 'formvuelar'`   |
 
-<h2>Components Props</h2>
+<h2>Components Props & Events</h2>
+uploadProgress
+success
+error
 
-| Name      | Prop         | Type    | Default | Possible values               |
-| --------- | ------------ | ------- | ------- | ----------------------------- |
-| fvl-form  | method       | String  | 'post'  | get\|post\|put\|patch\|delete |
-|           | data         | Object  | {}      | {}                            |
-|           | url          | String  | null    |                               |
-|           | multipart    | Boolean | false   | true\|false                   |
-|           |              |         |         |                               |
-| fvl-input | value        | String  | ''      |                               |
-|           | id           | String  | null    |                               |
-|           | name         | String  | ''      |                               |
-|           | type         | String  | 'text'  |                               |
-|           | placeholder  | String  | null    |                               |
-|           | autocomplete | String  | null    |                               |
-|           | class        | String  | null    |                               |
-|           | min          | Number  | null    |                               |
-|           | max          | Number  | null    |                               |
-|           | size         | Number  | null    |                               |
-|           | step         | Number  | null    |                               |
-|           | required     | Boolean | false   | true\|false                   |
-|           | readonly     | Boolean | false   | true\|false                   |
-|           | disabled     | Boolean | false   | true\|false                   |
-|           | pattern      | String  | null    | regex                         |
+| Name          | Prop/Event       | Type     | Default | Possible values               |
+| ------------- | ---------------- | -------- | ------- | ----------------------------- |
+| **fvl-form**  | :method          | String   | 'post'  | get\|post\|put\|patch\|delete |
+|               | :data            | Object   | {}      | {}                            |
+|               | :url             | String   | null    |                               |
+|               | :multipart       | Boolean  | false   | true\|false                   |
+|               | @success         | Function |         | axios response                |
+|               | @error           | Function |         | axios error response          |
+|               | @upload-progress | Function |         | 0-100                         |
+|               |                  |          |         |                               |
+| **fvl-input** | :value           | String   | ''      |                               |
+|               | :id              | String   | null    |                               |
+|               | :name            | String   | ''      |                               |
+|               | :type            | String   | 'text'  |                               |
+|               | :placeholder     | String   | null    |                               |
+|               | :autocomplete    | String   | null    |                               |
+|               | :field-class     | String   | null    |                               |
+|               | :min             | Number   | null    |                               |
+|               | :max             | Number   | null    |                               |
+|               | :size            | Number   | null    |                               |
+|               | :step            | Number   | null    |                               |
+|               | :required        | Boolean  | false   | true\|false                   |
+|               | :readonly        | Boolean  | false   | true\|false                   |
+|               | :disabled        | Boolean  | false   | true\|false                   |
+|               | :pattern         | String   | null    | regex                         |
 
 <h2>Basic Form Template</h2>
 <p>
