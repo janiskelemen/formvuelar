@@ -70,29 +70,28 @@ Create a form and sent it via post request to your server.
     </fvl-form>
 ```
 
-<h3>Components & Form Object</h3>
 <p>
-The form object you pass into the form above would look like this:
+The form object you pass into the form component above would look like this:
 </p>
 
 ```javascript
-  import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
-...
-    components: {
-      FvlForm,
-      FvlInput,
-      FvlTextarea,
-      FvlRadio,
-      FvlSubmit,
-    },
-    data() {
-      return {
-        form: {
-          fullname: '',
-          bio: '',
-          pet: ''
+    import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
+    ...
+        components: {
+            FvlForm,
+            FvlInput,
+            FvlTextarea,
+            FvlRadio,
+            FvlSubmit,
         },
-        ...
+        data() {
+            return {
+                form: {
+                fullname: '',
+                bio: '',
+                pet: ''
+                },
+            ...
 ```
 
 <h2>Error Response</h2>
