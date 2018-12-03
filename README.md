@@ -47,6 +47,7 @@ The following components are shipped with FormVuelar:
 |                |                  |          |         |                               |
 | **fvl-input**  | :value.sync      | String   | ''      |                               |
 |                | :id              | String   | null    |                               |
+|                | :label           | String   | null    |                               |
 |                | :name            | String   | ''      |                               |
 |                | :type            | String   | 'text'  |                               |
 |                | :placeholder     | String   | null    |                               |
@@ -64,14 +65,22 @@ The following components are shipped with FormVuelar:
 | **fvl-select** | :allow-empty     | Boolean  | false   | true\|false                   |
 |                | :options         | Object   | {}      | {'key': 'value', ...}         |
 |                | :selected.sync   | String   | null    | options.key                   |
+|                | :name            | String   | ''      |                               |
+|                | :label           | String   | null    |                               |
+|                | :required        | Boolean  | false   | true\|false                   |
+|                | :readonly        | Boolean  | false   | true\|false                   |
+|                | :disabled        | Boolean  | false   | true\|false                   |
+|                |                  |          |         |                               |
+| **fvl-radio**  | :options         | Object   | {}      | {'key': 'value', ...}         |
+|                | :checked.sync    | String   | null    | options.key                   |
+|                | :name            | String   | ''      |                               |
+|                | :label           | String   | null    |                               |
+|                | :required        | Boolean  | false   | true\|false                   |
+|                | :readonly        | Boolean  | false   | true\|false                   |
 |                | :disabled        | Boolean  | false   | true\|false                   |
 |                |                  |          |         |                               |
 | **fvl-submit** | :loader          | Boolean  | false   | true\|false                   |
 |                | :disabled        | Boolean  | false   | true\|false                   |
-
-:allow-empty="true"
-:options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
-:selected.sync="form.color"
 
 <h2>Basic Form Template</h2>
 <p>
