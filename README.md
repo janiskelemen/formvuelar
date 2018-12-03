@@ -33,6 +33,31 @@ The following components are shipped with FormVuelar:
 | `<fvl-file />`     | File input field      | `import { FvlFile } from 'formvuelar'`     |
 | `<fvl-submit />`   | Submit button         | `import { FvlSubmit } from 'formvuelar'`   |
 
+<h2>Components Props</h2>
+
+| Name      | Prop         | Type    | Default | Possible values               |
+| --------- | ------------ | ------- | ------- | ----------------------------- |
+| fvl-form  | method       | String  | 'post'  | get\|post\|put\|patch\|delete |
+|           | data         | Object  | {}      | {}                            |
+|           | url          | String  | null    |                               |
+|           | multipart    | Boolean | false   | true\|false                   |
+|           |              |         |         |                               |
+| fvl-input | value        | String  | ''      |                               |
+|           | id           | String  | null    |                               |
+|           | name         | String  | ''      |                               |
+|           | type         | String  | 'text'  |                               |
+|           | placeholder  | String  | null    |                               |
+|           | autocomplete | String  | null    |                               |
+|           | class        | String  | null    |                               |
+|           | min          | Number  | null    |                               |
+|           | max          | Number  | null    |                               |
+|           | size         | Number  | null    |                               |
+|           | step         | Number  | null    |                               |
+|           | required     | Boolean | false   | true\|false                   |
+|           | readonly     | Boolean | false   | true\|false                   |
+|           | disabled     | Boolean | false   | true\|false                   |
+|           | pattern      | String  | null    | regex                         |
+
 <h2>Basic Form Template</h2>
 <p>
 Create a form and sent it via post request to your server.
@@ -44,24 +69,24 @@ Create a form and sent it via post request to your server.
 
     <!-- Text input component -->
     <fvl-input
-    :value.sync="form.fullname"
-    label="Full Name"
-    name="fullname"
+        :value.sync="form.fullname"
+        label="Full Name"
+        name="fullname"
     />
 
     <!-- Textarea component -->
     <fvl-textarea
-    :value.sync="form.bio"
-    label="Bio"
-    name="bio"
+        :value.sync="form.bio"
+        label="Bio"
+        name="bio"
     />
 
     <!-- Radio component with options -->
     <fvl-radio
-    :checked.sync="form.pet"
-    :options="{'cat': 'Cat', 'dog': 'Dog'}"
-    label="Favorite pet"
-    name="pet"
+        :checked.sync="form.pet"
+        :options="{'cat': 'Cat', 'dog': 'Dog'}"
+        label="Favorite pet"
+        name="pet"
     />
 
     <!-- Submit button -->
