@@ -22,16 +22,56 @@ npm install formvuelar --save
 The following components are shipped with FormVuelar:
 </p>
 
-| Name               | Description          | Import Name                                |
-| ------------------ | -------------------- | ------------------------------------------ |
-| `<fvl-form />`     | Form wrapper element | `import { FvlForm } from 'formvuelar'`     |
-| `<fvl-input />`    | Input field          | `import { FvlInput } from 'formvuelar'`    |
-| `<fvl-textarea />` | Text area field      | `import { FvlTextarea } from 'formvuelar'` |
-| `<fvl-Radio />`    | Radio input field    | `import { FvlRadio } from 'formvuelar'`    |
+| Name               | Description           | Import Name                                |
+| ------------------ | --------------------- | ------------------------------------------ |
+| `<fvl-form />`     | Form wrapper element  | `import { FvlForm } from 'formvuelar'`     |
+| `<fvl-input />`    | Input field           | `import { FvlInput } from 'formvuelar'`    |
+| `<fvl-textarea />` | Text area field       | `import { FvlTextarea } from 'formvuelar'` |
+| `<fvl-Radio />`    | Radio input field     | `import { FvlRadio } from 'formvuelar'`    |
 | `<fvl-checkbox />` | Check box input field | `import { FvlCheckbox } from 'formvuelar'` |
-| `<fvl-select />`   | Select input field   | `import { FvlSelect } from 'formvuelar'`   |
-| `<fvl-file />`     | File input field     | `import { FvlFile } from 'formvuelar'`     |
-| `<fvl-submit />`   | Submit button        | `import { FvlSubmit } from 'formvuelar'`   |
+| `<fvl-select />`   | Select input field    | `import { FvlSelect } from 'formvuelar'`   |
+| `<fvl-file />`     | File input field      | `import { FvlFile } from 'formvuelar'`     |
+| `<fvl-submit />`   | Submit button         | `import { FvlSubmit } from 'formvuelar'`   |
+
+<h2>Basic Form</h2>
+<p>
+You can still use the default HTML5 validation rules for all input fields like 'accept' and 'required' for file inputs:
+</p>
+
+```html
+    <!-- form input  -->
+    <fvl-form method="post" :data="form" url="/create">
+
+      <!-- Text input component -->
+      <fvl-input
+        :value.sync="form.fullname"
+        autocomplete="fullname"
+        label="Full Name"
+        name="fullname"
+        placeholder="Type your full name"
+        type="text"
+      />
+
+      <!-- Textarea component -->
+      <fvl-textarea
+        :value.sync="form.bio"
+        label="Bio"
+        name="bio"
+        placeholder="Type your story..."
+      />
+
+      <!-- Radio component with options -->
+      <fvl-radio
+        :checked.sync="form.pet"
+        :options="{'cat': 'Cat', 'dog': 'Dog'}"
+        label="Favorite pet"
+        name="pet"
+      />
+
+      <!-- Submit button -->
+      <fvl-submit>Validate</fvl-submit>
+    </fvl-form>
+```
 
 <h2>Error Response</h2>
 
