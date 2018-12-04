@@ -4,7 +4,7 @@
     <div class="relative">
       <select
         :name="name"
-        :id="name"
+        :id="id"
         :placeholder="placeholder"
         :autocomplete="autocomplete"
         :class="fieldClass"
@@ -50,6 +50,10 @@
       name: {
         type: String,
         required: true
+      },
+      id: {
+        type: String,
+        default: null
       },
       label: {
         type: String,

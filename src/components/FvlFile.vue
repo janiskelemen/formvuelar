@@ -25,7 +25,7 @@
       <span class="fvl-file-name" v-text="fileName"/>
       <input
         :name="name"
-        :id="name"
+        :id="id"
         :ref="name"
         :placeholder="placeholder"
         :class="fieldClass"
@@ -60,6 +60,10 @@
       name: {
         type: String,
         required: true
+      },
+      id: {
+        type: String,
+        default: null
       },
       accept: {
         type: String,
@@ -108,8 +112,8 @@
     },
     methods: {
       /*
-            Handles a change on the file upload
-         */
+              Handles a change on the file upload
+           */
       handleFileChange() {
         let file = this.$refs[this.name].files[0]
         this.fileName = file.name

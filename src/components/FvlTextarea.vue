@@ -4,11 +4,14 @@
     <textarea
       :value="value"
       :name="name"
-      :id="name"
-      :type="type"
+      :id="id"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
       :class="fieldClass"
+      :cols="cols"
+      :maxlength="maxlength"
+      :rows="rows"
+      :wrap="wrap"
       :required="required"
       :readonly="readonly"
       :disabled="disabled"
@@ -39,13 +42,13 @@
         type: String,
         required: true
       },
+      id: {
+        type: String,
+        default: null
+      },
       value: {
         type: String,
         default: ''
-      },
-      type: {
-        type: String,
-        default: 'text'
       },
       placeholder: {
         type: String,
@@ -63,6 +66,26 @@
         default: null
       },
       labelClass: {
+        type: String,
+        required: false,
+        default: null
+      },
+      cols: {
+        type: Number,
+        required: false,
+        default: null
+      },
+      maxlength: {
+        type: Number,
+        required: false,
+        default: null
+      },
+      rows: {
+        type: Number,
+        required: false,
+        default: null
+      },
+      wrap: {
         type: String,
         required: false,
         default: null

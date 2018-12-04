@@ -4,7 +4,7 @@
     <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
       <input
         :name="name"
-        :id="key"
+        :id="id"
         :value="key"
         :checked="checked == key"
         :class="fieldClass"
@@ -38,6 +38,10 @@
       name: {
         type: String,
         required: true
+      },
+      id: {
+        type: String,
+        default: null
       },
       label: {
         type: String,

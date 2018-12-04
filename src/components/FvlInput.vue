@@ -4,7 +4,7 @@
     <input
       :value="value"
       :name="name"
-      :id="name"
+      :id="id"
       :type="type"
       :placeholder="placeholder"
       :autocomplete="autocomplete"
@@ -43,6 +43,10 @@
       name: {
         type: String,
         required: true
+      },
+      id: {
+        type: String,
+        default: null
       },
       value: {
         type: String,
