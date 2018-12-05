@@ -9,7 +9,7 @@
         "laravel"
     ],
     "main": "./dist/lib.common.js",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve",
