@@ -27,6 +27,14 @@ export {
 }
 from './components/FvlFile'
 export {
+    default as FvlMultiFile
+}
+from './components/FvlMultiFile'
+export {
+    default as FvlDropzone
+}
+from './components/FvlDropzone'
+export {
     default as FvlSubmit
 }
 from './components/FvlSubmit'

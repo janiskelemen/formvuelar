@@ -26,14 +26,19 @@
     </h1>
     <!-- Basic form example -->
     <basic-form/>
-    <!-- Single file upload example -->
-    <upload-form/>
-    <!-- Prefilled form example -->
+     <!-- Prefilled form example -->
     <prefilled-form
       init-fullname="John Doe"
       init-bio="Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
       init-pet="dog"
     />
+    <!-- Single file upload example -->
+    <upload-form/>
+    <!-- Multi file upload example -->
+    <multi-upload-form/>
+    <!-- Multi file upload example -->
+    <dropzone-form/>
+   
   </div>
 </template>
 
@@ -49,6 +54,8 @@
 
   import BasicForm from './examples/BasicForm.vue'
   import UploadForm from './examples/FileUpload.vue'
+  import MultiUploadForm from './examples/MultiFileUpload.vue'
+  import DropzoneForm from './examples/Dropzone.vue'
   import PrefilledForm from './examples/PrefilledForm'
 
   export default {
@@ -65,6 +72,8 @@
 
       BasicForm,
       UploadForm,
+      MultiUploadForm,
+      DropzoneForm,
       PrefilledForm
     },
     data() {

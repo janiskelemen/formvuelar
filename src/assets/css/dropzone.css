@@ -1,0 +1,95 @@
+.fvl-dropzone-wrapper {
+  @apply relative p-2;
+}
+
+.fvl-form-drag-over > .fvl-dropzone-wrapper > .fvl-dropzone-area-wrapper {
+  animation: pulse 1.4s infinite;
+  @apply rounded;
+}
+
+.fvl-dropzone-label {
+  @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
+}
+
+.fvl-dropzone-area-wrapper {
+  @apply inline-flex w-full;
+}
+
+.fvl-dropzone-wrapper:focus-within .fvl-dropzone-area-wrapper {
+  box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
+  @apply rounded;
+}
+
+.fvl-dropzone-wrapper:hover .fvl-dropzone-area {
+  @apply border-teal;
+}
+
+.fvl-dropzone-area {
+  @apply flex flex-wrap w-full bg-grey-lighter text-grey-darker border-dashed border-2 border-grey py-3 px-4 leading-tight rounded truncate;
+}
+.fvl-dropzone-area-placeholder {
+  @apply block text-center;
+}
+
+.fvl-dropzone-file-preview {
+  @apply relative w-1/2 m-2 bg-grey-darkest text-white leading-tight rounded truncate shadow overflow-hidden;
+  min-height: 3.5rem;
+}
+.fvl-dropzone-file-preview-name {
+  @apply absolute h-24 w-full py-3 px-4 font-bold text-xs truncate;
+}
+.fvl-dropzone-file-preview-name-background {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 29%, rgba(0, 0, 0, 0) 100%);
+  background-blend-mode: multiply;
+}
+.fvl-dropzone-file-preview-size {
+  @apply font-bold mt-1;
+  color: #c3c3c3;
+}
+.fvl-dropzone-file-preview-loader {
+  @apply absolute h-1 pin-t w-full z-20;
+}
+.fvl-dropzone-file-preview-loader > div {
+  @apply h-1;
+  transition: width 0.2s ease-out;
+  background: rgb(107, 116, 123);
+}
+.fvl-dropzone-file-image {
+  @apply bg-center bg-contain bg-no-repeat rounded;
+  transition: all 0.2s ease-out;
+}
+
+.fvl-dropzone-remove {
+  @apply absolute pin-b pin-r text-white bg-grey-darkest opacity-75 rounded-full m-1 p-1 w-6 h-6;
+}
+
+.fvl-dropzone-remove svg {
+  @apply stroke-current h-4 w-4;
+}
+
+.fvl-dropzone-remove:hover {
+  @apply cursor-pointer;
+}
+
+.fvl-dropzone {
+  @apply appearance-none absolute opacity-0 pin-l py-3 px-4 w-full cursor-pointer;
+}
+
+.fvl-dropzone::-webkit-file-upload-area {
+  cursor: pointer;
+  visibility: hidden;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #38a89d;
+  }
+
+  70% {
+    box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}

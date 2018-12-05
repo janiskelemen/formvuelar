@@ -10,6 +10,13 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 <h2>Examples</h2>
 <a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Give it a try!</a>
 
+<h2>Features</h2>
+
+    - Works out of the box with Laravel
+    - Axios integration
+    - File upload support including process indicator
+    - Display validation error messages from error response
+
 <h2>Getting Started</h2>
 
 ```bash
@@ -35,9 +42,9 @@ The following components are shipped with FormVuelar:
 
 <h2>Components Props & Events</h2>
 
-| Name             | Prop/Event       | Type     | Default | Possible values                         |
-| ---------------- | ---------------- | -------- | ------- | --------------------------------------- |
-| **fvl-form**     | :method          | String   | 'post'  | `get`\|`post`\|`put`\|`patch`\|`delete` |
+| Name             | Prop/Event       | Type     | Default | Possible values                         | Notes |
+| ---------------- | ---------------- | -------- | ------- | --------------------------------------- | ----- |
+| **fvl-form**     | :method          | String   | 'post'  | `get`\|`post`\|`put`\|`patch`\|`delete` |       |
 |                  | :data            | Object   | {}      | {}                                      |
 |                  | :url             | String   | null    |                                         |
 |                  | :multipart       | Boolean  | false   | `true`\|`false`                         |
@@ -45,7 +52,7 @@ The following components are shipped with FormVuelar:
 |                  | @error           | Function |         | axios error response                    |
 |                  | @upload-progress | Function |         | 0-100                                   |
 |                  |                  |          |         |                                         |
-| **fvl-input**    | :value.sync      | String   | ''      |                                         |
+| **fvl-input**    | :value.sync      | Data     | ''      | `form.name`                             |
 |                  | :id              | String   | null    |                                         |
 |                  | :name            | String   | ''      |                                         |
 |                  | :label           | String   | null    |                                         |
@@ -62,7 +69,7 @@ The following components are shipped with FormVuelar:
 |                  | :disabled        | Boolean  | false   | `true`\|`false`                         |
 |                  | :pattern         | String   | null    | regex                                   |
 |                  |                  |          |         |                                         |
-| **fvl-textarea** | :value.sync      | String   | ''      |                                         |
+| **fvl-textarea** | :value.sync      | Data     | ''      | `form.about`                            |
 |                  | :id              | String   | null    |                                         |
 |                  | :name            | String   | ''      |                                         |
 |                  | :label           | String   | null    |                                         |
@@ -78,8 +85,8 @@ The following components are shipped with FormVuelar:
 |                  | :disabled        | Boolean  | false   | `true`\|`false`                         |
 |                  | :pattern         | String   | null    | regex                                   |
 |                  |                  |          |         |                                         |
-| **fvl-select**   | :selected.sync   | String   | null    | options.key                             |
-|                  | :options         | Object   | {}      | {'key': 'value', ...}                   |
+| **fvl-select**   | :selected.sync   | Data     | null    | `form.favoriteColor`                    |
+|                  | :options         | Object   | {}      | `{'key': 'value', ...}`                 |
 |                  | :id              | String   | null    |                                         |
 |                  | :name            | String   | ''      |                                         |
 |                  | :label           | String   | null    |                                         |
@@ -90,15 +97,23 @@ The following components are shipped with FormVuelar:
 |                  | :readonly        | Boolean  | false   | `true`\|`false`                         |
 |                  | :disabled        | Boolean  | false   | `true`\|`false`                         |
 |                  |                  |          |         |                                         |
-| **fvl-radio**    | :checked.sync    | String   | null    | options.key                             |
-|                  | :options         | Object   | {}      | {'key': 'value', ...}                   |
+| **fvl-radio**    | :checked.sync    | Data     | null    | `form.newsletter`                       |
+|                  | :options         | Object   | {}      | `{'key': 'value', ...}`                 |
 |                  | :id              | String   | null    |                                         |
 |                  | :name            | String   | ''      |                                         |
 |                  | :label           | String   | null    |                                         |
 |                  | :required        | Boolean  | false   | `true`\|`false`                         |
 |                  | :readonly        | Boolean  | false   | `true`\|`false`                         |
 |                  | :disabled        | Boolean  | false   | `true`\|`false`                         |
-| **fvl-checkbox** | :checked.sync    | String   | null    | options.key                             |
+| **fvl-checkbox** | :checked.sync    | Data     | null    | `form.terms`                            |
+|                  | :id              | String   | null    |                                         |
+|                  | :name            | String   | ''      |                                         |
+|                  | :label           | String   | null    |                                         |
+|                  | :required        | Boolean  | false   | `true`\|`false`                         |
+|                  | :readonly        | Boolean  | false   | `true`\|`false`                         |
+|                  | :disabled        | Boolean  | false   | `true`\|`false`                         |
+|                  |                  |          |         |                                         |
+| **fvl-file**     | :file.sync       | Data     | null    | `form.avatar`                           |
 |                  | :id              | String   | null    |                                         |
 |                  | :name            | String   | ''      |                                         |
 |                  | :label           | String   | null    |                                         |

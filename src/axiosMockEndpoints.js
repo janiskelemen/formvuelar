@@ -43,12 +43,11 @@ mock.onPost( '/basic' ).reply( function ( config ) {
 } )
 
 // Mock POST request to /upload
-mock.onPost( '/upload' ).reply( function ( config ) {
+mock.onPost( '/uploads' ).reply( function ( config ) {
     var errors = {}
     if ( config.data.get( 'avatar' ) === '' ) {
         errors.avatar = [ 'Please select an image!' ]
     }
-
     if ( errors === {} ) {
         return [ 200, {
             "message": "All good!",
@@ -58,6 +57,7 @@ mock.onPost( '/upload' ).reply( function ( config ) {
         "message": "The given data was invalid.",
         "errors": errors
     } ]
+
 } )
 
 // Mock POST request to /update
@@ -84,3 +84,5 @@ mock.onPost( '/update' ).reply( function ( config ) {
         "errors": errors
     } ]
 } )
+
+mock.onAny().passThrough()

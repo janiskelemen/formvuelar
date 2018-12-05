@@ -2,9 +2,9 @@
 <template>
   <div class="mt-16">
     <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
-      Single File Upload
+      Multi File Upload
       <a
-        href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue"
+        href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/MultiFileUpload.vue"
         target="_blank"
         class="float-right text-grey-dark hover:text-teal text-xs no-underline"
       >Full Source Code</a>
@@ -14,7 +14,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showSource = !showSource"/>
       <!-- File input component -->
-      <fvl-file :file.sync="form.avatar" label="Avatar" name="avatar">
+      <fvl-multi-file :file.sync="form.gallery" label="Gallery" name="gallery">
         <template slot="button">
           <svg
             class="fill-current text-white mr-2"
@@ -31,9 +31,9 @@
               ></path>
             </g>
           </svg>
-          <span>Select File</span>
+          <span>Add Files</span>
         </template>
-      </fvl-file>
+      </fvl-multi-file>
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source"/>
       <!-- Submit button with upload loader indicator enabled -->
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-  import { FvlForm, FvlFile, FvlSubmit } from './../formvuelar'
+  import { FvlForm, FvlMultiFile, FvlSubmit } from './../formvuelar'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
@@ -51,7 +51,7 @@
   export default {
     components: {
       FvlForm,
-      FvlFile,
+      FvlMultiFile,
       FvlSubmit,
       SourceToggle,
       SourceBox
@@ -59,11 +59,15 @@
     data() {
       return {
         form: {
-          avatar: null
+          gallery: null
         },
         showSource: false,
         source:
-          `<fvl-file \n` + `    label="Avatar" \n` + `    name="avatar" \n` + `    :file.sync="form.avatar" \n` + `/> \n`
+          `<fvl-file \n` +
+          `    label="Gallery" \n` +
+          `    name="gallery" \n` +
+          `    :file.sync="form.gallery" \n` +
+          `/> \n`
       }
     }
   }

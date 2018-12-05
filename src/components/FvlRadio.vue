@@ -4,7 +4,7 @@
     <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
       <input
         :name="name"
-        :id="id"
+        :id="name+key"
         :value="key"
         :checked="checked == key"
         :class="fieldClass"
@@ -15,7 +15,7 @@
         class="fvl-radio"
         @change="$emit('update:checked', $event.target.value); $parent.dirty(name);"
       >
-      <label :class="labelClass" :for="key" class="fvl-radio-label" v-html="option"/>
+      <label :class="labelClass" :for="name+key" class="fvl-radio-label" v-html="option"/>
     </div>
     <slot name="hint"/>
     <slot :errors="$parent.getErrors(name)" name="errors">
@@ -38,10 +38,6 @@
       name: {
         type: String,
         required: true
-      },
-      id: {
-        type: String,
-        default: null
       },
       label: {
         type: String,

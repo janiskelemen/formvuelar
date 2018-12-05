@@ -2,7 +2,7 @@
   <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-checkbox-wrapper">
     <input
       :name="name"
-      :id="id"
+      :id="id ? id : name"
       :class="{'checked': checked, fieldClass}"
       :required="required"
       :readonly="readonly"
@@ -11,7 +11,7 @@
       class="fvl-checkbox"
       @input="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
     >
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-checkbox-label" v-html="label"/>
+    <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label" v-html="label"/>
     <slot name="hint"/>
     <slot :errors="this.$parent.getErrors(name)" name="errors">
       <validation-errors :errors="this.$parent.getErrors(name)"/>

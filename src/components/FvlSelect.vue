@@ -1,6 +1,6 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-select-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-select-label" v-html="label"/>
+    <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label" v-html="label"/>
     <div class="relative">
       <select
         :name="name"
