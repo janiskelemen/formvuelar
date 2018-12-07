@@ -14,9 +14,10 @@
         </slot>
       </button>
       <span class="fvl-multi-file-name">
-        <slot :files="files" name="selected-text">
-          You have selected {{ files ? files.length : 0 }} files
-        </slot>
+        <slot
+          :files="files"
+          name="selected-text"
+        >You have selected {{ files ? files.length : 0 }} files</slot>
       </span>
       <input
         :name="name"
@@ -124,7 +125,7 @@
         for (var i = 0; i < uploadedFiles.length; i++) {
           this.files.push(uploadedFiles[i])
         }
-        this.$emit('update:file', this.files)
+        this.$emit('update:files', this.files)
       },
       removeFile(key) {
         this.files.splice(key, 1)
