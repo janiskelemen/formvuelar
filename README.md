@@ -270,7 +270,7 @@ Feel free to use the predefined css component classes for your own projects.
 </p>
 
 <h2>TODO</h2>
-<p>
+
     - Advanced select component with search and remote source option
     - Tags component
-</p>
+
