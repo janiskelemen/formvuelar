@@ -279,3 +279,7 @@ Feel free to use the predefined css component classes for your own projects.
 
     - Advanced select component with search and remote source option
     - Tags component
+    - Test coverage
+
+<h2>License</h2>
+<p>Released under the MIT License.</p>
