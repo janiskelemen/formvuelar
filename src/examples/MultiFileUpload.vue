@@ -14,7 +14,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showSource = !showSource"/>
       <!-- File input component -->
-      <fvl-multi-file :file.sync="form.gallery" label="Gallery" name="gallery">
+      <fvl-multi-file :files.sync="form.gallery" label="Gallery" name="gallery">
         <template slot="button">
           <svg
             class="fill-current text-white mr-2"

@@ -14,7 +14,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showSource = !showSource"/>
       <!-- File input component -->
-      <fvl-dropzone :file.sync="form.animals" label="Animals" name="animals"></fvl-dropzone>
+      <fvl-dropzone :files.sync="form.media" label="Media" name="media"></fvl-dropzone>
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source"/>
       <!-- Submit button with upload loader indicator enabled -->
@@ -40,15 +40,11 @@
     data() {
       return {
         form: {
-          animals: null
+          media: null
         },
         showSource: false,
         source:
-          `<fvl-dropzone \n` +
-          `    label="Animals" \n` +
-          `    name="animals" \n` +
-          `    :file.sync="form.animals" \n` +
-          `/> \n`
+          `<fvl-dropzone \n` + `    label="Media" \n` + `    name="media" \n` + `    :file.sync="form.media" \n` + `/> \n`
       }
     }
   }
