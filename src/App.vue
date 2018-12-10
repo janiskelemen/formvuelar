@@ -30,7 +30,7 @@
         ></path>
       </svg>
     </h1>
-    <div class="flex justify-center">
+    <div class="flex flex-wrap justify-center">
       <button
         :class="section == 'basic' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
         class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:shadow-none"

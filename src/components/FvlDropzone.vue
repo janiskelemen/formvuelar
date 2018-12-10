@@ -24,11 +24,13 @@
             {{ file.name }}
             <div class="fvl-dropzone-file-preview-size">{{ formatBytes(previews[key].size) }}</div>
           </div>
-          <div
-            v-if="previews[key] && previews[key].isimage"
-            :style="{'backgroundImage': 'url('+previews[key].src+')', 'paddingTop': previews[key].ratioHeight+'%'}"
-            class="fvl-dropzone-file-image"
-          />
+          <transition name="fvl-dropzone-fade">
+            <div
+              v-if="previews[key] && previews[key].isimage && previews[key].src"
+              :style="{'backgroundImage': 'url('+previews[key].src+')', 'paddingTop': previews[key].ratioHeight+'%'}"
+              class="fvl-dropzone-file-image"
+            />
+          </transition>
           <span class="fvl-dropzone-remove" @click="removeFile( key )">
             <slot name="remove">
               <svg viewBox="0 0 40 40">
@@ -150,7 +152,8 @@
     data() {
       return {
         files: [],
-        previews: []
+        previews: [],
+        loaded: 0
       }
     },
     computed: {

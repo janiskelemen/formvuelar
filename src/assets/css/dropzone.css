@@ -36,7 +36,7 @@
   min-height: 3.5rem;
 }
 .fvl-dropzone-file-preview-name {
-  @apply absolute h-24 w-full py-3 px-4 font-bold text-xs truncate;
+  @apply absolute z-20 h-24 w-full py-3 px-4 font-bold text-xs truncate;
 }
 .fvl-dropzone-file-preview-name-background {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 29%, rgba(0, 0, 0, 0) 100%);
@@ -47,7 +47,7 @@
   color: #c3c3c3;
 }
 .fvl-dropzone-file-preview-loader {
-  @apply absolute h-1 pin-t w-full z-20;
+  @apply absolute h-1 pin-t w-full z-30;
 }
 .fvl-dropzone-file-preview-loader > div {
   @apply h-1;
@@ -55,9 +55,15 @@
   background: rgb(107, 116, 123);
 }
 .fvl-dropzone-file-image {
-  @apply bg-center bg-contain bg-no-repeat rounded;
-  transition: all 0.2s ease-out;
+  @apply z-10 bg-center bg-contain bg-no-repeat rounded pt-0;
+  transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
+.fvl-dropzone-fade-active, .fvl-dropzone-fade-leave-active{
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.fvl-dropzone-fade-enter, .fvl-dropzone-fade-leave-to {
+    opacity: 0;
+  }
 
 .fvl-dropzone-remove {
   @apply absolute pin-b pin-r text-white bg-grey-darkest opacity-75 rounded-full m-1 p-1 w-6 h-6;
