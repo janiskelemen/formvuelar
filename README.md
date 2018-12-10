@@ -216,7 +216,7 @@ You can still use the default HTML5 validation rules for all input fields like '
     <fvl-file
         label="Avatar"
         name="avatar"
-        :file.sync="form.file.avatar"
+        :file.sync="form.avatar"
         accept="image/*"
         required
     />
@@ -224,7 +224,7 @@ You can still use the default HTML5 validation rules for all input fields like '
 
 <h2>Styling</h2>
 <p>
-The styling is totally up to you. All components have their own classes so you have full control over the look feel of every component.
+The styling is totally up to you. All components have their own classes so you have full control over the look and feel of every component.
 </p>
 <p>
 Every component is wrapped with a div and the corresponding class .fvl-{type}-wrapper.
