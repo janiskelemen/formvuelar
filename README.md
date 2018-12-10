@@ -197,9 +197,9 @@ import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
     data() {
         return {
             form: {
-            fullname: '',
-            bio: '',
-            pet: ''
+                fullname: '',
+                bio: '',
+                pet: ''
             },
         ...
 ```
@@ -267,4 +267,10 @@ The field itself has a class name of .fvl-{type}
 <p>
 I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
 Feel free to use the predefined css component classes for your own projects.
+</p>
+
+<h2>TODO</h2>
+<p>
+    - Advanced select component with search and remote source option
+    - Tags component
 </p>
