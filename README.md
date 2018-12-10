@@ -9,6 +9,7 @@
     </a>
 </p>
 
+<h2>About</h2>
 <p>
 FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
 </p>
