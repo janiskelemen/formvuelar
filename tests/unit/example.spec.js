@@ -1,12 +1,13 @@
-import { shallowMount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld.vue'
+import { mount, shallowMount } from '@vue/test-utils'
+import FvlForm from '@/components/FvlForm.vue'
 
-describe('HelloWorld.vue', () => {
-  it('renders props.msg when passed', () => {
-    const msg = 'new message'
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+
+describe('FvlForm.vue', () => {
+  it('is a Vue instance', () => {
+    const url = '/test'
+    const wrapper = shallowMount(FvlForm, {
+      propsData: { url }
     })
-    expect(wrapper.text()).toMatch(msg)
+    expect(wrapper.isVueInstance()).toBeTruthy()
   })
 })

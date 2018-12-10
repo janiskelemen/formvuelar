@@ -52,49 +52,12 @@
       prepareData() {
         let rawData = this.data
         let formData = new FormData()
-
-        // Object.keys(rawData).forEach(function(field) {
-        //   // Append files of each single file input
-        //   if (field instanceof File) {
-        //     Object.keys(field).forEach(function(key) {
-        //       formData.append(key, rawData.file[key])
-        //     })
-        //   }
-        // })
-        // Append files of each multi file input
-        // if (typeof rawData.files !== 'undefined') {
-        //   Object.keys(rawData.files).forEach(function(fileField) {
-        //     // Iterate over any file sent over appending the files to the form data.
-        //     for (var i = 0; i < fileField.length; i++) {
-        //       let file = fileField[i]
-        //       formData.append(fileField + '[' + i + ']', file)
-        //     }
-        //   })
-        // }
-
-        // Map remaining data into formData
-        // Object.keys(rawData.file).map(file => {
-        //     formData.append('file', file);
-        //     /*
-        //     Iteate over any file sent over appending the files
-        //     to the form data.
-        //     */
-        //     // for( var i = 0; i < files.length; i++ ){
-        //     // let file = files[i];
-
-        //     // formData.append('files[' + i + ']', file);
-        //     // }
-        // });
-
-        //delete rawData['files'];
+        
         // Map remaining data into formData
         Object.keys(rawData).map(e => {
           formData.append(e, rawData[e])
         })
 
-        for (var pair of formData.entries()) {
-          console.log(pair[0] + ', ' + pair[1])
-        }
         return formData
       },
 
