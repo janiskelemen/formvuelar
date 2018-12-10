@@ -52,8 +52,8 @@
       prepareData() {
         let rawData = this.data
         let formData = new FormData()
-        
-        // Map remaining data into formData
+
+        // Map incoming data into formData
         Object.keys(rawData).map(e => {
           formData.append(e, rawData[e])
         })
