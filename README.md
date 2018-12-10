@@ -10,6 +10,13 @@
 </p>
 
 <h2>About</h2>
+
+[![](https://img.shields.io/npm/v/formvuelar.svg?label=version)](https://www.npmjs.com/package/formvuelar)
+[![](https://img.shields.io/npm/dm/formvuelar.svg)](https://npmcharts.com/compare/formvuelar?minimal=true)
+[![](https://badgen.net/bundlephobia/minzip/formvuelar?label=Size&color=38A89D)](https://bundlephobia.com/result?p=formvuelar)
+![](https://img.shields.io/github/forks/janiskelemen/formvuelar.svg)
+![](https://img.shields.io/github/license/janiskelemen/formvuelar.svg)
+
 <p>
 FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
 </p>
