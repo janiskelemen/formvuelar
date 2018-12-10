@@ -21,7 +21,7 @@ FormVuelar is a set of predefined vue form components which are designed to auto
     - Works out of the box with Laravel
     - Axios integration
     - File upload support including process indicator
-    - Dropzone with image preview (inspired by FilePont)
+    - Dropzone with image preview (inspired by FilePond)
     - Display validation error messages from error response
 
 <h2>Getting Started</h2>
