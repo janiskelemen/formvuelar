@@ -3,6 +3,12 @@
 </p>
 <h3 align="center">Vue form components with server side validation in mind</h3>
 
+<p align="center">
+    <a href="https://janiskelemen.github.io/formvuelar/" target="_blank">
+        <img src="https://janiskelemen.github.io/formvuelar/example/formvuelar_basic_form.png" alt="Formvuelar basic form" />
+    </a>
+</p>
+
 <p>
 FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
 </p>
