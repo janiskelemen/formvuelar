@@ -265,7 +265,7 @@ The field itself has a class name of .fvl-{type}
 ```
 
 <p>
-I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the demo.
+I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the examples.
 Feel free to use the predefined css component classes for your own projects.
 </p>
 
@@ -273,4 +273,3 @@ Feel free to use the predefined css component classes for your own projects.
 
     - Advanced select component with search and remote source option
     - Tags component
-

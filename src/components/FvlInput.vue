@@ -26,7 +26,7 @@
       <validation-errors :errors="$parent.getErrors(name)"/>
     </slot>
   </div>
-</template>8
+</template>
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
