@@ -9,9 +9,12 @@
         <span v-if="!filesCount" class="fvl-dropzone-area-placeholder">
           <slot name="placeholder">Drop files here or click to upload.</slot>
         </span>
-        <div v-for="(file, key) in files" v-else :key="key" class="fvl-dropzone-file-preview">
+        <div v-for="(file, key) in files" v-else :key="key" 
+             :class="(previews[key] && previews[key].status == 'failed') ? 'fvl-dropzone-file-has-error' : ''" 
+             class="fvl-dropzone-file-preview"
+        >
           <div
-            v-if="previews[key] && previews[key].percent != 100"
+            v-if="previews[key] && previews[key].status == 'loading'"
             class="fvl-dropzone-file-preview-loader"
           >
             <div :style="'width:'+previews[key].percent+'%'"/>
@@ -208,6 +211,7 @@
             size: event.total,
             loaded: event.loaded,
             percent: percent,
+            status: 'loading',
             src: '',
             ratioHeight: 0
           })
@@ -218,13 +222,17 @@
           $this.previews[index].percent = percent
         }
         reader.onabort = () => {
-          alert('File could not be loaded!')
+          $this.previews[index].status = 'failed'
+          alert($this.files[index].name+' could not be loaded!')
         }
         reader.onerror = () => {
-          alert('File could not be loaded!')
+          $this.previews[index].status = 'failed'
+          alert($this.files[index].name+' could not be loaded!')
           reader.abort()
         }
         reader.onload = () => {
+          $this.previews[index].status = 'loaded'
+          $this.previews[index].percent = 100
           if ($this.previews[index].isimage) {
             $this.getImagesize(index)
           }

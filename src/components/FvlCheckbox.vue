@@ -9,7 +9,7 @@
       :disabled="disabled"
       type="checkbox"
       class="fvl-checkbox"
-      @input="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
+      @change="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
     >
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label" v-html="label"/>
     <slot name="hint"/>

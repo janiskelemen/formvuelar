@@ -32,8 +32,16 @@
 }
 
 .fvl-dropzone-file-preview {
-  @apply relative w-1/2 m-2 bg-grey-darkest text-white leading-tight rounded truncate shadow overflow-hidden;
+  @apply relative w-full m-2 bg-grey-darkest text-white leading-tight rounded truncate shadow overflow-hidden;
   min-height: 3.5rem;
+}
+@screen lg {
+  .fvl-dropzone-file-preview {
+    @apply w-1/2;
+  }
+}
+.fvl-dropzone-file-has-error {
+  @apply bg-red-dark;
 }
 .fvl-dropzone-file-preview-name {
   @apply absolute z-20 h-24 w-full py-3 px-4 font-bold text-xs truncate;
@@ -66,11 +74,13 @@
   }
 
 .fvl-dropzone-remove {
-  @apply absolute pin-b pin-r text-white bg-grey-darkest opacity-75 rounded-full m-1 p-1 w-6 h-6;
+  @apply absolute z-40 pin-b pin-r text-white bg-grey-darkest opacity-75 rounded-full m-1 p-1 w-6 h-6;
 }
-
 .fvl-dropzone-remove svg {
   @apply stroke-current h-4 w-4;
+}
+.fvl-dropzone-file-has-error .fvl-dropzone-remove{
+  background-color: rgba(255,255,255,0.3) 
 }
 
 .fvl-dropzone-remove:hover {

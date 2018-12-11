@@ -1,7 +1,7 @@
-input:focus, 
-textarea:focus,
-button:focus,
-select:focus,
+.fvl-input:focus, 
+.fvl-textarea:focus,
+.fvl-submit-button:focus,
+.fvl-select:focus,
 .fvl-radio:focus + label:before,
 .fvl-checkbox:focus + label:before
 {
