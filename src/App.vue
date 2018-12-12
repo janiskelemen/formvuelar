@@ -33,27 +33,32 @@
     <div class="flex flex-wrap justify-center">
       <button
         :class="section == 'basic' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:shadow-none"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
         @click="section = 'basic'"
       >Basic</button>
       <button
         :class="section == 'prefilled' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:shadow-none"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
         @click="section = 'prefilled'"
       >Prefilled</button>
       <button
+        :class="section == 'advancedselects' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
+        @click="section = 'advancedselects'"
+      >Selects</button>
+      <button
         :class="section == 'upload' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:shadow-none"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
         @click="section = 'upload'"
       >Upload</button>
       <button
         :class="section == 'multiupload' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:shadow-none"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
         @click="section = 'multiupload'"
       >Multi Upload</button>
       <button
         :class="section == 'dropzone' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:shadow-none"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
         @click="section = 'dropzone'"
       >Dropzone</button>
     </div>
@@ -66,6 +71,8 @@
       init-bio="Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
       init-pet="dog"
     />
+    <!-- Single file upload example -->
+    <advanced-selects-form v-if="section == 'advancedselects'"/>
     <!-- Single file upload example -->
     <upload-form v-if="section == 'upload'"/>
     <!-- Multi file upload example -->
@@ -90,6 +97,7 @@
   import MultiUploadForm from './examples/MultiFileUpload.vue'
   import DropzoneForm from './examples/Dropzone.vue'
   import PrefilledForm from './examples/PrefilledForm'
+  import AdvancedSelectsForm from './examples/AdvancedSelects'
 
   export default {
     name: 'App',
@@ -107,24 +115,11 @@
       UploadForm,
       MultiUploadForm,
       DropzoneForm,
-      PrefilledForm
+      PrefilledForm,
+      AdvancedSelectsForm
     },
     data() {
       return {
-        form: {
-          name: '',
-          text: '',
-          password: '',
-          color: '',
-          option: '',
-          agree: false
-        },
-        form2: {
-          name: 'John Doe',
-          file: {
-            avatar: ''
-          }
-        },
         showSource: '',
         section: 'basic'
       }

@@ -15,6 +15,10 @@ export {
 }
 from './components/FvlSelect'
 export {
+    default as FvlSearchSelect
+}
+from './components/FvlSearchSelect'
+export {
     default as FvlRadio
 }
 from './components/FvlRadio'

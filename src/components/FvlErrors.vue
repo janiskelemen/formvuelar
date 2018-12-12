@@ -1,8 +1,8 @@
 <template>
     <transition-group name="slide-down" appear>
         <div
-            v-for="(error, index) in errors"
-            :key="index"
+            v-for="error in errors"
+            :key="error"
             class="fvl-checkbox-error-message"
             v-html="multible + error"
         />
