@@ -91,6 +91,9 @@
         fileName: ''
       }
     },
+    mounted() {
+      this.$emit('update:file', null)
+    },
     methods: {
       //Handles a change on the file upload
       handleFileChange() {
