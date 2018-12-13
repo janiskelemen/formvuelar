@@ -37,6 +37,10 @@
       ValidationErrors
     },
     props: {
+      file: {
+        type: File | String,
+        default: null
+      },
       label: {
         type: String,
         required: false,
@@ -91,8 +95,11 @@
         fileName: ''
       }
     },
-    mounted() {
-      this.$emit('update:file', null)
+    watch: {
+      file(newValue) {
+        /* Emit null up if given value is not a File object */
+        if (!(newValue instanceof File)) this.$emit('update:file', null)
+      }
     },
     methods: {
       //Handles a change on the file upload
