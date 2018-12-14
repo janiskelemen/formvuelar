@@ -53,10 +53,15 @@
         let rawData = this.data
         let formData = new FormData()
 
-        // Map incoming data into formData
+        /* Map incoming data into formData */
         Object.keys(rawData).map(e => {
           formData.append(e, rawData[e])
         })
+
+        /* Append original method into form data */
+        if (this.method == 'patch' || this.method == 'put') {
+          formData.append('_method', this.method)
+        }
 
         return formData
       },
@@ -64,8 +69,10 @@
       submit() {
         let $this = this
         this.isLoading = true
+        /* Set method to post if multipart form was send via patch/put */
+        let method = this.multipart && (this.method == 'patch' || this.method == 'put') ? 'post' : this.method
         axios({
-          method: this.method,
+          method: method,
           url: this.url,
           data: this.multipart ? this.prepareData() : this.data,
           // only set params if request is get or delete

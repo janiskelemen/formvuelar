@@ -98,7 +98,7 @@
     watch: {
       file(newValue) {
         /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof File)) this.$emit('update:file', null)
+        if (!(newValue instanceof File)) this.$emit('update:file', '')
       }
     },
     methods: {

@@ -15,9 +15,9 @@
       </button>
       <span class="fvl-multi-file-name">
         <slot
-          :files="files"
+          :files="filesList"
           name="selected-text"
-        >You have selected {{ files ? files.length : 0 }} files</slot>
+        >You have selected {{ filesList ? filesList.length : 0 }} files</slot>
       </span>
       <input
         :name="name"
@@ -35,7 +35,7 @@
         @change="handleFileChange(); $parent.dirty(name);"
       >
     </div>
-    <div v-for="(file, key) in files" :key="key" class="fvl-multi-file-list">
+    <div v-for="(file, key) in filesList" :key="key" class="fvl-multi-file-list">
       {{ file.name }}
       <span class="fvl-multi-file-remove" @click="removeFile( key )">
         <slot name="remove">
@@ -64,6 +64,10 @@
       ValidationErrors
     },
     props: {
+      files: {
+        type: Array,
+        default: () => []
+      },
       label: {
         type: String,
         required: false,
@@ -115,7 +119,13 @@
     },
     data() {
       return {
-        files: []
+        filesList: []
+      }
+    },
+    watch: {
+      files(newValue) {
+        /* Emit null up if given value is not a File object */
+        if (!(newValue instanceof Array) || !(newValue instanceof File)) this.$emit('update:file', [])
       }
     },
     methods: {
@@ -123,12 +133,12 @@
       handleFileChange() {
         var uploadedFiles = this.$refs[this.name].files
         for (var i = 0; i < uploadedFiles.length; i++) {
-          this.files.push(uploadedFiles[i])
+          this.filesList.push(uploadedFiles[i])
         }
-        this.$emit('update:files', this.files)
+        this.$emit('update:files', this.filesList)
       },
       removeFile(key) {
-        this.files.splice(key, 1)
+        this.filesList.splice(key, 1)
       }
     }
   }
