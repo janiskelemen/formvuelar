@@ -11,8 +11,9 @@
     content: '';
     @apply inline-block align-text-bottom bg-grey-lighter text-teal border border-grey-lighter rounded mr-4 h-6 w-6;
 }
-.fvl-checkbox.checked + label:before {
-    @apply bg-teal border-4 border-grey-lighter;
+.fvl-checkbox.checked + label:after {
+    content: '';
+    @apply bg-teal h-4 w-4 m-1 pin-l absolute rounded;
 }
 .fvl-checkbox:disabled + label {
     @apply text-grey-light cursor-auto;

@@ -76,6 +76,11 @@
         @click="section = 'advancedselects'"
       >Selects</button>
       <button
+        :class="section == 'nestedcheckbox' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
+        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
+        @click="section = 'nestedcheckbox'"
+      >Multi Checkbox</button>
+      <button
         :class="section == 'upload' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
         class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
         @click="section = 'upload'"
@@ -103,6 +108,8 @@
     <!-- Single file upload example -->
     <advanced-selects-form v-if="section == 'advancedselects'"/>
     <!-- Single file upload example -->
+    <nested-checkbox-form v-if="section == 'nestedcheckbox'"/>
+    <!-- Single file upload example -->
     <upload-form v-if="section == 'upload'"/>
     <!-- Multi file upload example -->
     <multi-upload-form v-if="section == 'multiupload'"/>
@@ -112,40 +119,24 @@
 </template>
 
 <script>
-  import FvlForm from './components/FvlForm.vue'
-  import FvlInput from './components/FvlInput.vue'
-  import FvlTextarea from './components/FvlTextarea.vue'
-  import FvlCheckbox from './components/FvlCheckbox.vue'
-  import FvlRadio from './components/FvlRadio.vue'
-  import FvlSelect from './components/FvlSelect.vue'
-  import FvlFile from './components/FvlFile.vue'
-  import FvlSubmit from './components/FvlSubmit.vue'
-
   import BasicForm from './examples/BasicForm.vue'
   import UploadForm from './examples/FileUpload.vue'
   import MultiUploadForm from './examples/MultiFileUpload.vue'
   import DropzoneForm from './examples/Dropzone.vue'
   import PrefilledForm from './examples/PrefilledForm'
   import AdvancedSelectsForm from './examples/AdvancedSelects'
+  import NestedCheckboxForm from './examples/NestedCheckbox'
 
   export default {
     name: 'App',
     components: {
-      FvlForm,
-      FvlInput,
-      FvlTextarea,
-      FvlCheckbox,
-      FvlRadio,
-      FvlSelect,
-      FvlFile,
-      FvlSubmit,
-
       BasicForm,
       UploadForm,
       MultiUploadForm,
       DropzoneForm,
       PrefilledForm,
-      AdvancedSelectsForm
+      AdvancedSelectsForm,
+      NestedCheckboxForm
     },
     data() {
       return {
