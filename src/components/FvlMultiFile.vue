@@ -10,14 +10,14 @@
     <div class="fvl-multi-file-button-wrapper">
       <button class="fvl-multi-file-button" tabindex="-1" @click.prevent>
         <slot name="button">
-          <span>Add Files</span>
+          <span>{{ $formvuelar.addFilesText }}</span>
         </slot>
       </button>
       <span class="fvl-multi-file-name">
         <slot
           :files="filesList"
           name="selected-text"
-        >You have selected {{ filesList ? filesList.length : 0 }} files</slot>
+        >{{ filesList ? filesList.length : 0 }} {{ $formvuelar.filesSelectedText }}</slot>
       </span>
       <input
         :name="name"

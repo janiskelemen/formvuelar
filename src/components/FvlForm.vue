@@ -13,7 +13,10 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import axios from 'axios'
+  import _assignIn from 'lodash/assignIn'
+
   export default {
     props: {
       method: {
@@ -47,7 +50,19 @@
         isDragging: false
       }
     },
-
+    beforeCreate() {
+      let globalConfig = typeof Vue.prototype.$formvuelar != 'undefined' ? Vue.prototype.$formvuelar : {}
+      let defaultConfig = {
+        noResultsText: 'No results found!',
+        pleaseWaitText: 'Please wait...',
+        addFilesText: 'Add Files',
+        addFileText: 'Add File',
+        filesSelectedText: 'Files Selected',
+        dropFilesHereText: 'Drop files here or click to upload.',
+        filesSelectedAndSizeText: 'files selected with a combined size of'
+      }
+      Vue.prototype.$formvuelar = _assignIn(defaultConfig, globalConfig)
+    },
     methods: {
       prepareData() {
         let rawData = this.data
