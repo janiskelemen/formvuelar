@@ -20,7 +20,7 @@
           type="text"
           class="fvl-search-select hide-caret"
           @click.prevent="toggle()"
-          @keydown.prevent
+          @keydown="$event.keyCode === 9 ? false : $event.preventDefault()"
           @keydown.space="toggle()"
         >
         <div class="fvl-search-select-carret">
@@ -91,7 +91,7 @@
     },
     props: {
       selected: {
-        type: String,
+        type: String | Number,
         default: null
       },
       name: {

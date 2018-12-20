@@ -44,7 +44,7 @@
     },
     props: {
       selected: {
-        type: String,
+        type: String | Number,
         default: ''
       },
       name: {
