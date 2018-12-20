@@ -4,7 +4,7 @@
     <div class="fvl-file-button-wrapper">
       <button class="fvl-file-button" tabindex="-1" @click.prevent>
         <slot name="button">
-          <span>Select File</span>
+          <span>{{ $formvuelar.selectFileText }}</span>
         </slot>
       </button>
       <span class="fvl-file-name" v-text="fileName"/>

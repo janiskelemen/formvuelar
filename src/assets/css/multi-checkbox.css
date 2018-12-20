@@ -1,0 +1,13 @@
+.fvl-multi-checkbox-wrapper {
+
+}
+
+.fvl-multi-checkbox-any-checked .fvl-checkbox + label:after {
+    content: '';
+    @apply bg-teal h-2 w-4 m-1 mt-2 pin-l absolute rounded;
+}
+
+.fvl-multi-checkbox-any-checked.fvl-multi-checkbox-all-checked .fvl-checkbox + label:after {
+    @apply h-4 mt-1
+}
+

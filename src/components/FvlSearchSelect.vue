@@ -53,10 +53,10 @@
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
-              <slot name="no-results">No results found</slot>
+              <slot name="no-results">{{ $formvuelar.noResultsText }}</slot>
             </div>
             <div v-if="isLoading" class="search-select-empty">
-              <slot name="loading">Please wait...</slot>
+              <slot name="loading">{{ $formvuelar.pleaseWaitText }}</slot>
             </div>
           </div>
         </transition>

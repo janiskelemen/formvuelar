@@ -150,7 +150,7 @@ The following components are shipped with FormVuelar:
 |                       | :readonly        | Boolean  | false   | `true`\|`false`                         |
 |                       | :disabled        | Boolean  | false   | `true`\|`false`                         |
 |                       |                  |          |         |                                         |
-| **fvl-file**          | :file.sync       | Data     | null    | `form.avatar`                           |
+| **fvl-file**          | :file            | Data     | null    | `form.avatar`                           |
 |                       | :id              | String   | null    |                                         |
 |                       | :name            | String   | ''      |                                         |
 |                       | :label           | String   | null    |                                         |
@@ -158,7 +158,7 @@ The following components are shipped with FormVuelar:
 |                       | :readonly        | Boolean  | false   | `true`\|`false`                         |
 |                       | :disabled        | Boolean  | false   | `true`\|`false`                         |
 |                       |                  |          |         |                                         |
-| **fvl-multi-file**    | :files.sync      | Data     | null    | `form.gallery`                          |
+| **fvl-multi-file**    | :files           | Data     | null    | `form.gallery`                          |
 |                       | :id              | String   | null    |                                         |
 |                       | :name            | String   | ''      |                                         |
 |                       | :label           | String   | null    |                                         |
@@ -166,7 +166,7 @@ The following components are shipped with FormVuelar:
 |                       | :readonly        | Boolean  | false   | `true`\|`false`                         |
 |                       | :disabled        | Boolean  | false   | `true`\|`false`                         |
 |                       |                  |          |         |                                         |
-| **fvl-dropzone**      | :files.sync      | Data     | null    | `form.media`                            |
+| **fvl-dropzone**      | :files           | Data     | null    | `form.media`                            |
 |                       | :id              | String   | null    |                                         |
 |                       | :name            | String   | ''      |                                         |
 |                       | :label           | String   | null    |                                         |
@@ -220,7 +220,7 @@ The form object you pass into the form component above would look like this:
 
 ```javascript
 import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
-...
+//...
     components: {
         FvlForm,
         FvlInput,
@@ -235,7 +235,24 @@ import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
                 bio: '',
                 pet: ''
             },
-        ...
+        //...
+```
+
+<h2>Global Config</h2>
+
+<p>You might want to change some defaults globally for all your forms, to do this you just can overwrite them as a global property before registering your main vue instance:</p>
+
+```javascript
+/* Register optional global FormVuelar config */
+Vue.prototype.$formvuelar = {
+    noResultsText: 'No results found!',
+    pleaseWaitText: 'Please wait...',
+    addFileText: 'Add File',
+    addFilesText: 'Add Files',
+    filesSelectedText: 'Files Selected',
+    dropFilesHereText: 'Drop files here or click to upload.',
+    filesSelectedAndSizeText: 'files selected with a combined size of'
+}
 ```
 
 <h2>Error Response</h2>

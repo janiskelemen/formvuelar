@@ -1,17 +1,23 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-dropzone-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label" v-html="label"/>
-    <span
+    <slot
       v-if="filesCount"
-    >{{ filesCount }} files selected with a combined size of {{ filesSizeSum }}</span>
+      :files-count="filesCount"
+      :files-size-sum="filesSizeSum"
+      name="summary"
+    >{{ filesCount }} {{ $formvuelar.filesSelectedAndSizeText }} {{ filesSizeSum }}</slot>
     <div class="fvl-dropzone-area-wrapper">
       <div class="fvl-dropzone-area">
         <span v-if="!filesCount" class="fvl-dropzone-area-placeholder">
-          <slot name="placeholder">Drop files here or click to upload.</slot>
+          <slot name="placeholder">{{ $formvuelar.dropFilesHereText }}</slot>
         </span>
-        <div v-for="(file, key) in files" v-else :key="key" 
-             :class="(previews[key] && previews[key].status == 'failed') ? 'fvl-dropzone-file-has-error' : ''" 
-             class="fvl-dropzone-file-preview"
+        <div
+          v-for="(file, key) in files"
+          v-else
+          :key="key"
+          :class="(previews[key] && previews[key].status == 'failed') ? 'fvl-dropzone-file-has-error' : ''"
+          class="fvl-dropzone-file-preview"
         >
           <div
             v-if="previews[key] && previews[key].status == 'loading'"
@@ -223,11 +229,11 @@
         }
         reader.onabort = () => {
           $this.previews[index].status = 'failed'
-          alert($this.files[index].name+' could not be loaded!')
+          alert($this.files[index].name + ' could not be loaded!')
         }
         reader.onerror = () => {
           $this.previews[index].status = 'failed'
-          alert($this.files[index].name+' could not be loaded!')
+          alert($this.files[index].name + ' could not be loaded!')
           reader.abort()
         }
         reader.onload = () => {

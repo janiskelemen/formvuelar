@@ -27,6 +27,10 @@ export {
 }
 from './components/FvlCheckbox'
 export {
+    default as FvlMultiCheckbox
+}
+from './components/FvlMultiCheckbox'
+export {
     default as FvlFile
 }
 from './components/FvlFile'
