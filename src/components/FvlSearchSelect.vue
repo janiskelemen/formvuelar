@@ -1,74 +1,80 @@
 <template>
-<on-click-outside @do="close()">
-  <div
-    :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
-    class="fvl-search-select-wrapper"
-  >
-    <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label" v-html="label"/>
-    <div class="fvl-search-select-input-wrapper">
-      <input
-        ref="selectinput"
-        :name="name"
-        :id="id"
-        :placeholder="placeholder"
-        :autocomplete="autocomplete"
-        :class="fieldClass"
-        :required="required"
-        :disabled="disabled"
-        :value="selectedOptionValue"
-        readonly
-        type="text"
-        class="fvl-search-select"
-        @click.prevent="toggle()"
-        @keydown.space="toggle()"
-      >
-      <div class="fvl-search-select-carret">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
-        </svg>
-      </div>
-      <transition name="fvl-search-select-dropdown-transition">
-        <div v-show="isOpen" class="fvl-search-select-dropdown">
-          <input
-            ref="search"
-            v-model="query"
-            class="fvl-search-select-dropdown-input"
-            @keydown.esc="close()"
-            @keydown.down="highlightNext()"
-            @keydown.up="highlightPrevious()"
-            @keydown.enter.prevent="selectHighlighted()"
-            @keydown.tab.prevent
-            @input="highlightedIndex = 0; getRemoteOptions();"
-          >
-          <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
-            <li
-              v-for="(option, index) in filteredOptionsList"
-              :key="option[optionKey]"
-              :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex}"
-              class="fvl-search-select-dropdown-option"
-              @click="select(option)"
-            >
-              <slot :option="option" name="option">
-                {{ option[optionValue] }}
-              </slot>
-            </li>
-          </ul>
-          <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
-            <slot name="no-results">No results found</slot>
-          </div>
-          <div v-if="isLoading" class="search-select-empty">
-            <slot name="loading">Please wait...</slot>
-          </div>
+  <on-click-outside @do="close()">
+    <div
+      :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
+      class="fvl-search-select-wrapper"
+    >
+      <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label" v-html="label"/>
+      <div class="fvl-search-select-input-wrapper">
+        <input
+          ref="selectinput"
+          :name="name"
+          :id="id"
+          :placeholder="placeholder"
+          :autocomplete="autocomplete"
+          :class="fieldClass"
+          :required="required"
+          :disabled="disabled"
+          :value="selectedOptionValue"
+          :readonly="readonly"
+          type="text"
+          class="fvl-search-select hide-caret"
+          @click.prevent="toggle()"
+          @keydown.prevent
+          @keydown.space="toggle()"
+        >
+        <div class="fvl-search-select-carret">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+          </svg>
         </div>
-      </transition>
+        <transition name="fvl-search-select-dropdown-transition">
+          <div v-show="isOpen" class="fvl-search-select-dropdown">
+            <input
+              ref="search"
+              v-model="query"
+              class="fvl-search-select-dropdown-input"
+              @keydown.esc="close()"
+              @keydown.down="highlightNext()"
+              @keydown.up="highlightPrevious()"
+              @keydown.enter.prevent="selectHighlighted()"
+              @keydown.tab.prevent
+              @input="highlightedIndex = 0; getRemoteOptions();"
+            >
+            <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
+              <li
+                v-for="(option, index) in filteredOptionsList"
+                :key="option[optionKey]"
+                :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex}"
+                class="fvl-search-select-dropdown-option"
+                @click="select(option)"
+              >
+                <slot :option="option" name="option">{{ option[optionValue] }}</slot>
+              </li>
+            </ul>
+            <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
+              <slot name="no-results">No results found</slot>
+            </div>
+            <div v-if="isLoading" class="search-select-empty">
+              <slot name="loading">Please wait...</slot>
+            </div>
+          </div>
+        </transition>
+      </div>
+      <slot name="hint"/>
+      <slot :errors="$parent.getErrors(name)" name="errors">
+        <validation-errors :errors="$parent.getErrors(name)"/>
+      </slot>
     </div>
-    <slot name="hint"/>
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
-    </slot>
-  </div>
-</on-click-outside>
+  </on-click-outside>
 </template>
+
+<style>
+  .hide-caret {
+    caret-color: transparent;
+  }
+</style>
+
 
 <script>
   import axios from 'axios'
@@ -178,14 +184,14 @@
       }
     },
     computed: {
-      optionsList(){
+      optionsList() {
         return this.remoteOptions.length ? this.remoteOptions : this.options
       },
       filteredOptionsList() {
         if (!this.query) {
           return this.optionsList
         }
-        if(this.searchRemote){
+        if (this.searchRemote) {
           return this.remoteOptions
         }
         let fuse = new Fuse(this.optionsList, {
@@ -208,9 +214,9 @@
         })
       }
     },
-    mounted(){
-      if(!this.optionsUrl) return
-      if(!this.lazyLoad) this.getRemoteOptions()
+    mounted() {
+      if (!this.optionsUrl) return
+      if (!this.lazyLoad) this.getRemoteOptions()
     },
     methods: {
       select(option) {
@@ -219,11 +225,11 @@
         this.$parent.dirty(name)
         this.close()
       },
-      reset(){
+      reset() {
         this.query = ''
       },
       selectHighlighted() {
-        if(!this.filteredOptionsList.length){
+        if (!this.filteredOptionsList.length) {
           return
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
@@ -247,15 +253,18 @@
         })
       },
       toggle() {
+        if (this.disabled || this.readonly) return
         this.isOpen ? this.close() : this.open()
       },
       scrollToIndex(index) {
-        if(typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
-        this.$refs.options.children[index].scrollIntoView({ block: "nearest" })
+        if (typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
+        this.$refs.options.children[index].scrollIntoView({ block: 'nearest' })
       },
       highlightNext() {
         this.highlightedIndex =
-          this.highlightedIndex == this.filteredOptionsList.length - 1 ? this.filteredOptionsList.length - 1 : this.highlightedIndex + 1
+          this.highlightedIndex == this.filteredOptionsList.length - 1
+            ? this.filteredOptionsList.length - 1
+            : this.highlightedIndex + 1
 
         this.scrollToIndex(this.highlightedIndex)
       },
@@ -263,25 +272,27 @@
         this.highlightedIndex = this.highlightedIndex == 0 ? 0 : this.highlightedIndex - 1
         this.scrollToIndex(this.highlightedIndex)
       },
-      getRemoteOptions(){
-        if((!this.searchRemote && this.optionsList.length) || !this.optionsUrl) return
+      getRemoteOptions() {
+        if ((!this.searchRemote && this.optionsList.length) || !this.optionsUrl) return
         let searchQuery = ''
-        if(this.query) {
+        if (this.query) {
           searchQuery = '?' + this.searchKeys[0] + '=' + this.query
         }
         let $this = this
         this.isLoading = true
         axios({
-          method:'get',
+          method: 'get',
           url: this.optionsUrl + searchQuery,
-          responseType:'json'
+          responseType: 'json'
         })
-          .then(function (response) {
+          .then(function(response) {
             $this.remoteOptions = response.data
             $this.$emit('remoteSuccess', response)
-          }).catch(function (error) {
+          })
+          .catch(function(error) {
             $this.$emit('remoteError', error)
-          }).then(function (){
+          })
+          .then(function() {
             $this.isLoading = false
           })
       }
