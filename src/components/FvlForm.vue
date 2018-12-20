@@ -56,7 +56,7 @@
         noResultsText: 'No results found!',
         pleaseWaitText: 'Please wait...',
         addFilesText: 'Add Files',
-        addFileText: 'Add File',
+        selectFileText: 'Select File',
         filesSelectedText: 'Files Selected',
         dropFilesHereText: 'Drop files here or click to upload.',
         filesSelectedAndSizeText: 'files selected with a combined size of'
