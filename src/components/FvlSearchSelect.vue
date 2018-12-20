@@ -81,6 +81,7 @@
   import Fuse from 'fuse.js'
   import _find from 'lodash/find'
   import _findKey from 'lodash/findKey'
+  import _get from 'lodash/get'
   import ValidationErrors from './FvlErrors.vue'
   import OnClickOutside from './utilities/OnClickOutside.vue'
   export default {
@@ -110,6 +111,10 @@
         default: () => []
       },
       optionsUrl: {
+        type: String,
+        default: null
+      },
+      responseDataPath: {
         type: String,
         default: null
       },
@@ -286,7 +291,7 @@
           responseType: 'json'
         })
           .then(function(response) {
-            $this.remoteOptions = response.data
+            $this.remoteOptions = $this.responseDataPath ? _get(response.data, $this.responseDataPath) : response.data
             $this.$emit('remoteSuccess', response)
           })
           .catch(function(error) {
