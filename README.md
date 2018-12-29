@@ -237,7 +237,8 @@ Vue.prototype.$formvuelar = {
   addFilesText: 'Add Files',
   filesSelectedText: 'Files Selected',
   dropFilesHereText: 'Drop files here or click to upload.',
-  filesSelectedAndSizeText: 'files selected with a combined size of'
+  filesSelectedAndSizeText: 'files selected with a combined size of',
+  headers="{}"
 }
 ```
 

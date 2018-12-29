@@ -35,6 +35,10 @@
         type: Boolean,
         default: false
       },
+      headers: {
+        type: Object,
+        default: () => {}
+      },
       data: {
         type: Object,
         default: () => {
@@ -50,6 +54,16 @@
         isDragging: false
       }
     },
+    computed: {
+      additionalHeaders() {
+        let multipart = this.multipart
+          ? {
+              'Content-Type': 'multipart/form-data'
+            }
+          : {}
+        return _assignIn(this.$formvuelar.headers, this.headers, multipart)
+      }
+    },
     beforeCreate() {
       let globalConfig = typeof Vue.prototype.$formvuelar != 'undefined' ? Vue.prototype.$formvuelar : {}
       let defaultConfig = {
@@ -59,7 +73,8 @@
         selectFileText: 'Select File',
         filesSelectedText: 'Files Selected',
         dropFilesHereText: 'Drop files here or click to upload.',
-        filesSelectedAndSizeText: 'files selected with a combined size of'
+        filesSelectedAndSizeText: 'files selected with a combined size of',
+        headers: {}
       }
       Vue.prototype.$formvuelar = _assignIn(defaultConfig, globalConfig)
     },
@@ -92,11 +107,7 @@
           data: this.multipart ? this.prepareData() : this.data,
           // only set params if request is get or delete
           params: this.method == 'get' || this.method == 'delete' ? this.data : {},
-          headers: this.multipart
-            ? {
-                'Content-Type': 'multipart/form-data'
-              }
-            : {},
+          headers: this.additionalHeaders,
 
           // Calculate current upload percentage
           onUploadProgress: function(progressEvent) {
