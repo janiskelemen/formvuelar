@@ -68,6 +68,7 @@ The following components are shipped with FormVuelar:
 |                       | :data                  | Object   | {}      | {}                                      |
 |                       | :url                   | String   | null    |                                         |
 |                       | :multipart             | Boolean  | false   | `true`\|`false`                         |
+|                       | :headers               | Object   | {}      | `{'your-header': 'your header value'}`  |
 |                       | @success               | Function |         | axios response                          |
 |                       | @error                 | Function |         | axios error response                    |
 |                       | @upload-progress       | Function |         | 0-100                                   |
