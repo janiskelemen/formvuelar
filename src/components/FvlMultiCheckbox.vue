@@ -1,28 +1,27 @@
 <template>
   <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-multi-checkbox-wrapper">
-    
-    <div v-for="group in groups" :key="group.name">
+    <div v-for="group in allgroups" :key="group.name">
+      <fvl-checkbox
+        :label="group.label"
+        :name="group.name"
+        :class="{'fvl-multi-checkbox-all-checked': groupAllChecked(group), 'fvl-multi-checkbox-any-checked': groupAnyChecked(group)}"
+        class="w-full lg:w-1/2"
+        @click.prevent.native="toggleChildren(group)"
+      />
+      <div v-for="nestedOption in group.options" :key="nestedOption.name">
         <fvl-checkbox
-          :checked.sync="group.checked"
-          :label="group.label"
-          :name="group.name"
-          :class="{'fvl-multi-checkbox-all-checked': groupAllChecked(group), 'fvl-multi-checkbox-any-checked': groupAnyChecked(group)}"
-          class="w-full lg:w-1/2"
+          :checked.sync="nestedOption.checked"
+          :label="nestedOption.label"
+          :name="nestedOption.name"
+          class="w-full lg:w-1/2 pl-12"
         />
-        <div v-for="nestedOption in group.options" :key="nestedOption.name">
-            <fvl-checkbox
-              :checked.sync="nestedOption.checked"
-              :label="nestedOption.label"
-              :name="nestedOption.name+[]"
-              class="w-full lg:w-1/2 pl-12"
-            />
-        </div>
+      </div>
     </div>
     <!-- <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label" v-html="label"/>
     <slot name="hint"/>
     <slot :errors="this.$parent.getErrors(name)" name="errors">
       <validation-errors :errors="this.$parent.getErrors(name)"/>
-    </slot> -->
+    </slot>-->
   </div>
 </template>
 
@@ -31,6 +30,7 @@
   import FvlCheckbox from './FvlCheckbox.vue'
   import _every from 'lodash/every'
   import _filter from 'lodash/filter'
+  import _forEach from 'lodash/forEach'
   export default {
     components: {
       ValidationErrors,
@@ -84,13 +84,24 @@
     data() {
       return {}
     },
+    computed: {
+      allgroups() {
+        return this.groups
+      }
+    },
     methods: {
-      groupAllChecked(group){
+      toggleChildren(group) {
+        let state = !_every(group.options, 'checked')
+        _forEach(group.options, function(value) {
+          value.checked = state
+        })
+      },
+      groupAllChecked(group) {
         let allChecked = _every(group.options, 'checked')
         group.checked = allChecked
         return allChecked
       },
-      groupAnyChecked(group){
+      groupAnyChecked(group) {
         return _filter(group.options, 'checked').length
       },
       dirty(name) {

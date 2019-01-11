@@ -1,9 +1,15 @@
 .fvl-select-wrapper {
     @apply p-2;
 }
+
 .fvl-select-label {
     @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
 }
+
 .fvl-select {
+    @apply relative;
+}
+
+.fvl-select>select {
     @apply block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded leading-tight;
 }

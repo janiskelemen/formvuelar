@@ -84,8 +84,18 @@
         let formData = new FormData()
 
         /* Map incoming data into formData */
-        Object.keys(rawData).map(e => {
-          formData.append(e, rawData[e])
+        Object.keys(rawData).forEach(e => {
+          if (rawData[e] instanceof Object) {
+            Object.keys(rawData[e]).forEach(f => {
+              if (rawData[e][f] instanceof File) {
+                formData.append(e + '[]', rawData[e][f])
+              } else {
+                formData.append(e, rawData[e])
+              }
+            })
+          } else {
+            formData.append(e, rawData[e])
+          }
         })
 
         /* Append original method into form data */

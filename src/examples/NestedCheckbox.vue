@@ -15,14 +15,13 @@
       <source-toggle @toggle="toggleSource('permissions')"/>
       <!-- Checkbox component -->
       <fvl-multi-checkbox
-        :cheched.sync="form.permissions"
-        :groups="permissionsStructure"
+        :checked.sync="form.permissions"
+        :groups.sync="permissionsStructure"
         label="I permissions with your terms of use"
         name="permissions"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'permissions'" :source="source.permissions"/>
-
     </fvl-form>
   </div>
 </template>
@@ -45,26 +44,30 @@
         form: {
           permissions: {}
         },
-        permissionsStructure: [{
-          'name': 'user',
-          'label': 'User permissions',
-          'checked': false,
-          'options': [{
-                       'name': 'create',
-                       'label': 'Create',
-                       'checked': false
-                     },
-                     {
-                       'name': 'update',
-                       'label': 'Update',
-                       'checked': false
-                     },
-                     {
-                       'name': 'delete',
-                       'label': 'Delete',
-                       'checked': false
-                     }]
-        }],
+        permissionsStructure: [
+          {
+            name: 'user',
+            label: 'User permissions',
+            checked: false,
+            options: [
+              {
+                name: 'create',
+                label: 'Create',
+                checked: false
+              },
+              {
+                name: 'update',
+                label: 'Update',
+                checked: false
+              },
+              {
+                name: 'delete',
+                label: 'Delete',
+                checked: false
+              }
+            ]
+          }
+        ],
         showSource: '',
         source: {
           permissions:

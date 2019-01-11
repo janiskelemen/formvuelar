@@ -26,7 +26,7 @@ mock.onPost( '/basic' ).reply( function ( config ) {
     if ( data.color === '' ) {
         errors.color = [ 'Your need to select a color!' ]
     }
-    if ( data.text === '' ) {
+    if ( data.text == '' ) {
         errors.text = [ 'Please type something!' ]
     }
 

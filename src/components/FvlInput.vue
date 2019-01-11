@@ -49,7 +49,7 @@
         default: null
       },
       value: {
-        type: String,
+        validator: prop => typeof prop === 'string' || prop === null,
         default: ''
       },
       type: {

@@ -182,7 +182,7 @@
             `    placeholder="-- Select any color --" \n` +
             `    :allowEmpty="true" \n` +
             `    :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}" \n` +
-            `    :checked.sync="form.color" \n` +
+            `    :selected.sync="form.color" \n` +
             `    class="w-1/2" \n` +
             `/> \n`,
           option:
