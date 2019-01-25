@@ -178,6 +178,7 @@ The following components are shipped with FormVuelar:
 |                       |                        |          |         |                                         |
 | **fvl-submit**        | :loader                | Boolean  | false   | `true`\|`false`                         |
 |                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                       | :button-class          | String   | null    |                                         |
 
 <h2>Basic Form Template</h2>
 <p>
