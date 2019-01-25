@@ -2,7 +2,7 @@
   <div class="fvl-submit-wrapper">
     <button
       :disabled="disabled || $parent.isLoading"
-      :buttonClass="buttonClass"
+      :class="buttonClass"
       class="fvl-submit-button"
       @click="$emit('submit')"
     >
