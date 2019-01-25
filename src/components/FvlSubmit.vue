@@ -2,6 +2,7 @@
   <div class="fvl-submit-wrapper">
     <button
       :disabled="disabled || $parent.isLoading"
+      :buttonClass="buttonClass"
       class="fvl-submit-button"
       @click="$emit('submit')"
     >
@@ -36,6 +37,10 @@
         type: Boolean,
         required: false,
         default: false
+      },
+      buttonClass: {
+        type: String,
+        default: null
       }
     }
   }

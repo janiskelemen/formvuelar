@@ -227,7 +227,7 @@
       select(option) {
         /* Return selected option key */
         this.$emit('update:selected', String(option[this.optionKey]))
-        this.$parent.dirty(name)
+        this.$parent.dirty(this.name)
         this.close()
       },
       reset() {
