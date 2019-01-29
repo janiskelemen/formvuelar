@@ -301,7 +301,12 @@ The field itself has a class name of .fvl-{type}
 <p>
 I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the examples.
 Feel free to use the predefined css component classes for your own projects.
+You can import them like this:
 </p>
+
+```scss
+@import '~formvuelar/dist/formvuelar.css';
+```
 
 <h2>TODO</h2>
 
