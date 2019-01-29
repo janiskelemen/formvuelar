@@ -1,16 +1,19 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-dropzone-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label" v-html="label"/>
-    <slot
-      v-if="filesCount"
-      :files-count="filesCount"
-      :files-size-sum="filesSizeSum"
-      name="summary"
-    >{{ filesCount }} {{ $formvuelar.filesSelectedAndSizeText }} {{ filesSizeSum }}</slot>
+    <slot v-if="filesCount" :files-count="filesCount" :files-size-sum="filesSizeSum" name="summary">
+      {{ filesCount }}
+      <span
+        v-text="getConfig('filesSelectedAndSizeText', 'files selected with a combined size of')"
+      />
+      {{ filesSizeSum }}
+    </slot>
     <div class="fvl-dropzone-area-wrapper">
       <div class="fvl-dropzone-area">
         <span v-if="!filesCount" class="fvl-dropzone-area-placeholder">
-          <slot name="placeholder">{{ $formvuelar.dropFilesHereText }}</slot>
+          <slot name="placeholder">
+            <span v-text="getConfig('dropFilesHereText', 'Drop files here or click to upload.')"/>
+          </slot>
         </span>
         <div
           v-for="(file, key) in files"
@@ -79,10 +82,13 @@
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { config } from './mixins/config'
+
   export default {
     components: {
       ValidationErrors
     },
+    mixins: [config],
     props: {
       label: {
         type: String,
@@ -285,4 +291,5 @@
     }
   }
 </script>
+
 

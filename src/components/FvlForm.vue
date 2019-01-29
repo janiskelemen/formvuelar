@@ -13,11 +13,12 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   import axios from 'axios'
   import _assignIn from 'lodash/assignIn'
+  import { config } from './mixins/config'
 
   export default {
+    mixins: [config],
     props: {
       method: {
         type: String,
@@ -61,22 +62,9 @@
               'Content-Type': 'multipart/form-data'
             }
           : {}
-        return _assignIn(this.$formvuelar.headers, this.headers, multipart)
+        let globalHeaders = this.getConfig('headers', {})
+        return _assignIn(globalHeaders, this.headers, multipart)
       }
-    },
-    beforeCreate() {
-      let globalConfig = typeof Vue.prototype.$formvuelar != 'undefined' ? Vue.prototype.$formvuelar : {}
-      let defaultConfig = {
-        noResultsText: 'No results found!',
-        pleaseWaitText: 'Please wait...',
-        addFilesText: 'Add Files',
-        selectFileText: 'Select File',
-        filesSelectedText: 'Files Selected',
-        dropFilesHereText: 'Drop files here or click to upload.',
-        filesSelectedAndSizeText: 'files selected with a combined size of',
-        headers: {}
-      }
-      Vue.prototype.$formvuelar = _assignIn(defaultConfig, globalConfig)
     },
     methods: {
       prepareData() {
@@ -157,4 +145,8 @@
     }
   }
 </script>
+
+<style lang="scss">
+  @import '../assets/scss/formvuelar.scss';
+</style>
 

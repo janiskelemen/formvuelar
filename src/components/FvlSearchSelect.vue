@@ -53,10 +53,14 @@
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
-              <slot name="no-results">{{ $formvuelar.noResultsText }}</slot>
+              <slot name="no-results">
+                <span v-text="getConfig('noResultsText', 'No results found!')"/>
+              </slot>
             </div>
             <div v-if="isLoading" class="search-select-empty">
-              <slot name="loading">{{ $formvuelar.pleaseWaitText }}</slot>
+              <slot name="loading">
+                <span v-text="getConfig('pleaseWaitText', 'Please wait...')"/>
+              </slot>
             </div>
           </div>
         </transition>
@@ -84,11 +88,13 @@
   import _get from 'lodash/get'
   import ValidationErrors from './FvlErrors.vue'
   import OnClickOutside from './utilities/OnClickOutside.vue'
+  import { config } from './mixins/config'
   export default {
     components: {
       ValidationErrors,
       OnClickOutside
     },
+    mixins: [config],
     props: {
       selected: {
         type: String | Number,

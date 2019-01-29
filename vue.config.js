@@ -1,16 +1,16 @@
-// module.exports = {
-//     css: {
-//         extract: false
-//     }
-// }
+module.exports = {
+  css: {
+    extract: true
+  }
+}
 
-const path = require("path");
+const path = require( "path" );
 
 module.exports = {
   pluginOptions: {
     "style-resources-loader": {
       preProcessor: "postcss",
-      patterns: [path.resolve(__dirname, "./src/assets/css/tailwind.css")]
+      patterns: [ path.resolve( __dirname, "./src/assets/scss/tailwind.scss" ) ]
     }
   }
 };
