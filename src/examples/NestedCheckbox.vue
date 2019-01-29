@@ -19,6 +19,7 @@
         :groups.sync="permissionsStructure"
         label="Set your permissions"
         name="permissions"
+        @values="values"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'permissions'" :source="source.permissions"/>
@@ -46,7 +47,7 @@
         },
         permissionsStructure: [
           {
-            name: 'user',
+            name: 'all',
             label: 'User permissions',
             checked: false,
             options: [
@@ -82,6 +83,9 @@
     methods: {
       toggleSource(field) {
         this.showSource = this.showSource == field ? '' : field
+      },
+      values(data) {
+        this.form.permissions = data
       }
     }
   }

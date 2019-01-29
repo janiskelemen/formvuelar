@@ -97,6 +97,15 @@
     computed: {
       allgroups() {
         return this.groups
+      },
+      values() {
+        let values = []
+        _forEach(this.allgroups, function(group) {
+          _forEach(group.options, function(field) {
+            values.push({ [field.name]: field.checked })
+          })
+        })
+        return values
       }
     },
     methods: {
@@ -112,6 +121,7 @@
         return allChecked
       },
       groupAnyChecked(group) {
+        this.$emit('values', this.values)
         return _filter(group.options, 'checked').length
       },
       dirty(name) {
