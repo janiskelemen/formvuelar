@@ -46,139 +46,148 @@ npm install formvuelar --save
 The following components are shipped with FormVuelar:
 </p>
 
-| Name                    | Description            | Import Name                                    |
-| ----------------------- | ---------------------- | ---------------------------------------------- |
-| `<fvl-form />`          | Form wrapper element   | `import { FvlForm } from 'formvuelar'`         |
-| `<fvl-input />`         | Input field            | `import { FvlInput } from 'formvuelar'`        |
-| `<fvl-textarea />`      | Text area field        | `import { FvlTextarea } from 'formvuelar'`     |
-| `<fvl-radio />`         | Radio input field      | `import { FvlRadio } from 'formvuelar'`        |
-| `<fvl-checkbox />`      | Check box input field  | `import { FvlCheckbox } from 'formvuelar'`     |
-| `<fvl-select />`        | Select input field     | `import { FvlSelect } from 'formvuelar'`       |
-| `<fvl-search-select />` | Select with search     | `import { FvlSearchSelect } from 'formvuelar'` |
-| `<fvl-file />`          | File input field       | `import { FvlFile } from 'formvuelar'`         |
-| `<fvl-multi-file />`    | Multi file input field | `import { FvlMultiFile } from 'formvuelar'`    |
-| `<fvl-dropzone />`      | Dropzone field         | `import { FvlDropzone } from 'formvuelar'`     |
-| `<fvl-submit />`        | Submit button          | `import { FvlSubmit } from 'formvuelar'`       |
+| Name                     | Description                 | Import Name                                     |
+| ------------------------ | --------------------------- | ----------------------------------------------- |
+| `<fvl-form />`           | Form wrapper element        | `import { FvlForm } from 'formvuelar'`          |
+| `<fvl-input />`          | Input field                 | `import { FvlInput } from 'formvuelar'`         |
+| `<fvl-textarea />`       | Text area field             | `import { FvlTextarea } from 'formvuelar'`      |
+| `<fvl-radio />`          | Radio input field           | `import { FvlRadio } from 'formvuelar'`         |
+| `<fvl-checkbox />`       | Checkbox input field        | `import { FvlCheckbox } from 'formvuelar'`      |
+| `<fvl-multi-checkbox />` | Nested checkbox input field | `import { FvlMultiCheckbox } from 'formvuelar'` |
+| `<fvl-select />`         | Select input field          | `import { FvlSelect } from 'formvuelar'`        |
+| `<fvl-search-select />`  | Select with search          | `import { FvlSearchSelect } from 'formvuelar'`  |
+| `<fvl-file />`           | File input field            | `import { FvlFile } from 'formvuelar'`          |
+| `<fvl-multi-file />`     | Multi file input field      | `import { FvlMultiFile } from 'formvuelar'`     |
+| `<fvl-dropzone />`       | Dropzone field              | `import { FvlDropzone } from 'formvuelar'`      |
+| `<fvl-submit />`         | Submit button               | `import { FvlSubmit } from 'formvuelar'`        |
 
 <h2>Components Props & Events</h2>
 
-| Name                  | Prop/Event             | Type     | Default | Possible values                         | Notes |
-| --------------------- | ---------------------- | -------- | ------- | --------------------------------------- | ----- |
-| **fvl-form**          | :method                | String   | 'post'  | `get`\|`post`\|`put`\|`patch`\|`delete` |       |
-|                       | :data                  | Object   | {}      | {}                                      |
-|                       | :url                   | String   | null    |                                         |
-|                       | :multipart             | Boolean  | false   | `true`\|`false`                         |
-|                       | :headers               | Object   | {}      | `{'your-header': 'your header value'}`  |
-|                       | @success               | Function |         | axios response                          |
-|                       | @error                 | Function |         | axios error response                    |
-|                       | @upload-progress       | Function |         | 0-100                                   |
-|                       |                        |          |         |                                         |
-| **fvl-input**         | :value.sync            | Data     | ''      | `form.name`                             |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :type                  | String   | 'text'  |                                         |
-|                       | :placeholder           | String   | null    |                                         |
-|                       | :autocomplete          | String   | null    |                                         |
-|                       | :field-class           | String   | null    |                                         |
-|                       | :min                   | Number   | null    |                                         |
-|                       | :max                   | Number   | null    |                                         |
-|                       | :size                  | Number   | null    |                                         |
-|                       | :step                  | Number   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       | :pattern               | String   | null    | regex                                   |
-|                       |                        |          |         |                                         |
-| **fvl-textarea**      | :value.sync            | Data     | ''      | `form.about`                            |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :placeholder           | String   | null    |                                         |
-|                       | :autocomplete          | String   | null    |                                         |
-|                       | :field-class           | String   | null    |                                         |
-|                       | :cols                  | Number   | null    |                                         |
-|                       | :maxlength             | Number   | null    |                                         |
-|                       | :rows                  | Number   | null    |                                         |
-|                       | :wrap                  | Boolean  | null    | `hard`\|`soft`                          |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       | :pattern               | String   | null    | regex                                   |
-|                       |                        |          |         |                                         |
-| **fvl-select**        | :selected.sync         | Data     | null    | `form.favoriteColor`                    |
-|                       | :options               | Object   | {}      | `{'key': 'value', ...}`                 |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :allow-empty           | Boolean  | false   | `true`\|`false`                         |
-|                       | :placeholder           | String   | null    |                                         |
-|                       | :autocomplete          | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       |                        |          |         |                                         |
-| **fvl-search-select** | :selected.sync         | Data     | null    | `form.user`                             |
-|                       | :options               | Object   | {}      | `{'key': 'value', ...}`                 |
-|                       | :options-url           | String   | null    | `https://api.yourdomain.com/users`      |
-|                       | :options-response-path | String   | null    | `data.users`                            |
-|                       | :option-key            | String   | null    | `id`                                    |
-|                       | :options-value         | String   | null    | `name`                                  |
-|                       | :search-keys           | Array    | []      | `['name']`                              |
-|                       | :search-remote         | Boolean  | false   | `true`\|`false`                         |
-|                       | :lazy-load             | Boolean  | false   | `true`\|`false`                         |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :placeholder           | String   | null    |                                         |
-|                       | :autocomplete          | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       |                        |          |         |                                         |
-| **fvl-radio**         | :checked.sync          | Data     | null    | `form.newsletter`                       |
-|                       | :options               | Object   | {}      | `{'key': 'value', ...}`                 |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-| **fvl-checkbox**      | :checked.sync          | Data     | null    | `form.terms`                            |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       |                        |          |         |                                         |
-| **fvl-file**          | :file                  | Data     | null    | `form.avatar`                           |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       |                        |          |         |                                         |
-| **fvl-multi-file**    | :files                 | Data     | null    | `form.gallery`                          |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       |                        |          |         |                                         |
-| **fvl-dropzone**      | :files                 | Data     | null    | `form.media`                            |
-|                       | :id                    | String   | null    |                                         |
-|                       | :name                  | String   | ''      |                                         |
-|                       | :label                 | String   | null    |                                         |
-|                       | :required              | Boolean  | false   | `true`\|`false`                         |
-|                       | :readonly              | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       |                        |          |         |                                         |
-| **fvl-submit**        | :loader                | Boolean  | false   | `true`\|`false`                         |
-|                       | :disabled              | Boolean  | false   | `true`\|`false`                         |
-|                       | :button-class          | String   | null    |                                         |
+| Name                   | Prop/Event             | Type     | Default | Possible values                         | Notes |
+| ---------------------- | ---------------------- | -------- | ------- | --------------------------------------- | ----- |
+| **fvl-form**           | :method                | String   | 'post'  | `get`\|`post`\|`put`\|`patch`\|`delete` |       |
+|                        | :data                  | Object   | {}      | {}                                      |
+|                        | :url                   | String   | null    |                                         |
+|                        | :multipart             | Boolean  | false   | `true`\|`false`                         |
+|                        | :headers               | Object   | {}      | `{'your-header': 'your header value'}`  |
+|                        | @success               | Function |         | axios response                          |
+|                        | @error                 | Function |         | axios error response                    |
+|                        | @upload-progress       | Function |         | 0-100                                   |
+|                        |                        |          |         |                                         |
+| **fvl-input**          | :value.sync            | Data     | ''      | `form.name`                             |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :type                  | String   | 'text'  |                                         |
+|                        | :placeholder           | String   | null    |                                         |
+|                        | :autocomplete          | String   | null    |                                         |
+|                        | :field-class           | String   | null    |                                         |
+|                        | :min                   | Number   | null    |                                         |
+|                        | :max                   | Number   | null    |                                         |
+|                        | :size                  | Number   | null    |                                         |
+|                        | :step                  | Number   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        | :pattern               | String   | null    | regex                                   |
+|                        |                        |          |         |                                         |
+| **fvl-textarea**       | :value.sync            | Data     | ''      | `form.about`                            |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :placeholder           | String   | null    |                                         |
+|                        | :autocomplete          | String   | null    |                                         |
+|                        | :field-class           | String   | null    |                                         |
+|                        | :cols                  | Number   | null    |                                         |
+|                        | :maxlength             | Number   | null    |                                         |
+|                        | :rows                  | Number   | null    |                                         |
+|                        | :wrap                  | Boolean  | null    | `hard`\|`soft`                          |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        | :pattern               | String   | null    | regex                                   |
+|                        |                        |          |         |                                         |
+| **fvl-select**         | :selected.sync         | Data     | null    | `form.favoriteColor`                    |
+|                        | :options               | Object   | {}      | `{'key': 'value', ...}`                 |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :allow-empty           | Boolean  | false   | `true`\|`false`                         |
+|                        | :placeholder           | String   | null    |                                         |
+|                        | :autocomplete          | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-search-select**  | :selected.sync         | Data     | null    | `form.user`                             |
+|                        | :options               | Object   | {}      | `{'key': 'value', ...}`                 |
+|                        | :options-url           | String   | null    | `https://api.yourdomain.com/users`      |
+|                        | :options-response-path | String   | null    | `data.users`                            |
+|                        | :option-key            | String   | null    | `id`                                    |
+|                        | :options-value         | String   | null    | `name`                                  |
+|                        | :search-keys           | Array    | []      | `['name']`                              |
+|                        | :search-remote         | Boolean  | false   | `true`\|`false`                         |
+|                        | :lazy-load             | Boolean  | false   | `true`\|`false`                         |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :placeholder           | String   | null    |                                         |
+|                        | :autocomplete          | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-radio**          | :checked.sync          | Data     | null    | `form.newsletter`                       |
+|                        | :options               | Object   | {}      | `{'key': 'value', ...}`                 |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+| **fvl-checkbox**       | :checked.sync          | Data     | null    | `form.terms`                            |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-multi-checkbox** | :checked.sync          | Object   | {}      | `form.permissions`                      |
+|                        | :groups.sync           | Object   | {}      |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-file**           | :file                  | Data     | null    | `form.avatar`                           |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-multi-file**     | :files                 | Data     | null    | `form.gallery`                          |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-dropzone**       | :files.sync            | Array of File Objects    | null    | `form.media`                            |
+|                        | :id                    | String   | null    |                                         |
+|                        | :name                  | String   | ''      |                                         |
+|                        | :label                 | String   | null    |                                         |
+|                        | :required              | Boolean  | false   | `true`\|`false`                         |
+|                        | :readonly              | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        |                        |          |         |                                         |
+| **fvl-submit**         | :loader                | Boolean  | false   | `true`\|`false`                         |
+|                        | :disabled              | Boolean  | false   | `true`\|`false`                         |
+|                        | :button-class          | String   | null    |                                         |
 
 <h2>Basic Form Template</h2>
 <p>

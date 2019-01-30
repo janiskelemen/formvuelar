@@ -73,7 +73,7 @@
 
         /* Map incoming data into formData */
         Object.keys(rawData).forEach(e => {
-          if (rawData[e] instanceof Object) {
+          if (rawData[e] instanceof Array) {
             Object.keys(rawData[e]).forEach(f => {
               if (rawData[e][f] instanceof File) {
                 formData.append(e + '[]', rawData[e][f])

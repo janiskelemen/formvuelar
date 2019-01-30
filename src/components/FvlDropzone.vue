@@ -195,7 +195,7 @@
           let reader = this.getFileReader(mime, uploadedFiles[i])
           reader.readAsDataURL(uploadedFiles[i])
         }
-        this.$emit('update:file', this.files)
+        this.$emit('update:files', this.files)
       },
       removeFile(key) {
         this.files.splice(key, 1)

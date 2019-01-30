@@ -63,10 +63,10 @@
         },
         showSource: false,
         source:
-          `<fvl-file \n` +
+          `<fvl-multi-file \n` +
           `    label="Gallery" \n` +
           `    name="gallery" \n` +
-          `    :file.sync="form.gallery" \n` +
+          `    :files.sync="form.gallery" \n` +
           `/> \n`
       }
     }

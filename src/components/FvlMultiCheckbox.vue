@@ -121,7 +121,7 @@
         return allChecked
       },
       groupAnyChecked(group) {
-        this.$emit('values', this.values)
+        this.$emit('update:checked', this.values)
         return _filter(group.options, 'checked').length
       },
       dirty(name) {
