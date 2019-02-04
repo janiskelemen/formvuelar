@@ -6,7 +6,8 @@
 - **Getting started**
 
   - [About](/)
-  - [Setup](setup.md)
+  - [Get Started](get-started.md)
+  - [Config](config.md)
   - [Custom Style](styling.md)
 
 - **Components**
@@ -18,8 +19,8 @@
   - [Multi Checkbox](components/multi-checkbox.md)
   - [Select](components/select.md)
   - [Search Select](components/search-select.md)
+  - [Submit Button](components/submit.md)
   - **File Inputs**
     - [File Input](components/file.md)
     - [Multi File Input](components/multi-file.md)
     - [Dropzone](components/dropzone.md)
-  - [Submit](components/submit.md)

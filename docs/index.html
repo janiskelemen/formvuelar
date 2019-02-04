@@ -26,10 +26,19 @@
   <div id="app"></div>
   <script>
     window.$docsify = {
+      themeColor: '#38A89D',
       loadNavbar: true,
       loadSidebar: true,
       repo: '',
-      search: 'auto'
+      search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: [], // or 'auto'
+
+        // Headline depth, 1 - 6
+        depth: 2,
+
+        hideOtherSidebarContent: true,
+      }
     }
   </script>
   <script src="//unpkg.com/vue/dist/vue.min.js"></script>

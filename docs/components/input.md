@@ -1,6 +1,6 @@
 # Input Component
 
-### Markup
+### Template
 
 ```vue
 <fvl-input :value.sync="form.lastname" name="lastname" label="Last name" />

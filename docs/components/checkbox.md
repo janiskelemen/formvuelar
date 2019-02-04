@@ -1,6 +1,6 @@
 # Checkbox Component
 
-### Markup
+### Template
 
 ```vue
 <fvl-checkbox label="I agree with your terms of use" name="agree" :checked.sync="form.agree" />

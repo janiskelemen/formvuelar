@@ -1,6 +1,6 @@
 # Textarea Component
 
-### Markup
+### Template
 
 ```vue
 <fvl-textarea :value.sync="form.bio" name="bio" label="Bio" />

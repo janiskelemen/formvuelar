@@ -1,6 +1,6 @@
 # Radio Component
 
-### Markup
+### Template
 
 ```vue
 <fvl-radio

@@ -14,11 +14,9 @@ You can import them like this:
 @import '~formvuelar/dist/formvuelar.css';
 ```
 
-<h2>Available Components</h2>
+## Available Components
 
-<p>
 The following components are shipped with FormVuelar:
-</p>
 
 | Name                     | Description                 | Import Name                                     |
 | ------------------------ | --------------------------- | ----------------------------------------------- |
@@ -35,10 +33,9 @@ The following components are shipped with FormVuelar:
 | `<fvl-dropzone />`       | Dropzone field              | `import { FvlDropzone } from 'formvuelar'`      |
 | `<fvl-submit />`         | Submit button               | `import { FvlSubmit } from 'formvuelar'`        |
 
-<h2>Basic Form Template</h2>
-<p>
+## Basic Form Template
+
 Create a form and sent it via post request to your server.
-</p>
 
 ```html
 <!-- form wrapper -->
@@ -57,9 +54,7 @@ Create a form and sent it via post request to your server.
 </fvl-form>
 ```
 
-<p>
 The form object you pass into the form component above would look like this:
-</p>
 
 ```javascript
 import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
@@ -81,29 +76,9 @@ import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from 'formvuelar'
         //...
 ```
 
-<h2>Global Config</h2>
+## Error Response
 
-<p>You might want to change some defaults globally for all your forms, to do this you just can overwrite them as a global property before registering your main vue instance:</p>
-
-```javascript
-/* Register optional global FormVuelar config */
-Vue.prototype.$formvuelar = {
-  noResultsText: 'No results found!',
-  pleaseWaitText: 'Please wait...',
-  addFileText: 'Add File',
-  addFilesText: 'Add Files',
-  filesSelectedText: 'Files Selected',
-  dropFilesHereText: 'Drop files here or click to upload.',
-  filesSelectedAndSizeText: 'files selected with a combined size of',
-  headers: '{}'
-}
-```
-
-<h2>Error Response</h2>
-
-<p>
 The response from your Backend should contain a Json error object and have a status of 422 in order to show the error messages below the input fields. This response format is default for Laravel and will work out of the box.
-</p>
 
 ```javascript
 {
@@ -121,10 +96,9 @@ The response from your Backend should contain a Json error object and have a sta
 }
 ```
 
-<h2>Client side validation</h2>
-<p>
+## Client side validation
+
 You can still use the default HTML5 validation rules for all input fields like 'accept' and 'required' for file inputs:
-</p>
 
 ```html
 <fvl-file label="Avatar" name="avatar" :file.sync="form.avatar" accept="image/*" required />

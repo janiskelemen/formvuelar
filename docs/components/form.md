@@ -1,6 +1,8 @@
 # Form Component
 
-### Markup
+This is the base component all other components must be wrapped by the fvl-form component.
+
+### Template
 
 ```vue
 <fvl-form url="/myendpoint" :data="form" method="PATCH">

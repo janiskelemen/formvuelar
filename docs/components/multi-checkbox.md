@@ -1,6 +1,6 @@
 # Multi Checkbox Component
 
-### Markup
+### Template
 
 ```vue
 <fvl-multi-checkbox
@@ -11,7 +11,7 @@
 />
 ```
 
-### Permission Structure Example
+### Checkbox Structure Example
 
 ```javascript
 data() {
