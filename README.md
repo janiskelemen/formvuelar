@@ -34,7 +34,8 @@ FormVuelar is a set of predefined vue form components which are designed to auto
     - Dropzone with image preview (inspired by FilePond)
     - Display validation error messages from error response
 
-<h2>Docs</h2>
+## Documentation
+
 [Full Documentation](https://formvuelar.netlify.com)
 
 <h2>Getting Started</h2>
