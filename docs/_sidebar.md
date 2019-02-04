@@ -24,3 +24,9 @@
     - [File Input](components/file.md)
     - [Multi File Input](components/multi-file.md)
     - [Dropzone](components/dropzone.md)
+
+<div style="text-align:center">
+<a href="https://helpspace.io/#formvuelar" target="_blank">
+<img src="https://helpspace.io/img/brand/og_helpspace.png" width="230px" style="border-radius:3px; margin-top:35px; box-shadow: 0 4px 8px 0 rgba(0,0,0,.12), 0 2px 4px 0 rgba(0,0,0,.08);"/>
+</a>
+</div>
