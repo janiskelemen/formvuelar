@@ -230,6 +230,11 @@
       if (!this.optionsUrl) return
       if (!this.lazyLoad) this.getRemoteOptions()
     },
+    beforeDestroy() {
+      if (this.popper) {
+        this.popper.destroy()
+      }
+    },
     methods: {
       select(option) {
         /* Return selected option key */
