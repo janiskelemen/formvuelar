@@ -29,7 +29,7 @@
           </svg>
         </div>
         <transition name="fvl-search-select-dropdown-transition">
-          <div v-show="isOpen" class="fvl-search-select-dropdown">
+          <div v-show="isOpen" ref="selectdropdown" class="fvl-search-select-dropdown">
             <input
               ref="search"
               v-model="query"
@@ -83,6 +83,7 @@
 <script>
   import axios from 'axios'
   import Fuse from 'fuse.js'
+  import Popper from 'popper.js'
   import _find from 'lodash/find'
   import _findKey from 'lodash/findKey'
   import _get from 'lodash/get'
@@ -245,11 +246,21 @@
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
       },
+      setupPopper() {
+        if (this.popper === undefined) {
+          this.popper = new Popper(this.$refs.selectinput, this.$refs.selectdropdown, {
+            placement: 'bottom'
+          })
+        } else {
+          this.popper.scheduleUpdate()
+        }
+      },
       open() {
         if (this.isOpen) return
         if (this.lazyLoad) this.getRemoteOptions()
         this.isOpen = true
         this.$nextTick(() => {
+          this.setupPopper()
           this.$refs.search.focus()
           this.highlightedIndex = this.selectedOptionIndex ? Number(this.selectedOptionIndex) : 0
           this.scrollToIndex(this.highlightedIndex)
@@ -305,6 +316,9 @@
           })
           .then(function() {
             $this.isLoading = false
+            if ($this.popper) {
+              $this.popper.scheduleUpdate()
+            }
           })
       }
     }

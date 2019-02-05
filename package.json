@@ -29,7 +29,8 @@
         "axios": "^0.18.0",
         "fuse.js": "^3.3.0",
         "lodash": "^4.17.11",
-        "vue": "^2.5.22"
+        "vue": "^2.5.22",
+        "popper.js": "^1.14.7"
     },
     "devDependencies": {
         "@cypress/webpack-preprocessor": "^4.0.3",
