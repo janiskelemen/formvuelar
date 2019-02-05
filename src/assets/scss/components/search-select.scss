@@ -7,7 +7,11 @@
 }
 
 .fvl-search-select {
-  @apply block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded leading-tight;
+  @apply block appearance-none w-full bg-grey-lighter border border-grey-lighter text-left text-grey-darker py-3 px-4 pr-8 rounded leading-tight;
+}
+
+.fvl-search-select-placeholder {
+  @apply text-grey-dark;
 }
 
 .fvl-search-select-wrapper:focus-within .fvl-search-select {

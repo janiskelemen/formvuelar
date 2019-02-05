@@ -4,25 +4,17 @@
       :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
       class="fvl-search-select-wrapper"
     >
-      <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label" v-html="label"/>
+      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label"/>
       <div class="fvl-search-select-input-wrapper">
-        <input
+        <button
           ref="selectinput"
-          :name="name"
-          :id="id"
-          :placeholder="placeholder"
-          :autocomplete="autocomplete"
-          :class="fieldClass"
-          :required="required"
+          :class="[{ 'fvl-search-select-placeholder': !selectedOptionValue}, fieldClass]"
           :disabled="disabled"
-          :value="selectedOptionValue"
-          :readonly="readonly"
-          type="text"
-          class="fvl-search-select hide-caret"
+          class="fvl-search-select"
           @click.prevent="toggle()"
-          @keydown="$event.keyCode === 9 ? false : $event.preventDefault()"
           @keydown.space="toggle()"
-        >
+          v-html="selectedOptionValue ? selectedOptionValue : placeholder"
+        />
         <div class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
@@ -72,13 +64,6 @@
     </div>
   </on-click-outside>
 </template>
-
-<style>
-  .hide-caret {
-    caret-color: transparent;
-  }
-</style>
-
 
 <script>
   import axios from 'axios'
@@ -153,7 +138,7 @@
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: '&nbsp;'
       },
       autocomplete: {
         type: String,
@@ -226,12 +211,19 @@
         })
       }
     },
+    watch: {
+      filteredOptionsList() {
+        if (this.popper !== undefined) {
+          this.popper.scheduleUpdate()
+        }
+      }
+    },
     mounted() {
       if (!this.optionsUrl) return
       if (!this.lazyLoad) this.getRemoteOptions()
     },
     beforeDestroy() {
-      if (this.popper) {
+      if (this.popper !== undefined) {
         this.popper.destroy()
       }
     },
