@@ -34,6 +34,7 @@
           <span>Select File</span>
         </template>
       </fvl-file>
+
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source"/>
       <!-- Submit button with upload loader indicator enabled -->
@@ -59,7 +60,8 @@
     data() {
       return {
         form: {
-          avatar: null
+          avatar: null,
+          name: null
         },
         showSource: false,
         source:

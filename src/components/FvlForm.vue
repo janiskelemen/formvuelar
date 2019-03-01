@@ -78,11 +78,11 @@
               if (rawData[e][f] instanceof File) {
                 formData.append(e + '[]', rawData[e][f])
               } else {
-                formData.append(e, rawData[e])
+                formData.append(e, this.replaceNullOnMultipart(rawData[e]))
               }
             })
           } else {
-            formData.append(e, rawData[e])
+            formData.append(e, this.replaceNullOnMultipart(rawData[e]))
           }
         })
 
@@ -93,7 +93,9 @@
 
         return formData
       },
-
+      replaceNullOnMultipart(val) {
+        return this.multipart && val === null ? '' : val
+      },
       submit() {
         let $this = this
         this.isLoading = true
