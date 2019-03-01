@@ -12,12 +12,12 @@
     <!-- Setup Nested Checkbox -->
     <fvl-form :data="form" class="relative" url="/basic">
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('permissions')"/>
+      <source-toggle class="-mt-1" @toggle="toggleSource('permissions')"/>
       <!-- Checkbox component -->
       <fvl-multi-checkbox
         :checked.sync="form.permissions"
         :groups.sync="permissionsStructure"
-        label="I permissions with your terms of use"
+        label="Set your permissions"
         name="permissions"
       />
       <!-- Source code area (only for example) -->
@@ -46,7 +46,7 @@
         },
         permissionsStructure: [
           {
-            name: 'user',
+            name: 'all',
             label: 'User permissions',
             checked: false,
             options: [
@@ -72,7 +72,7 @@
         source: {
           permissions:
             `<fvl-multi-checkbox \n` +
-            `    label="I permissions with your terms of use" \n` +
+            `    label="Set your permissions" \n` +
             `    name="permissions" \n` +
             `    :checked.sync="form.permissions" \n` +
             `/>`

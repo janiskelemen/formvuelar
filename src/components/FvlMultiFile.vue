@@ -10,14 +10,16 @@
     <div class="fvl-multi-file-button-wrapper">
       <button class="fvl-multi-file-button" tabindex="-1" @click.prevent>
         <slot name="button">
-          <span>{{ $formvuelar.addFilesText }}</span>
+          <span v-text="getConfig('addFilesText', 'Add Files')"/>
         </slot>
       </button>
       <span class="fvl-multi-file-name">
-        <slot
-          :files="filesList"
-          name="selected-text"
-        >{{ filesList ? filesList.length : 0 }} {{ $formvuelar.filesSelectedText }}</slot>
+        <slot :files="filesList" name="selected-text">
+          {{ filesList ? filesList.length : 0 }}
+          <span
+            v-text="getConfig('filesSelectedText', 'Files Selected')"
+          />
+        </slot>
       </span>
       <input
         :name="name"
@@ -59,10 +61,13 @@
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { config } from './mixins/config'
+
   export default {
     components: {
       ValidationErrors
     },
+    mixins: [config],
     props: {
       files: {
         type: Array,

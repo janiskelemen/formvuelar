@@ -1,15 +1,4 @@
-<p align="center">
-    <img src="https://janiskelemen.github.io/formvuelar/example/Formvuelar.svg" alt="Formvuelar" />
-</p>
-<h3 align="center">Vue form components with server side validation in mind</h3>
-
-<p align="center">
-    <a href="https://janiskelemen.github.io/formvuelar/" target="_blank">
-        <img src="https://janiskelemen.github.io/formvuelar/example/formvuelar_basic_form.png" alt="Formvuelar basic form" />
-    </a>
-</p>
-
-<h2>About</h2>
+## About
 
 [![](https://img.shields.io/npm/v/formvuelar.svg?label=version)](https://www.npmjs.com/package/formvuelar)
 [![](https://img.shields.io/npm/dm/formvuelar.svg)](https://npmcharts.com/compare/formvuelar?minimal=true)
@@ -34,26 +23,3 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 - File upload support including progress indication
 - Dropzone with image preview (inspired by FilePond)
 - Display validation error messages from error response
-
-## Documentation
-
-[Full Documentation](https://formvuelar.netlify.com)
-
-<h2>Getting Started</h2>
-
-```bash
-npm install formvuelar --save
-```
-
-## TODO
-
-    - Tags component
-    - Test coverage
-
-## Credits
-
-- [Janis Kelemen](https://twitter.com/janiskelemen)
-- [Helpspace.io](https://helpspace.io)
-
-<h2>License</h2>
-<p>Released under the MIT License.</p>

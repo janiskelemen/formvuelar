@@ -4,32 +4,24 @@
       :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
       class="fvl-search-select-wrapper"
     >
-      <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label" v-html="label"/>
+      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label"/>
       <div class="fvl-search-select-input-wrapper">
-        <input
+        <button
           ref="selectinput"
-          :name="name"
-          :id="id"
-          :placeholder="placeholder"
-          :autocomplete="autocomplete"
-          :class="fieldClass"
-          :required="required"
+          :class="[{ 'fvl-search-select-placeholder': !selectedOptionValue}, fieldClass]"
           :disabled="disabled"
-          :value="selectedOptionValue"
-          :readonly="readonly"
-          type="text"
-          class="fvl-search-select hide-caret"
+          class="fvl-search-select"
           @click.prevent="toggle()"
-          @keydown="$event.keyCode === 9 ? false : $event.preventDefault()"
           @keydown.space="toggle()"
-        >
+          v-html="selectedOptionValue ? selectedOptionValue : placeholder"
+        />
         <div class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
           </svg>
         </div>
         <transition name="fvl-search-select-dropdown-transition">
-          <div v-show="isOpen" class="fvl-search-select-dropdown">
+          <div v-show="isOpen" ref="selectdropdown" class="fvl-search-select-dropdown">
             <input
               ref="search"
               v-model="query"
@@ -53,10 +45,14 @@
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
-              <slot name="no-results">{{ $formvuelar.noResultsText }}</slot>
+              <slot name="no-results">
+                <span v-text="getConfig('noResultsText', 'No results found!')"/>
+              </slot>
             </div>
             <div v-if="isLoading" class="search-select-empty">
-              <slot name="loading">{{ $formvuelar.pleaseWaitText }}</slot>
+              <slot name="loading">
+                <span v-text="getConfig('pleaseWaitText', 'Please wait...')"/>
+              </slot>
             </div>
           </div>
         </transition>
@@ -69,26 +65,22 @@
   </on-click-outside>
 </template>
 
-<style>
-  .hide-caret {
-    caret-color: transparent;
-  }
-</style>
-
-
 <script>
   import axios from 'axios'
   import Fuse from 'fuse.js'
+  import Popper from 'popper.js'
   import _find from 'lodash/find'
   import _findKey from 'lodash/findKey'
   import _get from 'lodash/get'
   import ValidationErrors from './FvlErrors.vue'
   import OnClickOutside from './utilities/OnClickOutside.vue'
+  import { config } from './mixins/config'
   export default {
     components: {
       ValidationErrors,
       OnClickOutside
     },
+    mixins: [config],
     props: {
       selected: {
         type: String | Number,
@@ -146,7 +138,7 @@
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: '&nbsp;'
       },
       autocomplete: {
         type: String,
@@ -219,9 +211,21 @@
         })
       }
     },
+    watch: {
+      filteredOptionsList() {
+        if (this.popper !== undefined) {
+          this.popper.scheduleUpdate()
+        }
+      }
+    },
     mounted() {
       if (!this.optionsUrl) return
       if (!this.lazyLoad) this.getRemoteOptions()
+    },
+    beforeDestroy() {
+      if (this.popper !== undefined) {
+        this.popper.destroy()
+      }
     },
     methods: {
       select(option) {
@@ -239,11 +243,21 @@
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
       },
+      setupPopper() {
+        if (this.popper === undefined) {
+          this.popper = new Popper(this.$refs.selectinput, this.$refs.selectdropdown, {
+            placement: 'bottom'
+          })
+        } else {
+          this.popper.scheduleUpdate()
+        }
+      },
       open() {
         if (this.isOpen) return
         if (this.lazyLoad) this.getRemoteOptions()
         this.isOpen = true
         this.$nextTick(() => {
+          this.setupPopper()
           this.$refs.search.focus()
           this.highlightedIndex = this.selectedOptionIndex ? Number(this.selectedOptionIndex) : 0
           this.scrollToIndex(this.highlightedIndex)
@@ -299,6 +313,9 @@
           })
           .then(function() {
             $this.isLoading = false
+            if ($this.popper) {
+              $this.popper.scheduleUpdate()
+            }
           })
       }
     }

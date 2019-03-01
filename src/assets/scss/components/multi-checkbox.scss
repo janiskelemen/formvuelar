@@ -1,9 +1,25 @@
 .fvl-multi-checkbox-wrapper {}
 
+.fvl-multi-checkbox-label {
+    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 pl-2;
+}
+
 .fvl-multi-checkbox-any-checked .fvl-checkbox+label .fvl-checkbox-inner {
     @apply inline-block bg-grey-dark h-full w-full rounded;
 }
 
 .fvl-multi-checkbox-any-checked.fvl-multi-checkbox-all-checked .fvl-checkbox+label .fvl-checkbox-inner {
     @apply bg-teal;
+}
+
+.fvl-multi-checkbox {
+    @apply w-full;
+}
+
+.fvl-multi-checkbox-group {
+    @apply pl-8;
+}
+
+.fvl-multi-checkbox-nested {
+    @apply w-full;
 }

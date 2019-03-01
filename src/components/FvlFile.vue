@@ -4,7 +4,7 @@
     <div class="fvl-file-button-wrapper">
       <button class="fvl-file-button" tabindex="-1" @click.prevent>
         <slot name="button">
-          <span>{{ $formvuelar.selectFileText }}</span>
+          <span v-text="getConfig('selectFileText', 'Select File')"/>
         </slot>
       </button>
       <span class="fvl-file-name" v-text="fileName"/>
@@ -32,10 +32,12 @@
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { config } from './mixins/config'
   export default {
     components: {
       ValidationErrors
     },
+    mixins: [config],
     props: {
       file: {
         type: File | String,

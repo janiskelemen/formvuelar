@@ -1,27 +1,37 @@
 <template>
   <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-multi-checkbox-wrapper">
+    <label
+      v-if="label"
+      :class="labelClass"
+      :for="id ? id : name"
+      class="fvl-multi-checkbox-label"
+      v-html="label"
+    />
     <div v-for="group in allgroups" :key="group.name">
       <fvl-checkbox
         :label="group.label"
         :name="group.name"
         :class="{'fvl-multi-checkbox-all-checked': groupAllChecked(group), 'fvl-multi-checkbox-any-checked': groupAnyChecked(group)}"
-        class="w-full lg:w-1/2"
+        class="fvl-multi-checkbox"
         @click.prevent.native="toggleChildren(group)"
       />
-      <div v-for="nestedOption in group.options" :key="nestedOption.name">
+      <div
+        v-for="nestedOption in group.options"
+        :key="nestedOption.name"
+        class="fvl-multi-checkbox-group"
+      >
         <fvl-checkbox
           :checked.sync="nestedOption.checked"
           :label="nestedOption.label"
           :name="nestedOption.name"
-          class="w-full lg:w-1/2 pl-12"
+          class="fvl-multi-checkbox-nested"
         />
       </div>
     </div>
-    <!-- <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label" v-html="label"/>
     <slot name="hint"/>
     <slot :errors="this.$parent.getErrors(name)" name="errors">
       <validation-errors :errors="this.$parent.getErrors(name)"/>
-    </slot>-->
+    </slot>
   </div>
 </template>
 
@@ -87,6 +97,15 @@
     computed: {
       allgroups() {
         return this.groups
+      },
+      values() {
+        let values = []
+        _forEach(this.allgroups, function(group) {
+          _forEach(group.options, function(field) {
+            values.push({ [field.name]: field.checked })
+          })
+        })
+        return values
       }
     },
     methods: {
@@ -102,6 +121,7 @@
         return allChecked
       },
       groupAnyChecked(group) {
+        this.$emit('update:checked', this.values)
         return _filter(group.options, 'checked').length
       },
       dirty(name) {
