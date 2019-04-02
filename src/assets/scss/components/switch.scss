@@ -1,0 +1,51 @@
+/* Styles for hiding the native checkbox */
+.fvl-switch-wrapper {
+    @apply p-2;
+}
+
+.fvl-switch {
+  @apply absolute opacity-0;
+}
+
+.fvl-switch+label {
+    @apply relative cursor-pointer p-0;
+}
+
+/* Styles for the basic appearance of the toggle switch */
+.fvl-switch+label .fvl-switch-toggle {
+  @apply relative inline-block align-middle align-text-bottom mr-4 h-6 w-10;
+}
+
+/* Common styles for the ::before and ::after pseudo-elements of the toggle switch */
+.fvl-switch+label .fvl-switch-toggle::before,
+.fvl-switch+label .fvl-switch-toggle::after {
+  content: '';
+  @apply absolute pin-t pin-l;
+}
+
+/* Styles for the ::before pseudo-element (the outer frame) of the toggle switch */
+.fvl-switch+label .fvl-switch-toggle::before {
+  @apply bg-grey-lighter w-full h-full;
+  border-radius: 2rem;
+}
+
+/* Styles for the ::after pseudo-element (the inner slider) of the toggle switch */
+.fvl-switch+label .fvl-switch-toggle::after {
+  @apply h-5 w-5 bg-grey-light;
+  margin: 0.125rem;
+  border-radius: 50%;
+  transition: all 0.28s ease;
+}
+.fvl-switch.checked+label .fvl-switch-toggle::after {
+  @apply bg-teal;
+}
+
+/* Styles for the ::before pseudo-element of the toggle switch in checked or enabled state */
+.fvl-switch.checked+label .fvl-switch-toggle::before {
+  background: #d7efed;
+}
+
+/* Styles for the ::after pseudo-element of the toggle switch in checked or enabled state */
+.fvl-switch.checked+label .fvl-switch-toggle::after {
+  left: 1rem;
+}

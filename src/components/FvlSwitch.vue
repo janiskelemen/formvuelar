@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-checkbox-wrapper">
+  <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-switch-wrapper">
     <input
       :name="name"
       :id="id ? id : name"
@@ -9,11 +9,11 @@
       :disabled="disabled"
       :checked="checked"
       type="checkbox"
-      class="fvl-checkbox"
+      class="fvl-switch"
       @change="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
     >
-    <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
-      <span class="fvl-checkbox-outer"/>
+    <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">
+      <span class="fvl-switch-toggle"/>
       {{ label }}
     </label>
     <slot name="hint"/>

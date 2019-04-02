@@ -37,7 +37,7 @@
       <img
         alt="View on Github"
         height="40"
-        src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
+        src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
         width="40"
       >
     </a>

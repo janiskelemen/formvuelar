@@ -16,20 +16,20 @@
 .fvl-radio + label {
     @apply relative cursor-pointer p-0;
 }
-.fvl-radio + label:before {
+.fvl-radio + label .fvl-radio-toggle {
+    @apply relative inline-block align-text-bottom bg-grey-lighter rounded-full mr-4 h-6 w-6;
+}
+
+.fvl-radio:checked + label .fvl-radio-toggle {
+    @apply border-teal border-2;  
+}
+.fvl-radio:checked + label .fvl-radio-toggle:before {
     content: '';
-    @apply inline-block align-text-bottom bg-grey-lighter text-teal border border-grey-lighter rounded-full mr-4 h-6 w-6;
-}
-.fvl-radio:focus + label:before {
-    @apply border-white;
-}
-.fvl-radio:checked + label:before {
-    @apply bg-teal border-4 border-grey-lighter;
-    
+    @apply absolute inline-block rounded-full mx-auto my-auto bg-teal h-2 w-2 pin-r pin-l pin-t pin-b w-2 h-2 m-auto; 
 }
 .fvl-radio:disabled + label {
     @apply text-grey-light cursor-auto;
 }
-.fvl-radio:disabled + label:before {
+.fvl-radio:disabled + label .fvl-radio-toggle {
     @apply bg-grey-lighter shadow-none;
 }

@@ -99,6 +99,18 @@
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'agree'" :source="source.agree"/>
+
+      <!-- Add source code toggle button (only for example) -->
+      <source-toggle @toggle="toggleSource('switch')"/>
+       <!-- Switch component -->
+      <fvl-switch
+        :checked.sync="form.switch"
+        class="w-full lg:w-1/2"
+        label="Enable this feature"
+        name="switch"
+      />
+      <!-- Source code area (only for example) -->
+      <source-box :show-source="showSource == 'switch'" :source="source.switch"/>
       <!-- Submit button component -->
       <fvl-submit>Validate</fvl-submit>
     </fvl-form>
@@ -106,7 +118,7 @@
 </template>
 
 <script>
-  import { FvlForm, FvlInput, FvlTextarea, FvlCheckbox, FvlRadio, FvlSelect, FvlSubmit } from './../formvuelar'
+  import { FvlForm, FvlInput, FvlTextarea, FvlCheckbox, FvlRadio, FvlSelect, FvlSwitch, FvlSubmit } from './../formvuelar'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
@@ -119,6 +131,7 @@
       FvlCheckbox,
       FvlRadio,
       FvlSelect,
+      FvlSwitch,
       FvlSubmit,
       SourceToggle,
       SourceBox
@@ -131,7 +144,8 @@
           password: '',
           color: '',
           option: '',
-          agree: false
+          agree: false,
+          switch: false
         },
         showSource: '',
         source: {
@@ -198,6 +212,13 @@
             `    label="I agree with your terms of use" \n` +
             `    name="agree" \n` +
             `    :checked.sync="form.agree" \n` +
+            `/>`,
+
+          switch:
+            `<fvl-switch \n` +
+            `    label="Enable this feature" \n` +
+            `    name="switch" \n` +
+            `    :checked.sync="form.switch" \n` +
             `/>`
         }
       }

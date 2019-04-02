@@ -27,6 +27,10 @@ export {
 }
 from './components/FvlCheckbox'
 export {
+    default as FvlSwitch
+}
+from './components/FvlSwitch'
+export {
     default as FvlMultiCheckbox
 }
 from './components/FvlMultiCheckbox'

@@ -1,9 +1,10 @@
 .fvl-input:focus,
 .fvl-textarea:focus,
 .fvl-submit-button:focus,
-.fvl-select:focus,
-.fvl-radio:focus+label:before,
-.fvl-checkbox:focus+label:before {
+.fvl-select-wrapper select:focus,
+.fvl-checkbox:focus+label .fvl-checkbox-outer,
+.fvl-switch:focus+label .fvl-switch-toggle::before,
+.fvl-radio:focus + label .fvl-radio-toggle{
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
 }
