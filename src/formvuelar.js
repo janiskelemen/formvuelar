@@ -19,6 +19,10 @@ export {
 }
 from './components/FvlSearchSelect'
 export {
+    default as FvlTagSelect
+}
+from './components/FvlTagSelect'
+export {
     default as FvlRadio
 }
 from './components/FvlRadio'
