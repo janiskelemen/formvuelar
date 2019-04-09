@@ -2,32 +2,60 @@
   <on-click-outside @do="close()">
     <div
       :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
-      class="fvl-search-select-wrapper"
+      class="fvl-tag-select-wrapper"
     >
-      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label"/>
-      <div class="fvl-search-select-input-wrapper">
+      <label
+        v-if="label"
+        :class="labelClass"
+        class="fvl-select-label"
+        @click="toggle()"
+        v-html="label"
+      />
+      <div class="fvl-tag-select-input-wrapper">
         <button
           ref="selectinput"
-          :class="[{ 'fvl-search-select-placeholder': !selectedOptionValues}, fieldClass]"
+          :class="[{ 'fvl-tag-select-placeholder': !selectedOptionValues.length}, fieldClass]"
           :disabled="disabled"
-          class="fvl-search-select"
-          @click.prevent="toggle()"
+          class="fvl-tag-select"
+          @click.prevent="allowNew ? open() : toggle()"
           @keydown.space="toggle()"
         >
-          <span v-if="!selectedOptionValues.length && placeholder" v-text="placeholder"/>
-          <span v-for="value in selectedOptionValues" :key="value" class="inline-flex items-center bg-teal rounded px-2 py-1 mr-1 text-white">
+          <span
+            v-show="!selectedOptionValues.length && placeholder && !isOpen"
+            v-text="placeholder"
+          />
+          <span v-for="value in selectedOptionValues" :key="value" class="fvl-tag-select-item">
             {{ value }}
-            <svg class="stroke-current text-teal-darker opacity-50 inline-block h-4 w-4 ml-1" 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke-width="2" 
-            stroke-linecap="round" 
-            stroke-linejoin="round"
-            @click.prevent.stop="unselect(value)">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            <svg
+              class="fvl-tag-select-item-remove"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              @click.prevent.stop="unselect(value)"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </span>
+          <input
+            v-if="allowNew"
+            ref="inlineinput"
+            v-model="query"
+            :style="{ width: String(query).length*18 + 'px', maxWidth: '100%', minWidth: '40px'}"
+            :class="{'p-1': selectedOptionValues.length}"
+            type="text"
+            class="fvl-tag-inline-input"
+            @keydown.esc="close()"
+            @keydown.down="highlightNext()"
+            @keydown.up="highlightPrevious()"
+            @keydown.enter.prevent="selectHighlighted()"
+            @keydown.tab.prevent
+            @input="highlightedIndex = -1; getRemoteOptions();"
+            @keydown.backspace="removeTag()"
+          >
         </button>
         <div class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -35,10 +63,16 @@
           </svg>
         </div>
         <transition name="fvl-search-select-dropdown-transition">
-          <div v-show="isOpen" ref="selectdropdown" class="fvl-search-select-dropdown">
+          <div
+            v-show="(isOpen && !allowNew) || (isOpen && allowNew && filteredOptionsList.length)"
+            ref="selectdropdown"
+            class="fvl-search-select-dropdown"
+          >
             <input
+              v-if="!allowNew"
               ref="search"
               v-model="query"
+              type="text"
               class="fvl-search-select-dropdown-input"
               @keydown.esc="close()"
               @keydown.down="highlightNext()"
@@ -150,6 +184,10 @@
         type: Boolean,
         default: true
       },
+      allowNew: {
+        type: Boolean,
+        default: false
+      },
       placeholder: {
         type: String,
         required: false,
@@ -203,15 +241,15 @@
         let $this = this
         let options = this.searchRemote ? this.remoteOptions : this.optionsList
         /* Hide selected items from options list */
-        if(this.selected) {
-          options = _filter(options, function(o){
+        if (this.selected) {
+          options = _filter(options, function(o) {
             return $this.selected.indexOf(o[$this.optionKey]) === -1
           })
         }
-        if (!this.query ||this.searchRemote) {
+        if (!this.query || this.searchRemote) {
           return options
         }
-        
+
         let fuse = new Fuse(options, {
           threshold: 0.2,
           keys: this.searchKeys
@@ -221,14 +259,17 @@
       selectedOptionValues() {
         let $this = this
         let options = []
-        if(!this.selected) return options
+        if (!this.selected) return options
         this.selected.forEach(function(element) {
           let option = _find($this.optionsList, function(o) {
             return o[$this.optionKey] == element
           })
-          if(option){
+          if (option) {
             options.push(option[$this.optionValue])
-          } 
+          }
+          if (!option && $this.allowNew) {
+            options.push(element)
+          }
         })
         return options
       },
@@ -260,14 +301,16 @@
         let $this = this
         /* Add the selected option key to selected array */
         let selected = this.selected === null ? [] : this.selected
+        option = typeof option === 'object' ? option[$this.optionKey] : option
         let elementexists = _find(selected, function(o) {
-            return o == option[$this.optionKey]
+          return o == option
         })
-        if(elementexists) return
-        selected.push(option[this.optionKey])
+        if (elementexists || (!option && !this.filteredOptionsList.length)) return
+
+        selected.push(option)
         this.$emit('update:selected', selected)
         this.$parent.dirty(this.name)
-        this.close()
+        this.reset()
       },
       unselect(option) {
         /* Remove the selected option key from selected array */
@@ -277,11 +320,18 @@
         this.$parent.dirty(this.name)
         this.close()
       },
+      removeTag() {
+        if (this.selected && !this.query) {
+          this.selected.splice(this.selected.length - 1, 1)
+        }
+      },
       reset() {
         this.query = ''
       },
       selectHighlighted() {
-        if (!this.filteredOptionsList.length) {
+        if (!this.allowNew && !this.filteredOptionsList.length) return
+        if (this.highlightedIndex < 0 || this.highlightedIndex > this.filteredOptionsList.length - 1) {
+          if (this.allowNew && this.query) this.select(this.query)
           return
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
@@ -301,7 +351,7 @@
         this.isOpen = true
         this.$nextTick(() => {
           this.setupPopper()
-          this.$refs.search.focus()
+          this.allowNew ? this.$refs.inlineinput.focus() : this.$refs.search.focus()
           this.highlightedIndex = this.selectedOptionIndex ? Number(this.selectedOptionIndex) : 0
           this.scrollToIndex(this.highlightedIndex)
         })
@@ -324,14 +374,14 @@
       },
       highlightNext() {
         this.highlightedIndex =
-          this.highlightedIndex == this.filteredOptionsList.length - 1
+          this.highlightedIndex >= this.filteredOptionsList.length - 1
             ? this.filteredOptionsList.length - 1
             : this.highlightedIndex + 1
 
         this.scrollToIndex(this.highlightedIndex)
       },
       highlightPrevious() {
-        this.highlightedIndex = this.highlightedIndex == 0 ? 0 : this.highlightedIndex - 1
+        this.highlightedIndex = this.highlightedIndex <= 0 ? 0 : this.highlightedIndex - 1
         this.scrollToIndex(this.highlightedIndex)
       },
       getRemoteOptions() {

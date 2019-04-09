@@ -26,6 +26,7 @@
   - [Multi Checkbox](components/multi-checkbox.md)
   - [Select](components/select.md)
   - [Search Select](components/search-select.md)
+  - [Tag Select](components/tag-select.md)
   - [Submit Button](components/submit.md)
   - **File Inputs**
     - [File Input](components/file.md)
