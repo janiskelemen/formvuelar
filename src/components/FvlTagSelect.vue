@@ -11,7 +11,7 @@
         @click="toggle()"
         v-html="label"
       />
-      <div class="fvl-tag-select-input-wrapper">
+      <div :class="{'fvl-tag-select-input-inline': allowNew}" class="fvl-tag-select-input-wrapper">
         <button
           ref="selectinput"
           :class="[{ 'fvl-tag-select-placeholder': !selectedOptionValues.length}, fieldClass]"
@@ -21,7 +21,7 @@
           @keydown.space="toggle()"
         >
           <span
-            v-show="!selectedOptionValues.length && placeholder && !isOpen"
+            v-show="!selectedOptionValues.length && placeholder && !allowNew"
             v-text="placeholder"
           />
           <span v-for="value in selectedOptionValues" :key="value" class="fvl-tag-select-item">
@@ -44,15 +44,19 @@
             v-if="allowNew"
             ref="inlineinput"
             v-model="query"
-            :style="{ width: String(query).length*18 + 'px', maxWidth: '100%', minWidth: '40px'}"
+            :style="{ width: String(query).length*18 + 'px', 
+                      maxWidth: '100%', 
+                      minWidth: selectedOptionValues.length ? '80px' : String(placeholder).length*18 + 'px'
+                    }"
             :class="{'p-1': selectedOptionValues.length}"
+            :placeholder="selectedOptionValues.length ? '' : placeholder"
             type="text"
             class="fvl-tag-inline-input"
             @keydown.esc="close()"
             @keydown.down="highlightNext()"
             @keydown.up="highlightPrevious()"
             @keydown.enter.prevent="selectHighlighted()"
-            @keydown.tab.prevent
+            @keydown.tab="close()"
             @input="highlightedIndex = -1; getRemoteOptions();"
             @keydown.backspace="removeTag()"
           >
@@ -94,7 +98,7 @@
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
               <slot name="no-results">
-                <span v-text="getConfig('noResultsText', 'No results found!')"/>
+                <span v-if="!allowNew" v-text="getConfig('noResultsText', 'No results found!')"/>
               </slot>
             </div>
             <div v-if="isLoading" class="search-select-empty">
@@ -310,6 +314,7 @@
         selected.push(option)
         this.$emit('update:selected', selected)
         this.$parent.dirty(this.name)
+        if(this.allowNew) this.$refs.inlineinput.focus()
         this.reset()
       },
       unselect(option) {
@@ -318,7 +323,7 @@
         selected.splice(selected.indexOf(option), 1)
         this.$emit('update:selected', selected)
         this.$parent.dirty(this.name)
-        this.close()
+        if(this.allowNew) this.$refs.inlineinput.focus()
       },
       removeTag() {
         if (this.selected && !this.query) {
@@ -360,7 +365,7 @@
         if (!this.isOpen) return
         this.isOpen = false
         this.$nextTick(() => {
-          this.$refs.selectinput.focus()
+          if(!this.allowNew) this.$refs.selectinput.focus()
           this.reset()
         })
       },

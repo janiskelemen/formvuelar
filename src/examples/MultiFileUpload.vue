@@ -1,6 +1,6 @@
 <!-- File upload example -->
 <template>
-  <div class="mt-16">
+  <div class="mb-16">
     <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
       Multi File Upload
       <a

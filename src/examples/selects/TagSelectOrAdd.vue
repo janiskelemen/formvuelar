@@ -2,7 +2,7 @@
 <template>
   <div class="mb-16">
     <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
-      Select existing Tags only
+      Select or add new Tags
       <a
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelect.vue"
         target="_blank"
@@ -18,11 +18,12 @@
         :selected.sync="form.tags"
         :options="tagsOptions"
         :search-keys="['name']"
+        :allow-new="true"
         option-key="name"
         option-value="name"
         name="tags"
         label="Tags"
-        placeholder="Select some tags..."
+        placeholder="Add some tags..."
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source"/>
