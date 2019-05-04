@@ -4,6 +4,7 @@
     <search-select/>
     <remote-search-select/>
     <remote-api-search-select/>
+    
   </div>
 </template>
 
@@ -12,11 +13,13 @@
   import RemoteSearchSelect from './selects/RemoteSearchSelect.vue'
   import RemoteApiSearchSelect from './selects/RemoteApiSearchSelect.vue'
 
+
   export default {
     components: {
       SearchSelect,
       RemoteSearchSelect,
-      RemoteApiSearchSelect
+      RemoteApiSearchSelect,
+
     },
     
   }

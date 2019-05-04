@@ -1,5 +1,8 @@
 <template>
   <div id="app" class="p-8 lg:p-0">
+    <a title="Full Documentation" href="https://formvuelar.netlify.com/?ref=formvuelar-demo" target="_blank" class="absolute pin-r pin-t m-4 mt-5" style="margin-right:105px">
+      <svg class="h-8 w-8 text-teal-dark" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 296.999 296.999"><path d="M45.432 35.049h-.025a10.474 10.474 0 0 0-7.446 3.085 10.583 10.583 0 0 0-3.128 7.543v159.365c0 5.844 4.773 10.61 10.641 10.625 24.738.059 66.184 5.215 94.776 35.136V84.023c0-1.981-.506-3.842-1.461-5.382-23.467-37.792-68.563-43.534-93.357-43.592zM262.167 205.042V45.676c0-2.852-1.111-5.531-3.128-7.543a10.477 10.477 0 0 0-7.445-3.085h-.026c-24.793.059-69.889 5.801-93.357 43.593-.955 1.54-1.46 3.401-1.46 5.382v166.779c28.592-29.921 70.038-35.077 94.776-35.136 5.867-.015 10.64-4.781 10.64-10.624z"/><path d="M286.373 71.801h-7.706v133.241c0 14.921-12.157 27.088-27.101 27.125-20.983.05-55.581 4.153-80.084 27.344 42.378-10.376 87.052-3.631 112.512 2.171a10.606 10.606 0 0 0 9.011-2.054 10.567 10.567 0 0 0 3.994-8.301v-168.9c.001-5.859-4.767-10.626-10.626-10.626zM18.332 205.042V71.801h-7.706C4.768 71.801 0 76.568 0 82.427v168.897c0 3.25 1.456 6.276 3.994 8.301a10.598 10.598 0 0 0 9.011 2.054c25.46-5.803 70.135-12.547 112.511-2.171-24.502-23.19-59.1-27.292-80.083-27.342-14.943-.036-27.101-12.203-27.101-27.124z"/></svg>
+    </a>
     <a
       rel="no-referer"
       class="absolute pin-r pin-t m-4 mt-6 mr-12"
@@ -37,7 +40,7 @@
       <img
         alt="View on Github"
         height="40"
-        src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png"
+        src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
         width="40"
       >
     </a>
@@ -60,74 +63,110 @@
       </svg>
     </h1>
     <div class="flex flex-wrap justify-center">
-      <button
-        :class="section == 'basic' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'basic'"
-      >Basic</button>
-      <button
-        :class="section == 'prefilled' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'prefilled'"
-      >Prefilled</button>
-      <button
-        :class="section == 'advancedselects' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'advancedselects'"
-      >Selects</button>
-      <button
-        :class="section == 'nestedcheckbox' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'nestedcheckbox'"
-      >Multi Checkbox</button>
-      <button
-        :class="section == 'upload' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'upload'"
-      >Upload</button>
-      <button
-        :class="section == 'multiupload' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'multiupload'"
-      >Multi Upload</button>
-      <button
-        :class="section == 'dropzone' ? 'border-teal-dark font-semibold' : 'hover:border-grey-light'"
-        class="border-b-2 border-white p-2 mx-2 text-grey-darkest focus:outline-none"
-        @click="section = 'dropzone'"
-      >Dropzone</button>
+      <div class="w-full text-center md:w-1/5 md:text-left">
+        <router-link
+          tag="button"
+          to="/"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Basic</router-link>
+        <router-link
+          tag="button"
+          to="/prefilled"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Prefilled</router-link>
+        <router-link
+          tag="button"
+          to="/advancedselects"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Selects</router-link>
+        <router-link
+          tag="button"
+          to="/tags"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Tags</router-link>
+        <router-link
+          tag="button"
+          to="/nestedcheckbox"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Multi Checkbox</router-link>
+        <router-link
+          tag="button"
+          to="/upload"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Upload</router-link>
+        <router-link
+          tag="button"
+          to="/multiupload"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Multi Upload</router-link>
+        <router-link
+          tag="button"
+          to="/dropzone"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Dropzone</router-link>
+      </div>
+      <div class="w-full md:w-3/5">
+        <router-view/>
+      </div>
     </div>
-    <!-- Basic form example -->
-    <basic-form v-if="section == 'basic'"/>
-    <!-- Prefilled form example -->
-    <prefilled-form
-      v-if="section == 'prefilled'"
-      init-fullname="John Doe"
-      init-bio="Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-      init-pet="dog"
-    />
-    <!-- Single file upload example -->
-    <advanced-selects-form v-if="section == 'advancedselects'"/>
-    <!-- Single file upload example -->
-    <nested-checkbox-form v-if="section == 'nestedcheckbox'"/>
-    <!-- Single file upload example -->
-    <upload-form v-if="section == 'upload'"/>
-    <!-- Multi file upload example -->
-    <multi-upload-form v-if="section == 'multiupload'"/>
-    <!-- Multi file upload example -->
-    <dropzone-form v-if="section == 'dropzone'"/>
   </div>
 </template>
 
 <script>
+  import VueRouter from 'vue-router'
   import BasicForm from './examples/BasicForm.vue'
+  import PrefilledForm from './examples/PrefilledForm'
+  import AdvancedSelectsForm from './examples/AdvancedSelects'
   import UploadForm from './examples/FileUpload.vue'
   import MultiUploadForm from './examples/MultiFileUpload.vue'
   import DropzoneForm from './examples/Dropzone.vue'
-  import PrefilledForm from './examples/PrefilledForm'
-  import AdvancedSelectsForm from './examples/AdvancedSelects'
   import NestedCheckboxForm from './examples/NestedCheckbox'
+  import TagForm from './examples/TagForm'
+
+  const router = new VueRouter({
+    routes: [
+      {
+        path: '/',
+        component: BasicForm
+      },
+      {
+        path: '/prefilled',
+        component: PrefilledForm,
+        props: {
+              initFullname: "John Doe",
+              initBio: "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+              initPet: "dog"
+              }
+      },
+      {
+        path: '/advancedselects',
+        component: AdvancedSelectsForm
+      },
+      {
+        path: '/tags',
+        component: TagForm
+      },
+      {
+        path: '/nestedcheckbox',
+        component: NestedCheckboxForm
+      },
+      {
+        path: '/upload',
+        component: UploadForm
+      },
+      {
+        path: '/multiupload',
+        component: MultiUploadForm
+      },
+      {
+        path: '/dropzone',
+        component: DropzoneForm
+      }
+    ]
+  })
 
   export default {
+    router,
     name: 'App',
     components: {
       BasicForm,
@@ -152,14 +191,27 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="postcss">
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
     margin-top: 60px;
-    max-width: 600px;
+    max-width: 1024px;
     margin: 60px auto;
+  }
+  .button-link {
+    @apply border-b-2 border-white p-2 mx-2 mb-2 text-grey-darkest;
+  }
+  .button-link:focus {
+    @apply outline-none;
+  }
+  .button-link:hover {
+    @apply border-grey-light;
+  }
+  .router-link-exact-active,
+  .router-link-exact-active:hover {
+    @apply border-teal-dark font-semibold;
   }
 </style>

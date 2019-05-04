@@ -15,7 +15,10 @@
         class="fvl-radio"
         @change="$emit('update:checked', $event.target.value); $parent.dirty(name);"
       >
-      <label :class="labelClass" :for="name+key" class="fvl-radio-label" v-html="option"/>
+      <label :class="labelClass" :for="name+key" class="fvl-radio-label">
+        <span class="fvl-radio-toggle"/>
+        {{ option }}
+      </label>
     </div>
     <slot name="hint"/>
     <slot :errors="$parent.getErrors(name)" name="errors">

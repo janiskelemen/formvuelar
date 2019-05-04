@@ -19,6 +19,10 @@ export {
 }
 from './components/FvlSearchSelect'
 export {
+    default as FvlTagSelect
+}
+from './components/FvlTagSelect'
+export {
     default as FvlRadio
 }
 from './components/FvlRadio'
@@ -26,6 +30,10 @@ export {
     default as FvlCheckbox
 }
 from './components/FvlCheckbox'
+export {
+    default as FvlSwitch
+}
+from './components/FvlSwitch'
 export {
     default as FvlMultiCheckbox
 }
