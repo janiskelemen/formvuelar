@@ -103,6 +103,11 @@
         if (!(newValue instanceof File)) this.$emit('update:file', '')
       }
     },
+    mounted() {
+      if (!(this.file instanceof File)) {
+        this.$emit('update:file', '')
+      }
+    },
     methods: {
       //Handles a change on the file upload
       handleFileChange() {

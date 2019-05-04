@@ -60,7 +60,7 @@
     data() {
       return {
         form: {
-          avatar: null,
+          avatar: 'https://helpspace.io/someimage',
           name: null
         },
         showSource: false,
