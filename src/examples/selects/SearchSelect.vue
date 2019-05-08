@@ -1,12 +1,12 @@
 <!-- Advanced Selects example -->
 <template>
   <div class="mb-16">
-    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
+    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
       Select with Search
       <a
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/SearchSelect.vue"
         target="_blank"
-        class="float-right text-grey-dark hover:text-teal text-xs no-underline"
+        class="float-right text-gray-600 hover:text-teal-500 text-xs"
       >Full Source Code</a>
     </h3>
     <!-- Setup form for selects -->
@@ -14,9 +14,9 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showSource = !showSource"/>
       <!-- Search Select input component -->
-      <fvl-search-select 
-        :selected.sync="form.genre" 
-        :options="genreOptions" 
+      <fvl-search-select
+        :selected.sync="form.genre"
+        :options="genreOptions"
         :search-keys="['name']"
         option-key="name"
         option-value="name"
@@ -50,7 +50,7 @@
           genre: null
         },
         genreOptions: [
-          { name: 'Blues' }, 
+          { name: 'Blues' },
           { name: 'Jazz' },
           { name: 'Rock and Roll' },
           { name: 'Pop Rock' },
@@ -61,16 +61,16 @@
         ],
         showSource: false,
         source:
-        `<fvl-search-select \n` + 
-        `   :selected.sync="form.genre" \n` + 
-        `   :options="genreOptions" \n` + 
-        `   :search-keys="['name']"\n` + 
-        `   option-key="name"\n` + 
-        `   option-value="name"\n` + 
-        `   name="genre"\n` + 
-        `   label="Choose any genre"\n` +
-        `   placeholder="Select..."\n` +
-      `/>\n`
+          `<fvl-search-select \n` +
+          `   :selected.sync="form.genre" \n` +
+          `   :options="genreOptions" \n` +
+          `   :search-keys="['name']"\n` +
+          `   option-key="name"\n` +
+          `   option-value="name"\n` +
+          `   name="genre"\n` +
+          `   label="Choose any genre"\n` +
+          `   placeholder="Select..."\n` +
+          `/>\n`
       }
     }
   }

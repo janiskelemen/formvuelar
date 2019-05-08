@@ -1,35 +1,44 @@
 .fvl-radio-wrapper {
     @apply p-2;
 }
-.fvl-radio-group-label{
-    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+
+.fvl-radio-group-label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
 }
-.fvl-radio-label{
-    @apply block tracking-wide text-grey-darker mb-2;
+
+.fvl-radio-label {
+    @apply block tracking-wide text-gray-700 mb-2;
 }
+
 .fvl-radio-group {
     @apply leading-normal;
 }
+
 .fvl-radio {
     @apply absolute opacity-0;
 }
-.fvl-radio + label {
+
+.fvl-radio+label {
     @apply relative cursor-pointer p-0;
 }
-.fvl-radio + label .fvl-radio-toggle {
-    @apply relative inline-block align-text-bottom bg-grey-lighter rounded-full mr-4 h-6 w-6;
+
+.fvl-radio+label .fvl-radio-toggle {
+    @apply relative inline-block align-text-bottom bg-gray-200 rounded-full mr-4 h-6 w-6;
 }
 
-.fvl-radio:checked + label .fvl-radio-toggle {
-    @apply border-teal border-2;  
+.fvl-radio:checked+label .fvl-radio-toggle {
+    @apply border-teal-500 border-2;
 }
-.fvl-radio:checked + label .fvl-radio-toggle:before {
+
+.fvl-radio:checked+label .fvl-radio-toggle:before {
     content: '';
-    @apply absolute inline-block rounded-full mx-auto my-auto bg-teal h-2 w-2 pin-r pin-l pin-t pin-b w-2 h-2 m-auto; 
+    @apply absolute inline-block rounded-full mx-auto my-auto bg-teal-500 h-2 w-2 right-0 left-0 top-0 bottom-0 w-2 h-2 m-auto;
 }
-.fvl-radio:disabled + label {
-    @apply text-grey-light cursor-auto;
+
+.fvl-radio:disabled+label {
+    @apply text-gray-400 cursor-auto;
 }
-.fvl-radio:disabled + label .fvl-radio-toggle {
-    @apply bg-grey-lighter shadow-none;
+
+.fvl-radio:disabled+label .fvl-radio-toggle {
+    @apply bg-gray-200 shadow-none;
 }

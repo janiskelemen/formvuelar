@@ -1,10 +1,10 @@
 <!-- Basic form example -->
 <template>
   <div class="mb-16">
-    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
+    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
       Basic Form
       <a
-        class="float-right text-grey-dark hover:text-teal text-xs no-underline"
+        class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/BasicForm.vue"
         target="_blank"
       >Full Source Code</a>
@@ -50,7 +50,7 @@
       >
         <!-- Optional password strength meter using the hint slot -->
         <template slot="hint">
-          <div class="absolute pin-r pin-t mt-11 mr-4">
+          <div class="absolute right-0 top-0 mt-11 mr-4">
             <transition name="slide-down">
               <span v-if="form.password.length > 0 && form.password.length < 6">😔</span>
               <span v-if="form.password.length >= 6 && form.password.length < 10">😌</span>
@@ -102,7 +102,7 @@
 
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('switch')"/>
-       <!-- Switch component -->
+      <!-- Switch component -->
       <fvl-switch
         :checked.sync="form.switch"
         class="w-full lg:w-1/2"
@@ -178,7 +178,7 @@
             `> \n` +
             `    <!-- Optional Password Meter --> \n` +
             `    <template slot="hint"> \n` +
-            `    <div class="absolute pin-r pin-t mt-12 mr-4"> \n` +
+            `    <div class="absolute right-0 top-0 mt-12 mr-4"> \n` +
             `        <span v-if="form.password.length > 0 &&  \n` +
             `                    form.password.length < 6">😔</span> \n` +
             `        <span v-if="form.password.length >= 6 &&  \n` +

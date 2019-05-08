@@ -1,15 +1,15 @@
 .fvl-multi-checkbox-wrapper {}
 
 .fvl-multi-checkbox-label {
-    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 pl-2;
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pl-2;
 }
 
 .fvl-multi-checkbox-any-checked .fvl-checkbox+label .fvl-checkbox-inner {
-    @apply inline-block bg-grey-dark h-full w-full rounded;
+    @apply inline-block bg-gray-600 h-full w-full rounded;
 }
 
 .fvl-multi-checkbox-any-checked .fvl-checkbox+label .fvl-checkbox-outer {
-    @apply bg-teal border-teal border-2;
+    @apply bg-teal-500 border-teal-500 border-2;
     background: #4dc0b5 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCAxMiAxMiAxMiA0IDEyIi8+PC9zdmc+) center no-repeat;
     background-size: 80%;
 }

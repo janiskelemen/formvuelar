@@ -1,10 +1,10 @@
 <!-- Nested Checkbox example -->
 <template>
   <div class="mb-16">
-    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
+    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
       Nested Checkbox
       <a
-        class="float-right text-grey-dark hover:text-teal text-xs no-underline"
+        class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/NestedCheckbox.vue"
         target="_blank"
       >Full Source Code</a>

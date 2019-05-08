@@ -1,12 +1,13 @@
 .fvl-has-error .fvl-input,
 .fvl-has-error .fvl-textarea,
-.fvl-has-error .fvl-select,
+.fvl-has-error .fvl-select select,
 .fvl-has-error .fvl-file-name,
-.fvl-has-error .fvl-checkbox + label:before,
-.fvl-has-error .fvl-radio + label:before {
-    @apply border-red-light;
+.fvl-has-error .fvl-checkbox+label:before,
+.fvl-has-error .fvl-radio+label:before {
+    @apply border-red-400;
 }
+
 .fvl-input-error-message,
 .fvl-checkbox-error-message {
-    @apply text-red-light font-bold pt-1;
+    @apply text-red-400 font-bold pt-1;
 }

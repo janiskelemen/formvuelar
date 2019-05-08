@@ -1,36 +1,40 @@
 .fvl-tag-select-wrapper {
     @apply p-2;
 }
+
 .fvl-tag-select-input-wrapper {
-  @apply relative;
+    @apply relative;
 }
 
-.fvl-tag-select-input-inline button:hover{
+.fvl-tag-select-input-inline button:hover {
     cursor: text !important;
 }
 
 .fvl-tag-select {
-    @apply block appearance-none w-full bg-grey-lighter border border-grey-lighter text-left text-grey-darker pt-1 pb-2 px-4 pr-8 rounded leading-tight;
+    @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-left text-gray-700 pt-1 pb-2 px-4 pr-8 rounded leading-tight;
 }
 
-.fvl-tag-inline-input {
-    @apply bg-transparent text-grey-darker;
+.fvl-tag-inline-input {
+    @apply bg-transparent text-gray-700;
 }
-.fvl-tag-inline-input:focus {
+
+.fvl-tag-inline-input:focus {
     outline: none !important;
 }
 
-.fvl-tag-select-placeholder, .fvl-tag-inline-input::placeholder {
-    @apply py-3 text-grey-dark opacity-100;
+.fvl-tag-select-placeholder,
+.fvl-tag-inline-input::placeholder {
+    @apply py-3 text-gray-600 opacity-100;
 }
 
 .fvl-tag-select-item {
-    @apply inline-flex items-center bg-teal rounded mt-1 mb-0 px-2 py-1 mr-1 text-white;
+    @apply inline-flex items-center bg-teal-500 rounded mt-1 mb-0 px-2 py-1 mr-1 text-white;
 }
 
 .fvl-tag-select-item-remove {
-    @apply stroke-current text-teal-darker opacity-50 inline-block h-4 w-4 ml-1;
+    @apply stroke-current text-teal-700 opacity-50 inline-block h-4 w-4 ml-1;
 }
+
 .fvl-tag-select-item-remove:hover {
     @apply cursor-pointer;
 }

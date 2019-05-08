@@ -1,9 +1,11 @@
 .fvl-input-wrapper {
     @apply p-2;
 }
+
 .fvl-input-label {
-    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
 }
+
 .fvl-input {
-    @apply appearance-none block w-full bg-grey-lighter text-grey-darkest border border-grey-lighter rounded py-3 px-4 leading-tight;
+    @apply appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 leading-tight;
 }

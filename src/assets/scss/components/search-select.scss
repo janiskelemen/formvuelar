@@ -3,15 +3,15 @@
 }
 
 .fvl-search-select-label {
-  @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
 }
 
 .fvl-search-select {
-  @apply block appearance-none w-full bg-grey-lighter border border-grey-lighter text-left text-grey-darker py-3 px-4 pr-8 rounded leading-tight;
+  @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-left text-gray-700 py-3 px-4 pr-8 rounded leading-tight;
 }
 
 .fvl-search-select-placeholder {
-  @apply text-grey-dark;
+  @apply text-gray-600;
 }
 
 .fvl-search-select-wrapper:focus-within .fvl-search-select {
@@ -28,7 +28,7 @@
 }
 
 .fvl-search-select-carret {
-  @apply pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker;
+  @apply pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700;
   transition: transform 0.2s cubic-bezier(0.62, 0.28, 0.23, 0.99);
 }
 
@@ -57,11 +57,11 @@
 }
 
 .fvl-search-select-dropdown {
-  @apply block absolute z-30 w-full bg-grey-darkest text-white rounded p-2 shadow-md;
+  @apply block absolute z-30 w-full bg-gray-800 text-white rounded p-2 shadow-md;
 }
 
 .fvl-search-select-dropdown-input {
-  @apply appearance-none w-full bg-grey-darker text-white border border-grey-darker rounded py-2 px-2 mb-2 leading-tight;
+  @apply appearance-none w-full bg-gray-700 text-white border border-gray-700 rounded py-2 px-2 mb-2 leading-tight;
 }
 
 .fvl-search-select-dropdown-input:focus {
@@ -69,7 +69,7 @@
 }
 
 .fvl-search-select-dropdown-options {
-  @apply list-reset overflow-y-auto;
+  @apply overflow-y-auto;
   max-height: 200px;
 }
 
@@ -78,9 +78,9 @@
 }
 
 .fvl-search-select-dropdown-option-highlighted {
-  @apply bg-teal-dark;
+  @apply bg-teal-600;
 }
 
 .fvl-search-select-dropdown-option:hover {
-  @apply bg-grey-darker cursor-pointer;
+  @apply bg-gray-700 cursor-pointer;
 }

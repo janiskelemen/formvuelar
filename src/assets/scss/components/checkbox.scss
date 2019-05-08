@@ -12,19 +12,19 @@
 
 .fvl-checkbox+label .fvl-checkbox-outer {
     content: '';
-    @apply relative inline-block align-text-bottom bg-grey-lighter text-teal border border-grey-lighter rounded-full mr-4 h-6 w-6;
+    @apply relative inline-block align-text-bottom bg-gray-200 text-teal-500 border border-gray-200 rounded-full mr-4 h-6 w-6;
 }
 
 .fvl-checkbox.checked+label .fvl-checkbox-outer {
-    @apply bg-teal border-teal border-2;
+    @apply bg-teal-500 border-teal-500 border-2;
     background: #4dc0b5 url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4=) center no-repeat;
     background-size: 75%;
 }
 
 .fvl-checkbox:disabled+label {
-    @apply text-grey-light cursor-auto;
+    @apply text-gray-400 cursor-auto;
 }
 
 .fvl-checkbox-outer:disabled+label .fvl-checkbox-outer {
-    @apply bg-grey-lighter shadow-none;
+    @apply bg-gray-200 shadow-none;
 }

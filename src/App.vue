@@ -1,11 +1,29 @@
 <template>
   <div id="app" class="p-8 lg:p-0">
-    <a title="Full Documentation" href="https://formvuelar.netlify.com/?ref=formvuelar-demo" target="_blank" class="absolute pin-r pin-t m-4 mt-5" style="margin-right:105px">
-      <svg class="h-8 w-8 text-teal-dark" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 296.999 296.999"><path d="M45.432 35.049h-.025a10.474 10.474 0 0 0-7.446 3.085 10.583 10.583 0 0 0-3.128 7.543v159.365c0 5.844 4.773 10.61 10.641 10.625 24.738.059 66.184 5.215 94.776 35.136V84.023c0-1.981-.506-3.842-1.461-5.382-23.467-37.792-68.563-43.534-93.357-43.592zM262.167 205.042V45.676c0-2.852-1.111-5.531-3.128-7.543a10.477 10.477 0 0 0-7.445-3.085h-.026c-24.793.059-69.889 5.801-93.357 43.593-.955 1.54-1.46 3.401-1.46 5.382v166.779c28.592-29.921 70.038-35.077 94.776-35.136 5.867-.015 10.64-4.781 10.64-10.624z"/><path d="M286.373 71.801h-7.706v133.241c0 14.921-12.157 27.088-27.101 27.125-20.983.05-55.581 4.153-80.084 27.344 42.378-10.376 87.052-3.631 112.512 2.171a10.606 10.606 0 0 0 9.011-2.054 10.567 10.567 0 0 0 3.994-8.301v-168.9c.001-5.859-4.767-10.626-10.626-10.626zM18.332 205.042V71.801h-7.706C4.768 71.801 0 76.568 0 82.427v168.897c0 3.25 1.456 6.276 3.994 8.301a10.598 10.598 0 0 0 9.011 2.054c25.46-5.803 70.135-12.547 112.511-2.171-24.502-23.19-59.1-27.292-80.083-27.342-14.943-.036-27.101-12.203-27.101-27.124z"/></svg>
+    <a
+      title="Full Documentation"
+      href="https://formvuelar.netlify.com/?ref=formvuelar-demo"
+      target="_blank"
+      class="absolute right-0 top-0 m-4 mt-5"
+      style="margin-right:105px"
+    >
+      <svg
+        class="h-8 w-8 text-teal-600"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 296.999 296.999"
+      >
+        <path
+          d="M45.432 35.049h-.025a10.474 10.474 0 0 0-7.446 3.085 10.583 10.583 0 0 0-3.128 7.543v159.365c0 5.844 4.773 10.61 10.641 10.625 24.738.059 66.184 5.215 94.776 35.136V84.023c0-1.981-.506-3.842-1.461-5.382-23.467-37.792-68.563-43.534-93.357-43.592zM262.167 205.042V45.676c0-2.852-1.111-5.531-3.128-7.543a10.477 10.477 0 0 0-7.445-3.085h-.026c-24.793.059-69.889 5.801-93.357 43.593-.955 1.54-1.46 3.401-1.46 5.382v166.779c28.592-29.921 70.038-35.077 94.776-35.136 5.867-.015 10.64-4.781 10.64-10.624z"
+        ></path>
+        <path
+          d="M286.373 71.801h-7.706v133.241c0 14.921-12.157 27.088-27.101 27.125-20.983.05-55.581 4.153-80.084 27.344 42.378-10.376 87.052-3.631 112.512 2.171a10.606 10.606 0 0 0 9.011-2.054 10.567 10.567 0 0 0 3.994-8.301v-168.9c.001-5.859-4.767-10.626-10.626-10.626zM18.332 205.042V71.801h-7.706C4.768 71.801 0 76.568 0 82.427v168.897c0 3.25 1.456 6.276 3.994 8.301a10.598 10.598 0 0 0 9.011 2.054c25.46-5.803 70.135-12.547 112.511-2.171-24.502-23.19-59.1-27.292-80.083-27.342-14.943-.036-27.101-12.203-27.101-27.124z"
+        ></path>
+      </svg>
     </a>
     <a
       rel="no-referer"
-      class="absolute pin-r pin-t m-4 mt-6 mr-12"
+      class="absolute right-0 top-0 m-4 mt-6 mr-12"
       href="https://twitter.com/intent/tweet?text=Check%20out%20FormVuelar%21%20Vue%20form%20components%20done%20right%21&hashtags=formVuelar%2Cvue&url=https%3A%2F%2Fjaniskelemen.github.io%2Fformvuelar&original_referer=https%3A%2F%2Ftwitter.com%2Fshare%3Ftext%3DCheck%2520out%2520FormVuelar%21%2520Vue%2520form%2520components%2520done%2520right%21%26hashtags%3DformVuelar%2Cvue%26url%3Dhttps%3A%2F%2Fjaniskelemen.github.io%2Fformvuelar"
       title="Share on Twitter"
       target="_blank"
@@ -33,7 +51,7 @@
       </svg>
     </a>
     <a
-      class="absolute pin-r pin-t m-4"
+      class="absolute right-0 top-0 m-4"
       href="https://github.com/janiskelemen/formvuelar"
       title="View on Github"
     >
@@ -47,7 +65,7 @@
     <h1 class="text-center mb-16">
       <svg
         alt="FormVuelar"
-        class="h-16"
+        class="h-16 inline"
         fill="none"
         viewBox="0 0 340 81"
         xmlns="http://www.w3.org/2000/svg"
@@ -133,10 +151,10 @@
         path: '/prefilled',
         component: PrefilledForm,
         props: {
-              initFullname: "John Doe",
-              initBio: "Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-              initPet: "dog"
-              }
+          initFullname: 'John Doe',
+          initBio: 'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+          initPet: 'dog'
+        }
       },
       {
         path: '/advancedselects',
@@ -202,16 +220,16 @@
     margin: 60px auto;
   }
   .button-link {
-    @apply border-b-2 border-white p-2 mx-2 mb-2 text-grey-darkest;
+    @apply border-b-2 border-white p-2 mx-2 mb-2 text-gray-800;
   }
   .button-link:focus {
     @apply outline-none;
   }
   .button-link:hover {
-    @apply border-grey-light;
+    @apply border-gray-400;
   }
   .router-link-exact-active,
   .router-link-exact-active:hover {
-    @apply border-teal-dark font-semibold;
+    @apply border-teal-600 font-semibold;
   }
 </style>

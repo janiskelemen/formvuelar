@@ -1,47 +1,57 @@
 .fvl-file-wrapper {
     @apply relative p-2;
 }
-.fvl-form-drag-over > .fvl-file-wrapper > .fvl-file-button-wrapper{
+
+.fvl-form-drag-over>.fvl-file-wrapper>.fvl-file-button-wrapper {
     animation: pulse 1.4s infinite;
     @apply rounded;
 }
+
 .fvl-file-label {
-    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 cursor-pointer;
 }
-.fvl-file-button-wrapper{
+
+.fvl-file-button-wrapper {
     @apply inline-flex w-full;
 }
-.fvl-file-button{
-    @apply inline-flex items-center font-bold text-white bg-teal-dark border border-teal-dark py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
+
+.fvl-file-button {
+    @apply inline-flex items-center font-bold text-white bg-teal-600 border border-teal-600 py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
 }
-.fvl-file-wrapper:focus-within .fvl-file-button-wrapper{
+
+.fvl-file-wrapper:focus-within .fvl-file-button-wrapper {
     box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
     @apply rounded;
 }
-.fvl-file-wrapper:hover .fvl-file-button{
-    @apply bg-teal border-teal;
-}
-.fvl-file-name{
-    @apply pl-2 bg-grey-lighter text-grey-darker border border-grey-lighter flex-grow py-3 px-4 leading-tight rounded-r truncate;
-}
-.fvl-file{
-    @apply appearance-none absolute opacity-0 pin-l py-3 px-4 w-full cursor-pointer;
+
+.fvl-file-wrapper:hover .fvl-file-button {
+    @apply bg-teal-500 border-teal-500;
 }
 
-.fvl-file::-webkit-file-upload-button{
+.fvl-file-name {
+    @apply pl-2 bg-gray-200 text-gray-700 border border-gray-200 flex-grow py-3 px-4 leading-tight rounded-r truncate;
+}
+
+.fvl-file {
+    @apply appearance-none absolute opacity-0 left-0 py-3 px-4 w-full cursor-pointer;
+}
+
+.fvl-file::-webkit-file-upload-button {
     cursor: pointer;
     visibility: hidden;
 }
 
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 #38a89d;
-  }
-  70% {
-      box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0);
-  }
-  100% {
-      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  }
+    0% {
+        box-shadow: 0 0 0 0 #38a89d;
+    }
+
+    70% {
+        box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
 }

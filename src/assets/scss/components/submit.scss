@@ -1,23 +1,28 @@
-.fvl-submit-wrapper {
-  
-}
+.fvl-submit-wrapper {}
+
 .fvl-submit-button {
   transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-  @apply relative bg-teal-dark mt-8 px-6 py-3 text-white font-bold rounded;
+  @apply relative bg-teal-600 mt-8 px-6 py-3 text-white font-bold rounded;
 }
-.fvl-submit-button:hover, .fvl-submit-button:disabled{
-  @apply bg-teal;
+
+.fvl-submit-button:hover,
+.fvl-submit-button:disabled {
+  @apply bg-teal-500;
 }
- .fvl-submit-button:disabled{
-   @apply cursor-default bg-grey;
- }
+
+.fvl-submit-button:disabled {
+  @apply cursor-default bg-gray-500;
+}
+
 .fvl-submit-button-loader {
-  @apply absolute pin-l pin-t h-full w-full rounded overflow-hidden z-10;
+  @apply absolute left-0 top-0 h-full w-full rounded overflow-hidden z-10;
 }
+
 .fvl-submit-button-loader-progress {
-  @apply h-full rounded-l bg-teal-dark;
+  @apply h-full rounded-l bg-teal-600;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.fvl-submit-text{
+
+.fvl-submit-text {
   @apply relative z-20;
 }

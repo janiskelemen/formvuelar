@@ -3,7 +3,7 @@
 }
 
 .fvl-select-label {
-    @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2;
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
 }
 
 .fvl-select {
@@ -11,5 +11,5 @@
 }
 
 .fvl-select>select {
-    @apply block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded leading-tight;
+    @apply block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight;
 }

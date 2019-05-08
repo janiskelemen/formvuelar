@@ -1,12 +1,12 @@
 <!-- Advanced Selects example -->
 <template>
   <div class="mb-16">
-    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-grey-darkest">
+    <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
       Select existing Tags only
       <a
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelect.vue"
         target="_blank"
-        class="float-right text-grey-dark hover:text-teal text-xs no-underline"
+        class="float-right text-gray-600 hover:text-teal-500 text-xs"
       >Full Source Code</a>
     </h3>
     <!-- Setup form for selects -->

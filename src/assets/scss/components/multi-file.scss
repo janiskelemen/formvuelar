@@ -2,13 +2,13 @@
   @apply relative p-2;
 }
 
-.fvl-form-drag-over > .fvl-multi-file-wrapper > .fvl-multi-file-button-wrapper {
+.fvl-form-drag-over>.fvl-multi-file-wrapper>.fvl-multi-file-button-wrapper {
   animation: pulse 1.4s infinite;
   @apply rounded;
 }
 
 .fvl-multi-file-label {
-  @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 cursor-pointer;
 }
 
 .fvl-multi-file-button-wrapper {
@@ -16,7 +16,7 @@
 }
 
 .fvl-multi-file-button {
-  @apply inline-flex items-center font-bold text-white bg-teal-dark border border-teal-dark py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
+  @apply inline-flex items-center font-bold text-white bg-teal-600 border border-teal-600 py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
 }
 
 .fvl-multi-file-wrapper:focus-within .fvl-multi-file-button-wrapper {
@@ -25,28 +25,31 @@
 }
 
 .fvl-multi-file-wrapper:hover .fvl-multi-file-button {
-  @apply bg-teal border-teal;
+  @apply bg-teal-500 border-teal-500;
 }
 
 .fvl-multi-file-name {
-  @apply bg-grey-lighter text-grey-darker border border-grey-lighter flex-grow py-3 px-4 leading-tight rounded-r truncate;
+  @apply bg-gray-200 text-gray-700 border border-gray-200 flex-grow py-3 px-4 leading-tight rounded-r truncate;
 }
 
 .fvl-multi-file-list {
-  @apply bg-grey-lighter text-grey-darker border border-grey-lighter flex-grow py-2 px-4 my-2 leading-tight rounded truncate;
+  @apply bg-gray-200 text-gray-700 border border-gray-200 flex-grow py-2 px-4 my-2 leading-tight rounded truncate;
 }
+
 .fvl-multi-file-remove {
-  @apply float-right text-red-light w-4 h-4 pt-px;
+  @apply float-right text-red-400 w-4 h-4 pt-px;
 }
+
 .fvl-multi-file-remove svg {
   @apply stroke-current;
 }
+
 .fvl-multi-file-remove:hover {
   @apply cursor-pointer;
 }
 
 .fvl-multi-file {
-  @apply appearance-none absolute opacity-0 pin-l py-3 px-4 w-full cursor-pointer;
+  @apply appearance-none absolute opacity-0 left-0 py-3 px-4 w-full cursor-pointer;
 }
 
 .fvl-multi-file::-webkit-file-upload-button {

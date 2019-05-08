@@ -17,6 +17,7 @@
           :class="[{ 'fvl-tag-select-placeholder': !selectedOptionValues.length}, fieldClass]"
           :disabled="disabled"
           class="fvl-tag-select"
+          type="button"
           @click.prevent="allowNew ? open() : toggle()"
           @keydown.space="toggle()"
         >
@@ -41,7 +42,7 @@
             </svg>
           </span>
           <input
-            v-if="allowNew"
+            v-if="allowNew && !(max !== null && selected !== null && selected.length >= max)"
             ref="inlineinput"
             v-model="query"
             :style="{ width: String(query).length*18 + 'px', 
@@ -50,12 +51,13 @@
                     }"
             :class="{'p-1': selectedOptionValues.length}"
             :placeholder="selectedOptionValues.length ? '' : placeholder"
-            type="text"
+            :type="type"
             class="fvl-tag-inline-input"
             @keydown.esc="close()"
             @keydown.down="highlightNext()"
             @keydown.up="highlightPrevious()"
-            @keydown.enter.prevent="selectHighlighted()"
+            @keydown.enter.prevent="checkValidity($event)"
+            @blur="query ? checkValidity($event) : ''"
             @keydown.tab="close()"
             @input="highlightedIndex = -1; getRemoteOptions();"
             @keydown.backspace="removeTag()"
@@ -192,6 +194,18 @@
         type: Boolean,
         default: false
       },
+      max: {
+        type: Number,
+        default: null
+      },
+      min: {
+        type: Number,
+        default: null
+      },
+      type: {
+        type: String,
+        default: 'text'
+      },
       placeholder: {
         type: String,
         required: false,
@@ -305,6 +319,9 @@
         let $this = this
         /* Add the selected option key to selected array */
         let selected = this.selected === null ? [] : this.selected
+
+        if (this.max !== null && selected.length >= this.max) return
+
         option = typeof option === 'object' ? option[$this.optionKey] : option
         let elementexists = _find(selected, function(o) {
           return o == option
@@ -314,7 +331,10 @@
         selected.push(option)
         this.$emit('update:selected', selected)
         this.$parent.dirty(this.name)
-        if(this.allowNew) this.$refs.inlineinput.focus()
+
+        if (this.allowNew) this.focusInlineInput()
+        if (this.max !== null && this.selectedOptionValues.length == this.max) this.close()
+
         this.reset()
       },
       unselect(option) {
@@ -323,7 +343,9 @@
         selected.splice(selected.indexOf(option), 1)
         this.$emit('update:selected', selected)
         this.$parent.dirty(this.name)
-        if(this.allowNew) this.$refs.inlineinput.focus()
+        this.$nextTick(() => {
+          if (this.allowNew) this.focusInlineInput()
+        })
       },
       removeTag() {
         if (this.selected && !this.query) {
@@ -335,8 +357,12 @@
       },
       selectHighlighted() {
         if (!this.allowNew && !this.filteredOptionsList.length) return
-        if (this.highlightedIndex < 0 || this.highlightedIndex > this.filteredOptionsList.length - 1) {
-          if (this.allowNew && this.query) this.select(this.query)
+        if (
+          this.highlightedIndex === null ||
+          this.highlightedIndex < 0 ||
+          this.highlightedIndex > this.filteredOptionsList.length - 1
+        ) {
+          if (this.allowNew && this.query !== null && this.query.trimLeft() != '') this.select(this.query)
           return
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
@@ -353,11 +379,12 @@
       open() {
         if (this.isOpen) return
         if (this.lazyLoad) this.getRemoteOptions()
+        if (this.max !== null && this.selected !== null && this.selected.length >= this.max) return
         this.isOpen = true
         this.$nextTick(() => {
           this.setupPopper()
-          this.allowNew ? this.$refs.inlineinput.focus() : this.$refs.search.focus()
-          this.highlightedIndex = this.selectedOptionIndex ? Number(this.selectedOptionIndex) : 0
+          this.allowNew ? this.focusInlineInput() : this.focusSearch()
+          this.highlightedIndex = this.selectedOptionIndex ? Number(this.selectedOptionIndex) : null
           this.scrollToIndex(this.highlightedIndex)
         })
       },
@@ -365,9 +392,24 @@
         if (!this.isOpen) return
         this.isOpen = false
         this.$nextTick(() => {
-          if(!this.allowNew) this.$refs.selectinput.focus()
+          if (!this.allowNew) this.focusSelectInput()
           this.reset()
         })
+      },
+      focusInlineInput() {
+        if (this.$refs.inlineinput !== null) {
+          this.$refs.inlineinput.focus()
+        }
+      },
+      focusSelectInput() {
+        if (this.$refs.selectinput !== null) {
+          this.$refs.selectinput.focus()
+        }
+      },
+      focusSearch() {
+        if (this.$refs.search !== null) {
+          this.$refs.search.focus()
+        }
       },
       toggle() {
         if (this.disabled || this.readonly) return
@@ -388,6 +430,13 @@
       highlightPrevious() {
         this.highlightedIndex = this.highlightedIndex <= 0 ? 0 : this.highlightedIndex - 1
         this.scrollToIndex(this.highlightedIndex)
+      },
+      checkValidity(event) {
+        if (event.target.checkValidity()) {
+          this.selectHighlighted()
+        } else {
+          event.target.reportValidity()
+        }
       },
       getRemoteOptions() {
         if ((!this.searchRemote && this.optionsList.length) || !this.optionsUrl) return

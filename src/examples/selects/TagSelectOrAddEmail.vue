@@ -2,9 +2,9 @@
 <template>
   <div class="mb-16">
     <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
-      Select or add new Tags
+      Select or add new Emails
       <a
-        href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelect.vue"
+        href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelectOrAddEmail.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
       >Full Source Code</a>
@@ -15,16 +15,17 @@
       <source-toggle @toggle="showSource = !showSource"/>
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form.tags"
-        :options="tagsOptions"
-        :search-keys="['name']"
+        :selected.sync="form.emails"
+        :options="emailsOptions"
+        :search-keys="['email']"
         :allow-new="true"
         :max="20"
-        option-key="name"
-        option-value="name"
-        name="tags"
-        label="Tags"
-        placeholder="Add some tags..."
+        type="email"
+        option-key="email"
+        option-value="email"
+        name="emails"
+        label="Send Email To"
+        placeholder="Add some emails..."
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source"/>
@@ -49,30 +50,21 @@
     data() {
       return {
         form: {
-          tags: null
+          emails: null
         },
-        tagsOptions: [
-          { name: 'Cloud' },
-          { name: 'Autocompletion' },
-          { name: 'Remote list' },
-          { name: 'Fast' },
-          { name: 'Nice' },
-          { name: 'Cool' },
-          { name: 'Vue' },
-          { name: 'Advanced' }
-        ],
+        emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
         showSource: false,
         source:
           `<fvl-search-select \n` +
-          `   :selected.sync="form.tags" \n` +
-          `   :options="tagsOptions" \n` +
-          `   :search-keys="['name']"\n` +
+          `   :selected.sync="form.emails" \n` +
+          `   :options="emailsOptions" \n` +
+          `   :search-keys="['email']"\n` +
           `   :allow-new="true"\n` +
           `   :max="20"\n` +
           `   option-key="name"\n` +
           `   option-value="name"\n` +
-          `   name="tags"\n` +
-          `   label="Choose some tags"\n` +
+          `   name="emails"\n` +
+          `   label="Choose some emails"\n` +
           `   placeholder="Select..."\n` +
           `/>\n`
       }

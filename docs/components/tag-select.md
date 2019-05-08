@@ -39,6 +39,8 @@ import { FvlTagSelect } from 'formvuelar'
 | search-keys           | Keys to search in ie. `['name', 'title']`              | Array                       | []      |          |
 | search-remote         | If the search should be done on the server             | Boolean                     | false   |          |
 | lazy-load             | Request options only when the select input is in focus | Boolean                     | false   |          |
+| max                   | Max selectable tags (infinite by default)              | Number                      | null    |          |
+| type                  | Input type (text,email,number...)                      | String                      | text    |          |
 | id                    | Id                                                     | String                      | null    |          |
 | label                 | Label                                                  | String                      | null    |          |
 | placeholder           | Placeholder                                            | String                      | null    |          |

@@ -2,13 +2,13 @@
   @apply relative p-2;
 }
 
-.fvl-form-drag-over > .fvl-dropzone-wrapper > .fvl-dropzone-area-wrapper {
+.fvl-form-drag-over>.fvl-dropzone-wrapper>.fvl-dropzone-area-wrapper {
   animation: pulse 1.4s infinite;
   @apply rounded;
 }
 
 .fvl-dropzone-label {
-  @apply block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2 cursor-pointer;
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 cursor-pointer;
 }
 
 .fvl-dropzone-area-wrapper {
@@ -21,66 +21,81 @@
 }
 
 .fvl-dropzone-wrapper:hover .fvl-dropzone-area {
-  @apply border-teal;
+  @apply border-teal-500;
 }
 
 .fvl-dropzone-area {
-  @apply flex flex-wrap w-full bg-grey-lighter text-grey-darker border-dashed border-2 border-grey py-3 px-4 leading-tight rounded truncate;
+  @apply flex flex-wrap w-full bg-gray-200 text-gray-700 border-dashed border-2 border-gray-500 py-3 px-4 leading-tight rounded truncate;
 }
+
 .fvl-dropzone-area-placeholder {
   @apply block text-center;
 }
 
 .fvl-dropzone-file-preview {
-  @apply relative w-full m-2 bg-grey-darkest text-white leading-tight rounded truncate shadow overflow-hidden;
+  @apply relative w-full m-2 bg-gray-800 text-white leading-tight rounded truncate shadow overflow-hidden;
   min-height: 3.5rem;
 }
+
 @screen lg {
   .fvl-dropzone-file-preview {
     @apply w-1/2;
   }
 }
+
 .fvl-dropzone-file-has-error {
-  @apply bg-red-dark;
+  @apply bg-red-600;
 }
+
 .fvl-dropzone-file-preview-name {
   @apply absolute z-20 h-24 w-full py-3 px-4 font-bold text-xs truncate;
 }
+
 .fvl-dropzone-file-preview-name-background {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 29%, rgba(0, 0, 0, 0) 100%);
   background-blend-mode: multiply;
 }
+
 .fvl-dropzone-file-preview-size {
   @apply font-bold mt-1;
   color: #c3c3c3;
 }
+
 .fvl-dropzone-file-preview-loader {
-  @apply absolute h-1 pin-t w-full z-30;
+  @apply absolute h-1 top-0 w-full z-30;
 }
-.fvl-dropzone-file-preview-loader > div {
+
+.fvl-dropzone-file-preview-loader>div {
   @apply h-1;
   transition: width 0.2s ease-out;
   background: rgb(107, 116, 123);
 }
+
 .fvl-dropzone-file-image {
   @apply z-10 bg-center bg-contain bg-no-repeat rounded pt-0;
   transition: all 0.3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.fvl-dropzone-fade-active, .fvl-dropzone-fade-leave-active{
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+
+.fvl-dropzone-fade-active,
+.fvl-dropzone-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.fvl-dropzone-fade-enter, .fvl-dropzone-fade-leave-to {
-    opacity: 0;
-  }
+
+.fvl-dropzone-fade-enter,
+.fvl-dropzone-fade-leave-to {
+  opacity: 0;
+}
 
 .fvl-dropzone-remove {
-  @apply absolute z-40 pin-b pin-r text-white bg-grey-darkest opacity-75 rounded-full m-1 p-1 w-6 h-6;
+  @apply absolute z-40 bottom-0 right-0 text-white bg-gray-800 opacity-75 rounded-full m-1 p-1 w-6 h-6;
 }
+
 .fvl-dropzone-remove svg {
   @apply stroke-current h-4 w-4;
 }
-.fvl-dropzone-file-has-error .fvl-dropzone-remove{
-  background-color: rgba(255,255,255,0.3) 
+
+.fvl-dropzone-file-has-error .fvl-dropzone-remove {
+  background-color: rgba(255, 255, 255, 0.3)
 }
 
 .fvl-dropzone-remove:hover {
@@ -88,7 +103,7 @@
 }
 
 .fvl-dropzone {
-  @apply appearance-none absolute opacity-0 pin-l py-3 px-4 w-full cursor-pointer;
+  @apply appearance-none absolute opacity-0 left-0 py-3 px-4 w-full cursor-pointer;
 }
 
 .fvl-dropzone::-webkit-file-upload-area {
