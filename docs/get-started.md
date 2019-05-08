@@ -6,7 +6,7 @@ npm install formvuelar --save
 
 ## Styling
 
-I'm using <a href="https://tailwind.com">Tailwind CSS</a> for the examples.
+I'm using <a href="https://tailwindcss.com">Tailwind CSS</a> for the examples.
 Feel free to use the predefined css component classes for your own projects.
 You can import them like this:
 
