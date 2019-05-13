@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'fvl-has-error' : this.$parent.hasErrors(name)}" class="fvl-checkbox-wrapper">
+  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-checkbox-wrapper">
     <input
       :name="name"
       :id="id ? id : name"
@@ -17,8 +17,8 @@
       {{ label }}
     </label>
     <slot name="hint"/>
-    <slot :errors="this.$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="this.$parent.getErrors(name)"/>
+    <slot :errors="$parent.getErrors(name)" name="errors">
+      <validation-errors :errors="$parent.getErrors(name)"/>
     </slot>
   </div>
 </template>
