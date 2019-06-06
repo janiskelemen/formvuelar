@@ -15,6 +15,7 @@
         :max="max"
         :size="size"
         :step="step"
+        :maxlength="maxlength"
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
@@ -66,6 +67,11 @@
         default: null
       },
       max: {
+        type: Number,
+        required: false,
+        default: null
+      },
+      maxlength: {
         type: Number,
         required: false,
         default: null
