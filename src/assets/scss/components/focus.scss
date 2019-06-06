@@ -4,9 +4,13 @@
 .fvl-select-wrapper select:focus,
 .fvl-tag-select:focus,
 .fvl-tag-select:focus-within,
-.fvl-checkbox:focus+label .fvl-checkbox-outer,
+.fvl-input-group:focus-within .fvl-checkbox:focus+label .fvl-checkbox-outer,
 .fvl-switch:focus+label .fvl-switch-toggle::before,
 .fvl-radio:focus+label .fvl-radio-toggle {
     outline: none !important;
     box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
+}
+
+.fvl-input-group:focus-within>.fvl-input:focus {
+    box-shadow: none;
 }
