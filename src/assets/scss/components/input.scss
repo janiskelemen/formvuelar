@@ -2,10 +2,14 @@
     @apply p-2;
 }
 
+.fvl-input-group {
+    @apply flex;
+}
+
 .fvl-input-label {
     @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
 }
 
 .fvl-input {
-    @apply appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 leading-tight;
+    @apply appearance-none block flex-grow bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 leading-tight;
 }

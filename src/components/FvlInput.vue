@@ -1,26 +1,30 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-input-wrapper">
     <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label" v-html="label"/>
-    <input
-      :value="value"
-      :name="name"
-      :id="id"
-      :type="type"
-      :placeholder="placeholder"
-      :autocomplete="autocomplete"
-      :class="fieldClass"
-      :min="min"
-      :max="max"
-      :size="size"
-      :step="step"
-      :required="required"
-      :readonly="readonly"
-      :disabled="disabled"
-      :pattern="pattern"
-      class="fvl-input"
-      @change="$parent.dirty(name)"
-      @input="$emit('update:value', $event.target.value)"
-    >
+    <div class="fvl-input-group">
+      <slot name="prefix"/>
+      <input
+        :value="value"
+        :name="name"
+        :id="id"
+        :type="type"
+        :placeholder="placeholder"
+        :autocomplete="autocomplete"
+        :class="fieldClass"
+        :min="min"
+        :max="max"
+        :size="size"
+        :step="step"
+        :required="required"
+        :readonly="readonly"
+        :disabled="disabled"
+        :pattern="pattern"
+        class="fvl-input"
+        @change="$parent.dirty(name)"
+        @input="$emit('update:value', $event.target.value)"
+      >
+      <slot name="suffix"/>
+    </div>
     <slot name="hint"/>
     <slot :errors="$parent.getErrors(name)" name="errors">
       <validation-errors :errors="$parent.getErrors(name)"/>

@@ -51,6 +51,7 @@
                     }"
             :class="{'p-1': selectedOptionValues.length}"
             :placeholder="selectedOptionValues.length ? '' : placeholder"
+            :autocomplete="'new-'+name"
             :type="type"
             class="fvl-tag-inline-input"
             @keydown.esc="close()"
