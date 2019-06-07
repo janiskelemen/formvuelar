@@ -99,6 +99,7 @@
       submit() {
         let $this = this
         this.isLoading = true
+        this.$emit('requeststarted')
         /* Set method to post if multipart form was send via patch/put */
         let method = this.multipart && (this.method == 'patch' || this.method == 'put') ? 'post' : this.method
         axios({
@@ -130,6 +131,7 @@
             $this.isLoading = false
             $this.uploadPercentage = 0
             $this.$emit('uploadProgress', 0)
+            $this.$emit('requestfinished')
           })
       },
 
