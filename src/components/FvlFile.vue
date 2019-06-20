@@ -2,7 +2,7 @@
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-file-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label" v-html="label"/>
     <div class="fvl-file-button-wrapper">
-      <button class="fvl-file-button" tabindex="-1" @click.prevent>
+      <button class="fvl-file-button" tabindex="-1" type="button" @click.prevent>
         <slot name="button">
           <span v-text="getConfig('selectFileText', 'Select File')"/>
         </slot>

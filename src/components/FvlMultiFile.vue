@@ -8,7 +8,7 @@
       v-html="label"
     />
     <div class="fvl-multi-file-button-wrapper">
-      <button class="fvl-multi-file-button" tabindex="-1" @click.prevent>
+      <button class="fvl-multi-file-button" tabindex="-1" type="button" @click.prevent>
         <slot name="button">
           <span v-text="getConfig('addFilesText', 'Add Files')"/>
         </slot>
