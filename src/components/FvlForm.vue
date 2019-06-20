@@ -125,6 +125,19 @@
             if (error.response && error.response.status === 422) {
               $this.errors = error.response.data.errors
             }
+
+            /* Catch CSRF Token Missmatch - 419 */
+            if (error.response && error.response.status === 419) {
+              $this.$emit('error', { response: { status: 419 } })
+              return
+            }
+
+            /* Catch API Token Missmatch - 401 */
+            if (error.response && error.response.status === 401) {
+              $this.$emit('error', { response: { status: 401 } })
+              return
+            }
+
             $this.$emit('error', error)
           })
           .then(function() {

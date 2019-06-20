@@ -60,6 +60,14 @@ mock.onPost( '/uploads' ).reply( function ( config ) {
 
 } )
 
+mock.onPost( '/get419' ).reply( function () {
+
+    return [ 419, {
+
+    } ]
+
+} )
+
 // Mock POST request to /update
 mock.onPost( '/update' ).reply( function ( config ) {
     var errors = {}

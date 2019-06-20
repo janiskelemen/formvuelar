@@ -18,7 +18,7 @@
           :disabled="disabled"
           class="fvl-tag-select"
           type="button"
-          @click.prevent="allowNew ? open() : toggle()"
+          @click.prevent="allowNew ? focusInlineInput() : toggle(); allowNew && openOnClick ? open() : ''"
           @keydown.space="toggle()"
         >
           <span
@@ -55,16 +55,17 @@
             :type="type"
             class="fvl-tag-inline-input"
             @keydown.esc="close()"
+            @keydown="openOnKeyDown($event)"
             @keydown.down="highlightNext()"
             @keydown.up="highlightPrevious()"
-            @keydown.enter.prevent="checkValidity($event)"
+            @keydown.enter.prevent="checkValidity($event);"
             @blur="query ? checkValidity($event) : ''"
-            @keydown.tab="close()"
+            @keydown.tab="checkValidity($event); close();"
             @input="highlightedIndex = -1; getRemoteOptions();"
             @keydown.backspace="removeTag()"
           >
         </button>
-        <div class="fvl-search-select-carret">
+        <div v-if="!allowNew || (allowNew && openOnClick)" class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
             <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
           </svg>
@@ -91,7 +92,7 @@
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
                 v-for="(option, index) in filteredOptionsList"
-                :key="option[optionKey]"
+                :key="option[optionKey] + index"
                 :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex}"
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
@@ -211,6 +212,11 @@
         type: String,
         required: false,
         default: '&nbsp;'
+      },
+      openOnClick: {
+        type: Boolean,
+        required: false,
+        default: false
       },
       autocomplete: {
         type: String,
@@ -333,7 +339,10 @@
         this.$emit('update:selected', selected)
         this.$parent.dirty(this.name)
 
-        if (this.allowNew) this.focusInlineInput()
+        if (this.allowNew) {
+          this.focusInlineInput()
+          this.close()
+        }
         if (this.max !== null && this.selectedOptionValues.length == this.max) this.close()
 
         this.reset()
@@ -351,6 +360,11 @@
       removeTag() {
         if (this.selected && !this.query) {
           this.selected.splice(this.selected.length - 1, 1)
+          this.close()
+        }
+        /* Close dropdown*/
+        if (this.query.length == 1) {
+          this.close()
         }
       },
       reset() {
@@ -367,6 +381,7 @@
           return
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
+        this.highlightedIndex = -1
       },
       setupPopper() {
         if (this.popper === undefined) {
@@ -389,12 +404,15 @@
           this.scrollToIndex(this.highlightedIndex)
         })
       },
-      close() {
+      close(reset) {
+        reset = typeof reset === 'undefined' ? false : reset
         if (!this.isOpen) return
         this.isOpen = false
         this.$nextTick(() => {
-          if (!this.allowNew) this.focusSelectInput()
-          this.reset()
+          if (!this.allowNew) {
+            this.focusSelectInput()
+          }
+          if (reset) this.reset()
         })
       },
       focusInlineInput() {
@@ -411,6 +429,20 @@
         if (this.$refs.search !== null) {
           this.$refs.search.focus()
         }
+      },
+      preventNative(event) {
+        let selected = this.selected === null ? [] : this.selected
+        /* Prevent tab if max selected amount has not been reached yet */
+        if (this.max !== null && selected.length < this.max && event.keyCode == 9) {
+          event.preventDefault()
+        }
+      },
+      openOnKeyDown(event) {
+        let ingoreKeys = [9, 13, 27, 16, 91, 18, 17, 20, 8, 38, 40, 37, 39]
+        if (ingoreKeys.includes(event.keyCode)) {
+          return
+        }
+        this.open()
       },
       toggle() {
         if (this.disabled || this.readonly) return
@@ -433,7 +465,7 @@
         this.scrollToIndex(this.highlightedIndex)
       },
       checkValidity(event) {
-        if (event.target.checkValidity()) {
+        if ((this.highlightedIndex !== null && this.highlightedIndex !== -1) || event.target.checkValidity()) {
           this.selectHighlighted()
         } else {
           event.target.reportValidity()
