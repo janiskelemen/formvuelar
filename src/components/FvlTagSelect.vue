@@ -416,17 +416,17 @@
         })
       },
       focusInlineInput() {
-        if (this.$refs.inlineinput !== null) {
+        if (typeof this.$refs.inlineinput !== 'undefined') {
           this.$refs.inlineinput.focus()
         }
       },
       focusSelectInput() {
-        if (this.$refs.selectinput !== null) {
+        if (typeof this.$refs.selectinput !== 'undefined') {
           this.$refs.selectinput.focus()
         }
       },
       focusSearch() {
-        if (this.$refs.search !== null) {
+        if (typeof this.$refs.search !== 'undefined') {
           this.$refs.search.focus()
         }
       },
