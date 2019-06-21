@@ -337,6 +337,7 @@
 
         selected.push(option)
         this.$emit('update:selected', selected)
+        this.$emit('changed')
         this.$parent.dirty(this.name)
 
         if (this.allowNew) {

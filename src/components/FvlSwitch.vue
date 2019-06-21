@@ -10,7 +10,7 @@
       :checked="checked"
       type="checkbox"
       class="fvl-switch"
-      @change="$emit('update:checked', $event.target.checked); $parent.dirty(name);"
+      @change="$emit('update:checked', $event.target.checked); $emit('changed'); $parent.dirty(name);"
     >
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">
       <span class="fvl-switch-toggle"/>

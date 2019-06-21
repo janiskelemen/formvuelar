@@ -20,7 +20,7 @@
         :disabled="disabled || $parent.isLoading"
         type="file"
         class="fvl-file"
-        @change="handleFileChange(); $parent.dirty(name);"
+        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
       >
     </div>
     <slot name="hint"/>

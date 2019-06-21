@@ -34,7 +34,7 @@
         multiple
         type="file"
         class="fvl-multi-file"
-        @change="handleFileChange(); $parent.dirty(name);"
+        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
       >
     </div>
     <div v-for="(file, key) in filesList" :key="key" class="fvl-multi-file-list">

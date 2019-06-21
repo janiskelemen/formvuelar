@@ -13,7 +13,7 @@
         :disabled="disabled"
         type="radio"
         class="fvl-radio"
-        @change="$emit('update:checked', $event.target.value); $parent.dirty(name);"
+        @change="$emit('update:checked', $event.target.value); $emit('changed'); $parent.dirty(name);"
       >
       <label :class="labelClass" :for="name+key" class="fvl-radio-label">
         <span class="fvl-radio-toggle"/>

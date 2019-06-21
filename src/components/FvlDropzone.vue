@@ -70,7 +70,7 @@
         multiple
         type="file"
         class="fvl-dropzone"
-        @change="handleFileChange(); $parent.dirty(name);"
+        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
       >
     </div>
     <slot name="hint"/>
