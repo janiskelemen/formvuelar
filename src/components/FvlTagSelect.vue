@@ -353,6 +353,7 @@
         let selected = this.selected === null ? [] : this.selected
         selected.splice(selected.indexOf(option), 1)
         this.$emit('update:selected', selected)
+        this.$emit('changed')
         this.$parent.dirty(this.name)
         this.$nextTick(() => {
           if (this.allowNew) this.focusInlineInput()
