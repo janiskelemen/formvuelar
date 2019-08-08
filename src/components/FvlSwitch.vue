@@ -11,7 +11,7 @@
       type="checkbox"
       class="fvl-switch"
       @change="$emit('update:checked', $event.target.checked); $emit('changed'); $parent.dirty(name);"
-    >
+    />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">
       <span class="fvl-switch-toggle"/>
       {{ label }}
@@ -45,8 +45,11 @@
         default: null
       },
       checked: {
-        type: Boolean,
-        default: false
+        default: false,
+        validator: function(value) {
+          // The value must match one of these strings
+          return [0, 1, false, true, '0', '1'].indexOf(value) !== -1
+        }
       },
       fieldClass: {
         type: String,

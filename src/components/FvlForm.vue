@@ -138,7 +138,7 @@
               return
             }
 
-            $this.$emit('error', error)
+            $this.$emit('error', error.response)
           })
           .then(function() {
             $this.isLoading = false
