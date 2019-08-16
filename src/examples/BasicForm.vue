@@ -60,6 +60,18 @@
           </div>
         </template>
       </fvl-input>
+      <!-- Add source code toggle button (only for example) -->
+      <source-toggle @toggle="toggleSource('slider')"/>
+      <fvl-slider
+        :value.sync="form.slider"
+        value-position="left"
+        class="w-full lg:w-1/2"
+        label="Slider"
+        name="slider"
+      ></fvl-slider>
+      <!-- Source code area (only for example) -->
+      <source-box :show-source="showSource == 'slider'" :source="source.slider"/>
+
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'password'" :source="source.password"/>
       <!-- Add source code toggle button (only for example) -->
@@ -118,7 +130,17 @@
 </template>
 
 <script>
-  import { FvlForm, FvlInput, FvlTextarea, FvlCheckbox, FvlRadio, FvlSelect, FvlSwitch, FvlSubmit } from './../formvuelar'
+  import {
+    FvlForm,
+    FvlInput,
+    FvlTextarea,
+    FvlCheckbox,
+    FvlRadio,
+    FvlSelect,
+    FvlSwitch,
+    FvlSlider,
+    FvlSubmit
+  } from './../formvuelar'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
@@ -132,6 +154,7 @@
       FvlRadio,
       FvlSelect,
       FvlSwitch,
+      FvlSlider,
       FvlSubmit,
       SourceToggle,
       SourceBox
@@ -145,7 +168,8 @@
           color: '',
           option: '',
           agree: false,
-          switch: false
+          switch: false,
+          slider: '0'
         },
         showSource: '',
         source: {
@@ -189,6 +213,14 @@
             `    </div> \n` +
             `    </template> \n` +
             `</fvl-input> \n`,
+          slider:
+            `<fvl-slider \n` +
+            `    label="Slider" \n` +
+            `    name="slider" \n` +
+            `    value-position="left" \n` +
+            `    :value.sync="form.slider" \n` +
+            `    class="w-full lg:w-1/2 relative" \n` +
+            `/> \n`,
           color:
             `<fvl-select \n` +
             `    label="Select your favorite color" \n` +

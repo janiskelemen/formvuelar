@@ -1,0 +1,72 @@
+.fvl-slider-wrapper {
+    @apply p-2;
+}
+
+.fvl-slider-group {
+    @apply flex rounded;
+}
+
+.fvl-slider-label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+}
+
+// .fvl-slider {
+//     @apply appearance-none block flex-grow bg-gray-200 text-gray-800 border border-gray-200 rounded py-3 px-4 leading-tight;
+// }
+
+.fvl-slider-value {
+    @apply appearance-none text-center font-bold text-sm text-gray-700 block bg-gray-200 border border-gray-200 rounded py-3 px-4 leading-tight;
+    min-width: 4rem;
+}
+
+.fvl-slider-value-left {
+    @apply mr-2;
+}
+
+.fvl-slider-value-right {
+    @apply ml-2;
+}
+
+.fvl-slider-container {
+    @apply flex flex-grow;
+}
+
+.fvl-slider {
+    // width: calc(100% - (#{100% + 13px}));
+    @apply outline-none appearance-none m-0 p-0 bg-gray-300 rounded h-2 w-full self-center flex-1;
+
+    // Range Handle
+    &::-webkit-slider-thumb {
+        @apply appearance-none m-0 p-0 bg-gray-500 rounded-full h-5 w-5 cursor-pointer;
+        transition: background .15s ease-in-out;
+
+        &:hover {
+            @apply bg-gray-600;
+        }
+    }
+
+    &:active::-webkit-slider-thumb {
+        @apply bg-gray-600;
+    }
+
+    &::-moz-range-thumb {
+        @apply m-0 p-0 bg-gray-500 border-0 rounded-full h-8 w-8 cursor-pointer;
+        transition: background .15s ease-in-out;
+
+        &:hover {
+            @apply bg-gray-600;
+        }
+    }
+
+    &:active::-moz-range-thumb {
+        @apply bg-gray-600;
+    }
+
+    // Focus state
+    &:focus {
+
+        &::-webkit-slider-thumb {
+            box-shadow: 0 0 0 3px hsla(213, 21%, 83%, 1);
+        }
+    }
+}

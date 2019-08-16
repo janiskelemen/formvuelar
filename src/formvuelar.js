@@ -35,6 +35,10 @@ export {
 }
 from './components/FvlSwitch'
 export {
+    default as FvlSlider
+}
+from './components/FvlSlider'
+export {
     default as FvlMultiCheckbox
 }
 from './components/FvlMultiCheckbox'

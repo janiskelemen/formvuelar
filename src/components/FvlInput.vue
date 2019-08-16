@@ -23,7 +23,7 @@
         class="fvl-input"
         @change="$parent.dirty(name); $emit('changed');"
         @input="$emit('update:value', $event.target.value)"
-      >
+      />
       <slot name="suffix"/>
     </div>
     <slot name="hint"/>
@@ -54,7 +54,7 @@
         default: null
       },
       value: {
-        validator: prop => typeof prop === 'string' || prop === null,
+        validator: prop => typeof prop === 'string' || prop === 'number' || prop === null,
         default: ''
       },
       type: {
