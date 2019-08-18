@@ -72,6 +72,18 @@
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'slider'" :source="source.slider"/>
 
+      <!-- Add source code toggle button (only for example) -->
+      <source-toggle @toggle="toggleSource('colorpicker')"/>
+      <fvl-color-picker
+        :value.sync="form.colorPicker"
+        class="w-full lg:w-1/2"
+        format="hex"
+        label="Color Picker"
+        name="colorpicker"
+      ></fvl-color-picker>
+      <!-- Source code area (only for example) -->
+      <source-box :show-source="showSource == 'colorpicker'" :source="source.colorpicker"/>
+
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'password'" :source="source.password"/>
       <!-- Add source code toggle button (only for example) -->
@@ -139,6 +151,7 @@
     FvlSelect,
     FvlSwitch,
     FvlSlider,
+    FvlColorPicker,
     FvlSubmit
   } from './../formvuelar'
 
@@ -155,6 +168,7 @@
       FvlSelect,
       FvlSwitch,
       FvlSlider,
+      FvlColorPicker,
       FvlSubmit,
       SourceToggle,
       SourceBox
@@ -169,7 +183,8 @@
           option: '',
           agree: false,
           switch: false,
-          slider: '0'
+          slider: '0',
+          colorPicker: '#C75454'
         },
         showSource: '',
         source: {
@@ -220,6 +235,14 @@
             `    value-position="left" \n` +
             `    :value.sync="form.slider" \n` +
             `    class="w-full lg:w-1/2 relative" \n` +
+            `/> \n`,
+          colorpicker:
+            `<fvl-color-picker \n` +
+            `    label="Color" \n` +
+            `    name="color" \n` +
+            `    format="hex" \n` +
+            `    :value.sync="form.color" \n` +
+            `    class="w-full lg:w-1/2" \n` +
             `/> \n`,
           color:
             `<fvl-select \n` +

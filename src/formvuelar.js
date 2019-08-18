@@ -39,6 +39,10 @@ export {
 }
 from './components/FvlSlider'
 export {
+    default as FvlColorPicker
+}
+from './components/FvlColorPicker'
+export {
     default as FvlMultiCheckbox
 }
 from './components/FvlMultiCheckbox'

@@ -29,6 +29,7 @@ The following components are shipped with FormVuelar:
 | `<fvl-select />`         | Select input field          | `import { FvlSelect } from 'formvuelar'`        |
 | `<fvl-search-select />`  | Select with search          | `import { FvlSearchSelect } from 'formvuelar'`  |
 | `<fvl-file />`           | File input field            | `import { FvlFile } from 'formvuelar'`          |
+| `<fvl-slider />`         | Slider input field          | `import { FvlSlider } from 'formvuelar'`        |
 | `<fvl-multi-file />`     | Multi file input field      | `import { FvlMultiFile } from 'formvuelar'`     |
 | `<fvl-dropzone />`       | Dropzone field              | `import { FvlDropzone } from 'formvuelar'`      |
 | `<fvl-submit />`         | Submit button               | `import { FvlSubmit } from 'formvuelar'`        |

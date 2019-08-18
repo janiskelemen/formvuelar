@@ -19,6 +19,8 @@
 - **Components**
   - [Form](components/form.md)
   - [Text Input](components/input.md)
+  - [Slider](components/slider.md)
+  - [Color Picker](components/color-picker.md)
   - [Textarea](components/textarea.md)
   - [Radio Button](components/radio.md)
   - [Checkbox](components/checkbox.md)
