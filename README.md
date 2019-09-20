@@ -47,7 +47,7 @@ npm install formvuelar --save
 
 ## TODO
 
-    - Tags component
+    - Date picker component
     - Test coverage
 
 ## Credits

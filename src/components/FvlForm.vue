@@ -106,6 +106,7 @@
         this.$emit('requeststarted')
         /* Set method to post if multipart form was send via patch/put */
         let method = this.multipart && (this.method == 'patch' || this.method == 'put') ? 'post' : this.method
+        this.loadInterceptors()
         axios({
           method: method,
           url: this.url,
@@ -162,6 +163,20 @@
 
       hasErrors(name) {
         return this.errors[name] && this.errors[name] !== [] ? true : false
+      },
+      loadInterceptors() {
+        let $this = this
+
+        // Add config interceptors
+        let interceptors = $this.getConfig('interceptors', false)
+        if (!interceptors) return
+
+        if (interceptors.request) {
+          axios.interceptors.request.use(interceptors.request.before, interceptors.request.error)
+        }
+        if (interceptors.response) {
+          axios.interceptors.response.use(interceptors.response.success, interceptors.response.error)
+        }
       }
     }
   }
