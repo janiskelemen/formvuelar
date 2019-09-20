@@ -10,7 +10,7 @@
       >Full Source Code</a>
     </h3>
     <!-- Setup basic form -->
-    <fvl-form :data="form" class="relative" url="/basic">
+    <fvl-form :data="form" class="relative" url="/basic" multipart>
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('name')"/>
       <!-- Text input component -->
@@ -133,6 +133,7 @@
         label="Enable this feature"
         name="switch"
       />
+
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'switch'" :source="source.switch"/>
       <!-- Submit button component -->

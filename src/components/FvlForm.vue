@@ -82,7 +82,11 @@
               }
             })
           } else {
-            formData.append(e, this.replaceNullOnMultipart(rawData[e]))
+            if (rawData[e] instanceof Object && !(rawData[e] instanceof File)) {
+              formData.append(e, JSON.stringify(this.replaceNullOnMultipart(rawData[e])))
+            } else {
+              formData.append(e, this.replaceNullOnMultipart(rawData[e]))
+            }
           }
         })
 
