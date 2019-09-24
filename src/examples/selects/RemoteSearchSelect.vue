@@ -18,6 +18,7 @@
         :selected.sync="form.user"
         :search-keys="['name']"
         :lazy-load="true"
+        :select-first="true"
         options-url="https://5c113d7d7e18800013bc38d1.mockapi.io/api/v1/users"
         option-key="id"
         option-value="name"

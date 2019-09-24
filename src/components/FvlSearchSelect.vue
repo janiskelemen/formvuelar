@@ -24,7 +24,7 @@
         />
         <div class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
           </svg>
         </div>
         <transition name="fvl-search-select-dropdown-transition">
@@ -39,7 +39,7 @@
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
               @input="highlightedIndex = 0; getRemoteOptions();"
-            >
+            />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
                 v-for="(option, index) in filteredOptionsList"
@@ -173,6 +173,11 @@
         default: false
       },
       disabled: {
+        type: Boolean,
+        required: false,
+        default: false
+      },
+      selectFirst: {
         type: Boolean,
         required: false,
         default: false
@@ -314,6 +319,9 @@
         })
           .then(function(response) {
             $this.remoteOptions = $this.responseDataPath ? _get(response.data, $this.responseDataPath) : response.data
+            if ($this.selectFirst && !$this.selectedOptionValue && !$this.lazyLoad) {
+              $this.select($this.remoteOptions[0])
+            }
             $this.$emit('remoteSuccess', response)
           })
           .catch(function(error) {
