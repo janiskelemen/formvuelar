@@ -7,6 +7,10 @@
   @apply absolute opacity-0;
 }
 
+.fvl-switch-label {
+  @apply flex;
+}
+
 .fvl-switch+label {
   @apply relative cursor-pointer p-0;
 }

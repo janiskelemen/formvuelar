@@ -14,7 +14,7 @@
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">
       <span class="fvl-switch-toggle"/>
-      {{ label }}
+      <div class="fvl-switch-text">{{ label }}</div>
     </label>
     <slot name="hint"/>
     <slot :errors="$parent.getErrors(name)" name="errors">
