@@ -31,47 +31,46 @@
 </template>
 
 <script>
-  import { FvlForm, FvlSearchSelect, FvlSubmit } from './../../formvuelar'
+import { FvlForm, FvlSearchSelect } from './../../formvuelar'
 
-  import SourceToggle from './../utilities/SourceToggle.vue'
-  import SourceBox from './../utilities/SourceBox.vue'
+import SourceToggle from './../utilities/SourceToggle.vue'
+import SourceBox from './../utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlSearchSelect,
-      FvlSubmit,
-      SourceToggle,
-      SourceBox
-    },
-    data() {
-      return {
-        form: {
-          genre: null
-        },
-        genreOptions: [
-          { name: 'Blues' },
-          { name: 'Jazz' },
-          { name: 'Rock and Roll' },
-          { name: 'Pop Rock' },
-          { name: 'Country' },
-          { name: 'Soul' },
-          { name: 'Dance' },
-          { name: 'Hip Hop' }
-        ],
-        showSource: false,
-        source:
-          `<fvl-search-select \n` +
-          `   :selected.sync="form.genre" \n` +
-          `   :options="genreOptions" \n` +
-          `   :search-keys="['name']"\n` +
-          `   option-key="name"\n` +
-          `   option-value="name"\n` +
-          `   name="genre"\n` +
-          `   label="Choose any genre"\n` +
-          `   placeholder="Select..."\n` +
-          `/>\n`
-      }
+export default {
+  components: {
+    FvlForm,
+    FvlSearchSelect,
+    SourceToggle,
+    SourceBox
+  },
+  data() {
+    return {
+      form: {
+        genre: null
+      },
+      genreOptions: [
+        { name: 'Blues' },
+        { name: 'Jazz' },
+        { name: 'Rock and Roll' },
+        { name: 'Pop Rock' },
+        { name: 'Country' },
+        { name: 'Soul' },
+        { name: 'Dance' },
+        { name: 'Hip Hop' }
+      ],
+      showSource: false,
+      source:
+        `<fvl-search-select \n` +
+        `   :selected.sync="form.genre" \n` +
+        `   :options="genreOptions" \n` +
+        `   :search-keys="['name']"\n` +
+        `   option-key="name"\n` +
+        `   option-value="name"\n` +
+        `   name="genre"\n` +
+        `   label="Choose any genre"\n` +
+        `   placeholder="Select..."\n` +
+        `/>\n`
     }
   }
+}
 </script>

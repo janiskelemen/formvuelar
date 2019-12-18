@@ -34,40 +34,39 @@
 </template>
 
 <script>
-  import { FvlForm, FvlTagSelect, FvlSubmit } from './../../formvuelar'
+import { FvlForm, FvlTagSelect } from './../../formvuelar'
 
-  import SourceToggle from './../utilities/SourceToggle.vue'
-  import SourceBox from './../utilities/SourceBox.vue'
+import SourceToggle from './../utilities/SourceToggle.vue'
+import SourceBox from './../utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlTagSelect,
-      FvlSubmit,
-      SourceToggle,
-      SourceBox
-    },
-    data() {
-      return {
-        form: {
-          emails: null
-        },
-        emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
-        showSource: false,
-        source:
-          `<fvl-search-select \n` +
-          `   :selected.sync="form.emails" \n` +
-          `   :options="emailsOptions" \n` +
-          `   :search-keys="['email']"\n` +
-          `   :allow-new="true"\n` +
-          `   :max="20"\n` +
-          `   option-key="name"\n` +
-          `   option-value="name"\n` +
-          `   name="emails"\n` +
-          `   label="Choose some emails"\n` +
-          `   placeholder="Select..."\n` +
-          `/>\n`
-      }
+export default {
+  components: {
+    FvlForm,
+    FvlTagSelect,
+    SourceToggle,
+    SourceBox
+  },
+  data() {
+    return {
+      form: {
+        emails: null
+      },
+      emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
+      showSource: false,
+      source:
+        `<fvl-search-select \n` +
+        `   :selected.sync="form.emails" \n` +
+        `   :options="emailsOptions" \n` +
+        `   :search-keys="['email']"\n` +
+        `   :allow-new="true"\n` +
+        `   :max="20"\n` +
+        `   option-key="name"\n` +
+        `   option-value="name"\n` +
+        `   name="emails"\n` +
+        `   label="Choose some emails"\n` +
+        `   placeholder="Select..."\n` +
+        `/>\n`
     }
   }
+}
 </script>

@@ -122,6 +122,11 @@
           to="/dropzone"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
         >Dropzone</router-link>
+        <router-link
+          tag="button"
+          to="/datepicker"
+          class="button-link md:border-l-2 md:border-b-0 md:flex"
+        >Date Picker</router-link>
       </div>
       <div class="w-full md:w-3/5">
         <router-view/>
@@ -131,105 +136,102 @@
 </template>
 
 <script>
-  import VueRouter from 'vue-router'
-  import BasicForm from './examples/BasicForm.vue'
-  import PrefilledForm from './examples/PrefilledForm'
-  import AdvancedSelectsForm from './examples/AdvancedSelects'
-  import UploadForm from './examples/FileUpload.vue'
-  import MultiUploadForm from './examples/MultiFileUpload.vue'
-  import DropzoneForm from './examples/Dropzone.vue'
-  import NestedCheckboxForm from './examples/NestedCheckbox'
-  import TagForm from './examples/TagForm'
+import VueRouter from 'vue-router'
+import BasicForm from './examples/BasicForm.vue'
+import PrefilledForm from './examples/PrefilledForm'
+import AdvancedSelectsForm from './examples/AdvancedSelects'
+import DateTimePickersForm from './examples/DateTimePickers'
+import UploadForm from './examples/FileUpload.vue'
+import MultiUploadForm from './examples/MultiFileUpload.vue'
+import DropzoneForm from './examples/Dropzone.vue'
+import NestedCheckboxForm from './examples/NestedCheckbox'
+import TagForm from './examples/TagForm'
 
-  const router = new VueRouter({
-    routes: [
-      {
-        path: '/',
-        component: BasicForm
-      },
-      {
-        path: '/prefilled',
-        component: PrefilledForm,
-        props: {
-          initFullname: 'John Doe',
-          initBio: 'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-          initPet: 'dog'
-        }
-      },
-      {
-        path: '/advancedselects',
-        component: AdvancedSelectsForm
-      },
-      {
-        path: '/tags',
-        component: TagForm
-      },
-      {
-        path: '/nestedcheckbox',
-        component: NestedCheckboxForm
-      },
-      {
-        path: '/upload',
-        component: UploadForm
-      },
-      {
-        path: '/multiupload',
-        component: MultiUploadForm
-      },
-      {
-        path: '/dropzone',
-        component: DropzoneForm
-      }
-    ]
-  })
-
-  export default {
-    router,
-    name: 'App',
-    components: {
-      BasicForm,
-      UploadForm,
-      MultiUploadForm,
-      DropzoneForm,
-      PrefilledForm,
-      AdvancedSelectsForm,
-      NestedCheckboxForm
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/',
+      component: BasicForm
     },
-    data() {
-      return {
-        showSource: '',
-        section: 'basic'
+    {
+      path: '/prefilled',
+      component: PrefilledForm,
+      props: {
+        initFullname: 'John Doe',
+        initBio: 'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+        initPet: 'dog'
       }
     },
-    methods: {
-      toggleSource(field) {
-        this.showSource = this.showSource == field ? '' : field
-      }
+    {
+      path: '/advancedselects',
+      component: AdvancedSelectsForm
+    },
+    {
+      path: '/tags',
+      component: TagForm
+    },
+    {
+      path: '/nestedcheckbox',
+      component: NestedCheckboxForm
+    },
+    {
+      path: '/upload',
+      component: UploadForm
+    },
+    {
+      path: '/multiupload',
+      component: MultiUploadForm
+    },
+    {
+      path: '/dropzone',
+      component: DropzoneForm
+    },
+    {
+      path: '/datepicker',
+      component: DateTimePickersForm
+    }
+  ]
+})
+
+export default {
+  router,
+  name: 'App',
+  components: {},
+  data() {
+    return {
+      showSource: '',
+      section: 'basic'
+    }
+  },
+  methods: {
+    toggleSource(field) {
+      this.showSource = this.showSource == field ? '' : field
     }
   }
+}
 </script>
 
 <style lang="postcss">
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    margin-top: 60px;
-    max-width: 1024px;
-    margin: 60px auto;
-  }
-  .button-link {
-    @apply border-b-2 border-white p-2 mx-2 mb-2 text-gray-800;
-  }
-  .button-link:focus {
-    @apply outline-none;
-  }
-  .button-link:hover {
-    @apply border-gray-400;
-  }
-  .router-link-exact-active,
-  .router-link-exact-active:hover {
-    @apply border-teal-600 font-semibold;
-  }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
+  max-width: 1024px;
+  margin: 60px auto;
+}
+.button-link {
+  @apply border-b-2 border-white p-2 mx-2 mb-2 text-gray-800;
+}
+.button-link:focus {
+  @apply outline-none;
+}
+.button-link:hover {
+  @apply border-gray-400;
+}
+.router-link-exact-active,
+.router-link-exact-active:hover {
+  @apply border-teal-600 font-semibold;
+}
 </style>

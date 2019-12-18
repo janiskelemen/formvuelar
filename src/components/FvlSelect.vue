@@ -38,73 +38,72 @@
 </template>
 
 <script>
-  import ValidationErrors from './FvlErrors.vue'
-  export default {
-    components: {
-      ValidationErrors
+import ValidationErrors from './FvlErrors.vue'
+export default {
+  components: {
+    ValidationErrors
+  },
+  props: {
+    selected: {
+      type: String | Number,
+      default: ''
     },
-    props: {
-      selected: {
-        type: String | Number,
-        default: ''
-      },
-      name: {
-        type: String,
-        required: true
-      },
-      id: {
-        type: String,
-        default: null
-      },
-      label: {
-        type: String,
-        default: null
-      },
-      options: {
-        type: Object,
-        required: true,
-        default: () => {}
-      },
-      allowEmpty: {
-        type: Boolean,
-        default: true
-      },
-      placeholder: {
-        type: String,
-        required: false,
-        default: null
-      },
-      autocomplete: {
-        type: String,
-        required: false,
-        default: null
-      },
-      fieldClass: {
-        type: String,
-        required: false,
-        default: null
-      },
-      labelClass: {
-        type: String,
-        required: false,
-        default: ''
-      },
-      required: {
-        type: Boolean,
-        required: false,
-        default: false
-      },
-      readonly: {
-        type: Boolean,
-        required: false,
-        default: false
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false
-      }
+    name: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      default: null
+    },
+    label: {
+      type: String,
+      default: null
+    },
+    options: {
+      type: Object,
+      required: true,
+      default: () => {}
+    },
+    allowEmpty: {
+      type: Boolean,
+      default: true
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: null
+    },
+    autocomplete: {
+      type: String,
+      required: false,
+      default: null
+    },
+    fieldClass: {
+      type: String,
+      required: false,
+      default: null
+    },
+    labelClass: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
+}
 </script>
-

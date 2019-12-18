@@ -18,3 +18,19 @@
     transition: border 0.28s ease;
 }
 
+
+.fvl-dropdown-transition-enter,
+.fvl-dropdown-transition-leave-to {
+  opacity: 0;
+}
+
+.fvl-dropdown-transition-leave,
+.fvl-dropdown-transition-enter-to {
+  opacity: 1;
+}
+
+.fvl-dropdown-transition-enter-active,
+.fvl-dropdown-transition-leave-active {
+  transition: opacity 0.15s cubic-bezier(0.62, 0.28, 0.23, 0.99);
+}
+

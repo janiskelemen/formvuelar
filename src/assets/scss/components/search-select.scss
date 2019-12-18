@@ -40,22 +40,6 @@
   @apply fill-current h-4 w-4;
 }
 
-
-.fvl-search-select-dropdown-transition-enter,
-.fvl-search-select-dropdown-transition-leave-to {
-  opacity: 0
-}
-
-.fvl-search-select-dropdown-transition-leave,
-.fvl-search-select-dropdown-transition-enter-to {
-  opacity: 1
-}
-
-.fvl-search-select-dropdown-transition-enter-active,
-.fvl-search-select-dropdown-transition-leave-active {
-  transition: opacity 0.08s cubic-bezier(0.62, 0.28, 0.23, 0.99);
-}
-
 .fvl-search-select-dropdown {
   @apply block absolute z-30 w-full bg-gray-800 text-white rounded p-2 shadow-md;
 }

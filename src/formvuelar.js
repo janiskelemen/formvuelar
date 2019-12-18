@@ -62,3 +62,11 @@ export {
     default as FvlSubmit
 }
 from './components/FvlSubmit'
+export {
+    default as FvlDatePicker
+}
+from './components/FvlDatePicker'
+export {
+    default as FvlDatePickerExtended
+}
+from './components/FvlDatePickerExtended'
