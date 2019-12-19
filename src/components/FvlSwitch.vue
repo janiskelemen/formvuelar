@@ -13,12 +13,12 @@
       @change="$emit('update:checked', $event.target.checked); $emit('changed'); $parent.dirty(name);"
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">
-      <span class="fvl-switch-toggle"/>
+      <span class="fvl-switch-toggle" />
       <div class="fvl-switch-text">{{ label }}</div>
     </label>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

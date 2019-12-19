@@ -76,13 +76,6 @@
       "vue/html-indent": 1,
       "vue/max-attributes-per-line": 0,
       "vue/require-prop-type-constructor": 0,
-      "vue/html-closing-bracket-spacing": [
-        "error",
-        {
-          "startTag": "never",
-          "selfClosingTag": "never"
-        }
-      ],
       "import/no-unresolved": 0,
       "import/no-unassigned-import": 0,
       "semi": 0
