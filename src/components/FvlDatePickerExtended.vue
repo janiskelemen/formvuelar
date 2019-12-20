@@ -252,15 +252,9 @@
       },
       getRange(days) {
         let now = new Date()
-        let end = `${now.getFullYear()}-${now
-          .getMonth()
-          .toString()
-          .padStart(2, '0')}-${now.getDate()}`
+        let end = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate()}`
         let d = new Date(now.setDate(now.getDate() - days))
-        let start = `${d.getFullYear()}-${d
-          .getMonth()
-          .toString()
-          .padStart(2, '0')}-${d.getDate()}`
+        let start = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate()}`
         return { start: start, end: end }
       }
     }
