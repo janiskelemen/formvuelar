@@ -198,7 +198,6 @@
     },
     watch: {
       inputvalue(newValue) {
-        console.log(typeof newValue)
         let formatedValue
         if (this.config.mode == 'range' && typeof newValue == 'string') {
           newValue = newValue.split(' - ')
