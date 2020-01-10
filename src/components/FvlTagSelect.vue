@@ -25,7 +25,11 @@
             v-show="!selectedOptionValues.length && placeholder && !allowNew"
             v-text="placeholder"
           />
-          <span v-for="value in selectedOptionValues" :key="value" class="fvl-tag-select-item">
+          <span
+            v-for="(value, index) in selectedOptionValues"
+            :key="value + index"
+            class="fvl-tag-select-item"
+          >
             {{ value }}
             <svg
               class="fvl-tag-select-item-remove"
