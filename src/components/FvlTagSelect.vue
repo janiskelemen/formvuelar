@@ -37,8 +37,8 @@
               stroke-linejoin="round"
               @click.prevent.stop="unselect(value)"
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </span>
           <input
@@ -48,7 +48,7 @@
             :style="{ width: String(query).length*18 + 'px', 
                       maxWidth: '100%', 
                       minWidth: selectedOptionValues.length ? '80px' : String(placeholder).length*18 + 'px'
-                    }"
+            }"
             :class="{'p-1': selectedOptionValues.length}"
             :placeholder="selectedOptionValues.length ? '' : placeholder"
             :autocomplete="'new-'+name"
@@ -63,11 +63,11 @@
             @keydown.tab="checkValidity($event); close();"
             @input="highlightedIndex = -1; getRemoteOptions();"
             @keydown.backspace="removeTag()"
-          >
+          />
         </button>
         <div v-if="!allowNew || (allowNew && openOnClick)" class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </div>
         <transition name="fvl-dropdown-transition">
@@ -88,7 +88,7 @@
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
               @input="highlightedIndex = 0; getRemoteOptions();"
-            >
+            />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
                 v-for="(option, index) in filteredOptionsList"
@@ -102,20 +102,20 @@
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
               <slot name="no-results">
-                <span v-if="!allowNew" v-text="getConfig('noResultsText', 'No results found!')"/>
+                <span v-if="!allowNew" v-text="getConfig('noResultsText', 'No results found!')" />
               </slot>
             </div>
             <div v-if="isLoading" class="search-select-empty">
               <slot name="loading">
-                <span v-text="getConfig('pleaseWaitText', 'Please wait...')"/>
+                <span v-text="getConfig('pleaseWaitText', 'Please wait...')" />
               </slot>
             </div>
           </div>
         </transition>
       </div>
-      <slot name="hint"/>
+      <slot name="hint" />
       <slot :errors="$parent.getErrors(name)" name="errors">
-        <validation-errors :errors="$parent.getErrors(name)"/>
+        <validation-errors :errors="$parent.getErrors(name)" />
       </slot>
     </div>
   </on-click-outside>
@@ -365,9 +365,10 @@
           this.close()
         }
         /* Close dropdown*/
-        if (this.query.length == 1) {
+        if (this.query && this.query.length == 1) {
           this.close()
         }
+        this.$emit('changed')
       },
       reset() {
         this.query = ''
