@@ -15,7 +15,7 @@
 }
 
 .fvl-color-picker {
-    @apply appearance-none cursor-pointer block flex-grow bg-gray-200 text-gray-800 border border-gray-200 rounded-l py-3 px-4 leading-tight;
+    @apply appearance-none block flex-grow bg-gray-200 text-gray-800 border border-gray-200 rounded-l py-3 px-4 leading-tight;
 }
 
 .fvl-color-picker:focus {
@@ -23,7 +23,7 @@
 }
 
 .fvl-color-preview {
-    @apply inline-flex items-center bg-gray-200 border border-gray-200 py-3 px-4 leading-tight rounded-r cursor-pointer;
+    @apply inline-flex cursor-pointer items-center bg-gray-200 border border-gray-200 py-3 px-4 leading-tight rounded-r cursor-pointer;
 }
 
 .fvl-color-picker-dropdown {

@@ -72,7 +72,7 @@
       "plugin:vue/recommended"
     ],
     "rules": {
-      "vue/html-self-closing": 1,
+      "vue/html-self-closing": 0,
       "vue/html-indent": 1,
       "vue/max-attributes-per-line": 0,
       "vue/require-prop-type-constructor": 0,
