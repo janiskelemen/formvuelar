@@ -7,49 +7,47 @@
       class="fvl-color-picker-label"
       v-html="label"
     />
-  <on-click-outside @do="close()">
-    <div class="fvl-color-picker-group">
-      <slot name="prefix"></slot>
-      <div class="fvl-color-picker-container">
-        <input
-          ref="colorinput"
-          :value="value"
-          :name="name"
-          :id="id"
-          :class="fieldClass"
-          :required="required"
-          :disabled="disabled"
-          :readonly="readonly"
-          type="text"
-          class="fvl-color-picker"
-          :pattern="pattern"
-          @keyup.space="toggle()"
-        />
-        <div ref="colorpicker" @click="toggle()" class="fvl-color-preview">
-          <span
-            :style="{'background': value}"
-            class="inline-block rounded-full border border-white h-4 w-4"
-          ></span>
+    <on-click-outside @do="close()">
+      <div class="fvl-color-picker-group">
+        <slot name="prefix"></slot>
+        <div class="fvl-color-picker-container">
+          <input
+            :id="id"
+            ref="colorinput"
+            :value="value"
+            :name="name"
+            :class="fieldClass"
+            :required="required"
+            :disabled="disabled"
+            :readonly="readonly"
+            type="text"
+            class="fvl-color-picker"
+            :pattern="pattern"
+            @keyup.space="toggle()"
+          />
+          <div ref="colorpicker" class="fvl-color-preview" @click="toggle()">
+            <span
+              :style="{'background': value}"
+              class="inline-block rounded-full border border-white h-4 w-4"
+            ></span>
+          </div>
+        </div>
+        <slot name="suffix"></slot>
+        <div v-show="isOpen" ref="picker" class="fvl-color-picker-dropdown">
+          <chrome-picker
+            ref="picker"
+            :disable-alpha="format == 'hex'"
+            :value="value"
+            disable-fields
+            @input="updateValue"
+          ></chrome-picker>
         </div>
       </div>
-      <slot name="suffix"></slot>
-      <div v-show="isOpen" ref="picker" class="fvl-color-picker-dropdown">
-        
-        <chrome-picker
-          ref="picker"
-          :disable-alpha="format == 'hex'"
-          :value="value"
-          disable-fields
-          @input="updateValue"
-        ></chrome-picker>
-       
-      </div>
-    </div>
-    <slot name="hint"/>
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
-    </slot>
-     </on-click-outside>
+      <slot name="hint" />
+      <slot :errors="$parent.getErrors(name)" name="errors">
+        <validation-errors :errors="$parent.getErrors(name)" />
+      </slot>
+    </on-click-outside>
   </div>
 </template>
 
@@ -123,38 +121,21 @@
     },
     data() {
       return {
-        isOpen: false
+        isOpen: false,
+        patterns: {
+          'hex': `[#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3})`,
+          'hex8': `[#]([a-fA-F\\d]{8}`,
+          'hsl': `[Hh][Ss][Ll][\\(](((([\\d]{1,3}|[\\d\\%]{2,4})[\\,]{0,1})[\\s]*){3})[\\)]`,
+          'hsla': `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
+          'hsv': ``,
+          'rgb':`[Rr][Gg][Bb][\\(](((([\\d]{1,3})[\\,]{0,1})[\\s]*){3})[\\)]`,
+          'rgba':`[Rr][Gg][Bb][Aa][\\(](((([\\d]{1,3}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`
+        }
       }
     },
     computed: {
-      /*eslint no-unreachable: "warn"*/
       pattern(){
-        switch(this.format){
-          case 'hex':
-            return `[#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3})`
-          break;
-          case 'hex8':
-            return `[#]([a-fA-F\\d]{8}`
-          break;
-          case 'hsl':
-            return `[Hh][Ss][Ll][\\(](((([\\d]{1,3}|[\\d\\%]{2,4})[\\,]{0,1})[\\s]*){3})[\\)]`
-          break;
-          case 'hsla':
-            return `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`
-          break;
-          case 'hsv':
-            return ``
-          break;
-          case 'rgb':
-            return `[Rr][Gg][Bb][\\(](((([\\d]{1,3})[\\,]{0,1})[\\s]*){3})[\\)]`
-          break;
-          case 'rgba':
-            return `[Rr][Gg][Bb][Aa][\\(](((([\\d]{1,3}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`
-          break;
-          default:
-            return ''
-           break; 
-        }
+        return this.patterns[this.format]
       }
     },
     methods: {

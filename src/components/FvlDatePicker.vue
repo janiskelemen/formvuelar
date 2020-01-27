@@ -4,15 +4,15 @@
     <div class="fvl-input-group fvl-date-picker">
       <slot name="prefix" />
       <flat-pickr
+        v-model="inputvalue"
         :name="name"
         :placeholder="placeholder"
         :class="['fvl-input', fieldClass]"
-        v-model="inputvalue"
-        @on-change="$parent.dirty(name); $emit('changed');"
         :config="flatpickrConfig"
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
+        @on-change="$parent.dirty(name); $emit('changed');"
       />
       <slot name="suffix" />
     </div>
@@ -109,6 +109,11 @@
         }
       }
     },
+    data() {
+      return {
+        inputvalue: this.config.mode == 'range' && this.start && this.end ? this.start + ' - ' + this.end : this.value
+      }
+    },
     computed: {
       flatpickrConfig() {
         let config = this.config
@@ -134,11 +139,6 @@
           formatedValue = newValue
         }
         this.$emit('update:value', formatedValue)
-      }
-    },
-    data() {
-      return {
-        inputvalue: this.config.mode == 'range' && this.start && this.end ? this.start + ' - ' + this.end : this.value
       }
     }
   }

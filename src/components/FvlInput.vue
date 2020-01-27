@@ -1,12 +1,12 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-input-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label" v-html="label"/>
+    <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label" v-html="label" />
     <div class="fvl-input-group">
-      <slot name="prefix"/>
+      <slot name="prefix" />
       <input
+        :id="id"
         :value="value"
         :name="name"
-        :id="id"
         :type="type"
         :placeholder="placeholder"
         :autocomplete="autocomplete"
@@ -24,11 +24,11 @@
         @change="$parent.dirty(name); $emit('changed');"
         @input="$emit('update:value', $event.target.value)"
       />
-      <slot name="suffix"/>
+      <slot name="suffix" />
     </div>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

@@ -38,7 +38,9 @@
                 type="button"
                 @click="inputvalue = preset.start + ' - ' + preset.end"
                 @keydown.esc="close()"
-              >{{ preset.name }}</button>
+              >
+                {{ preset.name }}
+              </button>
             </div>
 
             <div class="fvl-date-picker-extended-flatpickr-wrapper">

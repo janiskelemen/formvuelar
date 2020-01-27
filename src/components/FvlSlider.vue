@@ -1,6 +1,6 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-slider-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-slider-label" v-html="label"/>
+    <label v-if="label" :class="labelClass" :for="name" class="fvl-slider-label" v-html="label" />
     <div class="fvl-slider-group">
       <slot :value="value" name="prefix">
         <span
@@ -10,9 +10,9 @@
       </slot>
       <div class="fvl-slider-container">
         <input
+          :id="id"
           :value="value"
           :name="name"
-          :id="id"
           :class="fieldClass"
           :min="min"
           :max="max"
@@ -32,9 +32,9 @@
         >{{ value }}</span>
       </slot>
     </div>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

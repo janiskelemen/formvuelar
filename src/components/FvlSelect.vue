@@ -3,8 +3,8 @@
     <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label" v-html="label" />
     <div class="fvl-select">
       <select
-        :name="name"
         :id="id"
+        :name="name"
         :placeholder="placeholder"
         :autocomplete="autocomplete"
         :class="fieldClass"

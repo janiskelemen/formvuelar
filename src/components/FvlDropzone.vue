@@ -1,6 +1,6 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-dropzone-wrapper">
-    <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label" v-html="label"/>
+    <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label" v-html="label" />
     <slot v-if="filesCount" :files-count="filesCount" :files-size-sum="filesSizeSum" name="summary">
       {{ filesCount }}
       <span
@@ -12,7 +12,7 @@
       <div class="fvl-dropzone-area">
         <span v-if="!filesCount" class="fvl-dropzone-area-placeholder">
           <slot name="placeholder">
-            <span v-text="getConfig('dropFilesHereText', 'Drop files here or click to upload.')"/>
+            <span v-text="getConfig('dropFilesHereText', 'Drop files here or click to upload.')" />
           </slot>
         </span>
         <div
@@ -26,7 +26,7 @@
             v-if="previews[key] && previews[key].status == 'loading'"
             class="fvl-dropzone-file-preview-loader"
           >
-            <div :style="'width:'+previews[key].percent+'%'"/>
+            <div :style="'width:'+previews[key].percent+'%'" />
           </div>
           <div
             v-if="previews[key]"
@@ -34,7 +34,9 @@
             class="fvl-dropzone-file-preview-name"
           >
             {{ file.name }}
-            <div class="fvl-dropzone-file-preview-size">{{ formatBytes(previews[key].size) }}</div>
+            <div class="fvl-dropzone-file-preview-size">
+              {{ formatBytes(previews[key].size) }}
+            </div>
           </div>
           <transition name="fvl-dropzone-fade">
             <div
@@ -58,9 +60,9 @@
         </div>
       </div>
       <input
-        :name="name"
         :id="id"
         :ref="name"
+        :name="name"
         :placeholder="placeholder"
         :class="fieldClass"
         :required="required"
@@ -73,9 +75,9 @@
         @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
       >
     </div>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

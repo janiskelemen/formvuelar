@@ -10,7 +10,7 @@
     <div class="fvl-multi-file-button-wrapper">
       <button class="fvl-multi-file-button" tabindex="-1" type="button" @click.prevent>
         <slot name="button">
-          <span v-text="getConfig('addFilesText', 'Add Files')"/>
+          <span v-text="getConfig('addFilesText', 'Add Files')" />
         </slot>
       </button>
       <span class="fvl-multi-file-name">
@@ -22,9 +22,9 @@
         </slot>
       </span>
       <input
-        :name="name"
         :id="id"
         :ref="name"
+        :name="name"
         :placeholder="placeholder"
         :class="fieldClass"
         :required="required"
@@ -52,9 +52,9 @@
         </slot>
       </span>
     </div>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

@@ -1,17 +1,17 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-file-wrapper">
-    <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label" v-html="label"/>
+    <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label" v-html="label" />
     <div class="fvl-file-button-wrapper">
       <button class="fvl-file-button" tabindex="-1" type="button" @click.prevent>
         <slot name="button">
-          <span v-text="getConfig('selectFileText', 'Select File')"/>
+          <span v-text="getConfig('selectFileText', 'Select File')" />
         </slot>
       </button>
-      <span class="fvl-file-name" v-text="fileName"/>
+      <span class="fvl-file-name" v-text="fileName" />
       <input
-        :name="name"
         :id="id"
         :ref="name"
+        :name="name"
         :placeholder="placeholder"
         :class="fieldClass"
         :required="required"
@@ -23,9 +23,9 @@
         @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
       >
     </div>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

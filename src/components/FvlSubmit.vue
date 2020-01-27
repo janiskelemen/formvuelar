@@ -7,7 +7,7 @@
       @click="$emit('submit')"
     >
       <span class="fvl-submit-text">
-        <slot/>
+        <slot />
       </span>
       <slot
         v-if="loader && $parent.isLoading"

@@ -1,8 +1,7 @@
 <!-- Advanced Selects example -->
 <template>
   <div>
-    <date-picker/>
-    
+    <date-picker />
   </div>
 </template>
 
