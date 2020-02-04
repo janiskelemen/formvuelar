@@ -1,0 +1,57 @@
+.fvl-image-wrapper {
+    @apply relative p-2;
+}
+
+.fvl-form-drag-over>.fvl-image-wrapper>.fvl-image-button-wrapper {
+    animation: pulse 1.4s infinite;
+    @apply rounded;
+}
+
+.fvl-image-label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 cursor-pointer;
+}
+
+.fvl-image-button-wrapper {
+    @apply inline-flex w-full relative;
+}
+
+.fvl-image-button {
+    @apply inline-flex items-center font-bold text-white bg-teal-600 border border-teal-600 py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
+}
+
+.fvl-image-wrapper:focus-within .fvl-image-button-wrapper {
+    box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
+    @apply rounded;
+}
+
+.fvl-image-wrapper:hover .fvl-image-button {
+    @apply bg-teal-500 border-teal-500;
+}
+
+.fvl-image-name {
+    @apply pl-2 bg-gray-200 text-gray-700 border border-gray-200 flex-grow py-3 px-4 leading-tight rounded-r truncate;
+}
+
+.fvl-image {
+    @apply appearance-none absolute opacity-0 left-0 py-3 px-4 w-full cursor-pointer;
+}
+
+.fvl-image::-webkit-image-upload-button {
+    cursor: pointer;
+    visibility: hidden;
+}
+
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 #38a89d;
+    }
+
+    70% {
+        box-shadow: 0 0 0px 6px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
