@@ -1,10 +1,9 @@
 <!-- Advanced Selects example -->
 <template>
   <div>
-    <search-select/>
-    <remote-search-select/>
-    <remote-api-search-select/>
-    
+    <search-select />
+    <remote-search-select />
+    <remote-api-search-select />
   </div>
 </template>
 

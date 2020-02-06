@@ -86,50 +86,68 @@
           tag="button"
           to="/"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Basic</router-link>
+        >
+          Basic
+        </router-link>
         <router-link
           tag="button"
           to="/prefilled"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Prefilled</router-link>
+        >
+          Prefilled
+        </router-link>
         <router-link
           tag="button"
           to="/advancedselects"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Selects</router-link>
+        >
+          Selects
+        </router-link>
         <router-link
           tag="button"
           to="/tags"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Tags</router-link>
+        >
+          Tags
+        </router-link>
         <router-link
           tag="button"
           to="/nestedcheckbox"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Multi Checkbox</router-link>
+        >
+          Multi Checkbox
+        </router-link>
         <router-link
           tag="button"
           to="/upload"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Upload</router-link>
+        >
+          Upload
+        </router-link>
         <router-link
           tag="button"
           to="/multiupload"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Multi Upload</router-link>
+        >
+          Multi Upload
+        </router-link>
         <router-link
           tag="button"
           to="/dropzone"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Dropzone</router-link>
+        >
+          Dropzone
+        </router-link>
         <router-link
           tag="button"
           to="/datepicker"
           class="button-link md:border-l-2 md:border-b-0 md:flex"
-        >Date Picker</router-link>
+        >
+          Date Picker
+        </router-link>
       </div>
       <div class="w-full md:w-3/5">
-        <router-view/>
+        <router-view />
       </div>
     </div>
   </div>

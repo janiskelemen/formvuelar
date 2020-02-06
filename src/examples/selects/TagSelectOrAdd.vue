@@ -12,7 +12,7 @@
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/select" class="relative">
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="showSource = !showSource"/>
+      <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
         :selected.sync="form.tags"
@@ -27,7 +27,7 @@
         placeholder="Add some tags..."
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource" :source="source"/>
+      <source-box :show-source="showSource" :source="source" />
     </fvl-form>
   </div>
 </template>

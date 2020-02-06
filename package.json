@@ -13,7 +13,7 @@
     "laravel"
   ],
   "main": "./dist/formvuelar.common.js",
-  "version": "1.4.6",
+  "version": "1.5.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -72,7 +72,7 @@
       "plugin:vue/recommended"
     ],
     "rules": {
-      "vue/html-self-closing": 1,
+      "vue/html-self-closing": 0,
       "vue/html-indent": 1,
       "vue/max-attributes-per-line": 0,
       "vue/require-prop-type-constructor": 0,

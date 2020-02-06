@@ -3,8 +3,8 @@
     <span class="fvl-radio-group-label" v-html="label"></span>
     <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
       <input
-        :name="name"
         :id="name+key"
+        :name="name"
         :value="key"
         :checked="checked == key"
         :class="fieldClass"
@@ -16,13 +16,13 @@
         @change="$emit('update:checked', $event.target.value); $emit('changed'); $parent.dirty(name);"
       >
       <label :class="labelClass" :for="name+key" class="fvl-radio-label">
-        <span class="fvl-radio-toggle"/>
+        <span class="fvl-radio-toggle" />
         {{ option }}
       </label>
     </div>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

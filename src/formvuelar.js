@@ -51,6 +51,10 @@ export {
 }
 from './components/FvlFile'
 export {
+    default as FvlImage
+}
+from './components/FvlImage'
+export {
     default as FvlMultiFile
 }
 from './components/FvlMultiFile'

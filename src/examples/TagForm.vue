@@ -1,9 +1,9 @@
 <!-- Basic form example -->
 <template>
   <div class="mb-16">
-    <tag-select/>
-    <tag-select-or-add/>
-    <tag-select-or-add-email/>
+    <tag-select />
+    <tag-select-or-add />
+    <tag-select-or-add-email />
   </div>
 </template>
 

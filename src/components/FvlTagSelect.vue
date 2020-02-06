@@ -101,7 +101,9 @@
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
               >
-                <slot :option="option" name="option">{{ option[optionValue] }}</slot>
+                <slot :option="option" name="option">
+                  {{ option[optionValue] }}
+                </slot>
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">

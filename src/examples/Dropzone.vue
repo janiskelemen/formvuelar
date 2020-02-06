@@ -12,13 +12,15 @@
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="showSource = !showSource"/>
+      <source-toggle @toggle="showSource = !showSource" />
       <!-- File input component -->
       <fvl-dropzone :files.sync="form.media" label="Media" name="media"></fvl-dropzone>
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource" :source="source"/>
+      <source-box :show-source="showSource" :source="source" />
       <!-- Submit button with upload loader indicator enabled -->
-      <fvl-submit loader>Upload</fvl-submit>
+      <fvl-submit loader>
+        Upload
+      </fvl-submit>
     </fvl-form>
   </div>
 </template>

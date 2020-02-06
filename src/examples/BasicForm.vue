@@ -12,7 +12,7 @@
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/basic" multipart>
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('name')"/>
+      <source-toggle @toggle="toggleSource('name')" />
       <!-- Text input component -->
       <fvl-input
         :value.sync="form.name"
@@ -23,9 +23,9 @@
         type="text"
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'name'" :source="source.name"/>
+      <source-box :show-source="showSource == 'name'" :source="source.name" />
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('text')"/>
+      <source-toggle @toggle="toggleSource('text')" />
       <!-- Textarea component -->
       <fvl-textarea
         :value.sync="form.text"
@@ -34,9 +34,9 @@
         placeholder="Type your story..."
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'text'" :source="source.text"/>
+      <source-box :show-source="showSource == 'text'" :source="source.text" />
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('password')"/>
+      <source-toggle @toggle="toggleSource('password')" />
       <!-- Password input component with custom strength meter -->
       <fvl-input
         :value.sync="form.password"
@@ -61,7 +61,7 @@
         </template>
       </fvl-input>
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('slider')"/>
+      <source-toggle @toggle="toggleSource('slider')" />
       <fvl-slider
         :value.sync="form.slider"
         value-position="left"
@@ -70,10 +70,10 @@
         name="slider"
       ></fvl-slider>
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'slider'" :source="source.slider"/>
+      <source-box :show-source="showSource == 'slider'" :source="source.slider" />
 
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('colorpicker')"/>
+      <source-toggle @toggle="toggleSource('colorpicker')" />
       <fvl-color-picker
         :value.sync="form.colorPicker"
         class="w-full lg:w-1/2"
@@ -82,12 +82,12 @@
         name="colorpicker"
       ></fvl-color-picker>
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'colorpicker'" :source="source.colorpicker"/>
+      <source-box :show-source="showSource == 'colorpicker'" :source="source.colorpicker" />
 
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'password'" :source="source.password"/>
+      <source-box :show-source="showSource == 'password'" :source="source.password" />
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('color')"/>
+      <source-toggle @toggle="toggleSource('color')" />
       <!-- Select component -->
       <fvl-select
         :allow-empty="true"
@@ -99,9 +99,9 @@
         placeholder="-- Select any color --"
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'color'" :source="source.color"/>
+      <source-box :show-source="showSource == 'color'" :source="source.color" />
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('option')"/>
+      <source-toggle @toggle="toggleSource('option')" />
       <!-- Radio component with options -->
       <fvl-radio
         :checked.sync="form.option"
@@ -111,9 +111,9 @@
         name="option"
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'option'" :source="source.option"/>
+      <source-box :show-source="showSource == 'option'" :source="source.option" />
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('agree')"/>
+      <source-toggle @toggle="toggleSource('agree')" />
       <!-- Checkbox component -->
       <fvl-checkbox
         :checked.sync="form.agree"
@@ -122,10 +122,10 @@
         name="agree"
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'agree'" :source="source.agree"/>
+      <source-box :show-source="showSource == 'agree'" :source="source.agree" />
 
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('switch')"/>
+      <source-toggle @toggle="toggleSource('switch')" />
       <!-- Switch component -->
       <fvl-switch
         :checked.sync="form.switch"
@@ -135,7 +135,7 @@
       />
 
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'switch'" :source="source.switch"/>
+      <source-box :show-source="showSource == 'switch'" :source="source.switch" />
       <!-- Submit button component -->
       <fvl-submit>Validate</fvl-submit>
     </fvl-form>

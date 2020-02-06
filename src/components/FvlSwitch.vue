@@ -1,8 +1,8 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-switch-wrapper">
     <input
-      :name="name"
       :id="id ? id : name"
+      :name="name"
       :class="{'checked': checked, fieldClass}"
       :required="required"
       :readonly="readonly"

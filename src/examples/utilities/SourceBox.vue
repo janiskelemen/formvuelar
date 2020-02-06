@@ -1,5 +1,5 @@
 <template>
-    <pre v-highlightjs="source" v-if="showSource" class="m-2">
+  <pre v-if="showSource" v-highlightjs="source" class="m-2">
     <code class="rounded html"></code>
 </pre>
 </template>

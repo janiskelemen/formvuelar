@@ -25,7 +25,7 @@
         />
         <div class="fvl-search-select-carret">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </div>
         <transition name="fvl-dropdown-transition">
@@ -49,25 +49,27 @@
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
               >
-                <slot :option="option" name="option">{{ option[optionValue] }}</slot>
+                <slot :option="option" name="option">
+                  {{ option[optionValue] }}
+                </slot>
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
               <slot name="no-results">
-                <span v-text="getConfig('noResultsText', 'No results found!')"/>
+                <span v-text="getConfig('noResultsText', 'No results found!')" />
               </slot>
             </div>
             <div v-if="isLoading" class="search-select-empty">
               <slot name="loading">
-                <span v-text="getConfig('pleaseWaitText', 'Please wait...')"/>
+                <span v-text="getConfig('pleaseWaitText', 'Please wait...')" />
               </slot>
             </div>
           </div>
         </transition>
       </div>
-      <slot name="hint"/>
+      <slot name="hint" />
       <slot :errors="$parent.getErrors(name)" name="errors">
-        <validation-errors :errors="$parent.getErrors(name)"/>
+        <validation-errors :errors="$parent.getErrors(name)" />
       </slot>
     </div>
   </on-click-outside>

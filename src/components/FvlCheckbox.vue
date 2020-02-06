@@ -1,8 +1,8 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-checkbox-wrapper">
     <input
-      :name="name"
       :id="id ? id : name"
+      :name="name"
       :class="{'checked': checked, fieldClass}"
       :required="required"
       :readonly="readonly"
@@ -13,12 +13,12 @@
       @change="$emit('update:checked', $event.target.checked); $emit('changed'); $parent.dirty(name);"
     >
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
-      <span class="fvl-checkbox-outer"/>
+      <span class="fvl-checkbox-outer" />
       {{ label }}
     </label>
-    <slot name="hint"/>
+    <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)"/>
+      <validation-errors :errors="$parent.getErrors(name)" />
     </slot>
   </div>
 </template>

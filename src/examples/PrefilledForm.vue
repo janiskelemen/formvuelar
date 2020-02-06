@@ -12,7 +12,7 @@
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/update">
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('fullname')"/>
+      <source-toggle @toggle="toggleSource('fullname')" />
       <!-- Text input component -->
       <fvl-input
         :value.sync="form.fullname"
@@ -23,13 +23,13 @@
         type="text"
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'fullname'" :source="source.fullname"/>
+      <source-box :show-source="showSource == 'fullname'" :source="source.fullname" />
       <!-- Add source code toggle button (only for example) -->
-      <source-toggle @toggle="toggleSource('bio')"/>
+      <source-toggle @toggle="toggleSource('bio')" />
       <!-- Textarea component -->
-      <fvl-textarea :value.sync="form.bio" label="Bio" name="bio" placeholder="Type your story..."/>
+      <fvl-textarea :value.sync="form.bio" label="Bio" name="bio" placeholder="Type your story..." />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'bio'" :source="source.bio"/>
+      <source-box :show-source="showSource == 'bio'" :source="source.bio" />
       <!-- Radio component with options -->
       <fvl-radio
         :checked.sync="form.pet"
@@ -39,7 +39,7 @@
         name="pet"
       />
       <!-- Source code area (only for example) -->
-      <source-box :show-source="showSource == 'pet'" :source="source.pet"/>
+      <source-box :show-source="showSource == 'pet'" :source="source.pet" />
       <!-- Submit button component -->
       <fvl-submit>Validate</fvl-submit>
     </fvl-form>
