@@ -1,24 +1,26 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-textarea-wrapper">
     <label v-if="label" :class="labelClass" :for="name" class="fvl-textarea-label" v-html="label" />
-    <textarea
-      :id="id"
-      :value="value"
-      :name="name"
-      :placeholder="placeholder"
-      :autocomplete="autocomplete"
-      :class="fieldClass"
-      :cols="cols"
-      :maxlength="maxlength"
-      :rows="rows"
-      :wrap="wrap"
-      :required="required"
-      :readonly="readonly"
-      :disabled="disabled"
-      class="fvl-textarea"
-      @change="$parent.dirty(name); $emit('changed');"
-      @input="$emit('update:value', $event.target.value)"
-    ></textarea>
+    <div class="fvl-input-group">
+      <textarea
+        :id="id"
+        :value="value"
+        :name="name"
+        :placeholder="placeholder"
+        :autocomplete="autocomplete"
+        :class="fieldClass"
+        :cols="cols"
+        :maxlength="maxlength"
+        :rows="rows"
+        :wrap="wrap"
+        :required="required"
+        :readonly="readonly"
+        :disabled="disabled"
+        class="fvl-textarea"
+        @change="$parent.dirty(name); $emit('changed');"
+        @input="$emit('update:value', $event.target.value)"
+      ></textarea>
+    </div>
     <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
       <validation-errors :errors="$parent.getErrors(name)" />
