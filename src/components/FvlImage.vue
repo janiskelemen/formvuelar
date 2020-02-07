@@ -2,7 +2,7 @@
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-image-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label" v-html="label" />
 
-    <div class="flex">
+    <div class="fvl-image-group flex">
       <slot name="preview" :preview="preview">
         <div class="relative flex justify-center h-10 w-10 self-center bg-gray-200 rounded-full overflow-hidden mr-4 flex-shrink-0">
           <img v-if="preview.src" :src="preview.src" :alt="fileName" class="h-full w-full" />
