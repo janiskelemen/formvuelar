@@ -19,6 +19,17 @@
     @apply inline-flex items-center font-bold text-white bg-teal-600 border border-teal-600 py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
 }
 
+.fvl-image-hide-file-name {
+    .fvl-image-button {
+        @apply rounded;
+    }
+}
+
+.fvl-image-button-wrapper.fvl-image-hide-file-name {
+    @apply w-auto mr-auto;
+}
+
+
 .fvl-image-wrapper:focus-within .fvl-image-button-wrapper {
     box-shadow: 0 0 0 3px rgba(218, 225, 231, 0.8);
     @apply rounded;

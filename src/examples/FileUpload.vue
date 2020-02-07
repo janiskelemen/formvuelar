@@ -57,6 +57,17 @@
       <!-- Source code area (only for example) -->
       <source-box :show-source="showImageSource" :source="imageSource" />
     </fvl-form>
+
+    <!-- Setup multipart form to support file uploads -->
+    <fvl-form :data="form" url="/upload" multipart class="relative">
+      <!-- Add source code toggle button (only for example) -->
+      <source-toggle @toggle="showImageSource2 = !showImageSource2" />
+      <!-- File input component -->
+      <fvl-image :file.sync="form.avatar2" :show-file-name="false" label="Avatar without file name" name="avatar2"></fvl-image>
+
+      <!-- Source code area (only for example) -->
+      <source-box :show-source="showImageSource2" :source="imageSource2" />
+    </fvl-form>
   </div>
 </template>
 
@@ -79,6 +90,7 @@
         form: {
           file: null,
           avatar: 'https://www.fakepersongenerator.com/Face/female/female2016102582457221.jpg',
+          avatar2: 'https://www.fakepersongenerator.com/Face/female/female2016102582457221.jpg',
           name: null
         },
         showFileSource: false,
@@ -88,6 +100,10 @@
         showImageSource: false,
         imageSource:
           `<fvl-image \n` + `    label="Avatar" \n` + `    name="avatar" \n` + `    :file.sync="form.avatar" \n` + `/> \n`
+        ,
+        showImageSource2: false,
+        imageSource2:
+          `<fvl-image \n` + `    label="Avatar" \n` + `    name="avatar" \n` + `    :show-file-name="false" \n` + `    :file.sync="form.avatar" \n` + `/> \n`
 
       }
     }

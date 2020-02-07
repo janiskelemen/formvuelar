@@ -8,13 +8,13 @@
           <img v-if="preview.src" :src="preview.src" :alt="fileName" class="h-full w-full" />
         </div>
       </slot>
-      <div class="fvl-image-button-wrapper">
+      <div class="fvl-image-button-wrapper" :class="{'fvl-image-hide-file-name': !showFileName}">
         <button class="fvl-image-button" tabindex="-1" type="button" @click.prevent>
           <slot name="button">
             <span v-text="getConfig('selectImageText', 'Select Image')" />
           </slot>
         </button>
-        <span class="fvl-image-name" v-text="fileName" />
+        <span v-if="showFileName" class="fvl-image-name" v-text="fileName" />
         <input
           :id="id"
           :ref="name"
@@ -98,6 +98,11 @@
         type: Boolean,
         required: false,
         default: false
+      },
+      showFileName: {
+        type: Boolean,
+        required: false,
+        default: true
       }
     },
     data() {
@@ -117,7 +122,12 @@
     watch: {
       file(newValue) {
         /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof File)) this.$emit('update:file', '')
+        if (!(newValue instanceof File)){
+          if(typeof newValue == 'string' && newValue != '' && this.isValidURL(newValue)){
+            this.preview.src = newValue
+          }
+          this.$emit('update:file', '')
+        } 
       }
     },
     mounted() {
@@ -212,6 +222,10 @@
         ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height)
         // encode image to data-uri with base64 version of compressed image
         return canvas.toDataURL()
+      },
+      isValidURL(string) {
+        var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g);
+        return (res !== null)
       }
     }
   }
