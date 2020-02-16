@@ -24,6 +24,7 @@
             class="fvl-color-picker"
             :pattern="pattern"
             @keyup.space="toggle()"
+            @change="updateValueManually($event.target.value)"
           />
           <div ref="colorpicker" class="fvl-color-preview" @click="toggle()">
             <span
@@ -141,6 +142,9 @@
     methods: {
       updateValue(e) {
         this.$emit('update:value', e[this.format])
+      },
+      updateValueManually(e){
+        this.$emit('update:value', e)
       },
       setupPopper() {
         if (this.popper === undefined) {
