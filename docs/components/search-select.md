@@ -64,7 +64,7 @@ import { FvlSearchSelect } from 'formvuelar'
 | options               | Key value object `{'key': 'value', ...}`                                 | Object                      |         |          |
 | name                  | Input name                                                               | String                      |         | **true** |
 | options-url           | Optional url to load option data from                                    | String                      | null    |          |
-| options-response-path | Path to options in json response ie. `data.users`                        | String                      | null    |          |
+| response-data-path | Path to options in json response ie. `data.users`                        | String                      | null    |          |
 | option-key            | Key name ie. `id`                                                        | String                      | null    |          |
 | options-value         | Value key name ie. `name`                                                | String                      | null    |          |
 | search-keys           | Keys to search in ie. `['name', 'title']`                                | Array                       | []      |          |
