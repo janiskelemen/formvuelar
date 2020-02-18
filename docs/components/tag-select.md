@@ -33,7 +33,7 @@ import { FvlTagSelect } from 'formvuelar'
 | name                  | Input name                                             | String                      |         | **true** |
 | allow-new             | Allow to add new tags                                  | Boolean                     | false   |          |
 | options-url           | Optional url to load option data from                  | String                      | null    |          |
-| options-response-path | Path to options in json response ie. `data.users`      | String                      | null    |          |
+| response-data-path | Path to options in json response ie. `data.users`      | String                      | null    |          |
 | option-key            | Key name ie. `id`                                      | String                      | null    |          |
 | options-value         | Value key name ie. `name`                              | String                      | null    |          |
 | search-keys           | Keys to search in ie. `['name', 'title']`              | Array                       | []      |          |
