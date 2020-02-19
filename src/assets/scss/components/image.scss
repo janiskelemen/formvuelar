@@ -35,7 +35,7 @@
     @apply rounded;
 }
 
-.fvl-image-wrapper:hover .fvl-image-button {
+.fvl-image-button:hover {
     @apply bg-teal-500 border-teal-500;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .fvl-image {
-    @apply appearance-none absolute opacity-0 left-0 py-3 px-4 w-full cursor-pointer;
+    @apply hidden appearance-none absolute opacity-0 left-0 py-3 px-4 w-full cursor-pointer;
 }
 
 .fvl-image::-webkit-image-upload-button {

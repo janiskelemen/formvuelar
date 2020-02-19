@@ -25,19 +25,21 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 <h2>Examples</h2>
 <a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Give it a try!</a>
 
+## Documentation
+
+[Full Documentation](https://formvuelar.netlify.com)
+
 <h2>Features</h2>
 
 - Works out of the box with Laravel
 - Axios integration
-- Select with search
+- Select with search and remote source option
 - Nested Checkboxes
 - File upload support including progress indication
+- Image upload with image preview
 - Dropzone with image preview (inspired by FilePond)
 - Display validation error messages from error response
-
-## Documentation
-
-[Full Documentation](https://formvuelar.netlify.com)
+- Supports Tree Shaking (adds only used components to your js bundle)
 
 <h2>Getting Started</h2>
 

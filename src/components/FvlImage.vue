@@ -4,12 +4,14 @@
 
     <div class="fvl-image-group flex">
       <slot name="preview" :preview="preview">
-        <div class="relative flex justify-center h-10 w-10 self-center bg-gray-200 rounded-full overflow-hidden mr-4 flex-shrink-0">
+        <div
+          class="relative flex justify-center h-10 w-10 self-center bg-gray-200 rounded-full overflow-hidden mr-4 flex-shrink-0"
+        >
           <img v-if="preview.src" :src="preview.src" :alt="fileName" class="h-full w-full" />
         </div>
       </slot>
       <div class="fvl-image-button-wrapper" :class="{'fvl-image-hide-file-name': !showFileName}">
-        <button class="fvl-image-button" tabindex="-1" type="button" @click.prevent>
+        <button class="fvl-image-button" type="button" @click.prevent="$refs[name].click()">
           <slot name="button">
             <span v-text="getConfig('selectImageText', 'Select Image')" />
           </slot>
@@ -122,12 +124,12 @@
     watch: {
       file(newValue) {
         /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof File)){
-          if(typeof newValue == 'string' && newValue != '' && this.isValidURL(newValue)){
+        if (!(newValue instanceof File)) {
+          if (typeof newValue == 'string' && newValue != '' && this.isValidURL(newValue)) {
             this.preview.src = newValue
           }
           this.$emit('update:file', '')
-        } 
+        }
       }
     },
     mounted() {
@@ -224,8 +226,10 @@
         return canvas.toDataURL()
       },
       isValidURL(string) {
-        var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g);
-        return (res !== null)
+        var res = string.match(
+          /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g
+        )
+        return res !== null
       }
     }
   }
