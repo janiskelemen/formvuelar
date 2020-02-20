@@ -15,7 +15,7 @@
 }
 
 .fvl-radio {
-    @apply absolute opacity-0;
+    @apply absolute opacity-0 hidden;
 }
 
 .fvl-radio+label {

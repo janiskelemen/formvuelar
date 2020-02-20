@@ -9,7 +9,7 @@
       :disabled="disabled"
       :checked="checked"
       type="checkbox"
-      class="fvl-switch"
+      class="fvl-switch hidden"
       @change="$emit('update:checked', $event.target.checked); $emit('changed'); $parent.dirty(name);"
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">

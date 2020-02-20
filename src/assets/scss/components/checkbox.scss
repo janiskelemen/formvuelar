@@ -3,7 +3,7 @@
 }
 
 .fvl-checkbox {
-    @apply absolute opacity-0;
+    @apply absolute opacity-0 hidden;
 }
 
 .fvl-checkbox+label {
