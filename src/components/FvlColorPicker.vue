@@ -10,13 +10,12 @@
     <on-click-outside @do="close()">
       <div class="fvl-color-picker-group">
         <slot name="prefix"></slot>
-        <div class="fvl-color-picker-container">
+        <div class="fvl-color-picker-container" :class="fieldClass">
           <input
             :id="id"
             ref="colorinput"
             :value="value"
             :name="name"
-            :class="fieldClass"
             :required="required"
             :disabled="disabled"
             :readonly="readonly"
@@ -118,24 +117,24 @@
         type: Boolean,
         required: false,
         default: false
-      },
+      }
     },
     data() {
       return {
         isOpen: false,
         patterns: {
-          'hex': `[#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3})`,
-          'hex8': `[#]([a-fA-F\\d]{8}`,
-          'hsl': `[Hh][Ss][Ll][\\(](((([\\d]{1,3}|[\\d\\%]{2,4})[\\,]{0,1})[\\s]*){3})[\\)]`,
-          'hsla': `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
-          'hsv': ``,
-          'rgb':`[Rr][Gg][Bb][\\(](((([\\d]{1,3})[\\,]{0,1})[\\s]*){3})[\\)]`,
-          'rgba':`[Rr][Gg][Bb][Aa][\\(](((([\\d]{1,3}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`
+          hex: `[#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3})`,
+          hex8: `[#]([a-fA-F\\d]{8}`,
+          hsl: `[Hh][Ss][Ll][\\(](((([\\d]{1,3}|[\\d\\%]{2,4})[\\,]{0,1})[\\s]*){3})[\\)]`,
+          hsla: `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
+          hsv: ``,
+          rgb: `[Rr][Gg][Bb][\\(](((([\\d]{1,3})[\\,]{0,1})[\\s]*){3})[\\)]`,
+          rgba: `[Rr][Gg][Bb][Aa][\\(](((([\\d]{1,3}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`
         }
       }
     },
     computed: {
-      pattern(){
+      pattern() {
         return this.patterns[this.format]
       }
     },
@@ -143,7 +142,7 @@
       updateValue(e) {
         this.$emit('update:value', e[this.format])
       },
-      updateValueManually(e){
+      updateValueManually(e) {
         this.$emit('update:value', e)
       },
       setupPopper() {
