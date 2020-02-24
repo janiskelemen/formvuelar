@@ -8,9 +8,9 @@
       v-html="label"
     />
     <on-click-outside @do="close()">
-      <div class="fvl-color-picker-group">
+      <div class="fvl-color-picker-group" :class="fieldClass">
         <slot name="prefix"></slot>
-        <div class="fvl-color-picker-container" :class="fieldClass">
+        <div class="fvl-color-picker-container">
           <input
             :id="id"
             ref="colorinput"

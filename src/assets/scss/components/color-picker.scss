@@ -3,7 +3,7 @@
 }
 
 .fvl-color-picker-group {
-    @apply flex rounded w-full;
+    @apply flex rounded;
 }
 
 .fvl-color-picker-container {
@@ -15,7 +15,7 @@
 }
 
 .fvl-color-picker {
-    @apply appearance-none block flex-grow bg-gray-200 text-gray-800 border border-gray-200 rounded-l py-3 px-4 leading-tight;
+    @apply appearance-none block w-full bg-gray-200 text-gray-800 border border-gray-200 rounded-l py-3 px-4 leading-tight;
 }
 
 .fvl-color-picker:focus {
