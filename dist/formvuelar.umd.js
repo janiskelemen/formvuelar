@@ -20468,12 +20468,12 @@ var FvlSlider_component = normalizeComponent(
 )
 
 /* harmony default export */ var FvlSlider = (FvlSlider_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"60d3db0a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FvlColorPicker.vue?vue&type=template&id=5dc68206&
-var FvlColorPickervue_type_template_id_5dc68206_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fvl-color-picker-wrapper",class:{'fvl-has-error' : _vm.$parent.hasErrors(_vm.name)}},[(_vm.label)?_c('label',{staticClass:"fvl-color-picker-label",class:_vm.labelClass,attrs:{"for":_vm.name},domProps:{"innerHTML":_vm._s(_vm.label)}}):_vm._e(),_c('on-click-outside',{on:{"do":function($event){return _vm.close()}}},[_c('div',{staticClass:"fvl-color-picker-group"},[_vm._t("prefix"),_c('div',{staticClass:"fvl-color-picker-container",class:_vm.fieldClass},[_c('input',{ref:"colorinput",staticClass:"fvl-color-picker",attrs:{"id":_vm.id,"name":_vm.name,"required":_vm.required,"disabled":_vm.disabled,"readonly":_vm.readonly,"type":"text","pattern":_vm.pattern},domProps:{"value":_vm.value},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.toggle()},"change":function($event){return _vm.updateValueManually($event.target.value)}}}),_c('div',{ref:"colorpicker",staticClass:"fvl-color-preview",on:{"click":function($event){return _vm.toggle()}}},[_c('span',{staticClass:"inline-block rounded-full border border-white h-4 w-4",style:({'background': _vm.value})})])]),_vm._t("suffix"),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isOpen),expression:"isOpen"}],ref:"picker",staticClass:"fvl-color-picker-dropdown"},[_c('chrome-picker',{ref:"picker",attrs:{"disable-alpha":_vm.format == 'hex',"value":_vm.value,"disable-fields":""},on:{"input":_vm.updateValue}})],1)],2),_vm._t("hint"),_vm._t("errors",[_c('validation-errors',{attrs:{"errors":_vm.$parent.getErrors(_vm.name)}})],{"errors":_vm.$parent.getErrors(_vm.name)})],2)],1)}
-var FvlColorPickervue_type_template_id_5dc68206_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"60d3db0a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/FvlColorPicker.vue?vue&type=template&id=1aca68b8&
+var FvlColorPickervue_type_template_id_1aca68b8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"fvl-color-picker-wrapper",class:{'fvl-has-error' : _vm.$parent.hasErrors(_vm.name)}},[(_vm.label)?_c('label',{staticClass:"fvl-color-picker-label",class:_vm.labelClass,attrs:{"for":_vm.name},domProps:{"innerHTML":_vm._s(_vm.label)}}):_vm._e(),_c('on-click-outside',{on:{"do":function($event){return _vm.close()}}},[_c('div',{staticClass:"fvl-color-picker-group",class:_vm.fieldClass},[_vm._t("prefix"),_c('div',{staticClass:"fvl-color-picker-container"},[_c('input',{ref:"colorinput",staticClass:"fvl-color-picker",attrs:{"id":_vm.id,"name":_vm.name,"required":_vm.required,"disabled":_vm.disabled,"readonly":_vm.readonly,"type":"text","pattern":_vm.pattern},domProps:{"value":_vm.value},on:{"keyup":function($event){if(!$event.type.indexOf('key')&&_vm._k($event.keyCode,"space",32,$event.key,[" ","Spacebar"])){ return null; }return _vm.toggle()},"change":function($event){return _vm.updateValueManually($event.target.value)}}}),_c('div',{ref:"colorpicker",staticClass:"fvl-color-preview",on:{"click":function($event){return _vm.toggle()}}},[_c('span',{staticClass:"inline-block rounded-full border border-white h-4 w-4",style:({'background': _vm.value})})])]),_vm._t("suffix"),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isOpen),expression:"isOpen"}],ref:"picker",staticClass:"fvl-color-picker-dropdown"},[_c('chrome-picker',{ref:"picker",attrs:{"disable-alpha":_vm.format == 'hex',"value":_vm.value,"disable-fields":""},on:{"input":_vm.updateValue}})],1)],2),_vm._t("hint"),_vm._t("errors",[_c('validation-errors',{attrs:{"errors":_vm.$parent.getErrors(_vm.name)}})],{"errors":_vm.$parent.getErrors(_vm.name)})],2)],1)}
+var FvlColorPickervue_type_template_id_1aca68b8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/FvlColorPicker.vue?vue&type=template&id=5dc68206&
+// CONCATENATED MODULE: ./src/components/FvlColorPicker.vue?vue&type=template&id=1aca68b8&
 
 // EXTERNAL MODULE: ./node_modules/vue-color/dist/vue-color.min.js
 var vue_color_min = __webpack_require__("c345");
@@ -20673,8 +20673,8 @@ var vue_color_min = __webpack_require__("c345");
 
 var FvlColorPicker_component = normalizeComponent(
   components_FvlColorPickervue_type_script_lang_js_,
-  FvlColorPickervue_type_template_id_5dc68206_render,
-  FvlColorPickervue_type_template_id_5dc68206_staticRenderFns,
+  FvlColorPickervue_type_template_id_1aca68b8_render,
+  FvlColorPickervue_type_template_id_1aca68b8_staticRenderFns,
   false,
   null,
   null,
