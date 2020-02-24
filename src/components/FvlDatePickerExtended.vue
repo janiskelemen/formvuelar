@@ -1,7 +1,7 @@
 <template>
   <on-click-outside @do="close()">
     <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-input-wrapper">
-      <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label" v-html="label" />
+      <label v-if="label" :class="labelClass" :for="id" class="fvl-input-label" v-html="label" />
       <div class="fvl-input-group" @click="isOpen = true">
         <slot name="prefix" />
         <input

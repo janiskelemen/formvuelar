@@ -3,7 +3,7 @@
     <label
       v-if="label"
       :class="labelClass"
-      :for="name"
+      :for="id"
       class="fvl-color-picker-label"
       v-html="label"
     />

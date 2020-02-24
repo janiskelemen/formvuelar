@@ -1,6 +1,6 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-image-wrapper">
-    <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label" v-html="label" />
+    <label v-if="label" :for="id" :class="labelClass" class="fvl-image-label" v-html="label" />
 
     <div class="fvl-image-group flex">
       <slot name="preview" :preview="preview">

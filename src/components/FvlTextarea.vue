@@ -1,6 +1,6 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-textarea-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-textarea-label" v-html="label" />
+    <label v-if="label" :class="labelClass" :for="id" class="fvl-textarea-label" v-html="label" />
     <div class="fvl-input-group">
       <textarea
         :id="id"

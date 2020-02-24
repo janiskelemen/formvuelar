@@ -1,6 +1,6 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-slider-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-slider-label" v-html="label" />
+    <label v-if="label" :class="labelClass" :for="id" class="fvl-slider-label" v-html="label" />
     <div class="fvl-slider-group">
       <slot :value="value" name="prefix">
         <span
