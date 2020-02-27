@@ -77,6 +77,7 @@
       <fvl-color-picker
         :value.sync="form.colorPicker"
         class="w-full lg:w-1/2"
+        field-class="w-40"
         format="hex"
         label="Color Picker"
         name="colorpicker"

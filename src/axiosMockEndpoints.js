@@ -9,24 +9,24 @@ var mock = new MockAdapter( axios, {
 
 // Mock GET request to /basic
 mock.onPost( '/basic' ).reply( function ( config ) {
+
     var errors = {}
-    var data = JSON.parse( config.data )
-    if ( data.name === '' ) {
+    if ( config.data.get( 'name' ) === '' ) {
         errors.name = [ 'Please enter your Name!' ]
     }
-    if ( data.password === '' ) {
+    if ( config.data.get( 'password' ) === '' ) {
         errors.password = [ 'Your Password cannot be blank!' ]
     }
-    if ( data.agree === false ) {
+    if ( config.data.get( 'agree' ) === false ) {
         errors.agree = [ 'Your need to accept our terms!' ]
     }
-    if ( data.option === '' ) {
+    if ( config.data.get( 'option' ) === '' ) {
         errors.option = [ 'Your need to select one option!' ]
     }
-    if ( data.color === '' ) {
+    if ( config.data.get( 'color' ) === '' ) {
         errors.color = [ 'Your need to select a color!' ]
     }
-    if ( data.text == '' ) {
+    if ( config.data.get( 'text' ) == '' ) {
         errors.text = [ 'Please type something!' ]
     }
 
@@ -71,14 +71,13 @@ mock.onPost( '/get419' ).reply( function () {
 // Mock POST request to /update
 mock.onPost( '/update' ).reply( function ( config ) {
     var errors = {}
-    var data = JSON.parse( config.data )
-    if ( data.fullname === '' ) {
+    if ( config.data.get( 'fullname' ) === '' ) {
         errors.fullname = [ 'Please enter your full name!' ]
     }
-    if ( data.bio === '' ) {
+    if ( config.data.get( 'bio' ) === '' ) {
         errors.bio = [ 'Please type something!' ]
     }
-    if ( data.pet === '' ) {
+    if ( config.data.get( 'pet' ) === '' ) {
         errors.pet = [ 'Your need to select a pet!' ]
     }
 
