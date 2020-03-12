@@ -60,7 +60,7 @@ export default {
       ],
       showSource: false,
       source:
-        `<fvl-search-select \n` +
+        `<fvl-tag-select \n` +
         `   :selected.sync="form.tags" \n` +
         `   :options="tagsOptions" \n` +
         `   :search-keys="['name']"\n` +
