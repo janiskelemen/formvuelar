@@ -54,7 +54,7 @@ export default {
       emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
       showSource: false,
       source:
-        `<fvl-search-select \n` +
+        `<fvl-tag-select \n` +
         `   :selected.sync="form.emails" \n` +
         `   :options="emailsOptions" \n` +
         `   :search-keys="['email']"\n` +
