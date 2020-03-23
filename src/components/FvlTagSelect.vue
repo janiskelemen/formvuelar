@@ -101,9 +101,7 @@
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
               >
-                <slot :option="option" name="option">
-                  {{ option[optionValue] }}
-                </slot>
+                <slot :option="option" name="option">{{ option[optionValue] }}</slot>
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
@@ -312,6 +310,9 @@
       }
     },
     watch: {
+      optionsUrl() {
+        this.getRemoteOptions(true)
+      },
       filteredOptionsList() {
         if (this.popper !== undefined) {
           this.popper.scheduleUpdate()
@@ -480,8 +481,8 @@
           event.target.reportValidity()
         }
       },
-      getRemoteOptions() {
-        if ((!this.searchRemote && this.optionsList.length) || !this.optionsUrl) return
+      getRemoteOptions(refresh) {
+        if ((!this.searchRemote && this.optionsList.length && !refresh) || !this.optionsUrl) return
         let searchQuery = ''
         if (this.query) {
           searchQuery = '?' + this.searchKeys[0] + '=' + this.query

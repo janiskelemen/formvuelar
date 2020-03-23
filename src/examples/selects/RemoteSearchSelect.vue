@@ -19,7 +19,7 @@
         :search-keys="['name']"
         :lazy-load="true"
         :select-first="true"
-        options-url="https://5c113d7d7e18800013bc38d1.mockapi.io/api/v1/users"
+        :options-url="optionsUrl"
         option-key="id"
         option-value="name"
         name="user"
@@ -33,37 +33,38 @@
 </template>
 
 <script>
-import { FvlForm, FvlSearchSelect } from './../../formvuelar'
+  import { FvlForm, FvlSearchSelect } from './../../formvuelar'
 
-import SourceToggle from './../utilities/SourceToggle.vue'
-import SourceBox from './../utilities/SourceBox.vue'
+  import SourceToggle from './../utilities/SourceToggle.vue'
+  import SourceBox from './../utilities/SourceBox.vue'
 
-export default {
-  components: {
-    FvlForm,
-    FvlSearchSelect,
-    SourceToggle,
-    SourceBox
-  },
-  data() {
-    return {
-      form: {
-        user: null
-      },
-      showSource: false,
-      source:
-        `<fvl-search-select  \n` +
-        `   :selected.sync="form.user"  \n` +
-        `   :search-keys="['name']" \n` +
-        `   :lazy-load="true" \n` +
-        `   options-url="https://jsonplaceholder.typicode.com/users"  \n` +
-        `   option-key="id" \n` +
-        `   option-value="name" \n` +
-        `   name="user" \n` +
-        `   label="Select a user" \n` +
-        `   placeholder="Select user..." \n` +
-        `/>\n`
+  export default {
+    components: {
+      FvlForm,
+      FvlSearchSelect,
+      SourceToggle,
+      SourceBox
+    },
+    data() {
+      return {
+        optionsUrl: 'https://5c113d7d7e18800013bc38d1.mockapi.io/api/v1/users',
+        form: {
+          user: null
+        },
+        showSource: false,
+        source:
+          `<fvl-search-select  \n` +
+          `   :selected.sync="form.user"  \n` +
+          `   :search-keys="['name']" \n` +
+          `   :lazy-load="true" \n` +
+          `   options-url="https://jsonplaceholder.typicode.com/users"  \n` +
+          `   option-key="id" \n` +
+          `   option-value="name" \n` +
+          `   name="user" \n` +
+          `   label="Select a user" \n` +
+          `   placeholder="Select user..." \n` +
+          `/>\n`
+      }
     }
   }
-}
 </script>
