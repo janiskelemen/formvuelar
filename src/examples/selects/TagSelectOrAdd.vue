@@ -33,48 +33,48 @@
 </template>
 
 <script>
-import { FvlForm, FvlTagSelect } from './../../formvuelar'
+  import { FvlForm, FvlTagSelect } from './../../formvuelar'
 
-import SourceToggle from './../utilities/SourceToggle.vue'
-import SourceBox from './../utilities/SourceBox.vue'
+  import SourceToggle from './../utilities/SourceToggle.vue'
+  import SourceBox from './../utilities/SourceBox.vue'
 
-export default {
-  components: {
-    FvlForm,
-    FvlTagSelect,
-    SourceToggle,
-    SourceBox
-  },
-  data() {
-    return {
-      form: {
-        tags: null
-      },
-      tagsOptions: [
-        { name: 'Cloud' },
-        { name: 'Autocompletion' },
-        { name: 'Remote list' },
-        { name: 'Fast' },
-        { name: 'Nice' },
-        { name: 'Cool' },
-        { name: 'Vue' },
-        { name: 'Advanced' }
-      ],
-      showSource: false,
-      source:
-        `<fvl-tag-select \n` +
-        `   :selected.sync="form.tags" \n` +
-        `   :options="tagsOptions" \n` +
-        `   :search-keys="['name']"\n` +
-        `   :allow-new="true"\n` +
-        `   :max="20"\n` +
-        `   option-key="name"\n` +
-        `   option-value="name"\n` +
-        `   name="tags"\n` +
-        `   label="Choose some tags"\n` +
-        `   placeholder="Select..."\n` +
-        `/>\n`
+  export default {
+    components: {
+      FvlForm,
+      FvlTagSelect,
+      SourceToggle,
+      SourceBox
+    },
+    data() {
+      return {
+        form: {
+          tags: null
+        },
+        tagsOptions: [
+          { name: 'Cloud' },
+          { name: 'Autocompletion' },
+          { name: 'Remote list' },
+          { name: 'Fast' },
+          { name: 'Nice' },
+          { name: 'Cool' },
+          { name: 'Vue' },
+          { name: 'Advanced' }
+        ],
+        showSource: false,
+        source:
+          `<fvl-tag-select \n` +
+          `   :selected.sync="form.tags" \n` +
+          `   :options="tagsOptions" \n` +
+          `   :search-keys="['name']"\n` +
+          `   :allow-new="true"\n` +
+          `   :max="20"\n` +
+          `   option-key="name"\n` +
+          `   option-value="name"\n` +
+          `   name="tags"\n` +
+          `   label="Choose some tags"\n` +
+          `   placeholder="Select..."\n` +
+          `/>\n`
+      }
     }
   }
-}
 </script>

@@ -68,3 +68,11 @@
 .fvl-search-select-dropdown-option:hover {
   @apply bg-gray-700 cursor-pointer;
 }
+
+.fvl-search-dropdown-option-disabled {
+  @apply opacity-25;
+}
+
+.fvl-search-dropdown-option-disabled:hover {
+  @apply cursor-default;
+}

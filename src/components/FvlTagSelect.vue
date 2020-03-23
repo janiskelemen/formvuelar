@@ -97,11 +97,15 @@
               <li
                 v-for="(option, index) in filteredOptionsList"
                 :key="option[optionKey] + index"
-                :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex}"
+                :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex, 'fvl-search-dropdown-option-disabled': optionIsDisabled(option)}"
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
               >
-                <slot :option="option" name="option">{{ option[optionValue] }}</slot>
+                <slot
+                  :option="option"
+                  :disabled="optionIsDisabled(option)"
+                  name="option"
+                >{{ option[optionValue] }}</slot>
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
@@ -160,6 +164,10 @@
         default: null
       },
       options: {
+        type: Array,
+        default: () => []
+      },
+      disabledOptions: {
         type: Array,
         default: () => []
       },
@@ -313,6 +321,9 @@
       optionsUrl() {
         this.getRemoteOptions(true)
       },
+      disabledOptions() {
+        this.getRemoteOptions(true)
+      },
       filteredOptionsList() {
         if (this.popper !== undefined) {
           this.popper.scheduleUpdate()
@@ -330,6 +341,7 @@
     },
     methods: {
       select(option) {
+        if (this.optionIsDisabled(option)) return
         let $this = this
         /* Add the selected option key to selected array */
         let selected = this.selected === null ? [] : this.selected
@@ -507,6 +519,16 @@
               $this.popper.scheduleUpdate()
             }
           })
+      },
+      optionIsDisabled(option) {
+        if (this.disabledOptions === null) return false
+        /* check if whole object is in disabled options list */
+        if (this.disabledOptions.length && typeof this.disabledOptions[0] === 'object') {
+          let disabledOptions = JSON.parse(JSON.stringify(this.disabledOptions))
+          return typeof _find(disabledOptions, JSON.parse(JSON.stringify(option))) !== 'undefined'
+        }
+        /* check if option key is in disabled options list */
+        return this.disabledOptions.includes(option[this.optionKey])
       }
     }
   }
