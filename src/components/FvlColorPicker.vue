@@ -21,7 +21,7 @@
             :readonly="readonly"
             type="text"
             class="fvl-color-picker"
-            :pattern="pattern"
+            :pattern="validateFormat ? pattern : null"
             @keyup.space="toggle()"
             @change="updateValueManually($event.target.value)"
           />
@@ -84,7 +84,7 @@
         type: String,
         validator: function(value) {
           // The value must match one of these strings
-          return ['hex', 'hex8', 'hsl', 'hsv', 'rgba'].indexOf(value) !== -1
+          return ['hex', 'hex8', 'hsl', 'hsv', 'rgba', 'linearGradient'].indexOf(value) !== -1
         },
         default: 'hex'
       },
@@ -117,13 +117,19 @@
         type: Boolean,
         required: false,
         default: false
+      },
+      validateFormat: {
+        type: Boolean,
+        required: false,
+        default: true
       }
     },
     data() {
       return {
         isOpen: false,
         patterns: {
-          hex: `[#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3})`,
+          hex: `([#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3}|[a-fA-F\\d]{8})|linear-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\))`,
+          linearGradient: `linear-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\)`,
           hex8: `[#]([a-fA-F\\d]{8}`,
           hsl: `[Hh][Ss][Ll][\\(](((([\\d]{1,3}|[\\d\\%]{2,4})[\\,]{0,1})[\\s]*){3})[\\)]`,
           hsla: `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
