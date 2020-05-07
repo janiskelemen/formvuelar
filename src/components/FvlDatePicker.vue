@@ -13,6 +13,7 @@
         :readonly="readonly"
         :disabled="disabled"
         @on-change="$parent.dirty(name); $emit('changed');"
+        @on-close="$parent.dirty(name); $emit('closed');"
       />
       <slot name="suffix" />
     </div>

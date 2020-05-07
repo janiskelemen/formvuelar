@@ -38,9 +38,7 @@
                 type="button"
                 @click="inputvalue = preset.start + ' - ' + preset.end"
                 @keydown.esc="close()"
-              >
-                {{ preset.name }}
-              </button>
+              >{{ preset.name }}</button>
             </div>
 
             <div class="fvl-date-picker-extended-flatpickr-wrapper">
@@ -240,6 +238,7 @@
         this.isOpen = false
         if (this.value && typeof this.value.end == 'undefined') {
           this.inputvalue = ''
+          this.$emit('closed')
           this.$emit('update:value', '')
           this.$emit('update:start', '')
           this.$emit('update:end', '')
