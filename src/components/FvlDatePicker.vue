@@ -129,20 +129,26 @@
       }
     },
     watch: {
-      value(newValue) {
-        this.inputvalue = newValue
+      value(newValue, oldValue) {
+        if (this.config.mode != 'range' && oldValue != newValue) {
+          this.inputvalue = newValue
+        }
       },
-      inputvalue(newValue) {
+      inputvalue(newValue, oldValue) {
         let formatedValue
         if (this.config.mode == 'range') {
-          newValue = newValue.split(' - ')
-          formatedValue = { start: newValue[0], end: newValue[1] }
-          this.$emit('update:start', newValue[0])
-          this.$emit('update:end', newValue[1])
+          let newValueParts = typeof newValue == 'string' ? newValue.split(' - ') : newValue
+          formatedValue = { start: newValueParts[0], end: newValueParts[1] }
+          this.$emit('update:start', formatedValue.start)
+          this.$emit('update:end', formatedValue.end)
+          if (oldValue != formatedValue) {
+            // console.log(oldValue, formatedValue)
+            this.$emit('update:value', formatedValue)
+          }
         } else {
           formatedValue = newValue
+          this.$emit('update:value', formatedValue)
         }
-        this.$emit('update:value', formatedValue)
       }
     }
   }
