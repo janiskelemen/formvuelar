@@ -129,6 +129,9 @@
       }
     },
     watch: {
+      value(newValue) {
+        this.inputvalue = newValue
+      },
       inputvalue(newValue) {
         let formatedValue
         if (this.config.mode == 'range') {
