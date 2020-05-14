@@ -117,7 +117,7 @@
             </div>
           </div>
         </template>
-        <template v-slot:button-wrapper="{ selectImage }">
+        <template v-slot:button-wrapper="{ preview, selectImage }">
           <button
             class="mt-5 bg-grey-200 text-xs rounded px-4 py-2"
             @click="selectImage()"

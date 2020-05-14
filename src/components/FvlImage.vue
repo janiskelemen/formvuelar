@@ -8,7 +8,7 @@
           <img v-if="preview.src" :src="preview.src" :alt="fileName" />
         </div>
       </slot>
-      <slot name="button-wrapper" :select-image="() => $refs[name].click()">
+      <slot name="button-wrapper" :preview="preview" :select-image="() => $refs[name].click()">
         <div class="fvl-image-button-wrapper" :class="{'fvl-image-hide-file-name': !showFileName}">
           <button class="fvl-image-button" type="button" @click.prevent="$refs[name].click()">
             <slot name="button">
@@ -127,6 +127,9 @@
         if (!(newValue instanceof File)) {
           if (typeof newValue == 'string' && newValue != '' && this.isValidURL(newValue)) {
             this.preview.src = newValue
+          }
+          if (newValue === null) {
+            this.preview.src = ''
           }
           this.$emit('update:file', '')
         }
