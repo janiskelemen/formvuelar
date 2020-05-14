@@ -2,36 +2,36 @@
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-image-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label" v-html="label" />
 
-    <div class="fvl-image-group flex">
-      <slot name="preview" :preview="preview">
-        <div
-          class="relative flex justify-center h-10 w-10 self-center bg-gray-200 rounded-full overflow-hidden mr-4 flex-shrink-0"
-        >
-          <img v-if="preview.src" :src="preview.src" :alt="fileName" class="h-full w-full" />
+    <div class="fvl-image-group" :class="fieldClass">
+      <slot name="preview" :preview="preview" :select-image="() => $refs[name].click()">
+        <div class="fvl-image-preview">
+          <img v-if="preview.src" :src="preview.src" :alt="fileName" />
         </div>
       </slot>
-      <div class="fvl-image-button-wrapper" :class="{'fvl-image-hide-file-name': !showFileName}">
-        <button class="fvl-image-button" type="button" @click.prevent="$refs[name].click()">
-          <slot name="button">
-            <span v-text="getConfig('selectImageText', 'Select Image')" />
-          </slot>
-        </button>
-        <span v-if="showFileName" class="fvl-image-name" v-text="fileName" />
-        <input
-          :id="id"
-          :ref="name"
-          :name="name"
-          :placeholder="placeholder"
-          :class="fieldClass"
-          :required="required"
-          :readonly="readonly"
-          :accept="accept"
-          :disabled="disabled || $parent.isLoading"
-          type="file"
-          class="fvl-image"
-          @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
-        />
-      </div>
+      <slot name="button-wrapper" :select-image="() => $refs[name].click()">
+        <div class="fvl-image-button-wrapper" :class="{'fvl-image-hide-file-name': !showFileName}">
+          <button class="fvl-image-button" type="button" @click.prevent="$refs[name].click()">
+            <slot name="button">
+              <span v-text="getConfig('selectImageText', 'Select Image')" />
+            </slot>
+          </button>
+          <span v-if="showFileName" class="fvl-image-name" v-text="fileName" />
+        </div>
+      </slot>
+      <input
+        :id="id"
+        :ref="name"
+        :name="name"
+        :placeholder="placeholder"
+        :class="fieldClass"
+        :required="required"
+        :readonly="readonly"
+        :accept="accept"
+        :disabled="disabled || $parent.isLoading"
+        type="file"
+        class="fvl-image"
+        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
+      />
     </div>
     <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">

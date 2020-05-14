@@ -63,10 +63,70 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showImageSource2 = !showImageSource2" />
       <!-- File input component -->
-      <fvl-image :file.sync="form.avatar2" :show-file-name="false" label="Avatar without file name" name="avatar2"></fvl-image>
+      <fvl-image
+        :file.sync="form.avatar2"
+        :show-file-name="false"
+        label="Avatar without file name"
+        name="avatar2"
+      ></fvl-image>
 
       <!-- Source code area (only for example) -->
       <source-box :show-source="showImageSource2" :source="imageSource2" />
+    </fvl-form>
+
+    <!-- Setup multipart form to support file uploads -->
+    <fvl-form :data="form" url="/upload" multipart class="relative">
+      <!-- Add source code toggle button (only for example) -->
+      <source-toggle @toggle="showImageSource3 = !showImageSource3" />
+      <!-- File input component -->
+      <fvl-image
+        :file.sync="form.customimage"
+        :show-file-name="false"
+        label="Image with custom preview and button"
+        name="customimage"
+        field-class="flex-col"
+      >
+        <template v-slot:preview="{ preview, selectImage }">
+          <div
+            class="flex justify-center w-full h-48 flex-shrink-0 shadow rounded-lg bg-gray-200 cursor-pointer"
+            @click="selectImage"
+          >
+            <img
+              v-if="preview.src"
+              class="self-center h-48 rounded-lg w-full object-cover"
+              :src="preview.src"
+            />
+            <div v-else class="self-center text-center">
+              <svg
+                viewBox="0 0 24 24"
+                width="50"
+                height="50"
+                stroke="currentColor"
+                stroke-width="1"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-400 mx-auto"
+              >
+                <polyline points="16 16 12 12 8 16" />
+                <line x1="12" y1="12" x2="12" y2="21" />
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
+                <polyline points="16 16 12 12 8 16" />
+              </svg>
+              <h2 class="mt-2 text-gray-500 font-bold">Click to select an image</h2>
+            </div>
+          </div>
+        </template>
+        <template v-slot:button-wrapper="{ selectImage }">
+          <button
+            class="mt-5 bg-grey-200 text-xs rounded px-4 py-2"
+            @click="selectImage()"
+          >You can also click me to trigger file selection</button>
+        </template>
+      </fvl-image>
+
+      <!-- Source code area (only for example) -->
+      <source-box :show-source="showImageSource3" :source="imageSource3" />
     </fvl-form>
   </div>
 </template>
@@ -91,20 +151,74 @@
           file: null,
           avatar: 'https://www.fakepersongenerator.com/Face/female/female2016102582457221.jpg',
           avatar2: 'https://www.fakepersongenerator.com/Face/female/female2016102582457221.jpg',
+          customimage: '',
           name: null
         },
         showFileSource: false,
         fileSource:
-          `<fvl-file \n` + `    label="File" \n` + `    name="file" \n` + `    :file.sync="form.file" \n` + `/> \n`
-        ,
+          `<fvl-file \n` + `    label="File" \n` + `    name="file" \n` + `    :file.sync="form.file" \n` + `/> \n`,
         showImageSource: false,
         imageSource:
-          `<fvl-image \n` + `    label="Avatar" \n` + `    name="avatar" \n` + `    :file.sync="form.avatar" \n` + `/> \n`
-        ,
+          `<fvl-image \n` +
+          `    label="Avatar" \n` +
+          `    name="avatar" \n` +
+          `    :file.sync="form.avatar" \n` +
+          `/> \n`,
         showImageSource2: false,
         imageSource2:
-          `<fvl-image \n` + `    label="Avatar" \n` + `    name="avatar" \n` + `    :show-file-name="false" \n` + `    :file.sync="form.avatar" \n` + `/> \n`
-
+          `<fvl-image \n` +
+          `    label="Avatar" \n` +
+          `    name="avatar" \n` +
+          `    :show-file-name="false" \n` +
+          `    :file.sync="form.avatar" \n` +
+          `/> \n`,
+        showImageSource3: false,
+        imageSource3:
+          `<fvl-image \n` +
+          `    :file.sync="form.customimage"\n` +
+          `    :show-file-name="false"\n` +
+          `    label="Image with custom preview and button"\n` +
+          `    name="customimage"\n` +
+          `    field-class="flex-col"\n` +
+          `  >\n` +
+          `    <template v-slot:preview="{ preview, selectImage }">\n` +
+          `      <div\n` +
+          `        class="flex justify-center w-full h-48 flex-shrink-0 shadow rounded-lg bg-gray-200 cursor-pointer"\n` +
+          `        @click="selectImage"\n` +
+          `      >\n` +
+          `        <img\n` +
+          `          v-if="preview.src"\n` +
+          `          class="self-center h-48 rounded-lg w-full object-cover"\n` +
+          `          :src="preview.src"\n` +
+          `        />\n` +
+          `        <div v-else class="self-center text-center">\n` +
+          `          <svg\n` +
+          `            viewBox="0 0 24 24"\n` +
+          `            width="50"\n` +
+          `            height="50"\n` +
+          `            stroke="currentColor"\n` +
+          `            stroke-width="1"\n` +
+          `            fill="none"\n` +
+          `            stroke-linecap="round"\n` +
+          `            stroke-linejoin="round"\n` +
+          `            class="text-gray-400 mx-auto"\n` +
+          `          >\n` +
+          `            <polyline points="16 16 12 12 8 16" />\n` +
+          `            <line x1="12" y1="12" x2="12" y2="21" />\n` +
+          `            <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />\n` +
+          `            <polyline points="16 16 12 12 8 16" />\n` +
+          `          </svg>\n` +
+          `          <h2 class="mt-2 text-gray-500 font-bold">Click to select an image</h2>\n` +
+          `        </div>\n` +
+          `      </div>\n` +
+          `    </template>\n` +
+          `    <template v-slot:button-wrapper="{ selectImage }">\n` +
+          `      <button\n` +
+          `        class="mt-5 bg-grey-200 text-xs rounded px-4 py-2"\n` +
+          `        @click="selectImage()"\n` +
+          `      >You can also click me to trigger file selection</button>\n` +
+          `    </template>\n` +
+          `  </fvl-image>`
       }
     }
   }
