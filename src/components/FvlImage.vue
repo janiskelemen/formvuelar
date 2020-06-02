@@ -143,6 +143,7 @@
     methods: {
       //Handles a change on the file upload
       handleFileChange() {
+        this.$emit('processstarted')
         let file = this.$refs[this.name].files[0]
         this.fileName = file.name
         let mime = file.type
@@ -151,6 +152,7 @@
         let reader = this.getFileReader(mime)
         reader.readAsDataURL(file)
         this.$emit('update:file', file)
+        this.$emit('processfinished')
       },
       getFileReader(mime) {
         let $this = this

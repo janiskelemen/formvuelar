@@ -1,24 +1,26 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-radio-wrapper">
     <span class="fvl-radio-group-label" v-html="label"></span>
-    <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
-      <input
-        :id="name+key"
-        :name="name"
-        :value="key"
-        :checked="checked == key"
-        :class="fieldClass"
-        :required="required"
-        :readonly="readonly"
-        :disabled="disabled"
-        type="radio"
-        class="fvl-radio"
-        @change="$emit('update:checked', $event.target.value); $emit('changed'); $parent.dirty(name);"
-      >
-      <label :class="labelClass" :for="name+key" class="fvl-radio-label">
-        <span class="fvl-radio-toggle" />
-        {{ option }}
-      </label>
+    <div class="fvl-radio-group-wrapper">
+      <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
+        <input
+          :id="name+key"
+          :name="name"
+          :value="key"
+          :checked="checked == key"
+          :class="fieldClass"
+          :required="required"
+          :readonly="readonly"
+          :disabled="disabled"
+          type="radio"
+          class="fvl-radio"
+          @change="$emit('update:checked', $event.target.value); $emit('changed'); $parent.dirty(name);"
+        />
+        <label :class="labelClass" :for="name+key" class="fvl-radio-label">
+          <span class="fvl-radio-toggle" />
+          <span class="fvl-radio-toggle-text">{{ option }}</span>
+        </label>
+      </div>
     </div>
     <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">

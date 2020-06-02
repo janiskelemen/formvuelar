@@ -7,7 +7,7 @@
 }
 
 .fvl-radio-label {
-    @apply block tracking-wide text-gray-700 mb-2;
+    @apply block tracking-wide text-gray-700 mb-2 flex;
 }
 
 .fvl-radio-group {
@@ -23,7 +23,7 @@
 }
 
 .fvl-radio+label .fvl-radio-toggle {
-    @apply relative inline-block align-text-bottom bg-gray-200 rounded-full mr-4 h-6 w-6;
+    @apply relative inline-block align-text-bottom bg-gray-200 rounded-full mr-4 h-6 w-6 self-center;
 }
 
 .fvl-radio:checked+label .fvl-radio-toggle {
@@ -41,4 +41,8 @@
 
 .fvl-radio:disabled+label .fvl-radio-toggle {
     @apply bg-gray-200 shadow-none;
+}
+
+.fvl-radio-toggle-text {
+    @apply self-center;
 }
