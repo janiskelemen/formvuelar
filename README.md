@@ -57,8 +57,8 @@ npm install formvuelar --save
 - [Helpspace.com](https://helpspace.com)
 
 
-<a href="https://helpspace.io/#formvuelar" target="_blank" title="HelpSpace">
-  <img src="https://helpspace.io/img/brand/og_helpspace.png" width="400px" alt="HelpSpace.com">
+<a href="https://helpspace.com/#formvuelar" target="_blank" title="HelpSpace">
+  <img src="https://cdn.helpspace.com/brand/og_card.png" width="400px" alt="HelpSpace.com">
 </a>
 
 <h2>License</h2>
