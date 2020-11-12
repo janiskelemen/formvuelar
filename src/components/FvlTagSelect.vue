@@ -1,35 +1,25 @@
 <template>
   <on-click-outside @do="close()">
     <div
-      :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
+      :class="{ 'fvl-has-error': $parent.hasErrors(name), 'fvl-dropdown-is-open': isOpen }"
       class="fvl-tag-select-wrapper"
     >
-      <label
-        v-if="label"
-        :class="labelClass"
-        class="fvl-select-label"
-        @click="toggle()"
-        v-html="label"
-      />
-      <div :class="{'fvl-tag-select-input-inline': allowNew}" class="fvl-tag-select-input-wrapper">
+      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label" />
+      <div :class="{ 'fvl-tag-select-input-inline': allowNew }" class="fvl-tag-select-input-wrapper">
         <button
           ref="selectinput"
-          :class="[{ 'fvl-tag-select-placeholder': !selectedOptionValues.length}, fieldClass]"
+          :class="[{ 'fvl-tag-select-placeholder': !selectedOptionValues.length }, fieldClass]"
           :disabled="disabled"
           class="fvl-tag-select"
           type="button"
-          @click.prevent="allowNew ? focusInlineInput() : toggle(); allowNew && openOnClick ? open() : ''"
+          @click.prevent="
+            allowNew ? focusInlineInput() : toggle()
+            allowNew && openOnClick ? open() : ''
+          "
           @keydown.space="toggle()"
         >
-          <span
-            v-show="!selectedOptionValues.length && placeholder && !allowNew"
-            v-text="placeholder"
-          />
-          <span
-            v-for="(value, index) in selectedOptionValues"
-            :key="value + index"
-            class="fvl-tag-select-item"
-          >
+          <span v-show="!selectedOptionValues.length && placeholder && !allowNew" v-text="placeholder" />
+          <span v-for="(value, index) in selectedOptionValues" :key="value + index" class="fvl-tag-select-item">
             {{ value }}
             <svg
               class="fvl-tag-select-item-remove"
@@ -49,23 +39,30 @@
             v-if="allowNew && !(max !== null && selected !== null && selected.length >= max)"
             ref="inlineinput"
             v-model="query"
-            :style="{ width: String(query).length*18 + 'px', 
-                      maxWidth: '100%', 
-                      minWidth: selectedOptionValues.length ? '80px' : String(placeholder).length*18 + 'px'
+            :style="{
+              width: String(query).length * 18 + 'px',
+              maxWidth: '100%',
+              minWidth: selectedOptionValues.length ? '80px' : String(placeholder).length * 18 + 'px',
             }"
-            :class="{'p-1': selectedOptionValues.length}"
+            :class="{ 'p-1': selectedOptionValues.length }"
             :placeholder="selectedOptionValues.length ? '' : placeholder"
-            :autocomplete="'new-'+name"
+            :autocomplete="'new-' + name"
             :type="type"
             class="fvl-tag-inline-input"
             @keydown.esc="close()"
             @keydown="openOnKeyDown($event)"
             @keydown.down="highlightNext()"
             @keydown.up="highlightPrevious()"
-            @keydown.enter.prevent="checkValidity($event);"
+            @keydown.enter.prevent="checkValidity($event)"
             @blur="query ? checkValidity($event) : ''"
-            @keydown.tab="checkValidity($event); close();"
-            @input="highlightedIndex = -1; getRemoteOptions();"
+            @keydown.tab="
+              checkValidity($event)
+              close()
+            "
+            @input="
+              highlightedIndex = -1
+              getRemoteOptions()
+            "
             @keydown.backspace="removeTag()"
           />
         </button>
@@ -91,21 +88,25 @@
               @keydown.up="highlightPrevious()"
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
-              @input="highlightedIndex = 0; getRemoteOptions();"
+              @input="
+                highlightedIndex = 0
+                getRemoteOptions()
+              "
             />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
                 v-for="(option, index) in filteredOptionsList"
-                :key="option[optionKey] + index"
-                :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex, 'fvl-search-dropdown-option-disabled': optionIsDisabled(option)}"
+                :key="option[optionKey] + '-' + index"
+                :class="{
+                  'fvl-search-select-dropdown-option-highlighted': index === highlightedIndex,
+                  'fvl-search-dropdown-option-disabled': optionIsDisabled(option),
+                }"
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
               >
-                <slot
-                  :option="option"
-                  :disabled="optionIsDisabled(option)"
-                  name="option"
-                >{{ option[optionValue] }}</slot>
+                <slot :option="option" :disabled="optionIsDisabled(option)" name="option">
+                  {{ option[optionValue] }}
+                </slot>
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
@@ -143,123 +144,123 @@
   export default {
     components: {
       ValidationErrors,
-      OnClickOutside
+      OnClickOutside,
     },
     mixins: [config],
     props: {
       selected: {
         type: Array,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       label: {
         type: String,
-        default: null
+        default: null,
       },
       options: {
         type: Array,
-        default: () => []
+        default: () => [],
       },
       disabledOptions: {
         type: Array,
-        default: () => []
+        default: () => [],
       },
       optionsUrl: {
         type: String,
-        default: null
+        default: null,
       },
       responseDataPath: {
         type: String,
-        default: null
+        default: null,
       },
       lazyLoad: {
         type: Boolean,
-        default: false
+        default: false,
       },
       optionKey: {
         type: String,
-        required: true
+        required: true,
       },
       optionValue: {
         type: String,
-        required: true
+        required: true,
       },
       searchKeys: {
         type: Array,
         required: true,
-        default: () => []
+        default: () => [],
       },
       searchRemote: {
         type: Boolean,
-        default: false
+        default: false,
       },
       allowEmpty: {
         type: Boolean,
-        default: true
+        default: true,
       },
       allowNew: {
         type: Boolean,
-        default: false
+        default: false,
       },
       max: {
         type: Number,
-        default: null
+        default: null,
       },
       min: {
         type: Number,
-        default: null
+        default: null,
       },
       type: {
         type: String,
-        default: 'text'
+        default: 'text',
       },
       placeholder: {
         type: String,
         required: false,
-        default: '&nbsp;'
+        default: '&nbsp;',
       },
       openOnClick: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       autocomplete: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: ''
+        default: '',
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
-      }
+        default: false,
+      },
     },
     data() {
       return {
@@ -267,7 +268,7 @@
         query: null,
         highlightedIndex: 0,
         remoteOptions: [],
-        isLoading: false
+        isLoading: false,
       }
     },
     computed: {
@@ -279,7 +280,7 @@
         let options = this.searchRemote ? this.remoteOptions : this.optionsList
         /* Hide selected items from options list */
         if (this.selected) {
-          options = _filter(options, function(o) {
+          options = _filter(options, function (o) {
             return $this.selected.indexOf(o[$this.optionKey]) === -1
           })
         }
@@ -289,7 +290,7 @@
 
         let fuse = new Fuse(options, {
           threshold: 0.2,
-          keys: this.searchKeys
+          keys: this.searchKeys,
         })
         return fuse.search(this.query)
       },
@@ -297,8 +298,8 @@
         let $this = this
         let options = []
         if (!this.selected) return options
-        this.selected.forEach(function(element) {
-          let option = _find($this.optionsList, function(o) {
+        this.selected.forEach(function (element) {
+          let option = _find($this.optionsList, function (o) {
             return o[$this.optionKey] == element
           })
           if (option) {
@@ -312,10 +313,10 @@
       },
       selectedOptionIndex() {
         let $this = this
-        return _findKey(this.optionsList, function(o) {
+        return _findKey(this.optionsList, function (o) {
           return o[$this.optionKey] == $this.selected
         })
-      }
+      },
     },
     watch: {
       optionsUrl() {
@@ -328,7 +329,7 @@
         if (this.popper !== undefined) {
           this.popper.scheduleUpdate()
         }
-      }
+      },
     },
     mounted() {
       if (!this.optionsUrl) return
@@ -349,7 +350,7 @@
         if (this.max !== null && selected.length >= this.max) return
 
         option = typeof option === 'object' ? option[$this.optionKey] : option
-        let elementexists = _find(selected, function(o) {
+        let elementexists = _find(selected, function (o) {
           return o == option
         })
         if (elementexists || (!option && !this.filteredOptionsList.length)) return
@@ -408,7 +409,7 @@
       setupPopper() {
         if (this.popper === undefined) {
           this.popper = new Popper(this.$refs.selectinput, this.$refs.selectdropdown, {
-            placement: 'bottom'
+            placement: 'bottom',
           })
         } else {
           this.popper.scheduleUpdate()
@@ -504,16 +505,16 @@
         axios({
           method: 'get',
           url: this.optionsUrl + searchQuery,
-          responseType: 'json'
+          responseType: 'json',
         })
-          .then(function(response) {
+          .then(function (response) {
             $this.remoteOptions = $this.responseDataPath ? _get(response.data, $this.responseDataPath) : response.data
             $this.$emit('remoteSuccess', response)
           })
-          .catch(function(error) {
+          .catch(function (error) {
             $this.$emit('remoteError', error)
           })
-          .then(function() {
+          .then(function () {
             $this.isLoading = false
             if ($this.popper) {
               $this.popper.scheduleUpdate()
@@ -529,8 +530,8 @@
         }
         /* check if option key is in disabled options list */
         return this.disabledOptions.includes(option[this.optionKey])
-      }
-    }
+      },
+    },
   }
 </script>
 
