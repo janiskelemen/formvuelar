@@ -56,5 +56,10 @@ npm install formvuelar --save
 - [Janis Kelemen](https://twitter.com/janiskelemen)
 - [Helpspace.com](https://helpspace.com)
 
+
+<a href="https://helpspace.io/#formvuelar" target="_blank" title="HelpSpace">
+  <img src="https://helpspace.io/img/brand/og_helpspace.png" width="400px" alt="HelpSpace.com">
+</a>
+
 <h2>License</h2>
 <p>Released under the MIT License.</p>
