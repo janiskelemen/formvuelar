@@ -54,7 +54,7 @@ npm install formvuelar --save
 ## Credits
 
 - [Janis Kelemen](https://twitter.com/janiskelemen)
-- [Helpspace.io](https://helpspace.io)
+- [Helpspace.com](https://helpspace.com)
 
 <h2>License</h2>
 <p>Released under the MIT License.</p>
