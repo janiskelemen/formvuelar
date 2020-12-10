@@ -9,5 +9,5 @@
 
 .fvl-input-error-message,
 .fvl-checkbox-error-message {
-    @apply text-red-400 font-bold pt-1;
+    @apply text-red-400 font-bold pt-1 whitespace-normal;
 }
