@@ -13,7 +13,7 @@
     "laravel"
   ],
   "main": "./dist/formvuelar.common.js",
-  "version": "1.5.21",
+  "version": "1.6.0",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
