@@ -292,7 +292,7 @@
           threshold: 0.2,
           keys: this.searchKeys,
         })
-        return fuse.search(this.query)
+        return fuse.search(this.query).map((a) => a.item)
       },
       selectedOptionValues() {
         let $this = this
@@ -381,7 +381,7 @@
       },
       removeTag() {
         if (this.selected && !this.query) {
-          this.selected.splice(this.selected.length - 1, 1)
+          //this.selected.splice(this.selected.length - 1, 1)
           this.close()
         }
         /* Close dropdown*/

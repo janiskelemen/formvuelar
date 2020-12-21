@@ -938,7 +938,7 @@ span.flatpickr-weekday {
 }
 
 .fvl-date-picker-extended-preset-item:focus {
-  @apply outline-none shadow-outline;
+  @apply outline-none ring;
 }
 
 .fvl-date-picker-extended-preset-item-active {
@@ -947,7 +947,7 @@ span.flatpickr-weekday {
 
 @media (min-width: 768px) {
   .fvl-date-picker-extended-wrapper {
-    @apply flex-no-wrap flex;
+    @apply flex-nowrap flex;
   }
 
   .fvl-date-picker-extended-preset-item {

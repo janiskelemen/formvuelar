@@ -16,7 +16,7 @@
 }
 
 .fvl-image-button {
-  @apply inline-flex items-center font-bold text-white bg-teal-600 border border-teal-600 py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-no-wrap;
+  @apply inline-flex items-center font-bold text-white bg-teal-600 border border-teal-600 py-3 px-4 leading-tight rounded-l cursor-pointer whitespace-nowrap;
 }
 
 .fvl-image-hide-file-name {

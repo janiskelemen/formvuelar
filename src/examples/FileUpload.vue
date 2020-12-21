@@ -7,7 +7,8 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
@@ -16,12 +17,7 @@
       <!-- File input component -->
       <fvl-file :file.sync="form.file" label="File" name="file">
         <template slot="button">
-          <svg
-            class="fill-current text-white mr-2"
-            width="18"
-            height="16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg class="fill-current text-white mr-2" width="18" height="16" xmlns="http://www.w3.org/2000/svg">
             <g fill-rule="nonzero">
               <path
                 d="M17.0591 6.85227c-.47046 0-.83865.36818-.83865.83864v5.76818H1.7591V7.67045c0-.47045-.36818-.83863-.83864-.83863-.47045 0-.83863.36818-.83863.83863v6.62728c0 .47045.36818.83863.83863.83863H17.0591c.47046 0 .83864-.36818.83864-.83863V7.67045c0-.45-.36818-.81818-.83864-.81818z"
@@ -45,7 +41,8 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
@@ -86,16 +83,12 @@
         name="customimage"
         field-class="flex-col"
       >
-        <template v-slot:preview="{ preview, selectImage }">
+        <template #preview="{ preview, selectImage }">
           <div
             class="flex justify-center w-full h-48 flex-shrink-0 shadow rounded-lg bg-gray-200 cursor-pointer"
             @click="selectImage"
           >
-            <img
-              v-if="preview.src"
-              class="self-center h-48 rounded-lg w-full object-cover"
-              :src="preview.src"
-            />
+            <img v-if="preview.src" class="self-center h-48 rounded-lg w-full object-cover" :src="preview.src" />
             <div v-else class="self-center text-center">
               <svg
                 viewBox="0 0 24 24"
@@ -117,11 +110,10 @@
             </div>
           </div>
         </template>
-        <template v-slot:button-wrapper="{ preview, selectImage }">
-          <button
-            class="mt-5 bg-grey-200 text-xs rounded px-4 py-2"
-            @click="selectImage()"
-          >You can also click me to trigger file selection</button>
+        <template #button-wrapper="{ selectImage }">
+          <button class="mt-5 bg-grey-200 text-xs rounded px-4 py-2" @click="selectImage()">
+            You can also click me to trigger file selection
+          </button>
         </template>
       </fvl-image>
 
@@ -143,7 +135,7 @@
       FvlFile,
       SourceToggle,
       SourceBox,
-      FvlImage
+      FvlImage,
     },
     data() {
       return {
@@ -152,7 +144,7 @@
           avatar: 'https://www.fakepersongenerator.com/Face/female/female2016102582457221.jpg',
           avatar2: 'https://www.fakepersongenerator.com/Face/female/female2016102582457221.jpg',
           customimage: '',
-          name: null
+          name: null,
         },
         showFileSource: false,
         fileSource:
@@ -218,8 +210,8 @@
           `        @click="selectImage()"\n` +
           `      >You can also click me to trigger file selection</button>\n` +
           `    </template>\n` +
-          `  </fvl-image>`
+          `  </fvl-image>`,
       }
-    }
+    },
   }
 </script>

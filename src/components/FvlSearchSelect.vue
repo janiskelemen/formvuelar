@@ -1,20 +1,14 @@
 <template>
   <on-click-outside @do="close()">
     <div
-      :class="{ 'fvl-has-error' : $parent.hasErrors(name), 'fvl-dropdown-is-open' : isOpen }"
+      :class="{ 'fvl-has-error': $parent.hasErrors(name), 'fvl-dropdown-is-open': isOpen }"
       class="fvl-search-select-wrapper"
     >
-      <label
-        v-if="label"
-        :class="labelClass"
-        class="fvl-select-label"
-        @click="toggle()"
-        v-html="label"
-      />
+      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label" />
       <div class="fvl-search-select-input-wrapper">
         <button
           ref="selectinput"
-          :class="[{ 'fvl-search-select-placeholder': !selectedOptionValue}, fieldClass]"
+          :class="[{ 'fvl-search-select-placeholder': !selectedOptionValue }, fieldClass]"
           :disabled="disabled"
           class="fvl-search-select"
           type="button"
@@ -39,21 +33,25 @@
               @keydown.up="highlightPrevious()"
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
-              @input="highlightedIndex = 0; getRemoteOptions();"
+              @input="
+                highlightedIndex = 0
+                getRemoteOptions()
+              "
             />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
                 v-for="(option, index) in filteredOptionsList"
                 :key="option[optionKey]"
-                :class="{ 'fvl-search-select-dropdown-option-highlighted' : index === highlightedIndex, 'fvl-search-dropdown-option-disabled': optionIsDisabled(option)}"
+                :class="{
+                  'fvl-search-select-dropdown-option-highlighted': index === highlightedIndex,
+                  'fvl-search-dropdown-option-disabled': optionIsDisabled(option),
+                }"
                 class="fvl-search-select-dropdown-option"
                 @click="select(option)"
               >
-                <slot
-                  :option="option"
-                  :disabled="optionIsDisabled(option)"
-                  name="option"
-                >{{ option[optionValue] }}</slot>
+                <slot :option="option" :disabled="optionIsDisabled(option)" name="option">
+                  {{ option[optionValue] }}
+                </slot>
               </li>
             </ul>
             <div v-if="!filteredOptionsList.length && !isLoading" class="search-select-empty">
@@ -90,107 +88,107 @@
   export default {
     components: {
       ValidationErrors,
-      OnClickOutside
+      OnClickOutside,
     },
     mixins: [config],
     props: {
       selected: {
         type: String | Number,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       label: {
         type: String,
-        default: null
+        default: null,
       },
       options: {
         type: Array,
-        default: () => []
+        default: () => [],
       },
       disabledOptions: {
         type: Array,
-        default: () => []
+        default: () => [],
       },
       optionsUrl: {
         type: String,
-        default: null
+        default: null,
       },
       responseDataPath: {
         type: String,
-        default: null
+        default: null,
       },
       lazyLoad: {
         type: Boolean,
-        default: false
+        default: false,
       },
       optionKey: {
         type: String,
-        required: true
+        required: true,
       },
       optionValue: {
         type: String,
-        required: true
+        required: true,
       },
       searchKeys: {
         type: Array,
         required: true,
-        default: () => []
+        default: () => [],
       },
       searchRemote: {
         type: Boolean,
-        default: false
+        default: false,
       },
       allowEmpty: {
         type: Boolean,
-        default: true
+        default: true,
       },
       placeholder: {
         type: String,
         required: false,
-        default: '&nbsp;'
+        default: '&nbsp;',
       },
       autocomplete: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: ''
+        default: '',
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       selectFirst: {
         type: Boolean,
         required: false,
-        default: false
-      }
+        default: false,
+      },
     },
     data() {
       return {
@@ -198,7 +196,7 @@
         query: null,
         highlightedIndex: 0,
         remoteOptions: [],
-        isLoading: false
+        isLoading: false,
       }
     },
     computed: {
@@ -214,23 +212,23 @@
         }
         let fuse = new Fuse(this.optionsList, {
           threshold: 0.2,
-          keys: this.searchKeys
+          keys: this.searchKeys,
         })
-        return fuse.search(this.query)
+        return fuse.search(this.query).map((a) => a.item)
       },
       selectedOptionValue() {
         let $this = this
-        let option = _find(this.optionsList, function(o) {
+        let option = _find(this.optionsList, function (o) {
           return o[$this.optionKey] == $this.selected
         })
         return option ? option[this.optionValue] : ''
       },
       selectedOptionIndex() {
         let $this = this
-        return _findKey(this.optionsList, function(o) {
+        return _findKey(this.optionsList, function (o) {
           return o[$this.optionKey] == $this.selected
         })
-      }
+      },
     },
     watch: {
       filteredOptionsList() {
@@ -243,7 +241,7 @@
       },
       disabledOptions() {
         this.getRemoteOptions(true)
-      }
+      },
     },
     mounted() {
       if (!this.optionsUrl) return
@@ -275,7 +273,7 @@
       setupPopper() {
         if (this.popper === undefined) {
           this.popper = new Popper(this.$refs.selectinput, this.$refs.selectdropdown, {
-            placement: 'bottom'
+            placement: 'bottom',
           })
         } else {
           this.popper.scheduleUpdate()
@@ -331,19 +329,19 @@
         axios({
           method: 'get',
           url: this.optionsUrl + searchQuery,
-          responseType: 'json'
+          responseType: 'json',
         })
-          .then(function(response) {
+          .then(function (response) {
             $this.remoteOptions = $this.responseDataPath ? _get(response.data, $this.responseDataPath) : response.data
             if ($this.selectFirst && !$this.selectedOptionValue && !$this.lazyLoad) {
               $this.select($this.remoteOptions[0])
             }
             $this.$emit('remoteSuccess', response)
           })
-          .catch(function(error) {
+          .catch(function (error) {
             $this.$emit('remoteError', error)
           })
-          .then(function() {
+          .then(function () {
             $this.isLoading = false
             if ($this.popper) {
               $this.popper.scheduleUpdate()
@@ -359,8 +357,8 @@
         }
         /* check if option key is in disabled options list */
         return this.disabledOptions.includes(option[this.optionKey])
-      }
-    }
+      },
+    },
   }
 </script>
 
