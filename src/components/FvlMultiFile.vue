@@ -2,7 +2,7 @@
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-multi-file-wrapper">
     <label
       v-if="label"
-      :for="name"
+      :for="id"
       :class="labelClass"
       class="fvl-multi-file-label"
       v-html="label"
