@@ -23,48 +23,48 @@
       method: {
         type: String,
         default: 'post',
-        validator: function(value) {
+        validator: function (value) {
           // The value must match one of the axios methods
           return ['get', 'post', 'put', 'patch', 'delete'].indexOf(value) !== -1
-        }
+        },
       },
       url: {
         type: String,
-        required: true
+        required: true,
       },
       multipart: {
         type: Boolean,
-        default: false
+        default: false,
       },
       headers: {
         type: Object,
-        default: () => {}
+        default: () => {},
       },
       data: {
         type: Object,
         default: () => {
           return {}
-        }
-      }
+        },
+      },
     },
     data() {
       return {
         errors: {},
         uploadPercentage: 0,
         isLoading: false,
-        isDragging: false
+        isDragging: false,
       }
     },
     computed: {
       additionalHeaders() {
         let multipart = this.multipart
           ? {
-              'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data',
             }
           : {}
         let globalHeaders = this.getConfig('headers', {})
         return _assignIn(globalHeaders, this.headers, multipart)
-      }
+      },
     },
     created() {
       this.axios = axios.create()
@@ -79,9 +79,9 @@
         let formData = new FormData()
 
         /* Map incoming data into formData */
-        Object.keys(rawData).forEach(e => {
+        Object.keys(rawData).forEach((e) => {
           if (rawData[e] instanceof Array) {
-            Object.keys(rawData[e]).forEach(f => {
+            Object.keys(rawData[e]).forEach((f) => {
               if (rawData[e][f] instanceof File) {
                 formData.append(e + '[]', rawData[e][f])
               } else {
@@ -125,23 +125,22 @@
           headers: this.additionalHeaders,
 
           // Calculate current upload percentage
-          onUploadProgress: function(progressEvent) {
+          onUploadProgress: function (progressEvent) {
             let percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total)
             $this.uploadPercentage = percentage
             $this.$emit('uploadProgress', percentage)
-          }
+          },
         })
-          .then(function(response) {
+          .then(function (response) {
             $this.$emit('success', response)
           })
-          .catch(function(error) {
+          .catch(function (error) {
             /* Catch validation errors if status is 422 */
             if (error.response && error.response.status === 422) {
               $this.errors = error.response.data.errors
               $this.$nextTick(() => {
-                document.getElementsByClassName("fvl-has-error")[0].scrollIntoView('smooth')
-              });
-            
+                document.getElementsByClassName('fvl-has-error')[0].scrollIntoView('smooth')
+              })
             }
 
             /* Catch CSRF Token Missmatch - 419 */
@@ -158,7 +157,7 @@
 
             $this.$emit('error', error.response)
           })
-          .then(function() {
+          .then(function () {
             $this.isLoading = false
             $this.uploadPercentage = 0
             $this.$emit('uploadProgress', 0)
@@ -168,6 +167,7 @@
 
       dirty(name) {
         this.errors[name] = false
+        this.$emit('changed', { fieldName: name })
       },
 
       getErrors(name) {
@@ -202,8 +202,8 @@
         if (this.responseInterceptor) {
           this.axios.interceptors.response.eject(this.responseInterceptor)
         }
-      }
-    }
+      },
+    },
   }
 </script>
 
