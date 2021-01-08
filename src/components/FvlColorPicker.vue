@@ -1,12 +1,6 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-color-picker-wrapper">
-    <label
-      v-if="label"
-      :class="labelClass"
-      :for="name"
-      class="fvl-color-picker-label"
-      v-html="label"
-    />
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-color-picker-wrapper">
+    <label v-if="label" :class="labelClass" :for="name" class="fvl-color-picker-label" v-html="label" />
     <on-click-outside @do="close()">
       <div class="fvl-color-picker-group" :class="fieldClass">
         <slot name="prefix"></slot>
@@ -26,10 +20,7 @@
             @change="updateValueManually($event.target.value)"
           />
           <div ref="colorpicker" class="fvl-color-preview" @click="toggle()">
-            <span
-              :style="{'background': value}"
-              class="inline-block rounded-full border border-white h-4 w-4"
-            ></span>
+            <span :style="{ background: value }" class="inline-block rounded-full border border-white h-4 w-4"></span>
           </div>
         </div>
         <slot name="suffix"></slot>
@@ -60,69 +51,69 @@
     components: {
       OnClickOutside,
       ValidationErrors,
-      'chrome-picker': Chrome
+      'chrome-picker': Chrome,
     },
     props: {
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       value: {
-        validator: prop => typeof prop === 'string' || prop === null,
-        default: '0'
+        validator: (prop) => typeof prop === 'string' || prop === null,
+        default: '0',
       },
       format: {
         type: String,
-        validator: function(value) {
+        validator: function (value) {
           // The value must match one of these strings
           return ['hex', 'hex8', 'hsl', 'hsv', 'rgba', 'linearGradient'].indexOf(value) !== -1
         },
-        default: 'hex'
+        default: 'hex',
       },
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       validateFormat: {
         type: Boolean,
         required: false,
-        default: true
-      }
+        default: true,
+      },
     },
     data() {
       return {
@@ -135,26 +126,28 @@
           hsla: `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
           hsv: ``,
           rgb: `[Rr][Gg][Bb][\\(](((([\\d]{1,3})[\\,]{0,1})[\\s]*){3})[\\)]`,
-          rgba: `[Rr][Gg][Bb][Aa][\\(](((([\\d]{1,3}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`
-        }
+          rgba: `[Rr][Gg][Bb][Aa][\\(](((([\\d]{1,3}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
+        },
       }
     },
     computed: {
       pattern() {
         return this.patterns[this.format]
-      }
+      },
     },
     methods: {
       updateValue(e) {
         this.$emit('update:value', e[this.format])
+        this.$emit('changed')
       },
       updateValueManually(e) {
         this.$emit('update:value', e)
+        this.$emit('changed')
       },
       setupPopper() {
         if (this.popper === undefined) {
           this.popper = new Popper(this.$refs.colorpicker, this.$refs.picker, {
-            placement: 'bottom-end'
+            placement: 'bottom-end',
           })
         } else {
           this.popper.scheduleUpdate()
@@ -177,8 +170,8 @@
       toggle() {
         if (this.disabled) return
         this.isOpen ? this.close() : this.open()
-      }
-    }
+      },
+    },
   }
 </script>
 
