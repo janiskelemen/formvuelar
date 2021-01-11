@@ -156,7 +156,6 @@
         let reader = this.getFileReader(mime)
         reader.readAsDataURL(file)
         this.$emit('update:file', file)
-        this.$emit('previewchanged', this.preview)
         this.$emit('processfinished')
       },
       getFileReader(mime) {
@@ -211,6 +210,7 @@
           $this.preview.width = this.width
           let percent = this.height > 60 ? (this.height / this.width) * 100 : minRatio
           $this.preview.ratioHeight = percent < maxRatio ? percent : maxRatio
+          $this.$emit('previewchanged', $this.preview)
         }
         image.src = _URL.createObjectURL(this.file)
         return image.src
