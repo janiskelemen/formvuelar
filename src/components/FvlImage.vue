@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-image-wrapper">
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-image-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label" v-html="label" />
 
     <div class="fvl-image-group" :class="fieldClass">
@@ -9,7 +9,7 @@
         </div>
       </slot>
       <slot name="button-wrapper" :preview="preview" :select-image="() => $refs[name].click()">
-        <div class="fvl-image-button-wrapper" :class="{'fvl-image-hide-file-name': !showFileName}">
+        <div class="fvl-image-button-wrapper" :class="{ 'fvl-image-hide-file-name': !showFileName }">
           <button class="fvl-image-button" type="button" @click.prevent="$refs[name].click()">
             <slot name="button">
               <span v-text="getConfig('selectImageText', 'Select Image')" />
@@ -30,7 +30,11 @@
         :disabled="disabled || $parent.isLoading"
         type="file"
         class="fvl-image"
-        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
+        @change="
+          handleFileChange()
+          $emit('changed')
+          $parent.dirty(name)
+        "
       />
     </div>
     <slot name="hint" />
@@ -45,67 +49,67 @@
   import { config } from './mixins/config'
   export default {
     components: {
-      ValidationErrors
+      ValidationErrors,
     },
     mixins: [config],
     props: {
       file: {
         type: File | String,
-        default: null
+        default: null,
       },
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       accept: {
         type: String,
         required: false,
-        default: 'image/*'
+        default: 'image/*',
       },
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       showFileName: {
         type: Boolean,
         required: false,
-        default: true
-      }
+        default: true,
+      },
     },
     data() {
       return {
@@ -117,8 +121,8 @@
           percent: 0,
           status: 'initial',
           src: this.file,
-          ratioHeight: 0
-        }
+          ratioHeight: 0,
+        },
       }
     },
     watch: {
@@ -133,7 +137,7 @@
           }
           this.$emit('update:file', '')
         }
-      }
+      },
     },
     mounted() {
       if (!(this.file instanceof File)) {
@@ -152,12 +156,13 @@
         let reader = this.getFileReader(mime)
         reader.readAsDataURL(file)
         this.$emit('update:file', file)
+        this.$emit('previewchanged', this.preview)
         this.$emit('processfinished')
       },
       getFileReader(mime) {
         let $this = this
         let reader = new FileReader()
-        reader.onloadstart = event => {
+        reader.onloadstart = (event) => {
           let percent = Math.round((event.loaded / event.total) * 100)
           // Add preview to preview array
           $this.preview = {
@@ -167,10 +172,10 @@
             percent: percent,
             status: 'loading',
             src: '',
-            ratioHeight: 0
+            ratioHeight: 0,
           }
         }
-        reader.onprogress = event => {
+        reader.onprogress = (event) => {
           let percent = Math.round((event.loaded / event.total) * 100)
           $this.preview.loaded = event.loaded
           $this.preview.percent = percent
@@ -198,7 +203,7 @@
         let _URL = window.URL || window.webkitURL
         let $this = this
         let image = new Image()
-        image.onload = function() {
+        image.onload = function () {
           $this.preview.src = $this.resizeImageForPreview(this)
           let minRatio = 19 // min ratio height 19%
           let maxRatio = 70 // max ratio height 70%
@@ -235,8 +240,8 @@
           /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g
         )
         return res !== null
-      }
-    }
+      },
+    },
   }
 </script>
 

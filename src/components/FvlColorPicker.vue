@@ -139,10 +139,12 @@
       updateValue(e) {
         this.$emit('update:value', e[this.format])
         this.$emit('changed')
+        this.$parent.dirty(this.name)
       },
       updateValueManually(e) {
         this.$emit('update:value', e)
         this.$emit('changed')
+        this.$parent.dirty(this.name)
       },
       setupPopper() {
         if (this.popper === undefined) {
