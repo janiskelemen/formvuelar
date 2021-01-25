@@ -69,6 +69,18 @@ mock.onPost( '/get419' ).reply( function () {
 } )
 
 // Mock POST request to /update
+mock.onPost( '/selecterror' ).reply( function ( config ) {
+    var errors = {}
+    if ( config.data.get( 'emails' ) === '' ) {
+        errors.emails[1] = [ 'This email is not allowed!' ]
+    }
+    return [ 422, {
+        "message": "The given data was invalid.",
+        "errors": errors
+    } ]
+});
+
+// Mock POST request to /update
 mock.onPost( '/update' ).reply( function ( config ) {
     var errors = {}
     if ( config.data.get( 'fullname' ) === '' ) {

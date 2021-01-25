@@ -38,3 +38,7 @@
 .fvl-tag-select-item-remove:hover {
     @apply cursor-pointer;
 }
+
+.fvl-tag-select-item.fvl-tag-select-item-has-error{
+    @apply ring-2 ring-red-500;
+}

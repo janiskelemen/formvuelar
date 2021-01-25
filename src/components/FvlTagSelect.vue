@@ -19,7 +19,12 @@
           @keydown.space="toggle()"
         >
           <span v-show="!selectedOptionValues.length && placeholder && !allowNew" v-text="placeholder" />
-          <span v-for="(value, index) in selectedOptionValues" :key="value + index" class="fvl-tag-select-item">
+          <span
+            v-for="(value, index) in selectedOptionValues"
+            :key="value + index"
+            class="fvl-tag-select-item"
+            :class="$parent.getErrors(name) && $parent.getErrors(name)[index] ? 'fvl-tag-select-item-has-error' : ''"
+          >
             {{ value }}
             <svg
               class="fvl-tag-select-item-remove"
