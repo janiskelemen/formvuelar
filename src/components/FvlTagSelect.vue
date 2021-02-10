@@ -1,9 +1,6 @@
 <template>
   <on-click-outside @do="close()">
-    <div
-      :class="{ 'fvl-has-error': $parent.hasErrors(name), 'fvl-dropdown-is-open': isOpen }"
-      class="fvl-tag-select-wrapper"
-    >
+    <div :class="{ 'fvl-has-error': hasErrors(name), 'fvl-dropdown-is-open': isOpen }" class="fvl-tag-select-wrapper">
       <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label" />
       <div :class="{ 'fvl-tag-select-input-inline': allowNew }" class="fvl-tag-select-input-wrapper">
         <button
@@ -23,7 +20,7 @@
             v-for="(value, index) in selectedOptionValues"
             :key="value + index"
             class="fvl-tag-select-item"
-            :class="$parent.getErrors(name) && $parent.getErrors(name)[index] ? 'fvl-tag-select-item-has-error' : ''"
+            :class="getErrors(name) && getErrors(name)[index] ? 'fvl-tag-select-item-has-error' : ''"
           >
             {{ value }}
             <svg
@@ -128,8 +125,8 @@
         </transition>
       </div>
       <slot name="hint" />
-      <slot :errors="$parent.getErrors(name)" name="errors">
-        <validation-errors :errors="$parent.getErrors(name)" />
+      <slot :errors="getErrors(name)" name="errors">
+        <validation-errors :errors="getErrors(name)" />
       </slot>
     </div>
   </on-click-outside>
@@ -346,6 +343,25 @@
       }
     },
     methods: {
+      getErrors(name) {
+        let errors = []
+        this.selected?.forEach((item, index) => {
+          if (this.$parent.getErrors(name + '.' + index).length) {
+            errors.push(this.$parent.getErrors(name + '.' + index))
+          }
+        })
+        return errors
+      },
+      hasErrors(name) {
+        let errors = []
+        this.selected?.forEach((item, index) => {
+          if (this.$parent.getErrors(name + '.' + index).length) {
+            errors.push(this.$parent.getErrors(name + '.' + index))
+          }
+        })
+        return errors.length
+      },
+
       select(option) {
         if (this.optionIsDisabled(option)) return
         let $this = this

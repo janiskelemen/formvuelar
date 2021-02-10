@@ -3,7 +3,8 @@
 .fvl-has-error .fvl-select select,
 .fvl-has-error .fvl-file-name,
 .fvl-has-error .fvl-checkbox+label:before,
-.fvl-has-error .fvl-radio+label:before {
+.fvl-has-error .fvl-radio+label:before,
+.fvl-has-error .fvl-tag-select {
     @apply border-red-400;
 }
 

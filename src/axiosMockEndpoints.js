@@ -82,7 +82,7 @@ mock.onPost( '/get419' ).reply( function () {
 
 mock.onPost("/selecterror").reply(422, {
     "message": "The given data was invalid.",
-    "errors": { 'emails': [['This email is not allowed!']] }
+    "errors": { 'emails.0': ['This email is not allowed!'] }
 });
 
 // Mock POST request to /update
