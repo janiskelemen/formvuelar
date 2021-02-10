@@ -59,7 +59,7 @@
         label="Send Email To"
         placeholder="Add some emails..."
       />
-      <button>submit</button>
+      <fvl-submit>submit</fvl-submit>
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source" />
     </fvl-form>
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-  import { FvlForm, FvlTagSelect } from './../../formvuelar'
+  import { FvlForm, FvlTagSelect, FvlSubmit } from './../../formvuelar'
 
   import SourceToggle from './../utilities/SourceToggle.vue'
   import SourceBox from './../utilities/SourceBox.vue'
@@ -78,6 +78,7 @@
       FvlTagSelect,
       SourceToggle,
       SourceBox,
+      FvlSubmit,
     },
     data() {
       return {
