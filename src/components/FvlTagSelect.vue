@@ -9,6 +9,7 @@
           :disabled="disabled"
           class="fvl-tag-select"
           type="button"
+          tabindex="-1"
           @click.prevent="
             allowNew ? focusInlineInput() : toggle()
             allowNew && openOnClick ? open() : ''
@@ -56,7 +57,7 @@
             @keydown.down="highlightNext()"
             @keydown.up="highlightPrevious()"
             @keydown.enter.prevent="checkValidity($event)"
-            @blur="query ? checkValidity($event) : ''"
+            @blur="query && !filteredOptionsList.length ? checkValidity($event) : ''"
             @keydown.tab="
               checkValidity($event)
               close()
@@ -363,6 +364,7 @@
       },
 
       select(option) {
+        console.log(option)
         if (this.optionIsDisabled(option)) return
         let $this = this
         /* Add the selected option key to selected array */
@@ -401,15 +403,16 @@
         })
       },
       removeTag() {
-        if (this.selected && !this.query) {
-          //this.selected.splice(this.selected.length - 1, 1)
+        let selected = this.selected === null ? [] : this.selected
+        if (selected && !this.query) {
+          this.unselect(selected[selected.length - 1])
           this.close()
         }
         /* Close dropdown*/
         if (this.query && this.query.length == 1) {
           this.close()
         }
-        this.$emit('changed')
+        // this.$emit('changed')
       },
       reset() {
         this.query = ''
@@ -509,6 +512,7 @@
         this.scrollToIndex(this.highlightedIndex)
       },
       checkValidity(event) {
+        console.log(event)
         if ((this.highlightedIndex !== null && this.highlightedIndex !== -1) || event.target.checkValidity()) {
           this.selectHighlighted()
         } else {
