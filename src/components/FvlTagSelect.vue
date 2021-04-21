@@ -346,6 +346,9 @@
     methods: {
       getErrors(name) {
         let errors = []
+        if (this.selected == '' && this.$parent.getErrors(name + '.0').length) {
+          errors.push(this.$parent.getErrors(name + '.0'))
+        }
         this.selected?.forEach((item, index) => {
           if (this.$parent.getErrors(name + '.' + index).length) {
             errors.push(this.$parent.getErrors(name + '.' + index))
@@ -355,6 +358,9 @@
       },
       hasErrors(name) {
         let errors = []
+        if (this.selected == '' && this.$parent.getErrors(name + '.0').length) {
+          return true
+        }
         this.selected?.forEach((item, index) => {
           if (this.$parent.getErrors(name + '.' + index).length) {
             errors.push(this.$parent.getErrors(name + '.' + index))
