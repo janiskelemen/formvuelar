@@ -346,19 +346,20 @@
     methods: {
       getErrors(name) {
         let errors = []
-        if (this.selected == '' && this.$parent.getErrors(name + '.0').length) {
-          errors.push(this.$parent.getErrors(name + '.0'))
+        if (this.selected == '' && this.$parent.getErrors(name).length) {
+          errors.push(this.$parent.getErrors(name))
         }
         this.selected?.forEach((item, index) => {
           if (this.$parent.getErrors(name + '.' + index).length) {
             errors.push(this.$parent.getErrors(name + '.' + index))
           }
         })
+
         return errors
       },
       hasErrors(name) {
         let errors = []
-        if (this.selected == '' && this.$parent.getErrors(name + '.0').length) {
+        if (this.selected == '' && this.$parent.getErrors(name).length) {
           return true
         }
         this.selected?.forEach((item, index) => {
