@@ -32,7 +32,7 @@
     "fuse.js": "^6.4.6",
     "lodash": "^4.17.20",
     "popper.js": "^1.16.1",
-    "postcss": "^7.0.35",
+    "postcss": "^8.2.10",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^2.6.12",
     "vue-color": "^2.8.1",
