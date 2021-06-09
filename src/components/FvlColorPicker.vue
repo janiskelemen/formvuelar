@@ -75,7 +75,7 @@
         type: String,
         validator: function (value) {
           // The value must match one of these strings
-          return ['hex', 'hex8', 'hsl', 'hsv', 'rgba', 'linearGradient'].indexOf(value) !== -1
+          return ['hex', 'hex8', 'hsl', 'hsv', 'rgba', 'linearGradient', 'radialGradient'].indexOf(value) !== -1
         },
         default: 'hex',
       },
@@ -121,6 +121,7 @@
         patterns: {
           hex: `([#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3}|[a-fA-F\\d]{8})|linear-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\))`,
           linearGradient: `linear-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\)`,
+          radialGradient: `radial-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\)`,
           hex8: `[#]([a-fA-F\\d]{8}`,
           hsl: `[Hh][Ss][Ll][\\(](((([\\d]{1,3}|[\\d\\%]{2,4})[\\,]{0,1})[\\s]*){3})[\\)]`,
           hsla: `[Hh][Ss][Ll][Aa][\\(](((([\\d]{1,3}|[\\d\\%]{2,4}|[\\d\\.]{1,3})[\\,]{0,1})[\\s]*){4})[\\)]`,
