@@ -119,7 +119,7 @@
       return {
         isOpen: false,
         patterns: {
-          hex: `([#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3}|[a-fA-F\\d]{8})|linear-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\))`,
+          hex: `([#]([a-fA-F\\d]{6}|[a-fA-F\\d]{3}|[a-fA-F\\d]{8})|(linear|radial)-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\))`,
           linearGradient: `linear-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\)`,
           radialGradient: `radial-gradient\\([^(]*(\\([^)]*\\)[^(]*)*[^)]*\\)`,
           hex8: `[#]([a-fA-F\\d]{8}`,
