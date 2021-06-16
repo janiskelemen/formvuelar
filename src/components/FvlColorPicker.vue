@@ -1,6 +1,9 @@
 <template>
   <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-color-picker-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-color-picker-label" v-html="label" />
+    <label v-if="label" :class="labelClass" :for="name" class="fvl-color-picker-label">
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
+    <label>
     <on-click-outside @do="close()">
       <div class="fvl-color-picker-group" :class="fieldClass">
         <slot name="prefix"></slot>
