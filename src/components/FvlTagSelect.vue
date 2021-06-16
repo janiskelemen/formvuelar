@@ -1,7 +1,10 @@
 <template>
   <on-click-outside @do="close()">
     <div :class="{ 'fvl-has-error': hasErrors(name), 'fvl-dropdown-is-open': isOpen }" class="fvl-tag-select-wrapper">
-      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label" />
+      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()">
+        <template v-html="label"></template>
+        <slot name="label_suffix" />
+      </label>
       <div :class="{ 'fvl-tag-select-input-inline': allowNew }" class="fvl-tag-select-input-wrapper">
         <button
           ref="selectinput"
