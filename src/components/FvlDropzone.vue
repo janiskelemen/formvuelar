@@ -1,6 +1,9 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-dropzone-wrapper">
-    <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label" v-html="label" />
+    <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label">
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
+    <label>
     <slot v-if="filesCount" :files-count="filesCount" :files-size-sum="filesSizeSum" name="summary">
       {{ filesCount }}
       <span
