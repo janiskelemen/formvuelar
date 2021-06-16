@@ -8,7 +8,7 @@
     >
       <template v-html="label"></template>
       <slot name="label_suffix" />
-    <label>
+    </label>
     <div v-for="group in allgroups" :key="group.name">
       <fvl-checkbox
         :label="group.label"
