@@ -14,7 +14,8 @@
     >
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
       <span class="fvl-checkbox-outer" />
-      {{ label }}
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
     </label>
     <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
