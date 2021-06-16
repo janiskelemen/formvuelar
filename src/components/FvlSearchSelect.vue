@@ -4,7 +4,10 @@
       :class="{ 'fvl-has-error': $parent.hasErrors(name), 'fvl-dropdown-is-open': isOpen }"
       class="fvl-search-select-wrapper"
     >
-      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()" v-html="label" />
+      <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()">
+        <template v-html="label"></template>
+        <slot name="label_suffix" />
+      </label>
       <div class="fvl-search-select-input-wrapper">
         <button
           ref="selectinput"
