@@ -3,7 +3,7 @@
     <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label">
       <template v-html="label"></template>
       <slot name="label_suffix" />
-    <label>
+    </label>
     <slot v-if="filesCount" :files-count="filesCount" :files-size-sum="filesSizeSum" name="summary">
       {{ filesCount }}
       <span
