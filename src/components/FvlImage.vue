@@ -3,7 +3,7 @@
     <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label">
       <template v-html="label"></template>
       <slot name="label_suffix" />
-    <label>
+    </label>
 
     <div class="fvl-image-group" :class="fieldClass">
       <slot name="preview" :preview="preview" :select-image="() => $refs[name].click()">
