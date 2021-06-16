@@ -1,14 +1,12 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-dropzone-wrapper">
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-dropzone-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label">
-      <template v-html="label"></template>
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
     <slot v-if="filesCount" :files-count="filesCount" :files-size-sum="filesSizeSum" name="summary">
       {{ filesCount }}
-      <span
-        v-text="getConfig('filesSelectedAndSizeText', 'files selected with a combined size of')"
-      />
+      <span v-text="getConfig('filesSelectedAndSizeText', 'files selected with a combined size of')" />
       {{ filesSizeSum }}
     </slot>
     <div class="fvl-dropzone-area-wrapper">
@@ -22,18 +20,15 @@
           v-for="(file, key) in files"
           v-else
           :key="key"
-          :class="(previews[key] && previews[key].status == 'failed') ? 'fvl-dropzone-file-has-error' : ''"
+          :class="previews[key] && previews[key].status == 'failed' ? 'fvl-dropzone-file-has-error' : ''"
           class="fvl-dropzone-file-preview"
         >
-          <div
-            v-if="previews[key] && previews[key].status == 'loading'"
-            class="fvl-dropzone-file-preview-loader"
-          >
-            <div :style="'width:'+previews[key].percent+'%'" />
+          <div v-if="previews[key] && previews[key].status == 'loading'" class="fvl-dropzone-file-preview-loader">
+            <div :style="'width:' + previews[key].percent + '%'" />
           </div>
           <div
             v-if="previews[key]"
-            :class="{'fvl-dropzone-file-preview-name-background': previews[key].isimage}"
+            :class="{ 'fvl-dropzone-file-preview-name-background': previews[key].isimage }"
             class="fvl-dropzone-file-preview-name"
           >
             {{ file.name }}
@@ -44,11 +39,14 @@
           <transition name="fvl-dropzone-fade">
             <div
               v-if="previews[key] && previews[key].isimage && previews[key].src"
-              :style="{'backgroundImage': 'url('+previews[key].src+')', 'paddingTop': previews[key].ratioHeight+'%'}"
+              :style="{
+                backgroundImage: 'url(' + previews[key].src + ')',
+                paddingTop: previews[key].ratioHeight + '%',
+              }"
               class="fvl-dropzone-file-image"
             />
           </transition>
-          <span class="fvl-dropzone-remove" @click="removeFile( key )">
+          <span class="fvl-dropzone-remove" @click="removeFile(key)">
             <slot name="remove">
               <svg viewBox="0 0 40 40">
                 <path
@@ -75,8 +73,12 @@
         multiple
         type="file"
         class="fvl-dropzone"
-        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
-      >
+        @change="
+          handleFileChange()
+          $emit('changed')
+          $parent.dirty(name)
+        "
+      />
     </div>
     <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
@@ -91,89 +93,89 @@
 
   export default {
     components: {
-      ValidationErrors
+      ValidationErrors,
     },
     mixins: [config],
     props: {
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       accept: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       maxSizePerFile: {
         type: Number,
         required: false,
-        default: 20 * (1024 * 1024) // 20 MB
+        default: 20 * (1024 * 1024), // 20 MB
       },
       maxFiles: {
         type: Number,
         required: false,
-        default: 50
+        default: 50,
       },
       maxSizeOfAllFiles: {
         type: Number,
         required: false,
-        default: null
+        default: null,
       },
       maxPreviewImageWidth: {
         type: Number,
         required: false,
-        default: 400
+        default: 400,
       },
       maxPreviewImageHeight: {
         type: Number,
         required: false,
-        default: 200
-      }
+        default: 200,
+      },
     },
     data() {
       return {
         files: [],
         previews: [],
-        loaded: 0
+        loaded: 0,
       }
     },
     computed: {
@@ -182,11 +184,11 @@
       },
       filesSizeSum() {
         let size = 0
-        this.previews.forEach(function(e) {
+        this.previews.forEach(function (e) {
           size = size + e.size
         })
         return this.formatBytes(size)
-      }
+      },
     },
     methods: {
       //Handles a change on the file upload
@@ -218,7 +220,7 @@
         let $this = this
         let reader = new FileReader()
         let index = 0
-        reader.onloadstart = event => {
+        reader.onloadstart = (event) => {
           // Add file to files array
           index = $this.files.push(file) - 1
           let percent = Math.round((event.loaded / event.total) * 100)
@@ -230,10 +232,10 @@
             percent: percent,
             status: 'loading',
             src: '',
-            ratioHeight: 0
+            ratioHeight: 0,
           })
         }
-        reader.onprogress = event => {
+        reader.onprogress = (event) => {
           let percent = Math.round((event.loaded / event.total) * 100)
           $this.previews[index].loaded = event.loaded
           $this.previews[index].percent = percent
@@ -261,7 +263,7 @@
         let _URL = window.URL || window.webkitURL
         let $this = this
         let image = new Image()
-        image.onload = function() {
+        image.onload = function () {
           $this.previews[index].src = $this.resizeImageForPreview(this)
           let minRatio = 19 // min ratio height 19%
           let maxRatio = 70 // max ratio height 70%
@@ -292,8 +294,8 @@
         ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height)
         // encode image to data-uri with base64 version of compressed image
         return canvas.toDataURL()
-      }
-    }
+      },
+    },
   }
 </script>
 

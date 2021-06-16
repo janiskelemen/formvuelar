@@ -1,27 +1,21 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-multi-checkbox-wrapper">
-    <label
-      v-if="label"
-      :class="labelClass"
-      :for="id ? id : name"
-      class="fvl-multi-checkbox-label"
-    >
-      <template v-html="label"></template>
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-multi-checkbox-wrapper">
+    <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-multi-checkbox-label">
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
     <div v-for="group in allgroups" :key="group.name">
       <fvl-checkbox
         :label="group.label"
         :name="group.name"
-        :class="{'fvl-multi-checkbox-all-checked': groupAllChecked(group), 'fvl-multi-checkbox-any-checked': groupAnyChecked(group)}"
+        :class="{
+          'fvl-multi-checkbox-all-checked': groupAllChecked(group),
+          'fvl-multi-checkbox-any-checked': groupAnyChecked(group),
+        }"
         class="fvl-multi-checkbox"
         @click.prevent.native="toggleChildren(group)"
       />
-      <div
-        v-for="nestedOption in group.options"
-        :key="nestedOption.name"
-        class="fvl-multi-checkbox-group"
-      >
+      <div v-for="nestedOption in group.options" :key="nestedOption.name" class="fvl-multi-checkbox-group">
         <fvl-checkbox
           :checked.sync="nestedOption.checked"
           :label="nestedOption.label"
@@ -46,52 +40,52 @@
   export default {
     components: {
       ValidationErrors,
-      FvlCheckbox
+      FvlCheckbox,
     },
     props: {
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       groups: {
         type: Array,
-        default: () => []
+        default: () => [],
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
-      }
+        default: false,
+      },
     },
     data() {
       return {}
@@ -102,18 +96,18 @@
       },
       values() {
         let values = []
-        _forEach(this.allgroups, function(group) {
-          _forEach(group.options, function(field) {
+        _forEach(this.allgroups, function (group) {
+          _forEach(group.options, function (field) {
             values.push({ [field.name]: field.checked })
           })
         })
         return values
-      }
+      },
     },
     methods: {
       toggleChildren(group) {
         let state = !_every(group.options, 'checked')
-        _forEach(group.options, function(value) {
+        _forEach(group.options, function (value) {
           value.checked = state
         })
       },
@@ -135,8 +129,8 @@
       },
       hasErrors(name) {
         return this.$parent.errors[name] && this.$parent.errors[name] !== [] ? true : false
-      }
-    }
+      },
+    },
   }
 </script>
 

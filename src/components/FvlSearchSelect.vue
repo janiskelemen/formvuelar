@@ -5,7 +5,7 @@
       class="fvl-search-select-wrapper"
     >
       <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()">
-        <template v-html="label"></template>
+        <span v-html="label"></span>
         <slot name="label_suffix" />
       </label>
       <div class="fvl-search-select-input-wrapper">

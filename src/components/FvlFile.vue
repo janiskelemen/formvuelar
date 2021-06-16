@@ -1,7 +1,7 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-file-wrapper">
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-file-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label">
-      <template v-html="label"></template>
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
     <div class="fvl-file-button-wrapper">
@@ -23,8 +23,12 @@
         :disabled="disabled || $parent.isLoading"
         type="file"
         class="fvl-file"
-        @change="handleFileChange(); $emit('changed'); $parent.dirty(name);"
-      >
+        @change="
+          handleFileChange()
+          $emit('changed')
+          $parent.dirty(name)
+        "
+      />
     </div>
     <slot name="hint" />
     <slot :errors="$parent.getErrors(name)" name="errors">
@@ -38,73 +42,73 @@
   import { config } from './mixins/config'
   export default {
     components: {
-      ValidationErrors
+      ValidationErrors,
     },
     mixins: [config],
     props: {
       file: {
         type: File | String,
-        default: null
+        default: null,
       },
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       accept: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
-      }
+        default: false,
+      },
     },
     data() {
       return {
-        fileName: ''
+        fileName: '',
       }
     },
     watch: {
       file(newValue) {
         /* Emit null up if given value is not a File object */
         if (!(newValue instanceof File)) this.$emit('update:file', '')
-      }
+      },
     },
     mounted() {
       if (!(this.file instanceof File)) {
@@ -117,8 +121,8 @@
         let file = this.$refs[this.name].files[0]
         this.fileName = file.name
         this.$emit('update:file', file)
-      }
-    }
+      },
+    },
   }
 </script>
 

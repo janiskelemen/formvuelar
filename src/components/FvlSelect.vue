@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-select-wrapper">
     <label v-if="label" :class="labelClass" :for="id" class="fvl-select-label">
-      <template v-html="label"></template>
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
     <div class="fvl-select">
@@ -37,72 +37,72 @@
 </template>
 
 <script>
-import ValidationErrors from './FvlErrors.vue'
-export default {
-  components: {
-    ValidationErrors
-  },
-  props: {
-    selected: {
-      type: String | Number,
-      default: ''
+  import ValidationErrors from './FvlErrors.vue'
+  export default {
+    components: {
+      ValidationErrors,
     },
-    name: {
-      type: String,
-      required: true
+    props: {
+      selected: {
+        type: String | Number,
+        default: '',
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      id: {
+        type: String,
+        default: null,
+      },
+      label: {
+        type: String,
+        default: null,
+      },
+      options: {
+        type: Object,
+        required: true,
+        default: () => {},
+      },
+      allowEmpty: {
+        type: Boolean,
+        default: true,
+      },
+      placeholder: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      autocomplete: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      fieldClass: {
+        type: String,
+        required: false,
+        default: null,
+      },
+      labelClass: {
+        type: String,
+        required: false,
+        default: '',
+      },
+      required: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
+      readonly: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
+      disabled: {
+        type: Boolean,
+        required: false,
+        default: false,
+      },
     },
-    id: {
-      type: String,
-      default: null
-    },
-    label: {
-      type: String,
-      default: null
-    },
-    options: {
-      type: Object,
-      required: true,
-      default: () => {}
-    },
-    allowEmpty: {
-      type: Boolean,
-      default: true
-    },
-    placeholder: {
-      type: String,
-      required: false,
-      default: null
-    },
-    autocomplete: {
-      type: String,
-      required: false,
-      default: null
-    },
-    fieldClass: {
-      type: String,
-      required: false,
-      default: null
-    },
-    labelClass: {
-      type: String,
-      required: false,
-      default: ''
-    },
-    required: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    readonly: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-      default: false
-    }
   }
-}
 </script>

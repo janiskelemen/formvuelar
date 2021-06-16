@@ -2,7 +2,7 @@
   <on-click-outside @do="close()">
     <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-input-wrapper">
       <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label">
-        <template v-html="label"></template>
+        <span v-html="label"></span>
         <slot name="label_suffix" />
       </label>
       <div class="fvl-input-group" @click="isOpen = true">
@@ -23,12 +23,7 @@
       </div>
 
       <transition name="fvl-dropdown-transition">
-        <div
-          v-show="isOpen"
-          ref="datedropdown"
-          class="fvl-date-picker"
-          :style="{ 'max-width': width }"
-        >
+        <div v-show="isOpen" ref="datedropdown" class="fvl-date-picker" :style="{ 'max-width': width }">
           <div class="fvl-date-picker-extended-wrapper">
             <div class="flex-grow pr-3">
               <button
@@ -36,12 +31,14 @@
                 :key="preset.name"
                 class="fvl-date-picker-extended-preset-item"
                 :class="{
-                  'fvl-date-picker-extended-preset-item-active': inputvalue == preset.start + ' - ' + preset.end
+                  'fvl-date-picker-extended-preset-item-active': inputvalue == preset.start + ' - ' + preset.end,
                 }"
                 type="button"
                 @click="inputvalue = preset.start + ' - ' + preset.end"
                 @keydown.esc="close()"
-              >{{ preset.name }}</button>
+              >
+                {{ preset.name }}
+              </button>
             </div>
 
             <div class="fvl-date-picker-extended-flatpickr-wrapper">
@@ -78,74 +75,74 @@
     components: {
       ValidationErrors,
       flatPickr,
-      OnClickOutside
+      OnClickOutside,
     },
     props: {
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       value: {
         type: String | Array | Object,
-        default: ''
+        default: '',
       },
       start: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       end: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       type: {
         type: String,
-        default: 'text'
+        default: 'text',
       },
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       autocomplete: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       config: {
         type: Object,
@@ -154,25 +151,25 @@
           return {
             dateFormat: 'Y-m-d',
             mode: 'range',
-            inline: true
+            inline: true,
           }
-        }
+        },
       },
       presets: {
         type: Array,
         required: false,
-        default: () => []
+        default: () => [],
       },
       width: {
         type: String,
         required: false,
-        default: null
-      }
+        default: null,
+      },
     },
     data() {
       return {
         isOpen: false,
-        inputvalue: this.start && this.end ? this.start + ' - ' + this.end : this.value
+        inputvalue: this.start && this.end ? this.start + ' - ' + this.end : this.value,
       }
     },
     computed: {
@@ -195,9 +192,9 @@
           { name: 'Last 30 Days', start: this.getRange(30).start, end: this.getRange(30).end },
           { name: 'Last 60 Days', start: this.getRange(60).start, end: this.getRange(60).end },
           { name: 'Last 90 Days', start: this.getRange(90).start, end: this.getRange(90).end },
-          { name: 'Last 365 Days', start: this.getRange(365).start, end: this.getRange(365).end }
+          { name: 'Last 365 Days', start: this.getRange(365).start, end: this.getRange(365).end },
         ]
-      }
+      },
     },
     watch: {
       value(newValue) {
@@ -216,7 +213,7 @@
           formatedValue = newValue
         }
         this.$emit('update:value', formatedValue)
-      }
+      },
     },
     beforeDestroy() {
       if (this.popper !== undefined) {
@@ -227,7 +224,7 @@
       setupPopper() {
         if (this.popper === undefined) {
           this.popper = new Popper(this.$refs.dateinput, this.$refs.datedropdown, {
-            placement: 'bottom'
+            placement: 'bottom',
           })
         } else {
           this.popper.scheduleUpdate()
@@ -265,7 +262,7 @@
         let d = new Date(now.setDate(now.getDate() - days))
         let start = `${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate()}`
         return { start: start, end: end }
-      }
-    }
+      },
+    },
   }
 </script>

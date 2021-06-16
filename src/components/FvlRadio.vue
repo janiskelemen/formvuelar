@@ -1,13 +1,13 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-radio-wrapper">
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-radio-wrapper">
     <span class="fvl-radio-group-label">
-      <template v-html="label"></template>
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </span>
     <div class="fvl-radio-group-wrapper">
       <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
         <input
-          :id="name+key"
+          :id="name + key"
           :name="name"
           :value="key"
           :checked="checked == key"
@@ -17,9 +17,13 @@
           :disabled="disabled"
           type="radio"
           class="fvl-radio"
-          @change="$emit('update:checked', $event.target.value); $emit('changed'); $parent.dirty(name);"
+          @change="
+            $emit('update:checked', $event.target.value)
+            $emit('changed')
+            $parent.dirty(name)
+          "
         />
-        <label :class="labelClass" :for="name+key" class="fvl-radio-label">
+        <label :class="labelClass" :for="name + key" class="fvl-radio-label">
           <span class="fvl-radio-toggle" />
           <span class="fvl-radio-toggle-text">{{ option }}</span>
         </label>
@@ -36,51 +40,51 @@
   import ValidationErrors from './FvlErrors.vue'
   export default {
     components: {
-      ValidationErrors
+      ValidationErrors,
     },
     props: {
       checked: {
         type: String,
-        default: ''
+        default: '',
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       label: {
         type: String,
-        default: null
+        default: null,
       },
       options: {
         type: Object,
         required: true,
-        default: () => {}
+        default: () => {},
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
-      }
+        default: false,
+      },
     },
     computed: {
       errors() {
@@ -88,8 +92,8 @@
       },
       hasError() {
         return this.$parent.errors[this.name] ? 'fvl-has-error' : ''
-      }
-    }
+      },
+    },
   }
 </script>
 

@@ -1,20 +1,24 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-checkbox-wrapper">
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-checkbox-wrapper">
     <input
       :id="id ? id : name"
       :name="name"
-      :class="{'checked': checked, fieldClass}"
+      :class="{ checked: checked, fieldClass }"
       :required="required"
       :readonly="readonly"
       :disabled="disabled"
       :checked="checked"
       type="checkbox"
       class="fvl-checkbox"
-      @change="$emit('update:checked', $event.target.checked); $emit('changed'); $parent.dirty(name);"
-    >
+      @change="
+        $emit('update:checked', $event.target.checked)
+        $emit('changed')
+        $parent.dirty(name)
+      "
+    />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
       <span class="fvl-checkbox-outer" />
-      <template v-html="label"></template>
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
     <slot name="hint" />
@@ -28,53 +32,53 @@
   import ValidationErrors from './FvlErrors.vue'
   export default {
     components: {
-      ValidationErrors
+      ValidationErrors,
     },
     props: {
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       checked: {
         type: Boolean,
-        default: false
+        default: false,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
-      }
-    }
+        default: false,
+      },
+    },
   }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
-  <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-input-wrapper">
-    <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label" >
-      <template v-html="label"></template>
+  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-input-wrapper">
+    <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label">
+      <span v-html="label" />
       <slot name="label_suffix" />
     </label>
     <div class="fvl-input-group">
@@ -24,7 +24,10 @@
         :disabled="disabled"
         :pattern="pattern"
         class="fvl-input"
-        @change="$parent.dirty(name); $emit('changed');"
+        @change="
+          $parent.dirty(name)
+          $emit('changed')
+        "
         @input="$emit('update:value', $event.target.value)"
       />
       <slot name="suffix" />
@@ -40,96 +43,96 @@
   import ValidationErrors from './FvlErrors.vue'
   export default {
     components: {
-      ValidationErrors
+      ValidationErrors,
     },
     props: {
       label: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       name: {
         type: String,
-        required: true
+        required: true,
       },
       id: {
         type: String,
-        default: null
+        default: null,
       },
       value: {
-        validator: prop => typeof prop === 'string' || prop === 'number' || prop === null,
-        default: ''
+        validator: (prop) => typeof prop === 'string' || prop === 'number' || prop === null,
+        default: '',
       },
       type: {
         type: String,
-        default: 'text'
+        default: 'text',
       },
       min: {
         type: Number,
         required: false,
-        default: null
+        default: null,
       },
       max: {
         type: Number,
         required: false,
-        default: null
+        default: null,
       },
       maxlength: {
         type: Number,
         required: false,
-        default: null
+        default: null,
       },
       size: {
         type: Number,
         required: false,
-        default: null
+        default: null,
       },
       step: {
         type: Number,
         required: false,
-        default: null
+        default: null,
       },
       pattern: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       placeholder: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       autocomplete: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       fieldClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       labelClass: {
         type: String,
         required: false,
-        default: null
+        default: null,
       },
       readonly: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       required: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
-      }
-    }
+        default: false,
+      },
+    },
   }
 </script>
 

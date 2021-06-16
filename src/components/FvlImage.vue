@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-image-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label">
-      <template v-html="label"></template>
+      <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
 
