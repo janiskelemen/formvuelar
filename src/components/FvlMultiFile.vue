@@ -5,8 +5,10 @@
       :for="name"
       :class="labelClass"
       class="fvl-multi-file-label"
-      v-html="label"
-    />
+    >
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
+    <label>
     <div class="fvl-multi-file-button-wrapper">
       <button class="fvl-multi-file-button" tabindex="-1" type="button" @click.prevent>
         <slot name="button">
