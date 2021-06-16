@@ -5,8 +5,10 @@
       :class="labelClass"
       :for="id ? id : name"
       class="fvl-multi-checkbox-label"
-      v-html="label"
-    />
+    >
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
+    <label>
     <div v-for="group in allgroups" :key="group.name">
       <fvl-checkbox
         :label="group.label"
