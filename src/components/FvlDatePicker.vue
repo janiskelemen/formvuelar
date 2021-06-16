@@ -3,7 +3,7 @@
     <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label">
       <template v-html="label"></template>
       <slot name="label_suffix" />
-    <label>
+    </label>
     <div class="fvl-input-group fvl-date-picker">
       <slot name="prefix" />
       <flat-pickr
