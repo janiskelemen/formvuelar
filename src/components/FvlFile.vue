@@ -1,6 +1,9 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-file-wrapper">
-    <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label" v-html="label" />
+    <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label">
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
+    <label>
     <div class="fvl-file-button-wrapper">
       <button class="fvl-file-button" tabindex="-1" type="button" @click.prevent>
         <slot name="button">
