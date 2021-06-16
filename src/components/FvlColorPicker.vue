@@ -3,7 +3,7 @@
     <label v-if="label" :class="labelClass" :for="name" class="fvl-color-picker-label">
       <template v-html="label"></template>
       <slot name="label_suffix" />
-    <label>
+    </label>
     <on-click-outside @do="close()">
       <div class="fvl-color-picker-group" :class="fieldClass">
         <slot name="prefix"></slot>
