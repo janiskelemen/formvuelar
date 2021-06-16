@@ -1,6 +1,9 @@
 <template>
   <div :class="{'fvl-has-error' : $parent.hasErrors(name)}" class="fvl-radio-wrapper">
-    <span class="fvl-radio-group-label" v-html="label"></span>
+    <span class="fvl-radio-group-label">
+      <template v-html="label"></template>
+      <slot name="label_suffix" />
+    </span>
     <div class="fvl-radio-group-wrapper">
       <div v-for="(option, key) in options" :key="key" class="fvl-radio-group">
         <input
