@@ -8,6 +8,7 @@
       :readonly="readonly"
       :disabled="disabled"
       :checked="checked"
+      :value="value"
       type="checkbox"
       class="fvl-checkbox"
       @change="
@@ -18,6 +19,7 @@
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
       <span class="fvl-checkbox-outer" />
+      <slot name="label_prefix" />
       <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
@@ -52,6 +54,11 @@
       checked: {
         type: Boolean,
         default: false,
+      },
+      value: {
+        type: String,
+        required: false,
+        default: null,
       },
       fieldClass: {
         type: String,
