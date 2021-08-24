@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-input :value.sync="form.lastname" name="lastname" label="Last name" />
+<fvl-input v-model:value="form.lastname" name="lastname" label="Last name" />
 ```
 
 ### Import Name

@@ -7,7 +7,8 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/PrefilledForm.vue"
         target="_blank"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/update">
@@ -15,7 +16,7 @@
       <source-toggle @toggle="toggleSource('fullname')" />
       <!-- Text input component -->
       <fvl-input
-        :value.sync="form.fullname"
+        v-model:value="form.fullname"
         autocomplete="fullname"
         label="Full Name"
         name="fullname"
@@ -27,13 +28,13 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('bio')" />
       <!-- Textarea component -->
-      <fvl-textarea :value.sync="form.bio" label="Bio" name="bio" placeholder="Type your story..." />
+      <fvl-textarea v-model:value="form.bio" label="Bio" name="bio" placeholder="Type your story..." />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'bio'" :source="source.bio" />
       <!-- Radio component with options -->
       <fvl-radio
-        :checked.sync="form.pet"
-        :options="{'cat': 'Cat', 'dog': 'Dog'}"
+        v-model:checked="form.pet"
+        :options="{ cat: 'Cat', dog: 'Dog' }"
         class="w-full lg:w-1/2"
         label="Favorite pet"
         name="pet"
@@ -60,28 +61,28 @@
       FvlRadio,
       FvlSubmit,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     props: {
       initFullname: {
         type: String,
-        default: ''
+        default: '',
       },
       initBio: {
         type: String,
-        default: ''
+        default: '',
       },
       initPet: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
     data() {
       return {
         form: {
           fullname: this.initFullname,
           bio: this.initBio,
-          pet: this.initPet
+          pet: this.initPet,
         },
         showSource: '',
         source: {
@@ -91,14 +92,14 @@
             `     name="fullname" \n` +
             `     type="text"  \n` +
             `     autocomplete="name"  \n` +
-            `     :value.sync="form.fullname"  \n` +
+            `     v-model:value="form.fullname"  \n` +
             `     placeholder="Type your full name"  \n` +
             `/>`,
           bio:
             `<fvl-textarea \n` +
             `     label="Bio" \n` +
             `     name="bio" \n` +
-            `     :value.sync="form.bio" \n` +
+            `     v-model:value="form.bio" \n` +
             `     placeholder="Type your story..." \n` +
             `/>`,
           pet:
@@ -107,14 +108,14 @@
             `    name="pet" \n` +
             `    :options="{'cat': 'Cat', 'dog': 'Dog'}" \n` +
             `    :checked.sync="form.pet" \n` +
-            `/> \n`
-        }
+            `/> \n`,
+        },
       }
     },
     methods: {
       toggleSource(field) {
         this.showSource = this.showSource == field ? '' : field
-      }
-    }
+      },
+    },
   }
 </script>

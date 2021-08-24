@@ -7,21 +7,17 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/MultiFileUpload.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+      >Full Source Code</a
+      >
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showSource = !showSource" />
       <!-- File input component -->
-      <fvl-multi-file :files.sync="form.gallery" label="Gallery" name="gallery">
-        <template slot="button">
-          <svg
-            class="fill-current text-white mr-2"
-            width="18"
-            height="16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+      <fvl-multi-file v-model:files="form.gallery" label="Gallery" name="gallery">
+        <template #button>
+          <svg class="fill-current text-white mr-2" width="18" height="16" xmlns="http://www.w3.org/2000/svg">
             <g fill-rule="nonzero">
               <path
                 d="M17.0591 6.85227c-.47046 0-.83865.36818-.83865.83864v5.76818H1.7591V7.67045c0-.47045-.36818-.83863-.83864-.83863-.47045 0-.83863.36818-.83863.83863v6.62728c0 .47045.36818.83863.83863.83863H17.0591c.47046 0 .83864-.36818.83864-.83863V7.67045c0-.45-.36818-.81818-.83864-.81818z"
@@ -37,40 +33,38 @@
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source" />
       <!-- Submit button with upload loader indicator enabled -->
-      <fvl-submit loader>
-        Upload
-      </fvl-submit>
+      <fvl-submit loader> Upload </fvl-submit>
     </fvl-form>
   </div>
 </template>
 
 <script>
-  import { FvlForm, FvlMultiFile, FvlSubmit } from './../formvuelar'
+import { FvlForm, FvlMultiFile, FvlSubmit } from './../formvuelar'
 
-  import SourceToggle from './utilities/SourceToggle.vue'
-  import SourceBox from './utilities/SourceBox.vue'
+import SourceToggle from './utilities/SourceToggle.vue'
+import SourceBox from './utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlMultiFile,
-      FvlSubmit,
-      SourceToggle,
-      SourceBox
-    },
-    data() {
-      return {
-        form: {
-          gallery: null
-        },
-        showSource: false,
-        source:
-          `<fvl-multi-file \n` +
-          `    label="Gallery" \n` +
-          `    name="gallery" \n` +
-          `    :files.sync="form.gallery" \n` +
-          `/> \n`
-      }
+export default {
+  components: {
+    FvlForm,
+    FvlMultiFile,
+    FvlSubmit,
+    SourceToggle,
+    SourceBox,
+  },
+  data() {
+    return {
+      form: {
+        gallery: null,
+      },
+      showSource: false,
+      source:
+        `<fvl-multi-file \n` +
+        `    label="Gallery" \n` +
+        `    name="gallery" \n` +
+        `    :files.sync="form.gallery" \n` +
+        `/> \n`,
     }
-  }
+  },
+}
 </script>

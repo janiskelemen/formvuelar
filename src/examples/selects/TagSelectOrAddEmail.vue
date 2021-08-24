@@ -16,7 +16,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form.emails"
+        v-model:selected="form.emails"
         :options="emailsOptions"
         :search-keys="['email']"
         :allow-new="true"
@@ -47,7 +47,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form2.emails"
+        v-model:selected="form2.emails"
         :options="emailsOptions"
         :search-keys="['email']"
         :allow-new="true"
@@ -67,43 +67,43 @@
 </template>
 
 <script>
-  import { FvlForm, FvlTagSelect, FvlSubmit } from './../../formvuelar'
+import { FvlForm, FvlTagSelect, FvlSubmit } from './../../formvuelar'
 
-  import SourceToggle from './../utilities/SourceToggle.vue'
-  import SourceBox from './../utilities/SourceBox.vue'
+import SourceToggle from './../utilities/SourceToggle.vue'
+import SourceBox from './../utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlTagSelect,
-      SourceToggle,
-      SourceBox,
-      FvlSubmit,
-    },
-    data() {
-      return {
-        form: {
-          emails: null,
-        },
-        form2: {
-          emails: ['donotAllowThis@email.com'],
-        },
-        emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
-        showSource: false,
-        source:
-          `<fvl-tag-select \n` +
-          `   :selected.sync="form.emails" \n` +
-          `   :options="emailsOptions" \n` +
-          `   :search-keys="['email']"\n` +
-          `   :allow-new="true"\n` +
-          `   :max="20"\n` +
-          `   option-key="name"\n` +
-          `   option-value="name"\n` +
-          `   name="emails"\n` +
-          `   label="Choose some emails"\n` +
-          `   placeholder="Select..."\n` +
-          `/>\n`,
-      }
-    },
-  }
+export default {
+  components: {
+    FvlForm,
+    FvlTagSelect,
+    SourceToggle,
+    SourceBox,
+    FvlSubmit,
+  },
+  data() {
+    return {
+      form: {
+        emails: null,
+      },
+      form2: {
+        emails: ['donotAllowThis@email.com'],
+      },
+      emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
+      showSource: false,
+      source:
+        `<fvl-tag-select \n` +
+        `   v-model:selected="form.emails" \n` +
+        `   :options="emailsOptions" \n` +
+        `   :search-keys="['email']"\n` +
+        `   :allow-new="true"\n` +
+        `   :max="20"\n` +
+        `   option-key="name"\n` +
+        `   option-value="name"\n` +
+        `   name="emails"\n` +
+        `   label="Choose some emails"\n` +
+        `   placeholder="Select..."\n` +
+        `/>\n`,
+    }
+  },
+}
 </script>

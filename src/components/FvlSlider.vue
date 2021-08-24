@@ -21,10 +21,7 @@
           :disabled="disabled"
           type="range"
           class="fvl-slider"
-          @change="
-            $parent.dirty(name)
-            $emit('changed')
-          "
+          @change="$parent.dirty(name), $emit('changed')"
           @input="$emit('update:value', $event.target.value)"
         />
       </div>
@@ -40,78 +37,77 @@
 </template>
 
 <script>
-  import ValidationErrors from './FvlErrors.vue'
-  export default {
-    components: {
-      ValidationErrors,
+import ValidationErrors from './FvlErrors.vue'
+export default {
+  components: {
+    ValidationErrors,
+  },
+  props: {
+    label: {
+      type: String,
+      required: false,
+      default: null,
     },
-    props: {
-      label: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        default: null,
-      },
-      valuePosition: {
-        type: String,
-        default: 'left',
-        validator: function (value) {
-          // The value must match one of these strings
-          return ['left', 'right', 'top', 'bottom'].indexOf(value) !== -1
-        },
-      },
-      value: {
-        validator: (prop) => typeof prop === 'string' || prop === null,
-        default: '0',
-      },
-      min: {
-        type: Number,
-        required: false,
-        default: null,
-      },
-      max: {
-        type: Number,
-        required: false,
-        default: null,
-      },
-      placeholder: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      fieldClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      labelClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      readonly: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      required: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false,
+    name: {
+      type: String,
+      required: true,
+    },
+    id: {
+      type: String,
+      default: null,
+    },
+    valuePosition: {
+      type: String,
+      default: 'left',
+      validator: function (value) {
+        // The value must match one of these strings
+        return ['left', 'right', 'top', 'bottom'].indexOf(value) !== -1
       },
     },
-  }
+    value: {
+      validator: (prop) => typeof prop === 'string' || prop === null,
+      default: '0',
+    },
+    min: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    max: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    fieldClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    labelClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+}
 </script>
-

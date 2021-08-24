@@ -42,10 +42,10 @@ Create a form and sent it via post request to your server.
 <!-- form wrapper -->
 <fvl-form method="post" :data="form" url="/create">
   <!-- Text input component -->
-  <fvl-input :value.sync="form.fullname" label="Full Name" name="fullname" />
+  <fvl-input v-model:value="form.fullname" label="Full Name" name="fullname" />
 
   <!-- Textarea component -->
-  <fvl-textarea :value.sync="form.bio" label="Bio" name="bio" />
+  <fvl-textarea v-model:value="form.bio" label="Bio" name="bio" />
 
   <!-- Radio component with options -->
   <fvl-radio :checked.sync="form.pet" :options="{'cat': 'Cat', 'dog': 'Dog'}" label="Favorite pet" name="pet" />

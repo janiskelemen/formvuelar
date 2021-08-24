@@ -9,7 +9,7 @@
   placeholder="-- Select any color --"
   :allowEmpty="true"
   :options="{ '#ffffff': 'White', '#000000': 'Black', blue: 'Blue', red: 'Red' }"
-  :selected.sync="form.color"
+  v-model:selected="form.color"
 />
 ```
 

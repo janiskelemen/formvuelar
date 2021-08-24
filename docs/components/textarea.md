@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-textarea :value.sync="form.bio" name="bio" label="Bio" />
+<fvl-textarea v-model:value="form.bio" name="bio" label="Bio" />
 ```
 
 ### Import Name

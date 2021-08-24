@@ -1,5 +1,5 @@
 <template>
-  <on-click-outside @do="close()">
+  <div v-click-outside="close">
     <div :class="{ 'fvl-has-error': hasErrors(name), 'fvl-dropdown-is-open': isOpen }" class="fvl-tag-select-wrapper">
       <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()">
         <span v-html="label"></span>
@@ -13,10 +13,7 @@
           class="fvl-tag-select"
           type="button"
           tabindex="-1"
-          @click.prevent="
-            allowNew ? focusInlineInput() : toggle()
-            allowNew && openOnClick ? open() : ''
-          "
+          @click.prevent="allowNew ? focusInlineInput() : toggle(), allowNew && openOnClick ? open() : ''"
           @keydown.space="toggle()"
         >
           <span v-show="!selectedOptionValues.length && placeholder && !allowNew" v-text="placeholder" />
@@ -61,14 +58,8 @@
             @keydown.up="highlightPrevious()"
             @keydown.enter.prevent="checkValidity($event)"
             @blur="query && !filteredOptionsList.length ? checkValidity($event) : ''"
-            @keydown.tab="
-              checkValidity($event)
-              close()
-            "
-            @input="
-              highlightedIndex = -1
-              getRemoteOptions()
-            "
+            @keydown.tab="checkValidity($event), close()"
+            @input=";(highlightedIndex = -1), getRemoteOptions()"
             @keydown.backspace="removeTag()"
           />
         </button>
@@ -94,10 +85,7 @@
               @keydown.up="highlightPrevious()"
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
-              @input="
-                highlightedIndex = 0
-                getRemoteOptions()
-              "
+              @input=";(highlightedIndex = 0), getRemoteOptions()"
             />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
@@ -133,7 +121,7 @@
         <validation-errors :errors="getErrors(name)" />
       </slot>
     </div>
-  </on-click-outside>
+  </div>
 </template>
 
 <script>
@@ -145,12 +133,14 @@
   import _get from 'lodash/get'
   import _filter from 'lodash/filter'
   import ValidationErrors from './FvlErrors.vue'
-  import OnClickOutside from './utilities/OnClickOutside.vue'
   import { config } from './mixins/config'
+  import vClickOutside from 'click-outside-vue3'
   export default {
+    directives: {
+      clickOutside: vClickOutside.directive,
+    },
     components: {
       ValidationErrors,
-      OnClickOutside,
     },
     mixins: [config],
     props: {
@@ -328,20 +318,26 @@
       optionsUrl() {
         this.getRemoteOptions(true)
       },
-      disabledOptions() {
-        this.getRemoteOptions(true)
+      disabledOptions: {
+        deep: true,
+        handler() {
+          this.getRemoteOptions(true)
+        },
       },
-      filteredOptionsList() {
-        if (this.popper !== undefined) {
-          this.popper.scheduleUpdate()
-        }
+      filteredOptionsList: {
+        deep: true,
+        handler() {
+          if (this.popper !== undefined) {
+            this.popper.scheduleUpdate()
+          }
+        },
       },
     },
     mounted() {
       if (!this.optionsUrl) return
       if (!this.lazyLoad) this.getRemoteOptions()
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }
@@ -569,4 +565,3 @@
     },
   }
 </script>
-

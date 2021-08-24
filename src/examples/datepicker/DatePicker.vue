@@ -3,17 +3,13 @@
   <div class="mb-16">
     <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
       Date Picker (
-      <a
-        class="text-blue-500"
-        href="https://flatpickr.js.org/"
-        target="_blank"
-        rel="nofollow"
-      >Flatpickr</a>)
+      <a class="text-blue-500" href="https://flatpickr.js.org/" target="_blank" rel="nofollow">Flatpickr</a>)
       <a
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/datepicker/DatePicker.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/datepicker" class="relative">
@@ -21,7 +17,7 @@
       <source-toggle @toggle="showDatePickerSource = !showDatePickerSource" />
       <!-- Search Select input component -->
       <fvl-date-picker
-        :value.sync="form.date"
+        v-model="form.date"
         name="datepicker"
         label="Single Date Picker"
         placeholder="Select a date"
@@ -34,11 +30,11 @@
       <source-toggle @toggle="showRangePickerSource = !showRangePickerSource" />
       <!-- Search Select input component -->
       <fvl-date-picker
-        :value.sync="form.daterange"
+        v-model="form.daterange"
         name="daterangepicker"
         label="Date Rage Picker"
         placeholder="Select a date range"
-        :config="{mode: 'range'}"
+        :config="{ mode: 'range' }"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showRangePickerSource" :source="rangePickerSource" />
@@ -47,8 +43,8 @@
       <source-toggle @toggle="showPickerExtendedSource = !showPickerExtendedSource" />
       <!-- Search Select input component -->
       <fvl-date-picker-extended
-        :start.sync="form.range.start"
-        :end.sync="form.range.end"
+        v-model:start="form.range.start"
+        v-model:end="form.range.end"
         name="daterangepicker"
         label="Extended Date Rage Picker"
         placeholder="Select a date range"
@@ -59,11 +55,11 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showTimePickerSource = !showTimePickerSource" />
       <fvl-date-picker
-        :value.sync="form.time"
+        v-model="form.time"
         name="timepicker"
         label="Time picker"
         placeholder="00:00"
-        :config="{mode: 'time'}"
+        :config="{ mode: 'time' }"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showTimePickerSource" :source="timePickerSource" />
@@ -71,11 +67,11 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showDateTimePickerSource = !showDateTimePickerSource" />
       <fvl-date-picker
-        :value.sync="form.datetime"
+        v-model="form.datetime"
         name="Datetimepicker"
         label="Date & Time picker"
         placeholder="YYYY-MM-DD 00:00"
-        :config="{enableTime: true}"
+        :config="{ enableTime: true }"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showDateTimePickerSource" :source="dateTimePickerSource" />
@@ -95,7 +91,7 @@
       FvlDatePicker,
       FvlDatePickerExtended,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     data() {
       return {
@@ -104,15 +100,15 @@
           daterange: null,
           range: {
             start: '',
-            end: ''
+            end: '',
           },
           time: null,
-          datetime: null
+          datetime: null,
         },
         showDatePickerSource: false,
         datePickerSource:
           `<fvl-date-picker \n` +
-          `   :value.sync="form.date" \n` +
+          `   v-model:value="form.date" \n` +
           `   name="startdate"\n` +
           `   label="Select a date"\n` +
           `   placeholder="Select a date"\n` +
@@ -140,7 +136,7 @@
         showTimePickerSource: false,
         timePickerSource:
           `<fvl-date-picker \n` +
-          `   :value.sync="form.time" \n` +
+          `   v-model:value="form.time" \n` +
           `   name="daterange"\n` +
           `   label="Time Picker"\n` +
           `   placeholder="00:00"\n` +
@@ -150,13 +146,13 @@
         showDateTimePickerSource: false,
         dateTimePickerSource:
           `<fvl-date-picker \n` +
-          `   :value.sync="form.datetime" \n` +
+          `   v-model:value="form.datetime" \n` +
           `   name="datetime"\n` +
           `   label="Date & Time Picker"\n` +
           `   placeholder="YYYY-MM-DD 00:00"\n` +
           `   :config="{enableTime: true}" \n` +
-          `/>\n`
+          `/>\n`,
       }
-    }
+    },
   }
 </script>

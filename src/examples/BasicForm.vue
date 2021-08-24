@@ -7,7 +7,8 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/BasicForm.vue"
         target="_blank"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/basic" multipart>
@@ -15,7 +16,7 @@
       <source-toggle @toggle="toggleSource('name')" />
       <!-- Text input component -->
       <fvl-input
-        :value.sync="form.name"
+        v-model:value="form.name"
         autocomplete="name"
         label="Name"
         name="name"
@@ -27,19 +28,14 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('text')" />
       <!-- Textarea component -->
-      <fvl-textarea
-        :value.sync="form.text"
-        label="Text"
-        name="text"
-        placeholder="Type your story..."
-      />
+      <fvl-textarea v-model:value="form.text" label="Text" name="text" placeholder="Type your story..." />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'text'" :source="source.text" />
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('password')" />
       <!-- Password input component with custom strength meter -->
       <fvl-input
-        :value.sync="form.password"
+        v-model:value="form.password"
         autocomplete="new-password"
         class="w-full lg:w-1/2 relative"
         field-class="pr-8"
@@ -49,21 +45,21 @@
         type="password"
       >
         <!-- Optional password strength meter using the hint slot -->
-        <template slot="hint">
+        <template #hint>
           <div class="absolute right-0 top-0 mt-11 mr-4">
-            <transition name="slide-down">
+            <transition-group name="slide-down">
               <span v-if="form.password.length > 0 && form.password.length < 6">😔</span>
               <span v-if="form.password.length >= 6 && form.password.length < 10">😌</span>
               <span v-if="form.password.length >= 10 && form.password.length < 15">😃</span>
               <span v-if="form.password.length >= 15">😍</span>
-            </transition>
+            </transition-group>
           </div>
         </template>
       </fvl-input>
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('slider')" />
       <fvl-slider
-        :value.sync="form.slider"
+        v-model:value="form.slider"
         value-position="left"
         class="w-full lg:w-1/2"
         label="Slider"
@@ -75,7 +71,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('colorpicker')" />
       <fvl-color-picker
-        :value.sync="form.colorPicker"
+        v-model:value="form.colorPicker"
         class="w-full lg:w-1/2"
         field-class="w-40"
         format="hex"
@@ -91,9 +87,9 @@
       <source-toggle @toggle="toggleSource('color')" />
       <!-- Select component -->
       <fvl-select
+        v-model:selected="form.color"
         :allow-empty="true"
-        :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
-        :selected.sync="form.color"
+        :options="{ '#ffffff': 'White', '#000000': 'Black', blue: 'Blue', red: 'Red' }"
         class="w-full lg:w-1/2"
         label="Select your favorite color"
         name="color"
@@ -105,8 +101,8 @@
       <source-toggle @toggle="toggleSource('option')" />
       <!-- Radio component with options -->
       <fvl-radio
-        :checked.sync="form.option"
-        :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
+        v-model:checked="form.option"
+        :options="{ opt1: 'Option 1', opt2: 'Option 2', opt3: 'Option 3' }"
         class="w-full lg:w-1/2"
         label="Select any option"
         name="option"
@@ -117,7 +113,7 @@
       <source-toggle @toggle="toggleSource('agree')" />
       <!-- Checkbox component -->
       <fvl-checkbox
-        :checked.sync="form.agree"
+        v-model:checked="form.agree"
         class="w-full lg:w-1/2"
         label="I agree with your terms of use"
         name="agree"
@@ -128,12 +124,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('switch')" />
       <!-- Switch component -->
-      <fvl-switch
-        :checked.sync="form.switch"
-        class="w-full lg:w-1/2"
-        label="Enable this feature"
-        name="switch"
-      />
+      <fvl-switch v-model:checked="form.switch" class="w-full lg:w-1/2" label="Enable this feature" name="switch" />
 
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'switch'" :source="source.switch" />
@@ -154,7 +145,7 @@
     FvlSwitch,
     FvlSlider,
     FvlColorPicker,
-    FvlSubmit
+    FvlSubmit,
   } from './../formvuelar'
 
   import SourceToggle from './utilities/SourceToggle.vue'
@@ -173,7 +164,7 @@
       FvlColorPicker,
       FvlSubmit,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     data() {
       return {
@@ -186,7 +177,7 @@
           agree: false,
           switch: false,
           slider: '0',
-          colorPicker: '#C75454'
+          colorPicker: '#C75454',
         },
         showSource: '',
         source: {
@@ -196,14 +187,14 @@
             `     name="name" \n` +
             `     type="text"  \n` +
             `     autocomplete="name"  \n` +
-            `     :value.sync="form.name"  \n` +
+            `     v-model:value="form.name"  \n` +
             `     placeholder="Type your name"  \n` +
             `/>`,
           text:
             `<fvl-textarea \n` +
             `     label="Text" \n` +
             `     name="text" \n` +
-            `     :value.sync="form.text" \n` +
+            `     v-model:value="form.text" \n` +
             `     placeholder="Type your story..." \n` +
             `/>`,
           password:
@@ -212,7 +203,7 @@
             `    name="password" \n` +
             `    type="password" \n` +
             `    autocomplete="new-password" \n` +
-            `    :value.sync="form.password" \n` +
+            `    v-model:value="form.password" \n` +
             `    placeholder="Type password" \n` +
             `    class="w-1/2 relative" \n` +
             `    fieldClass="pr-8" \n` +
@@ -235,7 +226,7 @@
             `    label="Slider" \n` +
             `    name="slider" \n` +
             `    value-position="left" \n` +
-            `    :value.sync="form.slider" \n` +
+            `    v-model:value="form.slider" \n` +
             `    class="w-full lg:w-1/2 relative" \n` +
             `/> \n`,
           colorpicker:
@@ -243,7 +234,7 @@
             `    label="Color" \n` +
             `    name="color" \n` +
             `    format="hex" \n` +
-            `    :value.sync="form.color" \n` +
+            `    v-model:value="form.color" \n` +
             `    class="w-full lg:w-1/2" \n` +
             `/> \n`,
           color:
@@ -253,7 +244,7 @@
             `    placeholder="-- Select any color --" \n` +
             `    :allowEmpty="true" \n` +
             `    :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}" \n` +
-            `    :selected.sync="form.color" \n` +
+            `    v-model:selected="form.color" \n` +
             `    class="w-1/2" \n` +
             `/> \n`,
           option:
@@ -276,14 +267,14 @@
             `    label="Enable this feature" \n` +
             `    name="switch" \n` +
             `    :checked.sync="form.switch" \n` +
-            `/>`
-        }
+            `/>`,
+        },
       }
     },
     methods: {
       toggleSource(field) {
         this.showSource = this.showSource == field ? '' : field
-      }
-    }
+      },
+    },
   }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <on-click-outside @do="close()">
+  <div v-click-outside="close">
     <div
       :class="{ 'fvl-has-error': $parent.hasErrors(name), 'fvl-dropdown-is-open': isOpen }"
       class="fvl-search-select-wrapper"
@@ -36,10 +36,7 @@
               @keydown.up="highlightPrevious()"
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
-              @input="
-                highlightedIndex = 0
-                getRemoteOptions()
-              "
+              @input=";(highlightedIndex = 0), getRemoteOptions()"
             />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li
@@ -75,7 +72,7 @@
         <validation-errors :errors="$parent.getErrors(name)" />
       </slot>
     </div>
-  </on-click-outside>
+  </div>
 </template>
 
 <script>
@@ -86,17 +83,19 @@
   import _findKey from 'lodash/findKey'
   import _get from 'lodash/get'
   import ValidationErrors from './FvlErrors.vue'
-  import OnClickOutside from './utilities/OnClickOutside.vue'
+  import vClickOutside from 'click-outside-vue3'
   import { config } from './mixins/config'
   export default {
+    directives: {
+      clickOutside: vClickOutside.directive,
+    },
     components: {
       ValidationErrors,
-      OnClickOutside,
     },
     mixins: [config],
     props: {
       selected: {
-        type: String | Number,
+        type: String || Number,
         default: null,
       },
       name: {
@@ -193,6 +192,7 @@
         default: false,
       },
     },
+    emits: ['update:selected', 'changed', 'remoteSuccess', 'remoteError'],
     data() {
       return {
         isOpen: false,
@@ -234,23 +234,29 @@
       },
     },
     watch: {
-      filteredOptionsList() {
-        if (this.popper !== undefined) {
-          this.popper.scheduleUpdate()
-        }
+      filteredOptionsList: {
+        deep: true,
+        handler() {
+          if (this.popper !== undefined) {
+            this.popper.scheduleUpdate()
+          }
+        },
       },
       optionsUrl() {
         this.getRemoteOptions(true)
       },
-      disabledOptions() {
-        this.getRemoteOptions(true)
+      disabledOptions: {
+        deep: true,
+        handler() {
+          this.getRemoteOptions(true)
+        },
       },
     },
     mounted() {
       if (!this.optionsUrl) return
       if (!this.lazyLoad) this.getRemoteOptions()
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }
@@ -306,8 +312,10 @@
         this.isOpen ? this.close() : this.open()
       },
       scrollToIndex(index) {
-        if (typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
-        this.$refs.options.children[index].scrollIntoView({ block: 'nearest' })
+        this.$nextTick(() => {
+          if (typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
+          this.$refs.options.children[index].scrollIntoView({ block: 'nearest' })
+        })
       },
       highlightNext() {
         this.highlightedIndex =
@@ -364,4 +372,3 @@
     },
   }
 </script>
-

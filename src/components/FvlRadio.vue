@@ -17,11 +17,7 @@
           :disabled="disabled"
           type="radio"
           class="fvl-radio"
-          @change="
-            $emit('update:checked', $event.target.value)
-            $emit('changed')
-            $parent.dirty(name)
-          "
+          @change="$emit('update:checked', $event.target.value), $emit('changed'), $parent.dirty(name)"
         />
         <label :class="labelClass" :for="name + key" class="fvl-radio-label">
           <span class="fvl-radio-toggle" />
@@ -37,63 +33,62 @@
 </template>
 
 <script>
-  import ValidationErrors from './FvlErrors.vue'
-  export default {
-    components: {
-      ValidationErrors,
+import ValidationErrors from './FvlErrors.vue'
+export default {
+  components: {
+    ValidationErrors,
+  },
+  props: {
+    checked: {
+      type: String,
+      default: '',
     },
-    props: {
-      checked: {
-        type: String,
-        default: '',
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      label: {
-        type: String,
-        default: null,
-      },
-      options: {
-        type: Object,
-        required: true,
-        default: () => {},
-      },
-      fieldClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      labelClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      required: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      readonly: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
+    name: {
+      type: String,
+      required: true,
     },
-    computed: {
-      errors() {
-        return this.$parent.errors[this.name] ? this.$parent.errors[this.name] : false
-      },
-      hasError() {
-        return this.$parent.errors[this.name] ? 'fvl-has-error' : ''
-      },
+    label: {
+      type: String,
+      default: null,
     },
-  }
+    options: {
+      type: Object,
+      required: true,
+      default: () => {},
+    },
+    fieldClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    labelClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  computed: {
+    errors() {
+      return this.$parent.errors[this.name] ? this.$parent.errors[this.name] : false
+    },
+    hasError() {
+      return this.$parent.errors[this.name] ? 'fvl-has-error' : ''
+    },
+  },
+}
 </script>
-

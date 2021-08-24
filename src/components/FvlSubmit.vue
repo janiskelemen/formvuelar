@@ -16,10 +16,7 @@
         name="loader"
       >
         <div class="fvl-submit-button-loader">
-          <div
-            :style="{width: $parent.uploadPercentage + '%'}"
-            class="fvl-submit-button-loader-progress"
-          />
+          <div :style="{ width: $parent.uploadPercentage + '%' }" class="fvl-submit-button-loader-progress" />
         </div>
       </slot>
     </button>
@@ -27,22 +24,21 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      loader: {
-        type: Boolean,
-        default: false
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false
-      },
-      buttonClass: {
-        type: String,
-        default: null
-      }
-    }
-  }
+export default {
+  props: {
+    loader: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    buttonClass: {
+      type: String,
+      default: null,
+    },
+  },
+}
 </script>
-      

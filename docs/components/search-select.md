@@ -6,7 +6,7 @@
 
 ```vue
 <fvl-search-select
-  :selected.sync="form.genre"
+  v-model:selected="form.genre"
   :options="genreOptions"
   :search-keys="['name']"
   option-key="name"
@@ -21,7 +21,7 @@
 
 ```vue
 <fvl-search-select
-  :selected.sync="form.user"
+  v-model:selected="form.user"
   :search-keys="['name']"
   :lazy-load="true"
   options-url="https://jsonplaceholder.typicode.com/users"
@@ -37,7 +37,7 @@
 
 ```vue
 <fvl-search-select
-  :selected.sync="form.user"
+  v-model:selected="form.user"
   :search-keys="['search']"
   :search-remote="true"
   :lazy-load="true"

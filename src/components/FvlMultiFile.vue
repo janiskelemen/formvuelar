@@ -29,11 +29,7 @@
         multiple
         type="file"
         class="fvl-multi-file"
-        @change="
-          handleFileChange()
-          $emit('changed')
-          $parent.dirty(name)
-        "
+        @change="handleFileChange(), $emit('changed'), $parent.dirty(name)"
       />
     </div>
     <div v-for="(file, key) in filesList" :key="key" class="fvl-multi-file-list">
@@ -54,92 +50,94 @@
 </template>
 
 <script>
-  import ValidationErrors from './FvlErrors.vue'
-  import { config } from './mixins/config'
+import ValidationErrors from './FvlErrors.vue'
+import { config } from './mixins/config'
 
-  export default {
-    components: {
-      ValidationErrors,
+export default {
+  components: {
+    ValidationErrors,
+  },
+  mixins: [config],
+  props: {
+    files: {
+      type: Array,
+      default: () => [],
     },
-    mixins: [config],
-    props: {
-      files: {
-        type: Array,
-        default: () => [],
-      },
-      label: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        default: null,
-      },
-      accept: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      placeholder: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      fieldClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      labelClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      required: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      readonly: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
+    label: {
+      type: String,
+      required: false,
+      default: null,
     },
-    data() {
-      return {
-        filesList: [],
-      }
+    name: {
+      type: String,
+      required: true,
     },
-    watch: {
-      files(newValue) {
+    id: {
+      type: String,
+      default: null,
+    },
+    accept: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    fieldClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    labelClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      filesList: [],
+    }
+  },
+  watch: {
+    files: {
+      deep: true,
+      handler(newValue) {
         /* Emit null up if given value is not a File object */
         if (!(newValue instanceof Array) || !(newValue instanceof File)) this.$emit('update:file', [])
       },
     },
-    methods: {
-      //Handles a change on the file upload
-      handleFileChange() {
-        var uploadedFiles = this.$refs[this.name].files
-        for (var i = 0; i < uploadedFiles.length; i++) {
-          this.filesList.push(uploadedFiles[i])
-        }
-        this.$emit('update:files', this.filesList)
-      },
-      removeFile(key) {
-        this.filesList.splice(key, 1)
-      },
+  },
+  methods: {
+    //Handles a change on the file upload
+    handleFileChange() {
+      var uploadedFiles = this.$refs[this.name].files
+      for (var i = 0; i < uploadedFiles.length; i++) {
+        this.filesList.push(uploadedFiles[i])
+      }
+      this.$emit('update:files', this.filesList)
     },
-  }
+    removeFile(key) {
+      this.filesList.splice(key, 1)
+    },
+  },
+}
 </script>
-

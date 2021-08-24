@@ -1,5 +1,5 @@
 <template>
-  <on-click-outside @do="close()">
+  <div v-click-outside="close">
     <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-input-wrapper">
       <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label">
         <span v-html="label"></span>
@@ -49,10 +49,7 @@
                 :placeholder="placeholder"
                 :class="['hidden', fieldClass]"
                 :config="flatpickrConfig"
-                @on-change="
-                  $parent.dirty(name)
-                  $emit('changed')
-                "
+                @on-change="$parent.dirty(name), $emit('changed')"
               />
             </div>
           </div>
@@ -63,19 +60,21 @@
         <validation-errors :errors="$parent.getErrors(name)" />
       </slot>
     </div>
-  </on-click-outside>
+  </div>
 </template>
 
 <script>
   import Popper from 'popper.js'
-  import OnClickOutside from './utilities/OnClickOutside.vue'
+  import vClickOutside from 'click-outside-vue3'
   import ValidationErrors from './FvlErrors.vue'
   import flatPickr from 'vue-flatpickr-component'
   export default {
+    directives: {
+      clickOutside: vClickOutside.directive,
+    },
     components: {
       ValidationErrors,
       flatPickr,
-      OnClickOutside,
     },
     props: {
       label: {
@@ -92,7 +91,7 @@
         default: null,
       },
       value: {
-        type: String | Array | Object,
+        type: String || Array || Object,
         default: '',
       },
       start: {
@@ -215,7 +214,7 @@
         this.$emit('update:value', formatedValue)
       },
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }

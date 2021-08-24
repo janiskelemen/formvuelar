@@ -7,7 +7,8 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/NestedCheckbox.vue"
         target="_blank"
-      >Full Source Code</a>
+      >Full Source Code</a
+      >
     </h3>
     <!-- Setup Nested Checkbox -->
     <fvl-form :data="form" class="relative" url="/basic">
@@ -15,8 +16,8 @@
       <source-toggle class="-mt-1" @toggle="toggleSource('permissions')" />
       <!-- Checkbox component -->
       <fvl-multi-checkbox
-        :checked.sync="form.permissions"
-        :groups.sync="permissionsStructure"
+        v-model:checked="form.permissions"
+        v-model:groups="permissionsStructure"
         label="Set your permissions"
         name="permissions"
       />
@@ -27,62 +28,62 @@
 </template>
 
 <script>
-  import { FvlForm, FvlMultiCheckbox } from './../formvuelar'
+import { FvlForm, FvlMultiCheckbox } from './../formvuelar'
 
-  import SourceToggle from './utilities/SourceToggle.vue'
-  import SourceBox from './utilities/SourceBox.vue'
+import SourceToggle from './utilities/SourceToggle.vue'
+import SourceBox from './utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlMultiCheckbox,
-      SourceToggle,
-      SourceBox
-    },
-    data() {
-      return {
-        form: {
-          permissions: {}
+export default {
+  components: {
+    FvlForm,
+    FvlMultiCheckbox,
+    SourceToggle,
+    SourceBox,
+  },
+  data() {
+    return {
+      form: {
+        permissions: {},
+      },
+      permissionsStructure: [
+        {
+          name: 'all',
+          label: 'User permissions',
+          checked: false,
+          options: [
+            {
+              name: 'create',
+              label: 'Create',
+              checked: false,
+            },
+            {
+              name: 'update',
+              label: 'Update',
+              checked: false,
+            },
+            {
+              name: 'delete',
+              label: 'Delete',
+              checked: false,
+            },
+          ],
         },
-        permissionsStructure: [
-          {
-            name: 'all',
-            label: 'User permissions',
-            checked: false,
-            options: [
-              {
-                name: 'create',
-                label: 'Create',
-                checked: false
-              },
-              {
-                name: 'update',
-                label: 'Update',
-                checked: false
-              },
-              {
-                name: 'delete',
-                label: 'Delete',
-                checked: false
-              }
-            ]
-          }
-        ],
-        showSource: '',
-        source: {
-          permissions:
-            `<fvl-multi-checkbox \n` +
-            `    label="Set your permissions" \n` +
-            `    name="permissions" \n` +
-            `    :checked.sync="form.permissions" \n` +
-            `/>`
-        }
-      }
-    },
-    methods: {
-      toggleSource(field) {
-        this.showSource = this.showSource == field ? '' : field
-      }
+      ],
+      showSource: '',
+      source: {
+        permissions:
+          `<fvl-multi-checkbox \n` +
+          `    label="Set your permissions" \n` +
+          `    name="permissions" \n` +
+          `    :checked.sync="form.permissions" \n` +
+          `/>`,
+      },
     }
-  }
+  },
+  methods: {
+    toggleSource(field) {
+      this.showSource = this.showSource == field ? '' : field
+    },
+  },
+}
 </script>

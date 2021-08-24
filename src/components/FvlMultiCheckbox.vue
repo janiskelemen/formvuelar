@@ -13,11 +13,11 @@
           'fvl-multi-checkbox-any-checked': groupAnyChecked(group),
         }"
         class="fvl-multi-checkbox"
-        @click.prevent.native="toggleChildren(group)"
+        @click.prevent="toggleChildren(group)"
       />
       <div v-for="nestedOption in group.options" :key="nestedOption.name" class="fvl-multi-checkbox-group">
         <fvl-checkbox
-          :checked.sync="nestedOption.checked"
+          v-model:checked="nestedOption.checked"
           :label="nestedOption.label"
           :name="nestedOption.name"
           class="fvl-multi-checkbox-nested"
@@ -32,105 +32,104 @@
 </template>
 
 <script>
-  import ValidationErrors from './FvlErrors.vue'
-  import FvlCheckbox from './FvlCheckbox.vue'
-  import _every from 'lodash/every'
-  import _filter from 'lodash/filter'
-  import _forEach from 'lodash/forEach'
-  export default {
-    components: {
-      ValidationErrors,
-      FvlCheckbox,
+import ValidationErrors from './FvlErrors.vue'
+import FvlCheckbox from './FvlCheckbox.vue'
+import _every from 'lodash/every'
+import _filter from 'lodash/filter'
+import _forEach from 'lodash/forEach'
+export default {
+  components: {
+    ValidationErrors,
+    FvlCheckbox,
+  },
+  props: {
+    label: {
+      type: String,
+      required: false,
+      default: null,
     },
-    props: {
-      label: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      groups: {
-        type: Array,
-        default: () => [],
-      },
-      fieldClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      labelClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      required: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      readonly: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
+    name: {
+      type: String,
+      required: true,
     },
-    data() {
-      return {}
+    id: {
+      type: String,
+      required: false,
+      default: null,
     },
-    computed: {
-      allgroups() {
-        return this.groups
-      },
-      values() {
-        let values = []
-        _forEach(this.allgroups, function (group) {
-          _forEach(group.options, function (field) {
-            values.push({ [field.name]: field.checked })
-          })
+    groups: {
+      type: Array,
+      default: () => [],
+    },
+    fieldClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    labelClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+  data() {
+    return {}
+  },
+  computed: {
+    allgroups() {
+      return this.groups
+    },
+    values() {
+      let values = []
+      _forEach(this.allgroups, function (group) {
+        _forEach(group.options, function (field) {
+          values.push({ [field.name]: field.checked })
         })
-        return values
-      },
+      })
+      return values
     },
-    methods: {
-      toggleChildren(group) {
-        let state = !_every(group.options, 'checked')
-        _forEach(group.options, function (value) {
-          value.checked = state
-        })
-      },
-      groupAllChecked(group) {
-        let allChecked = _every(group.options, 'checked')
-        group.checked = allChecked
-        return allChecked
-      },
-      groupAnyChecked(group) {
-        this.$emit('update:checked', this.values)
-        return _filter(group.options, 'checked').length
-      },
-      dirty(name) {
-        this.$parent.errors[name] = false
-      },
+  },
+  methods: {
+    toggleChildren(group) {
+      let state = !_every(group.options, 'checked')
+      _forEach(group.options, function (value) {
+        value.checked = state
+      })
+    },
+    groupAllChecked(group) {
+      let allChecked = _every(group.options, 'checked')
+      group.checked = allChecked
+      return allChecked
+    },
+    groupAnyChecked(group) {
+      this.$emit('update:checked', this.values)
+      return _filter(group.options, 'checked').length
+    },
+    dirty(name) {
+      this.$parent.errors[name] = false
+    },
 
-      getErrors(name) {
-        return this.$parent.errors[name] ? this.$parent.errors[name] : []
-      },
-      hasErrors(name) {
-        return this.$parent.errors[name] && this.$parent.errors[name] !== [] ? true : false
-      },
+    getErrors(name) {
+      return this.$parent.errors[name] ? this.$parent.errors[name] : []
     },
-  }
+    hasErrors(name) {
+      return this.$parent.errors[name] && this.$parent.errors[name] !== [] ? true : false
+    },
+  },
+}
 </script>
-

@@ -7,7 +7,8 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/RemoteApiSearchSelect.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/select" class="relative">
@@ -15,7 +16,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-search-select
-        :selected.sync="form.user"
+        v-model:selected="form.user"
         :search-keys="['search']"
         :search-remote="true"
         :lazy-load="true"
@@ -43,17 +44,17 @@ export default {
     FvlForm,
     FvlSearchSelect,
     SourceToggle,
-    SourceBox
+    SourceBox,
   },
   data() {
     return {
       form: {
-        user: null
+        user: null,
       },
       showSource: false,
       source:
         `<fvl-search-select  \n` +
-        `   :selected.sync="form.user"  \n` +
+        `   v-model:selected="form.user"  \n` +
         `   :search-keys="['search']" \n` +
         `   :search-remote="true" \n` +
         `   :lazy-load="true" \n` +
@@ -63,8 +64,8 @@ export default {
         `   name="user" \n` +
         `   label="Select a user" \n` +
         `   placeholder="Select user..." \n` +
-        `/>\n`
+        `/>\n`,
     }
-  }
+  },
 }
 </script>

@@ -23,11 +23,7 @@
         :disabled="disabled || $parent.isLoading"
         type="file"
         class="fvl-file"
-        @change="
-          handleFileChange()
-          $emit('changed')
-          $parent.dirty(name)
-        "
+        @change="handleFileChange(), $emit('changed'), $parent.dirty(name)"
       />
     </div>
     <slot name="hint" />
@@ -47,7 +43,7 @@
     mixins: [config],
     props: {
       file: {
-        type: File | String,
+        type: File || String,
         default: null,
       },
       label: {
@@ -125,4 +121,3 @@
     },
   }
 </script>
-

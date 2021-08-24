@@ -10,7 +10,7 @@ import DatePicker from './datepicker/DatePicker.vue'
 
 export default {
   components: {
-    DatePicker
-  }
+    DatePicker,
+  },
 }
 </script>

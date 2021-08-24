@@ -7,7 +7,8 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/RemoteSearchSelect.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/select" class="relative">
@@ -15,7 +16,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-search-select
-        :selected.sync="form.user"
+        v-model:selected="form.user"
         :search-keys="['name']"
         :lazy-load="true"
         :select-first="true"
@@ -33,38 +34,38 @@
 </template>
 
 <script>
-  import { FvlForm, FvlSearchSelect } from './../../formvuelar'
+import { FvlForm, FvlSearchSelect } from './../../formvuelar'
 
-  import SourceToggle from './../utilities/SourceToggle.vue'
-  import SourceBox from './../utilities/SourceBox.vue'
+import SourceToggle from './../utilities/SourceToggle.vue'
+import SourceBox from './../utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlSearchSelect,
-      SourceToggle,
-      SourceBox
-    },
-    data() {
-      return {
-        optionsUrl: 'https://5c113d7d7e18800013bc38d1.mockapi.io/api/v1/users',
-        form: {
-          user: null
-        },
-        showSource: false,
-        source:
-          `<fvl-search-select  \n` +
-          `   :selected.sync="form.user"  \n` +
-          `   :search-keys="['name']" \n` +
-          `   :lazy-load="true" \n` +
-          `   options-url="https://jsonplaceholder.typicode.com/users"  \n` +
-          `   option-key="id" \n` +
-          `   option-value="name" \n` +
-          `   name="user" \n` +
-          `   label="Select a user" \n` +
-          `   placeholder="Select user..." \n` +
-          `/>\n`
-      }
+export default {
+  components: {
+    FvlForm,
+    FvlSearchSelect,
+    SourceToggle,
+    SourceBox,
+  },
+  data() {
+    return {
+      optionsUrl: 'https://5c113d7d7e18800013bc38d1.mockapi.io/api/v1/users',
+      form: {
+        user: null,
+      },
+      showSource: false,
+      source:
+        `<fvl-search-select  \n` +
+        `   v-model:selected="form.user"  \n` +
+        `   :search-keys="['name']" \n` +
+        `   :lazy-load="true" \n` +
+        `   options-url="https://jsonplaceholder.typicode.com/users"  \n` +
+        `   option-key="id" \n` +
+        `   option-value="name" \n` +
+        `   name="user" \n` +
+        `   label="Select a user" \n` +
+        `   placeholder="Select user..." \n` +
+        `/>\n`,
     }
-  }
+  },
+}
 </script>

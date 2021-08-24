@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-color-picker :value.sync="form.color" name="color" label="Color" />
+<fvl-color-picker v-model:value="form.color" name="color" label="Color" />
 ```
 
 ### Import Name

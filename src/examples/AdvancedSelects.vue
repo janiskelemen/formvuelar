@@ -9,17 +9,17 @@
 </template>
 
 <script>
-  import SearchSelect from './selects/SearchSelect.vue'
-  import RemoteSearchSelect from './selects/RemoteSearchSelect.vue'
-  import RemoteApiSearchSelect from './selects/RemoteApiSearchSelect.vue'
-  import RemoteApiSearchWithDisabledOptionsSelect from './selects/RemoteApiSearchWithDisabledOptionsSelect.vue'
+import SearchSelect from './selects/SearchSelect.vue'
+import RemoteSearchSelect from './selects/RemoteSearchSelect.vue'
+import RemoteApiSearchSelect from './selects/RemoteApiSearchSelect.vue'
+import RemoteApiSearchWithDisabledOptionsSelect from './selects/RemoteApiSearchWithDisabledOptionsSelect.vue'
 
-  export default {
-    components: {
-      SearchSelect,
-      RemoteSearchSelect,
-      RemoteApiSearchSelect,
-      RemoteApiSearchWithDisabledOptionsSelect
-    }
-  }
+export default {
+  components: {
+    SearchSelect,
+    RemoteSearchSelect,
+    RemoteApiSearchSelect,
+    RemoteApiSearchWithDisabledOptionsSelect,
+  },
+}
 </script>

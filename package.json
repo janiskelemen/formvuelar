@@ -1,51 +1,50 @@
 {
   "name": "formvuelar",
-  "description": "Vue form components with server side validation in mind.",
-  "keywords": [
-    "vue",
-    "formvuelar",
-    "form",
-    "validation",
-    "select",
-    "input",
-    "upload",
-    "tailwind",
-    "laravel"
-  ],
-  "main": "./dist/formvuelar.common.js",
   "version": "1.6.16",
   "private": false,
+  "description": "Vue form components with server side validation in mind.",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e --headless",
+    "lint": "vue-cli-service lint",
     "build-examples": "vue-cli-service build --dest example; cp example/index.html index.html; sed -i \\.bak 's/\\/js/\\/formvuelar\\/example\\/js/g' index.html; rm index.html.bak; sed -i \\.bak 's/\\/css/\\/formvuelar\\/example\\/css/g' index.html; rm index.html.bak",
     "bundle": "vue-cli-service build --target lib --name formvuelar ./src/formvuelar.js",
-    "lint": "vue-cli-service lint",
-    "test:cypress": "vue-cli-service test:e2e",
-    "test:e2e": "vue-cli-service test:e2e --headless",
-    "test:unit": "vue-cli-service test:unit"
+    "test:cypress": "vue-cli-service test:e2e"
   },
+  "main": "./dist/formvuelar.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "*.json"
+  ],
   "dependencies": {
+    "@ckpack/vue-color": "^0.0.3",
     "@tailwindcss/postcss7-compat": "^2.0.3",
+    "@vue/compat": "^3.2.4",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
+    "click-outside-vue3": "^4.0.1",
     "fuse.js": "^6.4.6",
     "lodash": "^4.17.21",
     "popper.js": "^1.16.1",
     "postcss": "^7.0.35",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
-    "vue": "^2.6.14",
-    "vue-color": "^2.8.1",
-    "vue-flatpickr-component": "^8.1.6",
-    "vue-router": "^3.5.2"
+    "vue": "^3.1.0",
+    "vue-color-kit": "^1.0.5",
+    "vue-flatpickr-component": "^9.0.4",
+    "vue-router": "^4.0.11"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.5.0",
     "@vue/cli-plugin-babel": "^4.5.13",
     "@vue/cli-plugin-e2e-cypress": "^4.5.13",
-    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-unit-jest": "^4.5.13",
     "@vue/cli-service": "^4.5.13",
+    "@vue/compiler-sfc": "^3.1.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.1.3",
     "axios-mock-adapter": "^1.19.0",
     "babel-core": "7.0.0-bridge.0",
@@ -53,19 +52,13 @@
     "babel-jest": "^26.6.3",
     "cypress": "^6.4.0",
     "eslint": "^7.19.0",
-    "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.5.0",
     "node-sass": "^5.0.0",
+    "prettier": "^2.2.1",
     "sass-loader": "^10.1.0",
-    "vue-highlightjs": "^1.3.3",
-    "vue-template-compiler": "^2.6.14"
+    "vue3-highlightjs": "^1.0.5"
   },
-  "files": [
-    "dist/*",
-    "src/*",
-    "*.json"
-  ],
   "eslintConfig": {
     "root": true,
     "env": {
@@ -73,11 +66,12 @@
     },
     "extends": [
       "eslint:recommended",
-      "plugin:vue/recommended"
+      "plugin:vue/vue3-recommended",
+      "@vue/prettier"
     ],
     "rules": {
       "vue/html-self-closing": 0,
-      "vue/html-indent": 1,
+      "vue/html-indent": 0,
       "vue/max-attributes-per-line": 0,
       "vue/require-prop-type-constructor": 0,
       "import/no-unresolved": 0,
@@ -86,7 +80,18 @@
     },
     "parserOptions": {
       "parser": "babel-eslint"
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
@@ -116,5 +121,16 @@
       "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
     ],
     "testURL": "http://localhost/"
-  }
+  },
+  "keywords": [
+    "vue",
+    "formvuelar",
+    "form",
+    "validation",
+    "select",
+    "input",
+    "upload",
+    "tailwind",
+    "laravel"
+  ]
 }

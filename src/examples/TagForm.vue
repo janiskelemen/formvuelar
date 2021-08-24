@@ -8,15 +8,15 @@
 </template>
 
 <script>
-  import TagSelect from './selects/TagSelect.vue'
-  import TagSelectOrAdd from './selects/TagSelectOrAdd.vue'
-  import TagSelectOrAddEmail from './selects/TagSelectOrAddEmail.vue'
+import TagSelect from './selects/TagSelect.vue'
+import TagSelectOrAdd from './selects/TagSelectOrAdd.vue'
+import TagSelectOrAddEmail from './selects/TagSelectOrAddEmail.vue'
 
-  export default {
-    components: {
-      TagSelect,
-      TagSelectOrAdd,
-      TagSelectOrAddEmail
-    }
-  }
+export default {
+  components: {
+    TagSelect,
+    TagSelectOrAdd,
+    TagSelectOrAddEmail,
+  },
+}
 </script>

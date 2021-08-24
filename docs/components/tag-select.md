@@ -6,7 +6,7 @@
 
 ```vue
 <fvl-tag-select
-  :selected.sync="form.tags"
+  v-model:selected="form.tags"
   :options="tagsOptions"
   :search-keys="['name']"
   :allow-new="true"

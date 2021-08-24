@@ -7,7 +7,8 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelect.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/select" class="relative">
@@ -15,7 +16,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form.tags"
+        v-model:selected="form.tags"
         :options="tagsOptions"
         :search-keys="['name']"
         :allow-new="true"
@@ -33,48 +34,48 @@
 </template>
 
 <script>
-  import { FvlForm, FvlTagSelect } from './../../formvuelar'
+import { FvlForm, FvlTagSelect } from './../../formvuelar'
 
-  import SourceToggle from './../utilities/SourceToggle.vue'
-  import SourceBox from './../utilities/SourceBox.vue'
+import SourceToggle from './../utilities/SourceToggle.vue'
+import SourceBox from './../utilities/SourceBox.vue'
 
-  export default {
-    components: {
-      FvlForm,
-      FvlTagSelect,
-      SourceToggle,
-      SourceBox
-    },
-    data() {
-      return {
-        form: {
-          tags: null
-        },
-        tagsOptions: [
-          { name: 'Cloud' },
-          { name: 'Autocompletion' },
-          { name: 'Remote list' },
-          { name: 'Fast' },
-          { name: 'Nice' },
-          { name: 'Cool' },
-          { name: 'Vue' },
-          { name: 'Advanced' }
-        ],
-        showSource: false,
-        source:
-          `<fvl-tag-select \n` +
-          `   :selected.sync="form.tags" \n` +
-          `   :options="tagsOptions" \n` +
-          `   :search-keys="['name']"\n` +
-          `   :allow-new="true"\n` +
-          `   :max="20"\n` +
-          `   option-key="name"\n` +
-          `   option-value="name"\n` +
-          `   name="tags"\n` +
-          `   label="Choose some tags"\n` +
-          `   placeholder="Select..."\n` +
-          `/>\n`
-      }
+export default {
+  components: {
+    FvlForm,
+    FvlTagSelect,
+    SourceToggle,
+    SourceBox,
+  },
+  data() {
+    return {
+      form: {
+        tags: null,
+      },
+      tagsOptions: [
+        { name: 'Cloud' },
+        { name: 'Autocompletion' },
+        { name: 'Remote list' },
+        { name: 'Fast' },
+        { name: 'Nice' },
+        { name: 'Cool' },
+        { name: 'Vue' },
+        { name: 'Advanced' },
+      ],
+      showSource: false,
+      source:
+        `<fvl-tag-select \n` +
+        `   v-model:selected="form.tags" \n` +
+        `   :options="tagsOptions" \n` +
+        `   :search-keys="['name']"\n` +
+        `   :allow-new="true"\n` +
+        `   :max="20"\n` +
+        `   option-key="name"\n` +
+        `   option-value="name"\n` +
+        `   name="tags"\n` +
+        `   label="Choose some tags"\n` +
+        `   placeholder="Select..."\n` +
+        `/>\n`,
     }
-  }
+  },
+}
 </script>

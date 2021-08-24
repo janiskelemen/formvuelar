@@ -4,7 +4,7 @@
       <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
-    <on-click-outside @do="close()">
+    <div v-click-outside="close">
       <div class="fvl-color-picker-group" :class="fieldClass">
         <slot name="prefix"></slot>
         <div class="fvl-color-picker-container">
@@ -28,33 +28,35 @@
         </div>
         <slot name="suffix"></slot>
         <div v-show="isOpen" ref="picker" class="fvl-color-picker-dropdown">
-          <chrome-picker
+          <color-picker
             ref="picker"
-            :disable-alpha="format == 'hex'"
-            :value="value"
-            disable-fields
-            @input="updateValue"
-          ></chrome-picker>
+            :color="value"
+            :colors-default="colorsDefault"
+            @changeColor="updateValue"
+          ></color-picker>
         </div>
       </div>
       <slot name="hint" />
       <slot :errors="$parent.getErrors(name)" name="errors">
         <validation-errors :errors="$parent.getErrors(name)" />
       </slot>
-    </on-click-outside>
+    </div>
   </div>
 </template>
 
 <script>
-  import { Chrome } from 'vue-color'
+  import { ColorPicker } from 'vue-color-kit'
+  import 'vue-color-kit/dist/vue-color-kit.css'
   import Popper from 'popper.js'
   import ValidationErrors from './FvlErrors.vue'
-  import OnClickOutside from './utilities/OnClickOutside.vue'
+  import vClickOutside from 'click-outside-vue3'
   export default {
+    directives: {
+      clickOutside: vClickOutside.directive,
+    },
     components: {
-      OnClickOutside,
       ValidationErrors,
-      'chrome-picker': Chrome,
+      ColorPicker,
     },
     props: {
       label: {
@@ -117,6 +119,26 @@
         required: false,
         default: true,
       },
+      colorsDefault: {
+        type: Array,
+        required: false,
+        default: () => [
+          '#000000',
+          '#FFFFFF',
+          '#FF1900',
+          '#F47365',
+          '#FFB243',
+          '#FFE623',
+          '#6EFF2A',
+          '#1BC7B1',
+          '#00BEFF',
+          '#2E81FF',
+          '#5D61FF',
+          '#FF89CF',
+          '#FC3CAD',
+          '#BF3DCE',
+        ],
+      },
     },
     data() {
       return {
@@ -140,8 +162,9 @@
       },
     },
     methods: {
-      updateValue(e) {
-        this.$emit('update:value', e[this.format])
+      updateValue(color) {
+        this.color = color[this.format]
+        this.$emit('update:value', this.color)
         this.$emit('changed')
         this.$parent.dirty(this.name)
       },
@@ -181,3 +204,13 @@
   }
 </script>
 
+<style>
+  .color-alpha,
+  .color-show {
+    display: none !important;
+  }
+  .colors .item:nth-child(8n) {
+    margin-left: 0 !important;
+    margin-right: 10px;
+  }
+</style>

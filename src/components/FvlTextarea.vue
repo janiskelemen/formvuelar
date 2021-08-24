@@ -20,10 +20,7 @@
         :readonly="readonly"
         :disabled="disabled"
         class="fvl-textarea"
-        @change="
-          $parent.dirty(name)
-          $emit('changed')
-        "
+        @change="$parent.dirty(name), $emit('changed')"
         @input="$emit('update:value', $event.target.value)"
       ></textarea>
     </div>
@@ -35,85 +32,84 @@
 </template>
 
 <script>
-  import ValidationErrors from './FvlErrors.vue'
-  export default {
-    components: {
-      ValidationErrors,
+import ValidationErrors from './FvlErrors.vue'
+export default {
+  components: {
+    ValidationErrors,
+  },
+  props: {
+    label: {
+      type: String,
+      required: false,
+      default: null,
     },
-    props: {
-      label: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      id: {
-        type: String,
-        default: null,
-      },
-      value: {
-        validator: (prop) => typeof prop === 'string' || prop === null,
-        default: '',
-      },
-      placeholder: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      autocomplete: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      fieldClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      labelClass: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      cols: {
-        type: Number,
-        required: false,
-        default: null,
-      },
-      maxlength: {
-        type: Number,
-        required: false,
-        default: null,
-      },
-      rows: {
-        type: Number,
-        required: false,
-        default: null,
-      },
-      wrap: {
-        type: String,
-        required: false,
-        default: null,
-      },
-      required: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      readonly: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
-      disabled: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
+    name: {
+      type: String,
+      required: true,
     },
-  }
+    id: {
+      type: String,
+      default: null,
+    },
+    value: {
+      validator: (prop) => typeof prop === 'string' || prop === null,
+      default: '',
+    },
+    placeholder: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    autocomplete: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    fieldClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    labelClass: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    cols: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    maxlength: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    rows: {
+      type: Number,
+      required: false,
+      default: null,
+    },
+    wrap: {
+      type: String,
+      required: false,
+      default: null,
+    },
+    required: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
+}
 </script>
-

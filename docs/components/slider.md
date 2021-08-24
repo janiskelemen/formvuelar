@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-slider :value.sync="form.amount" name="amount" label="Amount" />
+<fvl-slider v-model:value="form.amount" name="amount" label="Amount" />
 ```
 
 ### Import Name
