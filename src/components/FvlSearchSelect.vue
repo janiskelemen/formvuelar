@@ -36,10 +36,7 @@
               @keydown.up="highlightPrevious()"
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
-              @input="
-                highlightedIndex = 0
-                getRemoteOptions()
-              "
+              @input=";(highlightedIndex = 0), getRemoteOptions()"
             />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li

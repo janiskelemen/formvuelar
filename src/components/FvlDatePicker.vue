@@ -15,10 +15,7 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @on-change="
-          $parent.dirty(name)
-          $emit('changed')
-        "
+        @on-change="$parent.dirty(name), $emit('changed')"
         @on-close="$emit('closed')"
       />
       <slot name="suffix" />

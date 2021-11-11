@@ -13,10 +13,7 @@
           class="fvl-tag-select"
           type="button"
           tabindex="-1"
-          @click.prevent="
-            allowNew ? focusInlineInput() : toggle()
-            allowNew && openOnClick ? open() : ''
-          "
+          @click.prevent="allowNew ? focusInlineInput() : toggle(), allowNew && openOnClick ? open() : ''"
           @keydown.space="toggle()"
         >
           <span v-show="!selectedOptionValues.length && placeholder && !allowNew" v-text="placeholder" />
@@ -61,14 +58,8 @@
             @keydown.up="highlightPrevious()"
             @keydown.enter.prevent="checkValidity($event)"
             @blur="query && !filteredOptionsList.length ? checkValidity($event) : ''"
-            @keydown.tab="
-              checkValidity($event)
-              close()
-            "
-            @input="
-              highlightedIndex = -1
-              getRemoteOptions()
-            "
+            @keydown.tab="checkValidity($event), close()"
+            @input=";(highlightedIndex = -1), getRemoteOptions()"
             @keydown.backspace="removeTag()"
           />
         </button>
@@ -94,10 +85,7 @@
               @keydown.up="highlightPrevious()"
               @keydown.enter.prevent="selectHighlighted()"
               @keydown.tab.prevent
-              @input="
-                highlightedIndex = 0
-                getRemoteOptions()
-              "
+              @input=";(highlightedIndex = 0), getRemoteOptions()"
             />
             <ul v-if="!isLoading" ref="options" class="fvl-search-select-dropdown-options">
               <li

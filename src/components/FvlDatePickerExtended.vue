@@ -49,10 +49,7 @@
                 :placeholder="placeholder"
                 :class="['hidden', fieldClass]"
                 :config="flatpickrConfig"
-                @on-change="
-                  $parent.dirty(name)
-                  $emit('changed')
-                "
+                @on-change="$parent.dirty(name), $emit('changed')"
               />
             </div>
           </div>

@@ -21,10 +21,7 @@
           :disabled="disabled"
           type="range"
           class="fvl-slider"
-          @change="
-            $parent.dirty(name)
-            $emit('changed')
-          "
+          @change="$parent.dirty(name), $emit('changed')"
           @input="$emit('update:value', $event.target.value)"
         />
       </div>

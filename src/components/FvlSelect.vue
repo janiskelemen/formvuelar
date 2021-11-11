@@ -15,11 +15,7 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @change="
-          $emit('update:selected', $event.target.value)
-          $emit('changed')
-          $parent.dirty(name)
-        "
+        @change="$emit('update:selected', $event.target.value), $emit('changed'), $parent.dirty(name)"
       >
         <option v-if="allowEmpty" disabled selected value v-text="placeholder" />
         <option v-for="(option, key) in options" :key="key" :value="key" :selected="selected == key" v-text="option" />
