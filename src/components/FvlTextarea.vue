@@ -20,8 +20,8 @@
         :readonly="readonly"
         :disabled="disabled"
         class="fvl-textarea"
-        @change="$parent.dirty(name), $emit('changed')"
-        @input="$emit('update:value', $event.target.value), $emit('input', $event)"
+        @change="$emit('changed')"
+        @input="$parent.dirty(name), $emit('update:value', $event.target.value), $emit('input', $event)"
       ></textarea>
     </div>
     <slot name="hint" />

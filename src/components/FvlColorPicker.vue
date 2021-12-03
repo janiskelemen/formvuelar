@@ -21,6 +21,7 @@
             :pattern="validateFormat ? pattern : null"
             @keyup.space="toggle()"
             @change="updateValueManually($event.target.value)"
+            @input="$parent.dirty(name)"
           />
           <div ref="colorpicker" class="fvl-color-preview" @click="toggle()">
             <span :style="{ background: value }" class="inline-block rounded-full border border-white h-4 w-4"></span>
