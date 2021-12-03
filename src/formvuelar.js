@@ -35,6 +35,10 @@ export {
 }
 from './components/FvlSwitch'
 export {
+    default as FvlTextSwitch
+}
+from './components/FvlTextSwitch'
+export {
     default as FvlSlider
 }
 from './components/FvlSlider'

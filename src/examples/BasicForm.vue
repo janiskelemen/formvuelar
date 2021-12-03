@@ -7,7 +7,8 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/BasicForm.vue"
         target="_blank"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/basic" multipart>
@@ -27,12 +28,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('text')" />
       <!-- Textarea component -->
-      <fvl-textarea
-        :value.sync="form.text"
-        label="Text"
-        name="text"
-        placeholder="Type your story..."
-      />
+      <fvl-textarea :value.sync="form.text" label="Text" name="text" placeholder="Type your story..." />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'text'" :source="source.text" />
       <!-- Add source code toggle button (only for example) -->
@@ -92,7 +88,7 @@
       <!-- Select component -->
       <fvl-select
         :allow-empty="true"
-        :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"
+        :options="{ '#ffffff': 'White', '#000000': 'Black', blue: 'Blue', red: 'Red' }"
         :selected.sync="form.color"
         class="w-full lg:w-1/2"
         label="Select your favorite color"
@@ -106,7 +102,7 @@
       <!-- Radio component with options -->
       <fvl-radio
         :checked.sync="form.option"
-        :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"
+        :options="{ opt1: 'Option 1', opt2: 'Option 2', opt3: 'Option 3' }"
         class="w-full lg:w-1/2"
         label="Select any option"
         name="option"
@@ -128,15 +124,24 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('switch')" />
       <!-- Switch component -->
-      <fvl-switch
-        :checked.sync="form.switch"
-        class="w-full lg:w-1/2"
-        label="Enable this feature"
-        name="switch"
-      />
+      <fvl-switch :checked.sync="form.switch" class="w-full lg:w-1/2" label="Enable this feature" name="switch" />
 
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'switch'" :source="source.switch" />
+
+      <!-- Add source code toggle button (only for example) -->
+      <source-toggle @toggle="toggleSource('textSwitch')" />
+      <!-- Switch component -->
+      <fvl-text-switch
+        :checked.sync="form.textSwitch"
+        class="w-auto"
+        :options="['Private', 'Public']"
+        name="textswitch"
+      />
+
+      <!-- Source code area (only for example) -->
+      <source-box :show-source="showSource == 'textSwitch'" :source="source.textSwitch" />
+
       <!-- Submit button component -->
       <fvl-submit>Validate</fvl-submit>
     </fvl-form>
@@ -152,9 +157,10 @@
     FvlRadio,
     FvlSelect,
     FvlSwitch,
+    FvlTextSwitch,
     FvlSlider,
     FvlColorPicker,
-    FvlSubmit
+    FvlSubmit,
   } from './../formvuelar'
 
   import SourceToggle from './utilities/SourceToggle.vue'
@@ -168,12 +174,13 @@
       FvlCheckbox,
       FvlRadio,
       FvlSelect,
+      FvlTextSwitch,
       FvlSwitch,
       FvlSlider,
       FvlColorPicker,
       FvlSubmit,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     data() {
       return {
@@ -185,8 +192,9 @@
           option: '',
           agree: false,
           switch: false,
+          textSwitch: false,
           slider: '0',
-          colorPicker: '#C75454'
+          colorPicker: '#C75454',
         },
         showSource: '',
         source: {
@@ -276,14 +284,20 @@
             `    label="Enable this feature" \n` +
             `    name="switch" \n` +
             `    :checked.sync="form.switch" \n` +
-            `/>`
-        }
+            `/>`,
+          textSwitch:
+            `<fvl-text-switch \n` +
+            `    name="textswitch" \n` +
+            `    :options="['Private', 'Public']" \n` +
+            `    :checked.sync="form.textswitch" \n` +
+            `/>`,
+        },
       }
     },
     methods: {
       toggleSource(field) {
         this.showSource = this.showSource == field ? '' : field
-      }
-    }
+      },
+    },
   }
 </script>

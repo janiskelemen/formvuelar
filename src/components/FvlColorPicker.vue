@@ -72,7 +72,7 @@
       },
       value: {
         validator: (prop) => typeof prop === 'string' || prop === null,
-        default: '0',
+        default: null,
       },
       format: {
         type: String,

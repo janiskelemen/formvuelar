@@ -1,0 +1,25 @@
+/* Styles for hiding the native checkbox */
+.fvl-text-switch-wrapper {
+  @apply p-2;
+}
+
+.fvl-text-switch {
+  @apply absolute opacity-0 hidden;
+}
+
+.fvl-text-switch-options-wrapper {
+  @apply grid grid-cols-2 text-sm font-bold items-center bg-gray-200 w-auto h-8 rounded-full;
+}
+
+.fvl-text-switch-label {
+  @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+}
+
+.fvl-text-switch-bg {
+  width: calc(50% - 0.25rem);
+  @apply z-30 absolute left-1 top-1 bg-gray-400 h-6 rounded-full transform-gpu transition-all duration-300 ease-in-out;
+}
+
+.fvl-text-switch-bg-selected {
+  @apply translate-x-full checked bg-teal-500;
+}
