@@ -23,3 +23,11 @@
 .fvl-text-switch-bg-selected {
   @apply translate-x-full checked bg-teal-500;
 }
+
+.fvl-text-switch-option-1 {
+  @apply z-40 pr-4 pl-5 text-center select-none;
+}
+
+.fvl-text-switch-option-2 {
+  @apply z-40 pl-4 pr-5 text-center transition-colors select-none;
+}

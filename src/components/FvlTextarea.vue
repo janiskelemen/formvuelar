@@ -20,7 +20,7 @@
         :readonly="readonly"
         :disabled="disabled"
         class="fvl-textarea"
-        @change="$emit('changed')"
+        @change="$parent.dirty(name), $emit('changed')"
         @input="$parent.dirty(name), $emit('update:value', $event.target.value), $emit('input', $event)"
       ></textarea>
     </div>

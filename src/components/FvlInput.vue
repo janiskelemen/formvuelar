@@ -24,7 +24,7 @@
         :disabled="disabled"
         :pattern="pattern"
         class="fvl-input"
-        @change="$emit('changed')"
+        @change="$parent.dirty(name), $emit('changed')"
         @input="$parent.dirty(name), $emit('update:value', $event.target.value), $emit('input', $event)"
       />
       <slot name="suffix" />

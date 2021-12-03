@@ -19,17 +19,9 @@
     </label>
 
     <span class="inline-block relative normal-case cursor-pointer">
-      <button type="button" tabindex="0" class="fvl-text-switch-options-wrapper" @click="$refs.checkbox.click()">
-        <div
-          class="fvl-text-switch-option-1 z-40 px-4 text-center select-none"
-          :class="!checked ? 'active' : ''"
-          v-html="options[0]"
-        ></div>
-        <div
-          class="fvl-text-switch-option-2 z-40 px-4 text-center transition-colors select-none"
-          :class="{ 'active text-white': checked }"
-          v-html="options[1]"
-        ></div>
+      <button type="button" class="fvl-text-switch-options-wrapper" @click="$refs.checkbox.click()">
+        <div class="fvl-text-switch-option-1" :class="!checked ? 'active' : ''" v-html="options[0]"></div>
+        <div class="fvl-text-switch-option-2" :class="{ 'active text-white': checked }" v-html="options[1]"></div>
       </button>
       <!-- switch bg -->
       <div class="fvl-text-switch-bg" :class="{ 'fvl-text-switch-bg-selected': checked }"></div>
