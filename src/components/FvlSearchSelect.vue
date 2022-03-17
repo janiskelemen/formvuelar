@@ -31,6 +31,8 @@
               ref="search"
               v-model="query"
               class="fvl-search-select-dropdown-input"
+              autocapitalize="off"
+              spellcheck="false"
               @keydown.esc="close()"
               @keydown.down="highlightNext()"
               @keydown.up="highlightPrevious()"

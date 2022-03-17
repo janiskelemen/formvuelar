@@ -42,6 +42,8 @@
             v-if="allowNew && !(max !== null && selected !== null && selected.length >= max)"
             ref="inlineinput"
             v-model="query"
+            autocapitalize="off"
+            spellcheck="false"
             :style="{
               width: String(query).length * 18 + 'px',
               maxWidth: '100%',

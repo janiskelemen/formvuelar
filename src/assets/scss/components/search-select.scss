@@ -58,7 +58,7 @@
 }
 
 .fvl-search-select-dropdown-option {
-  @apply block w-full text-white rounded py-2 px-2 my-px;
+  @apply block w-full text-white rounded py-2 px-2 my-px truncate;
 }
 
 .fvl-search-select-dropdown-option-highlighted {

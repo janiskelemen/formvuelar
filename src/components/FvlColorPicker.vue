@@ -11,6 +11,8 @@
           <input
             :id="id"
             ref="colorinput"
+            autocapitalize="off"
+            spellcheck="false"
             :value="value"
             :name="name"
             :required="required"
