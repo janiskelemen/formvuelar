@@ -10,6 +10,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  base: "/formvuelar/",
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/formvuelar.js'),
