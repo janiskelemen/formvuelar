@@ -7,7 +7,8 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/NestedCheckbox.vue"
         target="_blank"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup Nested Checkbox -->
     <fvl-form :data="form" class="relative" url="/basic">
@@ -27,7 +28,7 @@
 </template>
 
 <script>
-  import { FvlForm, FvlMultiCheckbox } from './../formvuelar'
+  import { FvlForm, FvlMultiCheckbox } from './../formvuelar.js'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
@@ -37,12 +38,12 @@
       FvlForm,
       FvlMultiCheckbox,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     data() {
       return {
         form: {
-          permissions: {}
+          permissions: {},
         },
         permissionsStructure: [
           {
@@ -53,20 +54,20 @@
               {
                 name: 'create',
                 label: 'Create',
-                checked: false
+                checked: false,
               },
               {
                 name: 'update',
                 label: 'Update',
-                checked: false
+                checked: false,
               },
               {
                 name: 'delete',
                 label: 'Delete',
-                checked: false
-              }
-            ]
-          }
+                checked: false,
+              },
+            ],
+          },
         ],
         showSource: '',
         source: {
@@ -75,14 +76,14 @@
             `    label="Set your permissions" \n` +
             `    name="permissions" \n` +
             `    :checked.sync="form.permissions" \n` +
-            `/>`
-        }
+            `/>`,
+        },
       }
     },
     methods: {
       toggleSource(field) {
         this.showSource = this.showSource == field ? '' : field
-      }
-    }
+      },
+    },
   }
 </script>

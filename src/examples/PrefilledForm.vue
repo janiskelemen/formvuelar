@@ -7,7 +7,8 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/PrefilledForm.vue"
         target="_blank"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/update">
@@ -33,7 +34,7 @@
       <!-- Radio component with options -->
       <fvl-radio
         :checked.sync="form.pet"
-        :options="{'cat': 'Cat', 'dog': 'Dog'}"
+        :options="{ cat: 'Cat', dog: 'Dog' }"
         class="w-full lg:w-1/2"
         label="Favorite pet"
         name="pet"
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-  import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from './../formvuelar'
+  import { FvlForm, FvlInput, FvlTextarea, FvlRadio, FvlSubmit } from './../formvuelar.js'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
@@ -60,28 +61,28 @@
       FvlRadio,
       FvlSubmit,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     props: {
       initFullname: {
         type: String,
-        default: ''
+        default: '',
       },
       initBio: {
         type: String,
-        default: ''
+        default: '',
       },
       initPet: {
         type: String,
-        default: ''
-      }
+        default: '',
+      },
     },
     data() {
       return {
         form: {
           fullname: this.initFullname,
           bio: this.initBio,
-          pet: this.initPet
+          pet: this.initPet,
         },
         showSource: '',
         source: {
@@ -107,14 +108,14 @@
             `    name="pet" \n` +
             `    :options="{'cat': 'Cat', 'dog': 'Dog'}" \n` +
             `    :checked.sync="form.pet" \n` +
-            `/> \n`
-        }
+            `/> \n`,
+        },
       }
     },
     methods: {
       toggleSource(field) {
         this.showSource = this.showSource == field ? '' : field
-      }
-    }
+      },
+    },
   }
 </script>

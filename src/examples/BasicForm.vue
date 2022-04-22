@@ -161,7 +161,7 @@
     FvlSlider,
     FvlColorPicker,
     FvlSubmit,
-  } from './../formvuelar'
+  } from './../formvuelar.js'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'

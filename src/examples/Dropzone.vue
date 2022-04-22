@@ -7,7 +7,8 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/Dropzone.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
@@ -18,15 +19,13 @@
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source" />
       <!-- Submit button with upload loader indicator enabled -->
-      <fvl-submit loader>
-        Upload
-      </fvl-submit>
+      <fvl-submit loader> Upload </fvl-submit>
     </fvl-form>
   </div>
 </template>
 
 <script>
-  import { FvlForm, FvlDropzone, FvlSubmit } from './../formvuelar'
+  import { FvlForm, FvlDropzone, FvlSubmit } from './../formvuelar.js'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
@@ -37,17 +36,21 @@
       FvlDropzone,
       FvlSubmit,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     data() {
       return {
         form: {
-          media: null
+          media: null,
         },
         showSource: false,
         source:
-          `<fvl-dropzone \n` + `    label="Media" \n` + `    name="media" \n` + `    :file.sync="form.media" \n` + `/> \n`
+          `<fvl-dropzone \n` +
+          `    label="Media" \n` +
+          `    name="media" \n` +
+          `    :file.sync="form.media" \n` +
+          `/> \n`,
       }
-    }
+    },
   }
 </script>

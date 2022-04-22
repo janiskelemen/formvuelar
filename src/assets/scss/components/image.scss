@@ -56,7 +56,7 @@
 }
 
 .fvl-image-group .fvl-image-preview {
-  @apply relative flex justify-center h-10 w-10 self-center bg-gray-200 rounded-full overflow-hidden mr-4 flex-shrink-0;
+  @apply relative flex justify-center h-10 w-10 self-center bg-gray-200 rounded-full overflow-hidden mr-4 shrink-0;
 }
 
 .fvl-image-group .fvl-image-preview img {

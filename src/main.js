@@ -11,7 +11,7 @@ import 'highlight.js/styles/atom-one-dark.css'
 Vue.use( VueHighlightJS )
 
 /* Load Axios Mock Adapter with mocked entpoints for demo */
-require( './axiosMockEndpoints.js' )
+import './axiosMockEndpoints.js'
 
 
 new Vue( {

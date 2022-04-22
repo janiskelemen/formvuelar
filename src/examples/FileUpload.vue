@@ -124,7 +124,7 @@
 </template>
 
 <script>
-  import { FvlForm, FvlFile, FvlImage } from './../formvuelar'
+  import { FvlForm, FvlFile, FvlImage } from './../formvuelar.js'
 
   import SourceToggle from './utilities/SourceToggle.vue'
   import SourceBox from './utilities/SourceBox.vue'
