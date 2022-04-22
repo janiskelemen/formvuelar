@@ -12,7 +12,7 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 </p>
 
 <h2>Examples</h2>
-<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Give it a try!</a>
+<a href="https://janiskelemen.github.io/formvuelar/example" target="_blank">Give it a try!</a>
 
 <h2>Features</h2>
 

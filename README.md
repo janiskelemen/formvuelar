@@ -4,7 +4,7 @@
 <h3 align="center">Vue form components with server side validation in mind</h3>
 
 <p align="center">
-    <a href="https://janiskelemen.github.io/formvuelar/" target="_blank">
+    <a href="https://janiskelemen.github.io/formvuelar/example" target="_blank">
         <img src="https://janiskelemen.github.io/formvuelar/example/formvuelar_basic_form.png" alt="Formvuelar basic form" />
     </a>
 </p>
@@ -23,7 +23,7 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 </p>
 
 <h2>Examples</h2>
-<a href="https://janiskelemen.github.io/formvuelar/" target="_blank">Give it a try!</a>
+<a href="https://janiskelemen.github.io/formvuelar/example" target="_blank">Give it a try!</a>
 
 ## Documentation
 
