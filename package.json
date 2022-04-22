@@ -13,12 +13,20 @@
     "laravel"
   ],
   "main": "./dist/formvuelar.umd.js",
+  "module": "./dist/formvuelar.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/formvuelar.es.js",
+      "require": "./dist/formvuelar.umd.js"
+    }
+  },
   "version": "1.8.0",
   "private": false,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "examples": "vite build -c vite.config.examples.js",
     "build-examples": "vite build --dest example; cp example/index.html index.html; sed -i \\.bak 's/\\/js/\\/formvuelar\\/example\\/js/g' index.html; rm index.html.bak; sed -i \\.bak 's/\\/css/\\/formvuelar\\/example\\/css/g' index.html; rm index.html.bak",
     "bundle": "vite build --target lib --name formvuelar ./src/formvuelar.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
