@@ -8852,6 +8852,8 @@ const __vue2_script$F = {
           Object.keys(rawData[e]).forEach((f) => {
             if (rawData[e][f] instanceof File) {
               formData.append(e + "[]", rawData[e][f]);
+            } else if (rawData[e][f] instanceof Object) {
+              formData.append(e + "[]", JSON.stringify(this.replaceNullOnMultipart(rawData[e][f])));
             } else {
               formData.append(e, this.replaceNullOnMultipart(rawData[e]));
             }
