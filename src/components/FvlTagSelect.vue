@@ -60,6 +60,7 @@
             @keydown.up="highlightPrevious()"
             @keydown.enter.prevent="checkValidity($event)"
             @blur="query && !filteredOptionsList.length ? checkValidity($event) : ''"
+            @paste.prevent=";(query = $event.clipboardData.getData('text')), checkValidity($event)"
             @keydown.tab="checkValidity($event), close()"
             @input=";(highlightedIndex = -1), getRemoteOptions()"
             @keydown.backspace="removeTag()"
@@ -512,11 +513,12 @@
         this.scrollToIndex(this.highlightedIndex)
       },
       checkValidity(event) {
-        console.log(event)
         if ((this.highlightedIndex !== null && this.highlightedIndex !== -1) || event.target.checkValidity()) {
           this.selectHighlighted()
+          return true
         } else {
           event.target.reportValidity()
+          return false
         }
       },
       getRemoteOptions(refresh) {
