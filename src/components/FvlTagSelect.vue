@@ -498,7 +498,7 @@
       },
       scrollToIndex(index) {
         if (typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
-        this.$refs.options.children[index].scrollIntoView({ block: 'nearest' })
+        this.$refs.options.children[index].scrollIntoView({ block: 'nearest', inline: 'nearest' })
       },
       highlightNext() {
         this.highlightedIndex =

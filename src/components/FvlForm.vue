@@ -141,7 +141,9 @@
             if (error.response && error.response.status === 422) {
               $this.errors = error.response.data.errors
               $this.$nextTick(() => {
-                document.getElementsByClassName('fvl-has-error')[0]?.scrollIntoView('smooth')
+                document
+                  .getElementsByClassName('fvl-has-error')[0]
+                  ?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
               })
             }
 
