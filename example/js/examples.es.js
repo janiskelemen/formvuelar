@@ -8899,7 +8899,7 @@ const __vue2_script$F = {
           $this.errors = error2.response.data.errors;
           $this.$nextTick(() => {
             var _a;
-            (_a = document.getElementsByClassName("fvl-has-error")[0]) == null ? void 0 : _a.scrollIntoView("smooth");
+            (_a = document.getElementsByClassName("fvl-has-error")[0]) == null ? void 0 : _a.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
           });
         }
         if (error2.response && error2.response.status === 419) {
@@ -9378,6 +9378,7 @@ function createKey(key) {
   let id = null;
   let src2 = null;
   let weight = 1;
+  let getFn = null;
   if (isString(key) || isArray$a(key)) {
     src2 = key;
     path = createKeyPath(key);
@@ -9396,8 +9397,9 @@ function createKey(key) {
     }
     path = createKeyPath(name);
     id = createKeyId(name);
+    getFn = key.getFn;
   }
-  return { path, id, weight, src: src2 };
+  return { path, id, weight, src: src2, getFn };
 }
 function createKeyPath(key) {
   return isArray$a(key) ? key : key.split(".");
@@ -9553,7 +9555,7 @@ class FuseIndex {
   _addObject(doc, docIndex) {
     let record = { i: docIndex, $: {} };
     this.keys.forEach((key, keyIndex) => {
-      let value = this.getFn(doc, key.path);
+      let value = key.getFn ? key.getFn(doc) : this.getFn(doc, key.path);
       if (!isDefined(value)) {
         return;
       }
@@ -9583,7 +9585,7 @@ class FuseIndex {
             ;
         }
         record.$[keyIndex] = subRecords;
-      } else if (!isBlank(value)) {
+      } else if (isString(value) && !isBlank(value)) {
         let subRecord = {
           v: value,
           n: this.norm.get(value)
@@ -10112,7 +10114,7 @@ const searchers = [
   FuzzyMatch
 ];
 const searchersLen = searchers.length;
-const SPACE_RE = / +(?=([^\"]*\"[^\"]*\")*[^\"]*$)/;
+const SPACE_RE = / +(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)/;
 const OR_TOKEN = "|";
 function parseQuery(pattern, options = {}) {
   return pattern.split(OR_TOKEN).map((item) => {
@@ -10556,7 +10558,7 @@ class Fuse {
     return matches2;
   }
 }
-Fuse.version = "6.5.3";
+Fuse.version = "6.6.2";
 Fuse.createIndex = createIndex;
 Fuse.parseIndex = parseIndex;
 Fuse.config = Config;
@@ -13151,7 +13153,7 @@ const __vue2_script$z = {
     scrollToIndex(index2) {
       if (typeof this.$refs.options == "undefined" || typeof this.$refs.options.children[index2] == "undefined")
         return;
-      this.$refs.options.children[index2].scrollIntoView({ block: "nearest" });
+      this.$refs.options.children[index2].scrollIntoView({ block: "nearest", inline: "nearest" });
     },
     highlightNext() {
       this.highlightedIndex = this.highlightedIndex == this.filteredOptionsList.length - 1 ? this.filteredOptionsList.length - 1 : this.highlightedIndex + 1;
@@ -13310,6 +13312,9 @@ var render$y = function() {
     return _vm.removeTag();
   }], "blur": function($event) {
     _vm.query && !_vm.filteredOptionsList.length ? _vm.checkValidity($event) : "";
+  }, "paste": function($event) {
+    $event.preventDefault();
+    _vm.query = $event.clipboardData.getData("text"), _vm.checkValidity($event);
   }, "input": function($event) {
     _vm.highlightedIndex = -1, _vm.getRemoteOptions();
   }, "change": function($event) {
@@ -13363,6 +13368,9 @@ var render$y = function() {
     return _vm.removeTag();
   }], "blur": function($event) {
     _vm.query && !_vm.filteredOptionsList.length ? _vm.checkValidity($event) : "";
+  }, "paste": function($event) {
+    $event.preventDefault();
+    _vm.query = $event.clipboardData.getData("text"), _vm.checkValidity($event);
   }, "input": function($event) {
     _vm.highlightedIndex = -1, _vm.getRemoteOptions();
   }, "change": function($event) {
@@ -13406,6 +13414,9 @@ var render$y = function() {
     return _vm.removeTag();
   }], "blur": function($event) {
     _vm.query && !_vm.filteredOptionsList.length ? _vm.checkValidity($event) : "";
+  }, "paste": function($event) {
+    $event.preventDefault();
+    _vm.query = $event.clipboardData.getData("text"), _vm.checkValidity($event);
   }, "input": [function($event) {
     if ($event.target.composing) {
       return;
@@ -13825,7 +13836,7 @@ const __vue2_script$y = {
     scrollToIndex(index2) {
       if (typeof this.$refs.options == "undefined" || typeof this.$refs.options.children[index2] == "undefined")
         return;
-      this.$refs.options.children[index2].scrollIntoView({ block: "nearest" });
+      this.$refs.options.children[index2].scrollIntoView({ block: "nearest", inline: "nearest" });
     },
     highlightNext() {
       this.highlightedIndex = this.highlightedIndex >= this.filteredOptionsList.length - 1 ? this.filteredOptionsList.length - 1 : this.highlightedIndex + 1;
@@ -13836,11 +13847,12 @@ const __vue2_script$y = {
       this.scrollToIndex(this.highlightedIndex);
     },
     checkValidity(event) {
-      console.log(event);
       if (this.highlightedIndex !== null && this.highlightedIndex !== -1 || event.target.checkValidity()) {
         this.selectHighlighted();
+        return true;
       } else {
         event.target.reportValidity();
+        return false;
       }
     },
     getRemoteOptions(refresh) {
@@ -67184,18 +67196,36 @@ var fastDeepEqual = function equal(a, b) {
 var isBuffer$1 = function isBuffer2(obj) {
   return obj != null && obj.constructor != null && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj);
 };
-var isBlob$1 = (value) => {
+/*!
+ * MIT License
+ *
+ * Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+ * persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+ * Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+function isBlob$1(value) {
   if (typeof Blob === "undefined") {
     return false;
   }
   return value instanceof Blob || Object.prototype.toString.call(value) === "[object Blob]";
-};
+}
+var is_blob = isBlob$1;
 var axios = axios$1;
 var isEqual = fastDeepEqual;
 var isBuffer = isBuffer$1;
-var isBlob = isBlob$1;
+var isBlob = is_blob;
 var toString = Object.prototype.toString;
-var rejectWithError = !!axios.create().defaults.headers;
 function find(array, predicate) {
   var length = array.length;
   for (var i = 0; i < length; i++) {
@@ -67239,8 +67269,9 @@ function isUrlMatching(url, required) {
 function isBodyOrParametersMatching(method, body, parameters, required) {
   var allowedParamsMethods = ["delete", "get", "head", "options"];
   if (allowedParamsMethods.indexOf(method.toLowerCase()) >= 0) {
+    var data2 = required ? required.data : void 0;
     var params = required ? required.params : void 0;
-    return isObjectMatching(parameters, params);
+    return isObjectMatching(parameters, params) && isBodyMatching(body, data2);
   } else {
     return isBodyMatching(body, required);
   }
@@ -67277,24 +67308,16 @@ function settle(resolve2, reject, response, delay) {
     setTimeout(settle, delay, resolve2, reject, response);
     return;
   }
-  if (!rejectWithError && (!response.config || !response.config.validateStatus)) {
-    if (response.status >= 200 && response.status < 300) {
-      resolve2(response);
-    } else {
-      reject(response);
-    }
-    return;
-  }
   if (!response.config.validateStatus || response.config.validateStatus(response.status)) {
     resolve2(response);
   } else {
-    if (!rejectWithError) {
-      return reject(response);
-    }
     reject(createAxiosError("Request failed with status code " + response.status, response.config, response));
   }
 }
 function createAxiosError(message, config2, response, code) {
+  if (typeof axios.AxiosError === "function") {
+    return axios.AxiosError.from(new Error(message), code, config2, null, response);
+  }
   var error2 = new Error(message);
   error2.isAxiosError = true;
   error2.config = config2;
@@ -67339,6 +67362,7 @@ var utils$2 = {
   isObjectOrArray,
   isBuffer,
   isBlob,
+  isBodyOrParametersMatching,
   isEqual,
   createAxiosError,
   createCouldNotFindMockError
@@ -67428,18 +67452,16 @@ var VERBS = [
   "patch",
   "put",
   "options",
-  "list"
+  "list",
+  "link",
+  "unlink"
 ];
 function adapter() {
   return function(config2) {
     var mockAdapter = this;
-    if (arguments.length === 3) {
-      handleRequest(mockAdapter, arguments[0], arguments[1], arguments[2]);
-    } else {
-      return new Promise(function(resolve2, reject) {
-        handleRequest(mockAdapter, resolve2, reject, config2);
-      });
-    }
+    return new Promise(function(resolve2, reject) {
+      handleRequest(mockAdapter, resolve2, reject, config2);
+    });
   }.bind(this);
 }
 function getVerbObject() {

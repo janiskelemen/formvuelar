@@ -3,17 +3,13 @@
   <div class="mb-16">
     <h3 class="border-b-2 mb-4 -mx-4 p-1 text-gray-800">
       Date Picker (
-      <a
-        class="text-blue-500"
-        href="https://flatpickr.js.org/"
-        target="_blank"
-        rel="nofollow"
-      >Flatpickr</a>)
+      <a class="text-blue-500" href="https://flatpickr.js.org/" target="_blank" rel="nofollow">Flatpickr</a>)
       <a
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/datepicker/DatePicker.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-      >Full Source Code</a>
+        >Full Source Code</a
+      >
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/datepicker" class="relative">
@@ -38,7 +34,7 @@
         name="daterangepicker"
         label="Date Rage Picker"
         placeholder="Select a date range"
-        :config="{mode: 'range'}"
+        :config="{ mode: 'range' }"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showRangePickerSource" :source="rangePickerSource" />
@@ -63,7 +59,7 @@
         name="timepicker"
         label="Time picker"
         placeholder="00:00"
-        :config="{mode: 'time'}"
+        :config="{ mode: 'time' }"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showTimePickerSource" :source="timePickerSource" />
@@ -75,7 +71,7 @@
         name="Datetimepicker"
         label="Date & Time picker"
         placeholder="YYYY-MM-DD 00:00"
-        :config="{enableTime: true}"
+        :config="{ enableTime: true }"
       />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showDateTimePickerSource" :source="dateTimePickerSource" />
@@ -95,7 +91,7 @@
       FvlDatePicker,
       FvlDatePickerExtended,
       SourceToggle,
-      SourceBox
+      SourceBox,
     },
     data() {
       return {
@@ -104,10 +100,10 @@
           daterange: null,
           range: {
             start: '',
-            end: ''
+            end: '',
           },
           time: null,
-          datetime: null
+          datetime: null,
         },
         showDatePickerSource: false,
         datePickerSource:
@@ -155,8 +151,8 @@
           `   label="Date & Time Picker"\n` +
           `   placeholder="YYYY-MM-DD 00:00"\n` +
           `   :config="{enableTime: true}" \n` +
-          `/>\n`
+          `/>\n`,
       }
-    }
+    },
   }
 </script>
