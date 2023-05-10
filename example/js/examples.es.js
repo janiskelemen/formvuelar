@@ -13703,7 +13703,6 @@ const __vue2_script$y = {
       return errors.length;
     },
     select(option) {
-      console.log(option);
       if (this.optionIsDisabled(option))
         return;
       let $this = this;
@@ -13730,7 +13729,9 @@ const __vue2_script$y = {
     },
     unselect(option) {
       let selected = this.selected === null ? [] : this.selected;
-      selected.splice(selected.indexOf(option), 1);
+      selected.splice(this.selectedOptionValues.findIndex((item) => {
+        return item == option || item == option[this.optionKey];
+      }), 1);
       this.$emit("update:selected", selected);
       this.$emit("changed");
       this.$parent.dirty(this.name);
@@ -21427,7 +21428,11 @@ const __vue2_script$2 = {
       form2: {
         emails: ["donotAllowThis@email.com"]
       },
-      emailsOptions: [{ email: "my@email.com" }, { email: "your@email.com" }, { email: "his@email.com" }],
+      emailsOptions: [
+        { id: 1, email: "my@email.com" },
+        { id: 2, email: "your@email.com" },
+        { id: 3, email: "his@email.com" }
+      ],
       showSource: false,
       source: `<fvl-tag-select 
    :selected.sync="form.emails" 
@@ -67388,6 +67393,21 @@ function makeResponse(result, config2) {
     }
   };
 }
+function passThroughRequest(mockAdapter, resolve2, reject, config2) {
+  var baseURL = config2.baseURL;
+  if (config2.baseURL && !/^https?:/.test(config2.baseURL)) {
+    baseURL = void 0;
+  }
+  if (typeof mockAdapter.originalAdapter === "function") {
+    return mockAdapter.originalAdapter(config2).then(resolve2, reject);
+  }
+  mockAdapter.axiosInstanceWithoutInterceptors(Object.assign({}, config2, {
+    baseURL,
+    adapter: mockAdapter.originalAdapter,
+    transformRequest: [],
+    transformResponse: []
+  })).then(resolve2, reject);
+}
 function handleRequest$1(mockAdapter, resolve2, reject, config2) {
   var url = config2.url || "";
   if (config2.baseURL && url.substr(0, config2.baseURL.length) === config2.baseURL) {
@@ -67395,13 +67415,13 @@ function handleRequest$1(mockAdapter, resolve2, reject, config2) {
   }
   delete config2.adapter;
   mockAdapter.history[config2.method].push(config2);
-  var handler = utils$1.findHandler(mockAdapter.handlers, config2.method, url, config2.data, config2.params, config2.headers, config2.baseURL);
+  var handler = utils$1.findHandler(mockAdapter.handlers, config2.method, url, config2.data, config2.params, config2.headers && config2.headers.constructor.name === "AxiosHeaders" ? Object.assign({}, config2.headers) : config2.headers, config2.baseURL);
   if (handler) {
     if (handler.length === 7) {
       utils$1.purgeIfReplyOnce(mockAdapter, handler);
     }
     if (handler.length === 2) {
-      mockAdapter.originalAdapter(config2).then(resolve2, reject);
+      passThroughRequest(mockAdapter, resolve2, reject, config2);
     } else if (typeof handler[3] !== "function") {
       utils$1.settle(resolve2, reject, makeResponse(handler.slice(3), config2), mockAdapter.delayResponse);
     } else {
@@ -67429,7 +67449,7 @@ function handleRequest$1(mockAdapter, resolve2, reject, config2) {
   } else {
     switch (mockAdapter.onNoMatch) {
       case "passthrough":
-        mockAdapter.originalAdapter(config2).then(resolve2, reject);
+        passThroughRequest(mockAdapter, resolve2, reject, config2);
         break;
       case "throwException":
         throw utils$1.createCouldNotFindMockError(config2);
@@ -67484,6 +67504,7 @@ function MockAdapter(axiosInstance, options) {
   reset.call(this);
   if (axiosInstance) {
     this.axiosInstance = axiosInstance;
+    this.axiosInstanceWithoutInterceptors = axiosInstance.create ? axiosInstance.create() : void 0;
     this.originalAdapter = axiosInstance.defaults.adapter;
     this.delayResponse = options && options.delayResponse > 0 ? options.delayResponse : null;
     this.onNoMatch = options && options.onNoMatch || null;

@@ -88,7 +88,11 @@
         form2: {
           emails: ['donotAllowThis@email.com'],
         },
-        emailsOptions: [{ email: 'my@email.com' }, { email: 'your@email.com' }, { email: 'his@email.com' }],
+        emailsOptions: [
+          { id: 1, email: 'my@email.com' },
+          { id: 2, email: 'your@email.com' },
+          { id: 3, email: 'his@email.com' },
+        ],
         showSource: false,
         source:
           `<fvl-tag-select \n` +

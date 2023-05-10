@@ -365,7 +365,6 @@
       },
 
       select(option) {
-        console.log(option)
         if (this.optionIsDisabled(option)) return
         let $this = this
         /* Add the selected option key to selected array */
@@ -395,7 +394,12 @@
       unselect(option) {
         /* Remove the selected option key from selected array */
         let selected = this.selected === null ? [] : this.selected
-        selected.splice(selected.indexOf(option), 1)
+        selected.splice(
+          this.selectedOptionValues.findIndex((item) => {
+            return item == option || item == option[this.optionKey]
+          }),
+          1
+        )
         this.$emit('update:selected', selected)
         this.$emit('changed')
         this.$parent.dirty(this.name)
