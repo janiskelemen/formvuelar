@@ -240,12 +240,12 @@
         this.isOpen = false
         if (this.value && typeof this.value.end == 'undefined') {
           this.inputvalue = ''
-          this.$emit('closed')
           this.$emit('update:value', '')
           this.$emit('update:start', '')
           this.$emit('update:end', '')
         }
         this.$nextTick(() => {
+          this.$emit('closed')
           this.$refs.dateinput.focus()
         })
       },
