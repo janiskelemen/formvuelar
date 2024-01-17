@@ -60,10 +60,10 @@
             @keydown.up="highlightPrevious()"
             @keydown.enter.prevent="checkValidity($event)"
             @blur="query && !filteredOptionsList.length ? checkValidity($event) : ''"
-            @paste.prevent=";(query = $event.clipboardData.getData('text')), checkValidity($event)"
+            @paste.prevent="checkValidity($event)"
             @keydown.tab="checkValidity($event), close()"
             @input=";(highlightedIndex = -1), getRemoteOptions()"
-            @keydown.backspace="removeTag()"
+            @keydown.backspace="removeTag($event)"
           />
         </button>
         <div v-if="!allowNew || (allowNew && openOnClick)" class="fvl-search-select-carret">
@@ -407,10 +407,20 @@
           if (this.allowNew) this.focusInlineInput()
         })
       },
-      removeTag() {
+      removeTag(event) {
         let selected = this.selected === null ? [] : this.selected
         if (selected && !this.query) {
-          this.unselect(selected[selected.length - 1])
+          let selectedIndex = selected.length - 1
+          let value = selected[selectedIndex]
+          this.unselect(value)
+          /* make removed editable again if allow new is active */
+          if (this.allowNew) {
+            event.preventDefault()
+            this.query = value
+          }
+          this.$emit('update:selected', selected)
+          this.$emit('changed')
+          this.$parent.dirty(this.name)
           this.close()
         }
         /* Close dropdown*/
@@ -429,8 +439,11 @@
           this.highlightedIndex < 0 ||
           this.highlightedIndex > this.filteredOptionsList.length - 1
         ) {
-          if (this.allowNew && this.query !== null && this.query.trimLeft() != '') this.select(this.query)
-          return
+          if (this.allowNew && this.query !== null && this.query.trimLeft() != '') {
+            console.log(this.$refs.inlineinput.checkValidity())
+            this.select(this.query)
+            return
+          }
         }
         this.select(this.filteredOptionsList[this.highlightedIndex])
         this.highlightedIndex = -1
@@ -517,6 +530,11 @@
         this.scrollToIndex(this.highlightedIndex)
       },
       checkValidity(event) {
+        if (event.clipboardData) {
+          this.query = event.clipboardData.getData('text')
+          event.target.value = this.query
+        }
+
         if ((this.highlightedIndex !== null && this.highlightedIndex !== -1) || event.target.checkValidity()) {
           this.selectHighlighted()
           return true

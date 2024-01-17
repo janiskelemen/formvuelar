@@ -8919,6 +8919,10 @@ const __vue2_script$F = {
       });
     },
     dirty(name) {
+      let subKeys = Object.keys(this.errors).filter((e) => e.startsWith(name + "."));
+      subKeys.forEach((e) => {
+        this.errors[e] = false;
+      });
       this.errors[name] = false;
       this.$emit("changed", { fieldName: name });
     },
@@ -13309,12 +13313,12 @@ var render$y = function() {
     if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "backspace", void 0, $event.key, void 0)) {
       return null;
     }
-    return _vm.removeTag();
+    return _vm.removeTag($event);
   }], "blur": function($event) {
     _vm.query && !_vm.filteredOptionsList.length ? _vm.checkValidity($event) : "";
   }, "paste": function($event) {
     $event.preventDefault();
-    _vm.query = $event.clipboardData.getData("text"), _vm.checkValidity($event);
+    return _vm.checkValidity($event);
   }, "input": function($event) {
     _vm.highlightedIndex = -1, _vm.getRemoteOptions();
   }, "change": function($event) {
@@ -13365,12 +13369,12 @@ var render$y = function() {
     if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "backspace", void 0, $event.key, void 0)) {
       return null;
     }
-    return _vm.removeTag();
+    return _vm.removeTag($event);
   }], "blur": function($event) {
     _vm.query && !_vm.filteredOptionsList.length ? _vm.checkValidity($event) : "";
   }, "paste": function($event) {
     $event.preventDefault();
-    _vm.query = $event.clipboardData.getData("text"), _vm.checkValidity($event);
+    return _vm.checkValidity($event);
   }, "input": function($event) {
     _vm.highlightedIndex = -1, _vm.getRemoteOptions();
   }, "change": function($event) {
@@ -13411,12 +13415,12 @@ var render$y = function() {
     if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "backspace", void 0, $event.key, void 0)) {
       return null;
     }
-    return _vm.removeTag();
+    return _vm.removeTag($event);
   }], "blur": function($event) {
     _vm.query && !_vm.filteredOptionsList.length ? _vm.checkValidity($event) : "";
   }, "paste": function($event) {
     $event.preventDefault();
-    _vm.query = $event.clipboardData.getData("text"), _vm.checkValidity($event);
+    return _vm.checkValidity($event);
   }, "input": [function($event) {
     if ($event.target.composing) {
       return;
@@ -13740,10 +13744,19 @@ const __vue2_script$y = {
           this.focusInlineInput();
       });
     },
-    removeTag() {
+    removeTag(event) {
       let selected = this.selected === null ? [] : this.selected;
       if (selected && !this.query) {
-        this.unselect(selected[selected.length - 1]);
+        let selectedIndex = selected.length - 1;
+        let value = selected[selectedIndex];
+        this.unselect(value);
+        if (this.allowNew) {
+          event.preventDefault();
+          this.query = value;
+        }
+        this.$emit("update:selected", selected);
+        this.$emit("changed");
+        this.$parent.dirty(this.name);
         this.close();
       }
       if (this.query && this.query.length == 1) {
@@ -13757,9 +13770,11 @@ const __vue2_script$y = {
       if (!this.allowNew && !this.filteredOptionsList.length)
         return;
       if (this.highlightedIndex === null || this.highlightedIndex < 0 || this.highlightedIndex > this.filteredOptionsList.length - 1) {
-        if (this.allowNew && this.query !== null && this.query.trimLeft() != "")
+        if (this.allowNew && this.query !== null && this.query.trimLeft() != "") {
+          console.log(this.$refs.inlineinput.checkValidity());
           this.select(this.query);
-        return;
+          return;
+        }
       }
       this.select(this.filteredOptionsList[this.highlightedIndex]);
       this.highlightedIndex = -1;
@@ -13848,6 +13863,10 @@ const __vue2_script$y = {
       this.scrollToIndex(this.highlightedIndex);
     },
     checkValidity(event) {
+      if (event.clipboardData) {
+        this.query = event.clipboardData.getData("text");
+        event.target.value = this.query;
+      }
       if (this.highlightedIndex !== null && this.highlightedIndex !== -1 || event.target.checkValidity()) {
         this.selectHighlighted();
         return true;

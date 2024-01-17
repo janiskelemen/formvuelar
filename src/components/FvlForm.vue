@@ -170,6 +170,10 @@
       },
 
       dirty(name) {
+        let subKeys = Object.keys(this.errors).filter((e) => e.startsWith(name + '.'))
+        subKeys.forEach((e) => {
+          this.errors[e] = false
+        })
         this.errors[name] = false
         this.$emit('changed', { fieldName: name })
       },
