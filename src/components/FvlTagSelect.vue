@@ -22,6 +22,7 @@
             :key="value + index"
             class="fvl-tag-select-item"
             :class="getErrors(name) && getErrors(name)[index] ? 'fvl-tag-select-item-has-error' : ''"
+            @click.prevent.stop="max == 1 ? removeTag($event) : ''"
           >
             {{ value }}
             <svg
