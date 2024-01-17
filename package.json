@@ -20,7 +20,7 @@
       "require": "./dist/formvuelar.umd.js"
     }
   },
-  "version": "1.8.7",
+  "version": "1.8.8",
   "private": false,
   "scripts": {
     "dev": "vite",
