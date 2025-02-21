@@ -35,7 +35,7 @@ function isFalse(v) {
 function isPrimitive(value) {
   return typeof value === "string" || typeof value === "number" || typeof value === "symbol" || typeof value === "boolean";
 }
-function isObject$9(obj) {
+function isObject$a(obj) {
   return obj !== null && typeof obj === "object";
 }
 var _toString = Object.prototype.toString;
@@ -58,7 +58,7 @@ function isPromise(val) {
 function toString$5(val) {
   return val == null ? "" : Array.isArray(val) || isPlainObject$1(val) && val.toString === _toString ? JSON.stringify(val, null, 2) : String(val);
 }
-function toNumber$2(val) {
+function toNumber$3(val) {
   var n = parseFloat(val);
   return isNaN(n) ? val : n;
 }
@@ -156,8 +156,8 @@ function looseEqual(a, b) {
   if (a === b) {
     return true;
   }
-  var isObjectA = isObject$9(a);
-  var isObjectB = isObject$9(b);
+  var isObjectA = isObject$a(a);
+  var isObjectB = isObject$a(b);
   if (isObjectA && isObjectB) {
     try {
       var isArrayA = Array.isArray(a);
@@ -499,7 +499,7 @@ function copyAugment(target2, src2, keys2) {
   }
 }
 function observe(value, asRootData) {
-  if (!isObject$9(value) || value instanceof VNode) {
+  if (!isObject$a(value) || value instanceof VNode) {
     return;
   }
   var ob;
@@ -1030,7 +1030,7 @@ function traverse(val) {
 function _traverse(val, seen) {
   var i, keys2;
   var isA = Array.isArray(val);
-  if (!isA && !isObject$9(val) || Object.isFrozen(val) || val instanceof VNode) {
+  if (!isA && !isObject$a(val) || Object.isFrozen(val) || val instanceof VNode) {
     return;
   }
   if (val.__ob__) {
@@ -1367,7 +1367,7 @@ function renderList(val, render7) {
     for (i = 0; i < val; i++) {
       ret[i] = render7(i + 1, i);
     }
-  } else if (isObject$9(val)) {
+  } else if (isObject$a(val)) {
     if (hasSymbol$1 && val[Symbol.iterator]) {
       ret = [];
       var iterator = val[Symbol.iterator]();
@@ -1433,7 +1433,7 @@ function checkKeyCodes(eventKeyCode, key, builtInKeyCode, eventKeyName, builtInK
 }
 function bindObjectProps(data2, tag, value, asProp, isSync) {
   if (value) {
-    if (!isObject$9(value))
+    if (!isObject$a(value))
       ;
     else {
       if (Array.isArray(value)) {
@@ -1542,7 +1542,7 @@ function prependModifier(value, symbol) {
 }
 function installRenderHelpers(target2) {
   target2._o = markOnce;
-  target2._n = toNumber$2;
+  target2._n = toNumber$3;
   target2._s = toString$5;
   target2._l = renderList;
   target2._t = renderSlot;
@@ -1701,7 +1701,7 @@ function createComponent(Ctor, data2, context, children, tag) {
     return;
   }
   var baseCtor = context.$options._base;
-  if (isObject$9(Ctor)) {
+  if (isObject$a(Ctor)) {
     Ctor = baseCtor.extend(Ctor);
   }
   if (typeof Ctor !== "function") {
@@ -1862,10 +1862,10 @@ function applyNS(vnode, ns, force) {
   }
 }
 function registerDeepBindings(data2) {
-  if (isObject$9(data2.style)) {
+  if (isObject$a(data2.style)) {
     traverse(data2.style);
   }
-  if (isObject$9(data2.class)) {
+  if (isObject$a(data2.class)) {
     traverse(data2.class);
   }
 }
@@ -1930,7 +1930,7 @@ function ensureCtor(comp, base) {
   if (comp.__esModule || hasSymbol$1 && comp[Symbol.toStringTag] === "Module") {
     comp = comp.default;
   }
-  return isObject$9(comp) ? base.extend(comp) : comp;
+  return isObject$a(comp) ? base.extend(comp) : comp;
 }
 function createAsyncPlaceholder(factory, data2, context, children, tag) {
   var node = createEmptyVNode();
@@ -1991,7 +1991,7 @@ function resolveAsyncComponent(factory, baseCtor) {
       }
     });
     var res = factory(resolve2, reject);
-    if (isObject$9(res)) {
+    if (isObject$a(res)) {
       if (isPromise(res)) {
         if (isUndef(factory.resolved)) {
           res.then(resolve2, reject);
@@ -2523,7 +2523,7 @@ Watcher.prototype.update = function update2() {
 Watcher.prototype.run = function run() {
   if (this.active) {
     var value = this.get();
-    if (value !== this.value || isObject$9(value) || this.deep) {
+    if (value !== this.value || isObject$a(value) || this.deep) {
       var oldValue = this.value;
       this.value = value;
       if (this.user) {
@@ -3157,7 +3157,7 @@ function stringifyClass(value) {
   if (Array.isArray(value)) {
     return stringifyArray(value);
   }
-  if (isObject$9(value)) {
+  if (isObject$a(value)) {
     return stringifyObject(value);
   }
   if (typeof value === "string") {
@@ -4170,7 +4170,7 @@ function isDirtyWithModifiers(elm2, newVal) {
   var modifiers2 = elm2._vModifiers;
   if (isDef(modifiers2)) {
     if (modifiers2.number) {
-      return toNumber$2(value) !== toNumber$2(newVal);
+      return toNumber$3(value) !== toNumber$3(newVal);
     }
     if (modifiers2.trim) {
       return value.trim() !== newVal.trim();
@@ -4529,7 +4529,7 @@ function enter(vnode, toggleDisplay) {
   var enterHook = isAppear ? typeof appear === "function" ? appear : enter2 : enter2;
   var afterEnterHook = isAppear ? afterAppear || afterEnter : afterEnter;
   var enterCancelledHook = isAppear ? appearCancelled || enterCancelled : enterCancelled;
-  var explicitEnterDuration = toNumber$2(isObject$9(duration2) ? duration2.enter : duration2);
+  var explicitEnterDuration = toNumber$3(isObject$a(duration2) ? duration2.enter : duration2);
   var expectsCSS = css2 !== false && !isIE9;
   var userWantsControl = getHookArgumentsLength(enterHook);
   var cb = el._enterCb = once$1(function() {
@@ -4609,7 +4609,7 @@ function leave(vnode, rm) {
   var duration2 = data2.duration;
   var expectsCSS = css2 !== false && !isIE9;
   var userWantsControl = getHookArgumentsLength(leave2);
-  var explicitLeaveDuration = toNumber$2(isObject$9(duration2) ? duration2.leave : duration2);
+  var explicitLeaveDuration = toNumber$3(isObject$a(duration2) ? duration2.leave : duration2);
   var cb = el._leaveCb = once$1(function() {
     if (el.parentNode && el.parentNode._pending) {
       el.parentNode._pending[vnode.key] = null;
@@ -7264,7 +7264,7 @@ function isString$1(val) {
 function isNumber$1(val) {
   return typeof val === "number";
 }
-function isObject$8(val) {
+function isObject$9(val) {
   return val !== null && typeof val === "object";
 }
 function isPlainObject(val) {
@@ -7287,7 +7287,7 @@ function isFunction$5(val) {
   return toString$4.call(val) === "[object Function]";
 }
 function isStream$1(val) {
-  return isObject$8(val) && isFunction$5(val.pipe);
+  return isObject$9(val) && isFunction$5(val.pipe);
 }
 function isURLSearchParams(val) {
   return toString$4.call(val) === "[object URLSearchParams]";
@@ -7362,7 +7362,7 @@ var utils$h = {
   isArrayBufferView,
   isString: isString$1,
   isNumber: isNumber$1,
-  isObject: isObject$8,
+  isObject: isObject$9,
   isPlainObject,
   isUndefined,
   isDate,
@@ -8272,10 +8272,10 @@ var freeGlobal$1 = typeof commonjsGlobal == "object" && commonjsGlobal && common
 var _freeGlobal = freeGlobal$1;
 var freeGlobal = _freeGlobal;
 var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-var root$8 = freeGlobal || freeSelf || Function("return this")();
-var _root = root$8;
-var root$7 = _root;
-var Symbol$5 = root$7.Symbol;
+var root$9 = freeGlobal || freeSelf || Function("return this")();
+var _root = root$9;
+var root$8 = _root;
+var Symbol$5 = root$8.Symbol;
 var _Symbol = Symbol$5;
 var Symbol$4 = _Symbol;
 var objectProto$d = Object.prototype;
@@ -8316,23 +8316,23 @@ function baseGetTag$5(value) {
   return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
 }
 var _baseGetTag = baseGetTag$5;
-function isObject$7(value) {
+function isObject$8(value) {
   var type = typeof value;
   return value != null && (type == "object" || type == "function");
 }
-var isObject_1 = isObject$7;
-var baseGetTag$4 = _baseGetTag, isObject$6 = isObject_1;
+var isObject_1 = isObject$8;
+var baseGetTag$4 = _baseGetTag, isObject$7 = isObject_1;
 var asyncTag = "[object AsyncFunction]", funcTag$1 = "[object Function]", genTag = "[object GeneratorFunction]", proxyTag = "[object Proxy]";
 function isFunction$4(value) {
-  if (!isObject$6(value)) {
+  if (!isObject$7(value)) {
     return false;
   }
   var tag = baseGetTag$4(value);
   return tag == funcTag$1 || tag == genTag || tag == asyncTag || tag == proxyTag;
 }
 var isFunction_1 = isFunction$4;
-var root$6 = _root;
-var coreJsData$1 = root$6["__core-js_shared__"];
+var root$7 = _root;
+var coreJsData$1 = root$7["__core-js_shared__"];
 var _coreJsData = coreJsData$1;
 var coreJsData = _coreJsData;
 var maskSrcKey = function() {
@@ -8359,7 +8359,7 @@ function toSource$2(func) {
   return "";
 }
 var _toSource = toSource$2;
-var isFunction$3 = isFunction_1, isMasked = _isMasked, isObject$5 = isObject_1, toSource$1 = _toSource;
+var isFunction$3 = isFunction_1, isMasked = _isMasked, isObject$6 = isObject_1, toSource$1 = _toSource;
 var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 var reIsHostCtor = /^\[object .+?Constructor\]$/;
 var funcProto = Function.prototype, objectProto$b = Object.prototype;
@@ -8367,7 +8367,7 @@ var funcToString = funcProto.toString;
 var hasOwnProperty$9 = objectProto$b.hasOwnProperty;
 var reIsNative = RegExp("^" + funcToString.call(hasOwnProperty$9).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
 function baseIsNative$1(value) {
-  if (!isObject$5(value) || isMasked(value)) {
+  if (!isObject$6(value) || isMasked(value)) {
     return false;
   }
   var pattern = isFunction$3(value) ? reIsNative : reIsHostCtor;
@@ -8461,11 +8461,11 @@ function apply$1(func, thisArg, args) {
 }
 var _apply = apply$1;
 var apply = _apply;
-var nativeMax$1 = Math.max;
+var nativeMax$2 = Math.max;
 function overRest$1(func, start, transform) {
-  start = nativeMax$1(start === void 0 ? func.length - 1 : start, 0);
+  start = nativeMax$2(start === void 0 ? func.length - 1 : start, 0);
   return function() {
-    var args = arguments, index2 = -1, length = nativeMax$1(args.length - start, 0), array = Array(length);
+    var args = arguments, index2 = -1, length = nativeMax$2(args.length - start, 0), array = Array(length);
     while (++index2 < length) {
       array[index2] = args[start + index2];
     }
@@ -8539,9 +8539,9 @@ function isIndex$3(value, length) {
   return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
 }
 var _isIndex = isIndex$3;
-var eq$2 = eq_1, isArrayLike$4 = isArrayLike_1, isIndex$2 = _isIndex, isObject$4 = isObject_1;
+var eq$2 = eq_1, isArrayLike$4 = isArrayLike_1, isIndex$2 = _isIndex, isObject$5 = isObject_1;
 function isIterateeCall$2(value, index2, object) {
-  if (!isObject$4(object)) {
+  if (!isObject$5(object)) {
     return false;
   }
   var type = typeof index2;
@@ -8684,11 +8684,11 @@ function nativeKeysIn$1(object) {
   return result;
 }
 var _nativeKeysIn = nativeKeysIn$1;
-var isObject$3 = isObject_1, isPrototype$1 = _isPrototype, nativeKeysIn = _nativeKeysIn;
+var isObject$4 = isObject_1, isPrototype$1 = _isPrototype, nativeKeysIn = _nativeKeysIn;
 var objectProto$6 = Object.prototype;
 var hasOwnProperty$5 = objectProto$6.hasOwnProperty;
 function baseKeysIn$1(object) {
-  if (!isObject$3(object)) {
+  if (!isObject$4(object)) {
     return nativeKeysIn(object);
   }
   var isProto = isPrototype$1(object), result = [];
@@ -9329,11 +9329,11 @@ function isNumber(value) {
 function isBoolean(value) {
   return value === true || value === false || isObjectLike$2(value) && getTag$2(value) == "[object Boolean]";
 }
-function isObject$2(value) {
+function isObject$3(value) {
   return typeof value === "object";
 }
 function isObjectLike$2(value) {
-  return isObject$2(value) && value !== null;
+  return isObject$3(value) && value !== null;
 }
 function isDefined(value) {
   return value !== void 0 && value !== null;
@@ -10259,7 +10259,7 @@ const KeyType = {
 };
 const isExpression = (query2) => !!(query2[LogicalOperator.AND] || query2[LogicalOperator.OR]);
 const isPath = (query2) => !!query2[KeyType.PATH];
-const isLeaf = (query2) => !isArray$a(query2) && isObject$2(query2) && !isExpression(query2);
+const isLeaf = (query2) => !isArray$a(query2) && isObject$3(query2) && !isExpression(query2);
 const convertToExplicit = (query2) => ({
   [LogicalOperator.AND]: Object.keys(query2).map((key) => ({
     [key]: query2[key]
@@ -10632,7 +10632,7 @@ function taskDebounce(fn) {
   };
 }
 var supportsMicroTasks = isBrowser && window.Promise;
-var debounce$1 = supportsMicroTasks ? microtaskDebounce : taskDebounce;
+var debounce$2 = supportsMicroTasks ? microtaskDebounce : taskDebounce;
 function isFunction$1(functionToCheck) {
   var getType2 = {};
   return functionToCheck && getType2.toString.call(functionToCheck) === "[object Function]";
@@ -11755,7 +11755,7 @@ var Popper = function() {
     this.scheduleUpdate = function() {
       return requestAnimationFrame(_this.update);
     };
-    this.update = debounce$1(this.update.bind(this));
+    this.update = debounce$2(this.update.bind(this));
     this.options = _extends({}, Popper2.Defaults, options);
     this.state = {
       isDestroyed: false,
@@ -11906,8 +11906,8 @@ function stackHas$1(key) {
   return this.__data__.has(key);
 }
 var _stackHas = stackHas$1;
-var getNative$5 = _getNative, root$5 = _root;
-var Map$4 = getNative$5(root$5, "Map");
+var getNative$5 = _getNative, root$6 = _root;
+var Map$4 = getNative$5(root$6, "Map");
 var _Map = Map$4;
 var getNative$4 = _getNative;
 var nativeCreate$4 = getNative$4(Object, "create");
@@ -12140,8 +12140,8 @@ function equalArrays$2(array, other, bitmask, customizer, equalFunc, stack) {
   return result;
 }
 var _equalArrays = equalArrays$2;
-var root$4 = _root;
-var Uint8Array$1 = root$4.Uint8Array;
+var root$5 = _root;
+var Uint8Array$1 = root$5.Uint8Array;
 var _Uint8Array = Uint8Array$1;
 function mapToArray$1(map) {
   var index2 = -1, result = Array(map.size);
@@ -12337,17 +12337,17 @@ function equalObjects$1(object, other, bitmask, customizer, equalFunc, stack) {
   return result;
 }
 var _equalObjects = equalObjects$1;
-var getNative$3 = _getNative, root$3 = _root;
-var DataView$1 = getNative$3(root$3, "DataView");
+var getNative$3 = _getNative, root$4 = _root;
+var DataView$1 = getNative$3(root$4, "DataView");
 var _DataView = DataView$1;
-var getNative$2 = _getNative, root$2 = _root;
-var Promise$2 = getNative$2(root$2, "Promise");
+var getNative$2 = _getNative, root$3 = _root;
+var Promise$2 = getNative$2(root$3, "Promise");
 var _Promise = Promise$2;
-var getNative$1 = _getNative, root$1 = _root;
-var Set$2 = getNative$1(root$1, "Set");
+var getNative$1 = _getNative, root$2 = _root;
+var Set$2 = getNative$1(root$2, "Set");
 var _Set = Set$2;
-var getNative = _getNative, root = _root;
-var WeakMap$1 = getNative(root, "WeakMap");
+var getNative = _getNative, root$1 = _root;
+var WeakMap$1 = getNative(root$1, "WeakMap");
 var _WeakMap = WeakMap$1;
 var DataView = _DataView, Map$1 = _Map, Promise$1 = _Promise, Set$1 = _Set, WeakMap = _WeakMap, baseGetTag$1 = _baseGetTag, toSource = _toSource;
 var mapTag = "[object Map]", objectTag$1 = "[object Object]", promiseTag = "[object Promise]", setTag = "[object Set]", weakMapTag = "[object WeakMap]";
@@ -12456,9 +12456,9 @@ function baseIsMatch$1(object, source3, matchData, customizer) {
   return true;
 }
 var _baseIsMatch = baseIsMatch$1;
-var isObject$1 = isObject_1;
+var isObject$2 = isObject_1;
 function isStrictComparable$2(value) {
-  return value === value && !isObject$1(value);
+  return value === value && !isObject$2(value);
 }
 var _isStrictComparable = isStrictComparable$2;
 var isStrictComparable$1 = _isStrictComparable, keys$2 = keys_1;
@@ -12511,10 +12511,10 @@ function isKey$3(value, object) {
 }
 var _isKey = isKey$3;
 var MapCache = _MapCache;
-var FUNC_ERROR_TEXT = "Expected a function";
+var FUNC_ERROR_TEXT$1 = "Expected a function";
 function memoize$1(func, resolver) {
   if (typeof func != "function" || resolver != null && typeof resolver != "function") {
-    throw new TypeError(FUNC_ERROR_TEXT);
+    throw new TypeError(FUNC_ERROR_TEXT$1);
   }
   var memoized = function() {
     var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache = memoized.cache;
@@ -12732,22 +12732,22 @@ function baseTrim$1(string) {
   return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, "") : string;
 }
 var _baseTrim = baseTrim$1;
-var baseTrim = _baseTrim, isObject = isObject_1, isSymbol = isSymbol_1;
+var baseTrim = _baseTrim, isObject$1 = isObject_1, isSymbol = isSymbol_1;
 var NAN = 0 / 0;
 var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
 var reIsBinary = /^0b[01]+$/i;
 var reIsOctal = /^0o[0-7]+$/i;
 var freeParseInt = parseInt;
-function toNumber$1(value) {
+function toNumber$2(value) {
   if (typeof value == "number") {
     return value;
   }
   if (isSymbol(value)) {
     return NAN;
   }
-  if (isObject(value)) {
+  if (isObject$1(value)) {
     var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-    value = isObject(other) ? other + "" : other;
+    value = isObject$1(other) ? other + "" : other;
   }
   if (typeof value != "string") {
     return value === 0 ? value : +value;
@@ -12756,14 +12756,14 @@ function toNumber$1(value) {
   var isBinary = reIsBinary.test(value);
   return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
 }
-var toNumber_1 = toNumber$1;
-var toNumber = toNumber_1;
+var toNumber_1 = toNumber$2;
+var toNumber$1 = toNumber_1;
 var INFINITY = 1 / 0, MAX_INTEGER = 17976931348623157e292;
 function toFinite$1(value) {
   if (!value) {
     return value === 0 ? value : 0;
   }
-  value = toNumber(value);
+  value = toNumber$1(value);
   if (value === INFINITY || value === -INFINITY) {
     var sign = value < 0 ? -1 : 1;
     return sign * MAX_INTEGER;
@@ -12778,7 +12778,7 @@ function toInteger$1(value) {
 }
 var toInteger_1 = toInteger$1;
 var baseFindIndex = _baseFindIndex, baseIteratee$3 = _baseIteratee, toInteger = toInteger_1;
-var nativeMax = Math.max;
+var nativeMax$1 = Math.max;
 function findIndex$1(array, predicate, fromIndex) {
   var length = array == null ? 0 : array.length;
   if (!length) {
@@ -12786,7 +12786,7 @@ function findIndex$1(array, predicate, fromIndex) {
   }
   var index2 = fromIndex == null ? 0 : toInteger(fromIndex);
   if (index2 < 0) {
-    index2 = nativeMax(length + index2, 0);
+    index2 = nativeMax$1(length + index2, 0);
   }
   return baseFindIndex(array, baseIteratee$3(predicate), index2);
 }
@@ -12831,6 +12831,96 @@ function findKey(object, predicate) {
   return baseFindKey(object, baseIteratee$2(predicate), baseForOwn$1);
 }
 var findKey_1 = findKey;
+var root = _root;
+var now$1 = function() {
+  return root.Date.now();
+};
+var now_1 = now$1;
+var isObject = isObject_1, now = now_1, toNumber = toNumber_1;
+var FUNC_ERROR_TEXT = "Expected a function";
+var nativeMax = Math.max, nativeMin = Math.min;
+function debounce$1(func, wait, options) {
+  var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
+  if (typeof func != "function") {
+    throw new TypeError(FUNC_ERROR_TEXT);
+  }
+  wait = toNumber(wait) || 0;
+  if (isObject(options)) {
+    leading = !!options.leading;
+    maxing = "maxWait" in options;
+    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+    trailing = "trailing" in options ? !!options.trailing : trailing;
+  }
+  function invokeFunc(time) {
+    var args = lastArgs, thisArg = lastThis;
+    lastArgs = lastThis = void 0;
+    lastInvokeTime = time;
+    result = func.apply(thisArg, args);
+    return result;
+  }
+  function leadingEdge(time) {
+    lastInvokeTime = time;
+    timerId = setTimeout(timerExpired, wait);
+    return leading ? invokeFunc(time) : result;
+  }
+  function remainingWait(time) {
+    var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, timeWaiting = wait - timeSinceLastCall;
+    return maxing ? nativeMin(timeWaiting, maxWait - timeSinceLastInvoke) : timeWaiting;
+  }
+  function shouldInvoke(time) {
+    var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
+    return lastCallTime === void 0 || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+  }
+  function timerExpired() {
+    var time = now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    timerId = setTimeout(timerExpired, remainingWait(time));
+  }
+  function trailingEdge(time) {
+    timerId = void 0;
+    if (trailing && lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs = lastThis = void 0;
+    return result;
+  }
+  function cancel() {
+    if (timerId !== void 0) {
+      clearTimeout(timerId);
+    }
+    lastInvokeTime = 0;
+    lastArgs = lastCallTime = lastThis = timerId = void 0;
+  }
+  function flush() {
+    return timerId === void 0 ? result : trailingEdge(now());
+  }
+  function debounced() {
+    var time = now(), isInvoking = shouldInvoke(time);
+    lastArgs = arguments;
+    lastThis = this;
+    lastCallTime = time;
+    if (isInvoking) {
+      if (timerId === void 0) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxing) {
+        clearTimeout(timerId);
+        timerId = setTimeout(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId === void 0) {
+      timerId = setTimeout(timerExpired, wait);
+    }
+    return result;
+  }
+  debounced.cancel = cancel;
+  debounced.flush = flush;
+  return debounced;
+}
+var debounce_1 = debounce$1;
 const __vue2_script$A = {
   mounted() {
     const listener = (e) => {
@@ -13034,6 +13124,11 @@ const __vue2_script$z = {
       type: Boolean,
       required: false,
       default: false
+    },
+    debounceTime: {
+      type: Number,
+      required: false,
+      default: 800
     }
   },
   data() {
@@ -13167,7 +13262,7 @@ const __vue2_script$z = {
       this.highlightedIndex = this.highlightedIndex == 0 ? 0 : this.highlightedIndex - 1;
       this.scrollToIndex(this.highlightedIndex);
     },
-    getRemoteOptions(refresh) {
+    getRemoteOptions: debounce_1(function(refresh) {
       if (!this.searchRemote && this.optionsList.length && !refresh || !this.optionsUrl)
         return;
       let searchQuery = "";
@@ -13194,7 +13289,7 @@ const __vue2_script$z = {
           $this.popper.scheduleUpdate();
         }
       });
-    },
+    }, 800),
     optionIsDisabled(option) {
       if (this.disabledOptions === null)
         return false;
@@ -13272,7 +13367,11 @@ var render$y = function() {
     }
     return _vm.toggle();
   } } }, [_c("span", { directives: [{ name: "show", rawName: "v-show", value: !_vm.selectedOptionValues.length && _vm.placeholder && !_vm.allowNew, expression: "!selectedOptionValues.length && placeholder && !allowNew" }], domProps: { "textContent": _vm._s(_vm.placeholder) } }), _vm._l(_vm.selectedOptionValues, function(value, index2) {
-    return _c("span", { key: value + index2, staticClass: "fvl-tag-select-item", class: _vm.getErrors(_vm.name) && _vm.getErrors(_vm.name)[index2] ? "fvl-tag-select-item-has-error" : "" }, [_vm._v(" " + _vm._s(value) + " "), _c("svg", { staticClass: "fvl-tag-select-item-remove", attrs: { "xmlns": "http://www.w3.org/2000/svg", "viewBox": "0 0 24 24", "fill": "none", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, on: { "click": function($event) {
+    return _c("span", { key: value + index2, staticClass: "fvl-tag-select-item", class: _vm.getErrors(_vm.name) && _vm.getErrors(_vm.name)[index2] ? "fvl-tag-select-item-has-error" : "", on: { "click": function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      _vm.max == 1 ? _vm.removeTag($event) : "";
+    } } }, [_vm._v(" " + _vm._s(value) + " "), _c("svg", { staticClass: "fvl-tag-select-item-remove", attrs: { "xmlns": "http://www.w3.org/2000/svg", "viewBox": "0 0 24 24", "fill": "none", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round" }, on: { "click": function($event) {
       $event.preventDefault();
       $event.stopPropagation();
       return _vm.unselect(value);
@@ -13598,6 +13697,11 @@ const __vue2_script$y = {
       type: Boolean,
       required: false,
       default: false
+    },
+    debounceTime: {
+      type: Number,
+      required: false,
+      default: 800
     }
   },
   data() {
@@ -13875,7 +13979,7 @@ const __vue2_script$y = {
         return false;
       }
     },
-    getRemoteOptions(refresh) {
+    getRemoteOptions: debounce_1(function(refresh) {
       if (!this.searchRemote && this.optionsList.length && !refresh || !this.optionsUrl)
         return;
       let searchQuery = "";
@@ -13899,7 +14003,7 @@ const __vue2_script$y = {
           $this.popper.scheduleUpdate();
         }
       });
-    },
+    }, 800),
     optionIsDisabled(option) {
       if (this.disabledOptions === null)
         return false;
@@ -20218,9 +20322,9 @@ const __vue2_script$k = {
       this.isOpen ? this.close() : this.open();
     },
     getRange(days) {
-      let now = new Date();
-      let end = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, "0")}-${now.getDate()}`;
-      let d2 = new Date(now.setDate(now.getDate() - days));
+      let now2 = new Date();
+      let end = `${now2.getFullYear()}-${(now2.getMonth() + 1).toString().padStart(2, "0")}-${now2.getDate()}`;
+      let d2 = new Date(now2.setDate(now2.getDate() - days));
       let start = `${d2.getFullYear()}-${(d2.getMonth() + 1).toString().padStart(2, "0")}-${d2.getDate()}`;
       return { start, end };
     }

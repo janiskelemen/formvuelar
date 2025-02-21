@@ -84,6 +84,7 @@
   import _find from 'lodash/find'
   import _findKey from 'lodash/findKey'
   import _get from 'lodash/get'
+  import _debounce from 'lodash/debounce'
   import ValidationErrors from './FvlErrors.vue'
   import OnClickOutside from './utilities/OnClickOutside.vue'
   import { config } from './mixins/config'
@@ -190,6 +191,11 @@
         type: Boolean,
         required: false,
         default: false,
+      },
+      debounceTime: {
+        type: Number,
+        required: false,
+        default: 800,
       },
     },
     data() {
@@ -320,7 +326,7 @@
         this.highlightedIndex = this.highlightedIndex == 0 ? 0 : this.highlightedIndex - 1
         this.scrollToIndex(this.highlightedIndex)
       },
-      getRemoteOptions(refresh) {
+      getRemoteOptions: _debounce(function (refresh) {
         if ((!this.searchRemote && this.optionsList.length && !refresh) || !this.optionsUrl) return
         let searchQuery = ''
         if (this.query) {
@@ -349,7 +355,7 @@
               $this.popper.scheduleUpdate()
             }
           })
-      },
+      }, 800),
       optionIsDisabled(option) {
         if (this.disabledOptions === null) return false
         /* check if whole object is in disabled options list */
