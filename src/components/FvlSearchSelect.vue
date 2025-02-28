@@ -253,7 +253,7 @@
     },
     mounted() {
       if (!this.optionsUrl) return
-      if (!this.lazyLoad) this.getRemoteOptions()
+      if (!this.lazyLoad || this.selected) this.getRemoteOptions()
     },
     beforeDestroy() {
       if (this.popper !== undefined) {

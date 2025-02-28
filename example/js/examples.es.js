@@ -13187,7 +13187,7 @@ const __vue2_script$z = {
   mounted() {
     if (!this.optionsUrl)
       return;
-    if (!this.lazyLoad)
+    if (!this.lazyLoad || this.selected)
       this.getRemoteOptions();
   },
   beforeDestroy() {
@@ -13775,7 +13775,7 @@ const __vue2_script$y = {
   mounted() {
     if (!this.optionsUrl)
       return;
-    if (!this.lazyLoad)
+    if (!this.lazyLoad || this.selected)
       this.getRemoteOptions();
   },
   beforeDestroy() {
