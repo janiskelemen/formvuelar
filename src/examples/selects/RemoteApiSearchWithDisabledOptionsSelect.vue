@@ -49,7 +49,7 @@
     data() {
       return {
         form: {
-          user: null
+          user: 3
         },
         disabledOptions: ['1', '2'],
         showSource: false,

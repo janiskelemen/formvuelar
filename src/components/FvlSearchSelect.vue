@@ -355,7 +355,7 @@
               $this.popper.scheduleUpdate()
             }
           })
-      }, 800),
+      }, 800, { leading: true, trailing: true }),
       optionIsDisabled(option) {
         if (this.disabledOptions === null) return false
         /* check if whole object is in disabled options list */

@@ -13289,7 +13289,7 @@ const __vue2_script$z = {
           $this.popper.scheduleUpdate();
         }
       });
-    }, 800),
+    }, 800, { leading: true, trailing: true }),
     optionIsDisabled(option) {
       if (this.disabledOptions === null)
         return false;
@@ -14003,7 +14003,7 @@ const __vue2_script$y = {
           $this.popper.scheduleUpdate();
         }
       });
-    }, 800),
+    }, 800, { leading: true, trailing: true }),
     optionIsDisabled(option) {
       if (this.disabledOptions === null)
         return false;
@@ -20873,7 +20873,7 @@ const __vue2_script$c = {
   data() {
     return {
       form: {
-        user: null
+        user: 3
       },
       disabledOptions: ["1", "2"],
       showSource: false,
