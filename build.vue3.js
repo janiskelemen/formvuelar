@@ -26,7 +26,7 @@ try {
 
 console.log('\nBuilding Vue 3 version...');
 try {
-  execSync('vite build -c vite.config.vue3.js', { stdio: 'inherit' });
+  execSync('npx vite build -c vite.config.vue3.js', { stdio: 'inherit' });
   console.log('Vue 3 build completed successfully.');
 } catch (error) {
   console.error('Vue 3 build failed:', error);

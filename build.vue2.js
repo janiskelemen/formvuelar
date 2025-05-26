@@ -26,7 +26,7 @@ try {
 
 console.log('\nBuilding Vue 2 version...');
 try {
-  execSync('vite build', { stdio: 'inherit' });
+  execSync('npx vite build', { stdio: 'inherit' });
   console.log('Vue 2 build completed successfully.');
 } catch (error) {
   console.error('Vue 2 build failed:', error);
