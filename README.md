@@ -46,6 +46,20 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 npm install formvuelar --save
 ```
 
+### Vue 2 Usage
+
+```js
+import FormVuelar from 'formvuelar' // Default import is Vue 2 compatible
+// or explicitly specify Vue 2 version
+import FormVuelar from 'formvuelar/vue2'
+```
+
+### Vue 3 Usage
+
+```js
+import FormVuelar from 'formvuelar/vue3'
+```
+
 ## TODO
 
     - Test coverage

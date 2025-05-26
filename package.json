@@ -12,19 +12,29 @@
     "tailwind",
     "laravel"
   ],
-  "main": "./dist/formvuelar.umd.js",
-  "module": "./dist/formvuelar.es.js",
+  "main": "./dist/vue2/formvuelar.umd.js",
+  "module": "./dist/vue2/formvuelar.es.js",
   "exports": {
     ".": {
-      "import": "./dist/formvuelar.es.js",
-      "require": "./dist/formvuelar.umd.js"
+      "import": "./dist/vue2/formvuelar.es.js",
+      "require": "./dist/vue2/formvuelar.umd.js"
+    },
+    "./vue2": {
+      "import": "./dist/vue2/formvuelar.es.js",
+      "require": "./dist/vue2/formvuelar.umd.js"
+    },
+    "./vue3": {
+      "import": "./dist/vue3/formvuelar.es.js",
+      "require": "./dist/vue3/formvuelar.umd.js"
     }
   },
   "version": "1.8.13",
   "private": false,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node build.js",
+    "build:vue2": "vite build",
+    "build:vue3": "vite build -c vite.config.vue3.js",
     "serve": "vite preview --port=8888",
     "build:examples": "vite build -c vite.config.examples.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
@@ -32,18 +42,18 @@
     "test:e2e": "vite test:e2e --headless",
     "test:unit": "vite test:unit"
   },
+  "peerDependencies": {
+    "vue": "^2.6.14 || ^3.2.0"
+  },
   "dependencies": {
     "axios": "^0.26.0",
     "fuse.js": "^6.6.2",
     "lodash": "^4.17.21",
-    "popper.js": "^1.16.1",
-    "vue": "^2.6.14",
-    "vue-color": "^2.8.1",
-    "vue-flatpickr-component": "^8.1.7",
-    "vue-router": "^3.5.3"
+    "popper.js": "^1.16.1"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^5.17.1",
+    "@vitejs/plugin-vue": "^2.3.4",
     "@vue/test-utils": "^1.3.0",
     "autoprefixer": "^10.4.14",
     "axios-mock-adapter": "^1.21.4",
@@ -60,10 +70,16 @@
     "trim-newlines": ">=3.0.1",
     "vite": "^2.9.5",
     "vite-plugin-vue2": "1.9.3",
-    "vue-highlightjs": "^1.3.3"
+    "vue": "^2.6.14",
+    "vue-color": "^2.8.1",
+    "vue-flatpickr-component": "^8.1.7",
+    "vue-highlightjs": "^1.3.3",
+    "vue-router": "^3.5.3",
+    "vue2": "npm:vue@^2.6.14",
+    "vue3": "npm:vue@^3.2.47"
   },
   "files": [
-    "dist/*",
+    "dist/**/*",
     "src/*",
     "*.json"
   ],
