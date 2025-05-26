@@ -12,12 +12,12 @@
     "tailwind",
     "laravel"
   ],
-  "main": "./dist/vue2/formvuelar.umd.js",
-  "module": "./dist/vue2/formvuelar.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/vue2/formvuelar.es.js",
-      "require": "./dist/vue2/formvuelar.umd.js"
+      "import": "./dist/index.mjs", 
+      "require": "./dist/index.js"
     },
     "./vue2": {
       "import": "./dist/vue2/formvuelar.es.js",
@@ -70,7 +70,7 @@
     "trim-newlines": ">=3.0.1",
     "vite": "^2.9.5",
     "vite-plugin-vue2": "1.9.3",
-    "vue": "^2.6.14",
+    "vue": "^3.5.15",
     "vue-color": "^2.8.1",
     "vue-flatpickr-component": "^8.1.7",
     "vue-highlightjs": "^1.3.3",

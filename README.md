@@ -46,18 +46,51 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 npm install formvuelar --save
 ```
 
-### Vue 2 Usage
+### Usage
+
+FormVuelar supports both Vue 2 and Vue 3. It will automatically detect which version of Vue you're using and use the appropriate build.
 
 ```js
-import FormVuelar from 'formvuelar' // Default import is Vue 2 compatible
-// or explicitly specify Vue 2 version
+// Auto-detection of Vue version
+import FormVuelar from 'formvuelar'
+```
+
+### Explicit Vue Version Selection
+
+If you want to explicitly choose a specific Vue version build:
+
+#### Vue 2
+
+```js
 import FormVuelar from 'formvuelar/vue2'
 ```
 
-### Vue 3 Usage
+#### Vue 3
 
 ```js
 import FormVuelar from 'formvuelar/vue3'
+```
+
+### Components Registration
+
+```js
+// Vue 2
+import Vue from 'vue'
+import { FvlForm, FvlInput, FvlSelect } from 'formvuelar'
+
+Vue.component('fvl-form', FvlForm)
+Vue.component('fvl-input', FvlInput)
+Vue.component('fvl-select', FvlSelect)
+
+// Vue 3
+import { createApp } from 'vue'
+import { FvlForm, FvlInput, FvlSelect } from 'formvuelar/vue3'
+
+const app = createApp(App)
+app.component('fvl-form', FvlForm)
+app.component('fvl-input', FvlInput)
+app.component('fvl-select', FvlSelect)
+app.mount('#app')
 ```
 
 ## TODO
