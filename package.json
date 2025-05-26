@@ -16,7 +16,7 @@
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs", 
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./vue2": {
@@ -33,8 +33,8 @@
   "scripts": {
     "dev": "vite",
     "build": "node build.js",
-    "build:vue2": "vite build",
-    "build:vue3": "vite build -c vite.config.vue3.js",
+    "build:vue2": "node build.vue2.js",
+    "build:vue3": "node build.vue3.js",
     "serve": "vite preview --port=8888",
     "build:examples": "vite build -c vite.config.examples.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
@@ -75,6 +75,7 @@
     "vue-flatpickr-component": "^8.1.7",
     "vue-highlightjs": "^1.3.3",
     "vue-router": "^3.5.3",
+    "vue-template-compiler": "^2.7.16",
     "vue2": "npm:vue@^2.6.14",
     "vue3": "npm:vue@^3.2.47"
   },
