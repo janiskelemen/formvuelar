@@ -10,14 +10,14 @@
           :id="name + key"
           :name="name"
           :value="key"
-          :checked="checked == key"
+          :checked="(modelValue !== undefined ? modelValue : checked) == key"
           :class="fieldClass"
           :required="required"
           :readonly="readonly"
           :disabled="disabled"
           type="radio"
           class="fvl-radio"
-          @change="$emit('update:checked', $event.target.value), $emit('changed'), $parent.dirty(name)"
+          @change="handleChange($event, key)"
         />
         <label :class="labelClass" :for="name + key" class="fvl-radio-label">
           <span class="fvl-radio-toggle" />
@@ -42,6 +42,10 @@
       checked: {
         type: String,
         default: '',
+      },
+      modelValue: {
+        type: String,
+        default: undefined,
       },
       name: {
         type: String,
@@ -89,6 +93,15 @@
       hasError() {
         return this.$parent.errors[this.name] ? 'fvl-has-error' : ''
       },
+    },
+    methods: {
+      handleChange(event, key) {
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('update:checked', event.target.value);
+        this.$emit('update:modelValue', event.target.value);
+        this.$emit('changed');
+        this.$parent.dirty(this.name);
+      }
     },
   }
 </script>

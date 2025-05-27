@@ -73,6 +73,9 @@
     beforeDestroy() {
       this.unloadInterceptors()
     },
+    beforeUnmount() {
+      this.unloadInterceptors()
+    },
     methods: {
       prepareData() {
         let rawData = this.data

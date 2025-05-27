@@ -3,14 +3,14 @@
     <input
       :id="id ? id : name"
       :name="name"
-      :class="{ checked: checked, fieldClass }"
+      :class="{ checked: modelValue !== undefined ? modelValue : checked, fieldClass }"
       :required="required"
       :readonly="readonly"
       :disabled="disabled"
-      :checked="checked"
+      :checked="modelValue !== undefined ? modelValue : checked"
       type="checkbox"
       class="fvl-switch hidden"
-      @change="$emit('update:checked', $event.target.checked), $emit('changed'), $parent.dirty(name)"
+      @change="handleChange"
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-switch-label">
       <span class="fvl-switch-toggle" />
@@ -52,6 +52,14 @@
           return [0, 1, false, true, '0', '1'].indexOf(value) !== -1
         },
       },
+      modelValue: {
+        default: undefined,
+        validator: function (value) {
+          if (value === undefined) return true;
+          // The value must match one of these strings
+          return [0, 1, false, true, '0', '1'].indexOf(value) !== -1
+        },
+      },
       fieldClass: {
         type: String,
         required: false,
@@ -77,6 +85,15 @@
         required: false,
         default: false,
       },
+    },
+    methods: {
+      handleChange(event) {
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('update:checked', event.target.checked);
+        this.$emit('update:modelValue', event.target.checked);
+        this.$emit('changed');
+        this.$parent.dirty(this.name);
+      }
     },
   }
 </script>

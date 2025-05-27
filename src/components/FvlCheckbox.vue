@@ -7,11 +7,11 @@
       :required="required"
       :readonly="readonly"
       :disabled="disabled"
-      :checked="checked"
+      :checked="modelValue !== undefined ? modelValue : checked"
       :value="value"
       type="checkbox"
       class="fvl-checkbox"
-      @change="$emit('update:checked', $event.target.checked), $emit('changed'), $parent.dirty(name)"
+      @change="handleChange"
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
       <span class="fvl-checkbox-outer" />
@@ -51,6 +51,10 @@
         type: Boolean,
         default: false,
       },
+      modelValue: {
+        type: Boolean,
+        default: undefined,
+      },
       value: {
         type: String,
         required: false,
@@ -81,6 +85,15 @@
         required: false,
         default: false,
       },
+    },
+    methods: {
+      handleChange(event) {
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('update:checked', event.target.checked);
+        this.$emit('update:modelValue', event.target.checked);
+        this.$emit('changed');
+        this.$parent.dirty(this.name);
+      }
     },
   }
 </script>

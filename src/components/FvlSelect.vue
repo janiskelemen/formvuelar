@@ -15,10 +15,16 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @change="$emit('update:selected', $event.target.value), $emit('changed'), $parent.dirty(name)"
+        @change="handleChange"
       >
         <option v-if="allowEmpty" disabled selected value v-text="placeholder" />
-        <option v-for="(option, key) in options" :key="key" :value="key" :selected="selected == key" v-text="option" />
+        <option 
+          v-for="(option, key) in options" 
+          :key="key" 
+          :value="key" 
+          :selected="(modelValue !== undefined ? modelValue : selected) == key" 
+          v-text="option" 
+        />
       </select>
       <div
         class="pointer-events-none absolute h-full inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -44,8 +50,12 @@
     },
     props: {
       selected: {
-        type: String | Number,
+        type: [String, Number],
         default: '',
+      },
+      modelValue: {
+        type: [String, Number],
+        default: undefined,
       },
       name: {
         type: String,
@@ -104,5 +114,14 @@
         default: false,
       },
     },
+    methods: {
+      handleChange(event) {
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('update:selected', event.target.value);
+        this.$emit('update:modelValue', event.target.value);
+        this.$emit('changed');
+        this.$parent.dirty(this.name);
+      }
+    }
   }
 </script>

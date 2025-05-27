@@ -7,7 +7,7 @@
     <div class="fvl-input-group">
       <textarea
         :id="id"
-        :value="value"
+        :value="modelValue !== undefined ? modelValue : value"
         :name="name"
         :placeholder="placeholder"
         :autocomplete="autocomplete"
@@ -21,7 +21,7 @@
         :disabled="disabled"
         class="fvl-textarea"
         @change="$parent.dirty(name), $emit('changed')"
-        @input="$parent.dirty(name), $emit('update:value', $event.target.value), $emit('input', $event)"
+        @input="handleInput"
       ></textarea>
     </div>
     <slot name="hint" />
@@ -54,6 +54,10 @@
       value: {
         validator: (prop) => typeof prop === 'string' || prop === null,
         default: '',
+      },
+      modelValue: {
+        validator: (prop) => typeof prop === 'string' || prop === null,
+        default: undefined,
       },
       placeholder: {
         type: String,
@@ -110,6 +114,15 @@
         required: false,
         default: false,
       },
+    },
+    methods: {
+      handleInput(event) {
+        this.$parent.dirty(this.name);
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('update:value', event.target.value);
+        this.$emit('input', event);
+        this.$emit('update:modelValue', event.target.value);
+      }
     },
   }
 </script>
