@@ -5,13 +5,13 @@
       <slot name="label_suffix" />
     </label>
     <div class="fvl-slider-group">
-      <slot :value="value" name="prefix">
-        <span v-if="valuePosition == 'left'" class="fvl-slider-value fvl-slider-value-left">{{ value }}</span>
+      <slot :value="modelValue !== undefined ? modelValue : value" name="prefix">
+        <span v-if="valuePosition == 'left'" class="fvl-slider-value fvl-slider-value-left">{{ modelValue !== undefined ? modelValue : value }}</span>
       </slot>
       <div class="fvl-slider-container">
         <input
           :id="id"
-          :value="value"
+          :value="modelValue !== undefined ? modelValue : value"
           :name="name"
           :class="fieldClass"
           :min="min"
@@ -22,11 +22,11 @@
           type="range"
           class="fvl-slider"
           @change="$parent.dirty(name), $emit('changed')"
-          @input="$emit('update:value', $event.target.value)"
+          @input="handleInput"
         />
       </div>
-      <slot :value="value" name="suffix">
-        <span v-if="valuePosition == 'right'" class="fvl-slider-value fvl-slider-value-right">{{ value }}</span>
+      <slot :value="modelValue !== undefined ? modelValue : value" name="suffix">
+        <span v-if="valuePosition == 'right'" class="fvl-slider-value fvl-slider-value-right">{{ modelValue !== undefined ? modelValue : value }}</span>
       </slot>
     </div>
     <slot name="hint" />
@@ -68,6 +68,10 @@
         validator: (prop) => typeof prop === 'string' || prop === null,
         default: '0',
       },
+      modelValue: {
+        validator: (prop) => typeof prop === 'string' || prop === null,
+        default: undefined,
+      },
       min: {
         type: Number,
         required: false,
@@ -108,6 +112,13 @@
         required: false,
         default: false,
       },
+    },
+    methods: {
+      handleInput(event) {
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('update:value', event.target.value);
+        this.$emit('update:modelValue', event.target.value);
+      }
     },
   }
 </script>

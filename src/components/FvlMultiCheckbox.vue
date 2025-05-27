@@ -13,11 +13,12 @@
           'fvl-multi-checkbox-any-checked': groupAnyChecked(group),
         }"
         class="fvl-multi-checkbox"
-        @click.prevent.native="toggleChildren(group)"
+        @click.prevent="toggleChildren(group)"
       />
       <div v-for="nestedOption in group.options" :key="nestedOption.name" class="fvl-multi-checkbox-group">
         <fvl-checkbox
-          :checked.sync="nestedOption.checked"
+          v-model="nestedOption.checked"
+          :checked="nestedOption.checked"
           :label="nestedOption.label"
           :name="nestedOption.name"
           class="fvl-multi-checkbox-nested"
@@ -60,6 +61,10 @@
       groups: {
         type: Array,
         default: () => [],
+      },
+      modelValue: {
+        type: Array,
+        default: undefined,
       },
       fieldClass: {
         type: String,
@@ -118,6 +123,7 @@
       },
       groupAnyChecked(group) {
         this.$emit('update:checked', this.values)
+        this.$emit('update:modelValue', this.values)
         return _filter(group.options, 'checked').length
       },
       dirty(name) {
