@@ -11,9 +11,13 @@
       this.$once('hook:beforeDestroy', () => {
         document.removeEventListener('click', listener)
       })
+      this.$once('hook:beforeUnmount', () => {
+        document.removeEventListener('click', listener)
+      })
     },
     render() {
-      return this.$slots.default[0]
+      // Vue 3 compatible version
+      return this.$slots.default ? (Array.isArray(this.$slots.default()) ? this.$slots.default()[0] : this.$slots.default()) : null;
     }
   }
 </script>

@@ -151,6 +151,10 @@
         type: Array,
         default: null,
       },
+      modelValue: {
+        type: Array,
+        default: undefined,
+      },
       name: {
         type: String,
         required: true,
@@ -301,8 +305,9 @@
       selectedOptionValues() {
         let $this = this
         let options = []
-        if (!this.selected) return options
-        this.selected.forEach(function (element) {
+        let selectedValue = this.modelValue !== undefined ? this.modelValue : this.selected;
+        if (!selectedValue) return options
+        selectedValue.forEach(function (element) {
           let option = _find($this.optionsList, function (o) {
             return o[$this.optionKey] == element
           })
@@ -340,6 +345,11 @@
       if (!this.lazyLoad || this.selected) this.getRemoteOptions()
     },
     beforeDestroy() {
+      if (this.popper !== undefined) {
+        this.popper.destroy()
+      }
+    },
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }
@@ -387,6 +397,7 @@
 
         selected.push(option)
         this.$emit('update:selected', selected)
+        this.$emit('update:modelValue', selected)
         this.$emit('changed')
         this.$parent.dirty(this.name)
 
@@ -408,6 +419,7 @@
           1
         )
         this.$emit('update:selected', selected)
+        this.$emit('update:modelValue', selected)
         this.$emit('changed')
         this.$parent.dirty(this.name)
         this.$nextTick(() => {
@@ -426,6 +438,7 @@
             this.query = value
           }
           this.$emit('update:selected', selected)
+          this.$emit('update:modelValue', selected)
           this.$emit('changed')
           this.$parent.dirty(this.name)
           this.close()

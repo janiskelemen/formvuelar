@@ -96,8 +96,12 @@
     mixins: [config],
     props: {
       selected: {
-        type: String | Number,
+        type: [String, Number],
         default: null,
+      },
+      modelValue: {
+        type: [String, Number],
+        default: undefined,
       },
       name: {
         type: String,
@@ -226,15 +230,17 @@
       },
       selectedOptionValue() {
         let $this = this
+        let selectedValue = this.modelValue !== undefined ? this.modelValue : this.selected;
         let option = _find(this.optionsList, function (o) {
-          return o[$this.optionKey] == $this.selected
+          return o[$this.optionKey] == selectedValue
         })
         return option ? option[this.optionValue] : ''
       },
       selectedOptionIndex() {
         let $this = this
+        let selectedValue = this.modelValue !== undefined ? this.modelValue : this.selected;
         return _findKey(this.optionsList, function (o) {
-          return o[$this.optionKey] == $this.selected
+          return o[$this.optionKey] == selectedValue
         })
       },
     },
@@ -260,11 +266,17 @@
         this.popper.destroy()
       }
     },
+    beforeUnmount() {
+      if (this.popper !== undefined) {
+        this.popper.destroy()
+      }
+    },
     methods: {
       select(option) {
         /* Return selected option key */
         if (this.optionIsDisabled(option)) return
         this.$emit('update:selected', String(option[this.optionKey]))
+        this.$emit('update:modelValue', String(option[this.optionKey]))
         this.$emit('changed')
         this.$parent.dirty(this.name)
         this.close()
