@@ -199,6 +199,7 @@
           reader.readAsDataURL(uploadedFiles[i])
         }
         this.$emit('update:files', this.files)
+        this.$emit('update:modelValue', this.files)
       },
       removeFile(key) {
         this.files.splice(key, 1)

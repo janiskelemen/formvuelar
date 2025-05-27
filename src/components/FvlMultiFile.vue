@@ -63,6 +63,10 @@
         type: Array,
         default: () => [],
       },
+      modelValue: {
+        type: Array,
+        default: undefined,
+      },
       label: {
         type: String,
         required: false,
@@ -120,7 +124,10 @@
     watch: {
       files(newValue) {
         /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof Array) || !(newValue instanceof File)) this.$emit('update:file', [])
+        if (!(newValue instanceof Array) || !(newValue instanceof File)) {
+          this.$emit('update:file', [])
+          this.$emit('update:modelValue', [])
+        }
       },
     },
     methods: {
@@ -131,6 +138,7 @@
           this.filesList.push(uploadedFiles[i])
         }
         this.$emit('update:files', this.filesList)
+        this.$emit('update:modelValue', this.filesList)
       },
       removeFile(key) {
         this.filesList.splice(key, 1)

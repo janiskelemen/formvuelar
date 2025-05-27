@@ -51,8 +51,12 @@
         default: null,
       },
       value: {
-        type: String | Array,
+        type: [String, Array],
         default: '',
+      },
+      modelValue: {
+        type: [String, Array],
+        default: undefined,
       },
       start: {
         type: String,
@@ -147,10 +151,12 @@
           if (oldValue != formatedValue) {
             // console.log(oldValue, formatedValue)
             this.$emit('update:value', formatedValue)
+            this.$emit('update:modelValue', formatedValue)
           }
         } else {
           formatedValue = newValue
           this.$emit('update:value', formatedValue)
+          this.$emit('update:modelValue', formatedValue)
         }
       },
     },

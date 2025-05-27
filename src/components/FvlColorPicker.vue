@@ -13,7 +13,7 @@
             ref="colorinput"
             autocapitalize="off"
             spellcheck="false"
-            :value="value"
+            :value="modelValue !== undefined ? modelValue : value"
             :name="name"
             :required="required"
             :disabled="disabled"
@@ -23,7 +23,7 @@
             :pattern="validateFormat ? pattern : null"
             @keyup.space="toggle()"
             @change="updateValueManually($event.target.value)"
-            @input="$parent.dirty(name)"
+            @input="handleInput"
           />
           <div ref="colorpicker" class="fvl-color-preview" @click="toggle()">
             <span :style="{ background: value }" class="inline-block rounded-full border border-white h-4 w-4"></span>
@@ -34,7 +34,7 @@
           <chrome-picker
             ref="picker"
             :disable-alpha="format == 'hex'"
-            :value="value"
+            :value="modelValue !== undefined ? modelValue : value"
             disable-fields
             @input="updateValue"
           ></chrome-picker>
@@ -76,6 +76,10 @@
       value: {
         validator: (prop) => typeof prop === 'string' || prop === null,
         default: null,
+      },
+      modelValue: {
+        validator: (prop) => typeof prop === 'string' || prop === null,
+        default: undefined,
       },
       format: {
         type: String,
@@ -145,13 +149,21 @@
     methods: {
       updateValue(e) {
         this.$emit('update:value', e[this.format])
+        this.$emit('update:modelValue', e[this.format])
         this.$emit('changed')
         this.$parent.dirty(this.name)
       },
       updateValueManually(e) {
         this.$emit('update:value', e)
+        this.$emit('update:modelValue', e)
         this.$emit('changed')
         this.$parent.dirty(this.name)
+      },
+      handleInput(event) {
+        this.$parent.dirty(this.name)
+        // Support both Vue 2 and Vue 3 v-model patterns
+        this.$emit('input', event)
+        this.$emit('update:modelValue', event.target.value)
       },
       setupPopper() {
         if (this.popper === undefined) {

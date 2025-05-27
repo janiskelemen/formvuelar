@@ -43,8 +43,12 @@
     mixins: [config],
     props: {
       file: {
-        type: File | String,
+        type: [File, String],
         default: null,
+      },
+      modelValue: {
+        type: [File, String],
+        default: undefined,
       },
       label: {
         type: String,
@@ -103,12 +107,16 @@
     watch: {
       file(newValue) {
         /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof File)) this.$emit('update:file', '')
+        if (!(newValue instanceof File)) {
+          this.$emit('update:file', '')
+          this.$emit('update:modelValue', '')
+        }
       },
     },
     mounted() {
       if (!(this.file instanceof File)) {
         this.$emit('update:file', '')
+        this.$emit('update:modelValue', '')
       }
     },
     methods: {
@@ -117,6 +125,7 @@
         let file = this.$refs[this.name].files[0]
         this.fileName = file.name
         this.$emit('update:file', file)
+        this.$emit('update:modelValue', file)
       },
     },
   }
