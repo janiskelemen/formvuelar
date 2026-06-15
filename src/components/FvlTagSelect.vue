@@ -139,6 +139,7 @@
   import _debounce from 'lodash/debounce'
   import ValidationErrors from './FvlErrors.vue'
   import OnClickOutside from './utilities/OnClickOutside.vue'
+  import { parseEmailAddresses } from './utilities/parseEmailAddresses'
   import { config } from './mixins/config'
   export default {
     components: {
@@ -538,7 +539,13 @@
       },
       checkValidity(event) {
         if (event.clipboardData) {
-          this.query = event.clipboardData.getData('text')
+          const pastedText = event.clipboardData.getData('text')
+
+          if (this.type === 'email' && this.allowNew) {
+            return this.addPastedEmails(pastedText, event)
+          }
+
+          this.query = pastedText
           event.target.value = this.query
         }
 
@@ -549,6 +556,37 @@
           event.target.reportValidity()
           return false
         }
+      },
+      addPastedEmails(text, event) {
+        const input = event.target
+        const emails = parseEmailAddresses(text)
+        let selected = this.selected === null ? [] : [...this.selected]
+        let addedAny = false
+
+        for (const email of emails) {
+          if (this.max !== null && selected.length >= this.max) break
+
+          input.value = email
+          if (!input.checkValidity()) continue
+
+          const exists = selected.some((item) => String(item).toLowerCase() === email.toLowerCase())
+          if (exists) continue
+
+          selected.push(email)
+          addedAny = true
+        }
+
+        if (addedAny) {
+          this.$emit('update:selected', selected)
+          this.$emit('changed')
+          this.$parent.dirty(this.name)
+          this.reset()
+          return true
+        }
+
+        input.value = text
+        input.reportValidity()
+        return false
       },
       getRemoteOptions: _debounce(function (refresh) {
         if ((!this.searchRemote && this.optionsList.length && !refresh) || !this.optionsUrl) return
