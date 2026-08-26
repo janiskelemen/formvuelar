@@ -1,7 +1,7 @@
 <template>
   <div class="fvl-submit-wrapper">
     <button
-      :disabled="disabled || $parent.isLoading"
+      :disabled="disabled || formIsLoading"
       :class="buttonClass"
       class="fvl-submit-button"
       @click="$emit('submit')"
@@ -10,14 +10,14 @@
         <slot />
       </span>
       <slot
-        v-if="loader && $parent.isLoading"
-        :is-loading="$parent.isLoading"
-        :upload-percentage="$parent.uploadPercentage"
+        v-if="loader && formIsLoading"
+        :is-loading="formIsLoading"
+        :upload-percentage="formUploadPercentage"
         name="loader"
       >
         <div class="fvl-submit-button-loader">
           <div
-            :style="{width: $parent.uploadPercentage + '%'}"
+            :style="{ width: formUploadPercentage + '%' }"
             class="fvl-submit-button-loader-progress"
           />
         </div>
@@ -27,22 +27,25 @@
 </template>
 
 <script>
+  import { formControl } from './mixins/formControl'
+
   export default {
+    mixins: [formControl],
+    emits: ['submit'],
     props: {
       loader: {
         type: Boolean,
-        default: false
+        default: false,
       },
       disabled: {
         type: Boolean,
         required: false,
-        default: false
+        default: false,
       },
       buttonClass: {
         type: String,
-        default: null
-      }
-    }
+        default: null,
+      },
+    },
   }
 </script>
-      

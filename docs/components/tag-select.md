@@ -6,7 +6,7 @@
 
 ```vue
 <fvl-tag-select
-  :selected.sync="form.tags"
+  v-model="form.tags"
   :options="tagsOptions"
   :search-keys="['name']"
   :allow-new="true"
@@ -28,7 +28,7 @@ import { FvlTagSelect } from 'formvuelar'
 
 | Property           | Description                                                                                                            | Type                        | Default | Required |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------- | -------- |
-| selected.sync      | Selected value                                                                                                         | `String \| Number \| Array` |         | **true** |
+| v-model            | Selected values                                                                                                        | `Array` |         | **true** |
 | options            | Key value object `{'key': 'value', ...}`                                                                               | Object                      |         |          |
 | name               | Input name                                                                                                             | String                      |         | **true** |
 | allow-new          | Allow to add new tags                                                                                                  | Boolean                     | false   |          |

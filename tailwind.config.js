@@ -1,7 +1,5 @@
-module.exports = {
-  content: [
-    './src/**/**/*.vue',
-  ],
+export default {
+  content: ['./src/**/*.vue'],
   theme: {
     colors: {
       transparent: 'transparent',
@@ -54,7 +52,7 @@ module.exports = {
         800: '#285e61',
         900: '#234e52',
       },
-  }
+    },
   },
   corePlugins: {},
   plugins: [],

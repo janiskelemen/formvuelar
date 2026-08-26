@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-textarea :value.sync="form.bio" name="bio" label="Bio" />
+<fvl-textarea v-model="form.bio" name="bio" label="Bio" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlTextarea } from 'formvuelar'
 
 | Property     | Description                          | Type    | Default | Required |
 | ------------ | ------------------------------------ | ------- | ------- | -------- |
-| value.sync   | Input value                          | String  |         | **true** |
+| v-model      | Input value                          | String  |         | **true** |
 | name         | Input name                           | String  |         | **true** |
 | id           | Id                                   | String  | null    |          |
 | label        | Label                                | String  | null    |          |

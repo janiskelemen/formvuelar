@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-dropzone-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-dropzone-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-dropzone-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -69,16 +69,16 @@
         :required="required"
         :readonly="readonly"
         :accept="accept"
-        :disabled="disabled || $parent.isLoading"
+        :disabled="disabled || formIsLoading"
         multiple
         type="file"
         class="fvl-dropzone"
-        @change="handleFileChange(), $emit('changed'), $parent.dirty(name)"
+        @change="handleFileChange"
       />
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
@@ -86,13 +86,29 @@
 <script>
   import ValidationErrors from './FvlErrors.vue'
   import { config } from './mixins/config'
+  import { formControl } from './mixins/formControl'
+
+  const createPreview = (file) => ({
+    isimage: file.type.split('/')[0] === 'image',
+    size: file.size,
+    loaded: 0,
+    percent: 0,
+    status: 'loading',
+    src: '',
+    ratioHeight: 0,
+  })
 
   export default {
     components: {
       ValidationErrors,
     },
-    mixins: [config],
+    mixins: [config, formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
+      modelValue: {
+        type: Array,
+        default: () => [],
+      },
       label: {
         type: String,
         required: false,
@@ -169,10 +185,21 @@
     },
     data() {
       return {
-        files: [],
-        previews: [],
+        files: Array.isArray(this.modelValue) ? [...this.modelValue] : [],
+        previews: Array.isArray(this.modelValue) ? this.modelValue.map(createPreview) : [],
         loaded: 0,
       }
+    },
+    watch: {
+      modelValue(newValue) {
+        newValue = Array.isArray(newValue) ? newValue : []
+        const unchanged =
+          newValue.length === this.files.length && newValue.every((file, index) => file === this.files[index])
+        if (!unchanged) {
+          this.files = [...newValue]
+          this.previews = newValue.map(createPreview)
+        }
+      },
     },
     computed: {
       filesCount() {
@@ -188,21 +215,31 @@
     },
     methods: {
       //Handles a change on the file upload
-      handleFileChange() {
-        var uploadedFiles = this.$refs[this.name].files
-        for (var i = 0; i < uploadedFiles.length; i++) {
+      handleFileChange(event) {
+        const uploadedFiles = Array.from(event.target.files || [])
+        for (const file of uploadedFiles) {
           // Get mime type
-          let mime = uploadedFiles[i].type
+          let mime = file.type
           mime = mime.split('/')
           // Create preview image
-          let reader = this.getFileReader(mime, uploadedFiles[i])
-          reader.readAsDataURL(uploadedFiles[i])
+          const index = this.files.push(file) - 1
+          this.previews.push(createPreview(file))
+          let reader = this.getFileReader(mime, index)
+          reader.readAsDataURL(file)
         }
-        this.$emit('update:files', this.files)
+        if (!uploadedFiles.length) return
+        this.emitFiles()
+        this.$emit('changed')
+        this.formDirty(this.name)
       },
       removeFile(key) {
         this.files.splice(key, 1)
         this.previews.splice(key, 1)
+        this.emitFiles()
+        this.formDirty(this.name)
+      },
+      emitFiles() {
+        this.$emit('update:modelValue', [...this.files])
       },
       formatBytes(a, b) {
         if (0 == a) return '0 Bytes'
@@ -212,24 +249,15 @@
           f = Math.floor(Math.log(a) / Math.log(c))
         return parseFloat((a / Math.pow(c, f)).toFixed(d)) + ' ' + e[f]
       },
-      getFileReader(mime, file) {
+      getFileReader(mime, index) {
         let $this = this
         let reader = new FileReader()
-        let index = 0
         reader.onloadstart = (event) => {
-          // Add file to files array
-          index = $this.files.push(file) - 1
           let percent = Math.round((event.loaded / event.total) * 100)
-          // Add preview to previews array
-          $this.previews.push({
-            isimage: mime[0] == 'image',
-            size: event.total,
-            loaded: event.loaded,
-            percent: percent,
-            status: 'loading',
-            src: '',
-            ratioHeight: 0,
-          })
+          $this.previews[index].isimage = mime[0] == 'image'
+          $this.previews[index].size = event.total
+          $this.previews[index].loaded = event.loaded
+          $this.previews[index].percent = percent
         }
         reader.onprogress = (event) => {
           let percent = Math.round((event.loaded / event.total) * 100)
@@ -294,5 +322,3 @@
     },
   }
 </script>
-
-

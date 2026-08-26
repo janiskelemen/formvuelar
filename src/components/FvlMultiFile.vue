@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-multi-file-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-multi-file-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-multi-file-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -12,7 +12,7 @@
       </button>
       <span class="fvl-multi-file-name">
         <slot :files="filesList" name="selected-text">
-          {{ filesList ? filesList.length : 0 }}
+          {{ filesList.length }}
           <span v-text="getConfig('filesSelectedText', 'Files Selected')" />
         </slot>
       </span>
@@ -25,11 +25,11 @@
         :required="required"
         :readonly="readonly"
         :accept="accept"
-        :disabled="disabled || $parent.isLoading"
+        :disabled="disabled || formIsLoading"
         multiple
         type="file"
         class="fvl-multi-file"
-        @change="handleFileChange(), $emit('changed'), $parent.dirty(name)"
+        @change="handleFileChange"
       />
     </div>
     <div v-for="(file, key) in filesList" :key="key" class="fvl-multi-file-list">
@@ -43,8 +43,8 @@
       </span>
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
@@ -52,14 +52,16 @@
 <script>
   import ValidationErrors from './FvlErrors.vue'
   import { config } from './mixins/config'
+  import { formControl } from './mixins/formControl'
 
   export default {
     components: {
       ValidationErrors,
     },
-    mixins: [config],
+    mixins: [config, formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
-      files: {
+      modelValue: {
         type: Array,
         default: () => [],
       },
@@ -114,28 +116,34 @@
     },
     data() {
       return {
-        filesList: [],
+        filesList: Array.isArray(this.modelValue) ? [...this.modelValue] : [],
       }
     },
     watch: {
-      files(newValue) {
-        /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof Array) || !(newValue instanceof File)) this.$emit('update:file', [])
+      modelValue(newValue) {
+        newValue = Array.isArray(newValue) ? newValue : []
+        const unchanged =
+          newValue.length === this.filesList.length && newValue.every((file, index) => file === this.filesList[index])
+        if (!unchanged) this.filesList = [...newValue]
       },
     },
     methods: {
-      //Handles a change on the file upload
-      handleFileChange() {
-        var uploadedFiles = this.$refs[this.name].files
-        for (var i = 0; i < uploadedFiles.length; i++) {
-          this.filesList.push(uploadedFiles[i])
-        }
-        this.$emit('update:files', this.filesList)
+      handleFileChange(event) {
+        const uploadedFiles = Array.from(event.target.files || [])
+        if (!uploadedFiles.length) return
+        this.filesList = [...this.filesList, ...uploadedFiles]
+        this.emitFiles()
+        this.$emit('changed')
+        this.formDirty(this.name)
       },
       removeFile(key) {
-        this.filesList.splice(key, 1)
+        this.filesList = this.filesList.filter((file, index) => index !== key)
+        this.emitFiles()
+        this.formDirty(this.name)
+      },
+      emitFiles() {
+        this.$emit('update:modelValue', [...this.filesList])
       },
     },
   }
 </script>
-

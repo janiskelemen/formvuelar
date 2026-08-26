@@ -15,7 +15,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form.tags"
+        v-model="form.tags"
         :options="tagsOptions"
         :search-keys="['name']"
         :allow-new="true"
@@ -62,9 +62,9 @@
         ],
         showSource: false,
         source:
-          `<fvl-tag-select \n` +
-          `   :selected.sync="form.tags" \n` +
-          `   :options="tagsOptions" \n` +
+          `<fvl-tag-select\n` +
+          `   v-model="form.tags"\n` +
+          `   :options="tagsOptions"\n` +
           `   :search-keys="['name']"\n` +
           `   :allow-new="true"\n` +
           `   :max="20"\n` +

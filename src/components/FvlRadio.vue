@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-radio-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-radio-wrapper">
     <span class="fvl-radio-group-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -10,14 +10,14 @@
           :id="name + key"
           :name="name"
           :value="key"
-          :checked="checked == key"
+          :checked="modelValue == key"
           :class="fieldClass"
           :required="required"
           :readonly="readonly"
           :disabled="disabled"
           type="radio"
           class="fvl-radio"
-          @change="$emit('update:checked', $event.target.value), $emit('changed'), $parent.dirty(name)"
+          @change="handleChange"
         />
         <label :class="labelClass" :for="name + key" class="fvl-radio-label">
           <span class="fvl-radio-toggle" />
@@ -26,21 +26,25 @@
       </div>
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
     },
+    mixins: [formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
-      checked: {
-        type: String,
+      modelValue: {
+        type: [String, Number],
         default: '',
       },
       name: {
@@ -82,14 +86,12 @@
         default: false,
       },
     },
-    computed: {
-      errors() {
-        return this.$parent.errors[this.name] ? this.$parent.errors[this.name] : false
-      },
-      hasError() {
-        return this.$parent.errors[this.name] ? 'fvl-has-error' : ''
+    methods: {
+      handleChange(event) {
+        this.$emit('update:modelValue', event.target.value)
+        this.$emit('changed')
+        this.formDirty(this.name)
       },
     },
   }
 </script>
-

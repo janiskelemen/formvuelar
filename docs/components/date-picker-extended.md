@@ -5,7 +5,7 @@ The Extended Date Picker provides predefined date range options alongside a cale
 ### Template
 
 ```vue
-<fvl-date-picker-extended :value.sync="form.daterange" name="daterange" label="Select Date Range" />
+<fvl-date-picker-extended v-model="form.daterange" name="daterange" label="Select Date Range" />
 ```
 
 ### Import Name
@@ -18,7 +18,7 @@ import { FvlDatePickerExtended } from 'formvuelar'
 
 | Property    | Description                                 | Type           | Default                      | Required |
 | ----------- | ------------------------------------------- | -------------- | ---------------------------- | -------- |
-| value.sync  | Date picker value                           | String/Object  |                              | **true** |
+| v-model     | Date picker value                           | String/Object  |                              | **true** |
 | name        | Date picker name                            | String         |                              | **true** |
 | id          | Id                                          | String         | null                         |          |
 | label       | Label                                       | String         | null                         |          |
@@ -38,10 +38,10 @@ import { FvlDatePickerExtended } from 'formvuelar'
 
 ```vue
 <fvl-date-picker-extended 
-  :start.sync="form.startDate" 
-  :end.sync="form.endDate" 
-  name="daterange" 
-  label="Select Date Range" 
+  v-model:start="form.startDate"
+  v-model:end="form.endDate"
+  name="daterange"
+  label="Select Date Range"
 />
 ```
 
@@ -57,10 +57,10 @@ You can customize these presets by providing your own array of preset objects:
 
 ```vue
 <fvl-date-picker-extended 
-  :value.sync="form.daterange" 
-  name="daterange" 
-  label="Select Date Range" 
-  :presets="customPresets" 
+  v-model="form.daterange"
+  name="daterange"
+  label="Select Date Range"
+  :presets="customPresets"
 />
 ```
 

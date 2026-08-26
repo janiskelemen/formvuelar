@@ -1,16 +1,7 @@
 export function parseEmailAddresses(text) {
   if (!text || typeof text !== 'string') return []
 
-  const parts = text
-    .trim()
-    .split(/[,;]+/)
-    .map((part) => part.trim())
-    .filter(Boolean)
-
-  const emails = parts.map((part) => {
-    const match = part.match(/<([^<>@\s]+@[^<>\s]+)>/)
-    return match ? match[1].trim() : part
-  })
+  const emails = text.match(/[\w.!#$%&'*+/=?^`{|}~-]+@[\w-]+(?:\.[\w-]+)+/g) || []
 
   const seen = new Set()
   return emails.filter((email) => {

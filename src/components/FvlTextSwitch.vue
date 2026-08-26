@@ -1,17 +1,17 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-text-switch-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-text-switch-wrapper">
     <input
       :id="id ? id : name"
       ref="checkbox"
       :name="name"
-      :class="{ checked: checked, fieldClass }"
+      :class="[{ checked: Boolean(modelValue) }, fieldClass]"
       :required="required"
       :readonly="readonly"
       :disabled="disabled"
-      :checked="checked"
+      :checked="Boolean(modelValue)"
       type="checkbox"
       class="fvl-text-switch hidden"
-      @change="$emit('update:checked', $event.target.checked), $emit('changed'), $parent.dirty(name)"
+      @change="handleChange"
     />
     <label v-if="label" class="fvl-text-switch-label">
       <span v-html="label" />
@@ -20,26 +20,30 @@
 
     <span class="inline-block relative normal-case cursor-pointer">
       <button type="button" class="fvl-text-switch-options-wrapper" @click="$refs.checkbox.click()">
-        <div class="fvl-text-switch-option-1" :class="!checked ? 'active' : ''" v-html="options[0]"></div>
-        <div class="fvl-text-switch-option-2" :class="{ 'active text-white': checked }" v-html="options[1]"></div>
+        <div class="fvl-text-switch-option-1" :class="!modelValue ? 'active' : ''" v-html="options[0]"></div>
+        <div class="fvl-text-switch-option-2" :class="{ 'active text-white': modelValue }" v-html="options[1]"></div>
       </button>
       <!-- switch bg -->
-      <div class="fvl-text-switch-bg" :class="{ 'fvl-text-switch-bg-selected': checked }"></div>
+      <div class="fvl-text-switch-bg" :class="{ 'fvl-text-switch-bg-selected': modelValue }"></div>
     </span>
 
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
     },
+    mixins: [formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
       options: {
         type: Array,
@@ -60,7 +64,7 @@
         required: false,
         default: null,
       },
-      checked: {
+      modelValue: {
         default: false,
         validator: function (value) {
           // The value must match one of these strings
@@ -91,6 +95,13 @@
         type: Boolean,
         required: false,
         default: false,
+      },
+    },
+    methods: {
+      handleChange(event) {
+        this.$emit('update:modelValue', event.target.checked)
+        this.$emit('changed')
+        this.formDirty(this.name)
       },
     },
   }

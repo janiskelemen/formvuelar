@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-file label="Avatar" name="avatar" :file.sync="form.avatar" />
+<fvl-file v-model="form.avatar" label="Avatar" name="avatar" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlFile } from 'formvuelar'
 
 | Property  | Description | Type    | Default | Required |
 | --------- | ----------- | ------- | ------- | -------- |
-| file.sync | File Object | Object  |         | **true** |
+| v-model   | File object | Object  | null    | **true** |
 | name      | Input name  | String  |         | **true** |
 | id        | Id          | String  | null    |          |
 | label     | Label       | String  | null    |          |

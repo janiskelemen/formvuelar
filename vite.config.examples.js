@@ -1,37 +1,31 @@
+import { fileURLToPath, URL } from 'node:url'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-// import vue from '@vitejs/plugin-vue' // only for vue 3
-import { createVuePlugin as vue } from "vite-plugin-vue2";
 
-const path = require("path");
 export default defineConfig({
+  publicDir: false,
   plugins: [vue()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   build: {
-    outDir: path.resolve(__dirname, 'example/'),
+    emptyOutDir: true,
     lib: {
-      entry: path.resolve(__dirname, 'src/main.js'),
-      name: 'FormVuelar',
-      fileName: (format) => `examples.${format}.js`
+      entry: fileURLToPath(new URL('./src/main.js', import.meta.url)),
+      name: 'FormVuelarExamples',
+      cssFileName: 'examples',
+      formats: ['es', 'umd'],
+      fileName: (format) => `examples.${format}.js`,
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
       output: {
-        dir: path.resolve(__dirname, 'example/js/'),
-        // Provide global variables to use in the UMD build
-        // for externalized deps
+        dir: fileURLToPath(new URL('./example/js', import.meta.url)),
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
         },
-        assetFileNames: (assetInfo) => {
-            if (assetInfo.name == 'style.css')
-              return 'examples.css';
-            return assetInfo.name;
-          },
-      }
-    }
-  }
-});
+      },
+    },
+  },
+})

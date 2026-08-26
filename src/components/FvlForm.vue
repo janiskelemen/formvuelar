@@ -15,10 +15,19 @@
 <script>
   import axios from 'axios'
   import _assignIn from 'lodash/assignIn'
+  import { FVL_FORM_CONTEXT } from './formContext'
   import { config } from './mixins/config'
 
   export default {
     mixins: [config],
+    emits: [
+      'changed',
+      'error',
+      'requestfinished',
+      'requeststarted',
+      'success',
+      'uploadProgress',
+    ],
     props: {
       method: {
         type: String,
@@ -38,7 +47,7 @@
       },
       headers: {
         type: Object,
-        default: () => {},
+        default: () => ({}),
       },
       data: {
         type: Object,
@@ -53,6 +62,26 @@
         uploadPercentage: 0,
         isLoading: false,
         isDragging: false,
+      }
+    },
+    provide() {
+      const form = this
+
+      return {
+        [FVL_FORM_CONTEXT]: {
+          get errors() {
+            return form.errors
+          },
+          get isLoading() {
+            return form.isLoading
+          },
+          get uploadPercentage() {
+            return form.uploadPercentage
+          },
+          dirty: (name) => form.dirty(name),
+          getErrors: (name) => form.getErrors(name),
+          hasErrors: (name) => form.hasErrors(name),
+        },
       }
     },
     computed: {
@@ -70,7 +99,7 @@
       this.axios = axios.create()
       this.loadInterceptors()
     },
-    beforeDestroy() {
+    beforeUnmount() {
       this.unloadInterceptors()
     },
     methods: {
@@ -183,7 +212,7 @@
       },
 
       hasErrors(name) {
-        return this.errors[name] && this.errors[name] !== [] ? true : false
+        return Boolean(this.errors[name] && this.errors[name].length)
       },
       loadInterceptors() {
         // Add config interceptors
@@ -216,5 +245,5 @@
 </script>
 
 <style lang="scss">
-  @import '../assets/scss/formvuelar.scss';
+  @use '../assets/scss/formvuelar.scss';
 </style>

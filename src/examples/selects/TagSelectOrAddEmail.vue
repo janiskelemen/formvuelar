@@ -7,8 +7,7 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelectOrAddEmail.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form" url="/select" class="relative">
@@ -16,7 +15,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form.emails"
+        v-model="form.emails"
         :options="emailsOptions"
         :search-keys="['email']"
         :allow-new="true"
@@ -38,8 +37,7 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/selects/TagSelectOrAddEmail.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup form for selects -->
     <fvl-form :data="form2" url="/selecterror" class="relative">
@@ -47,7 +45,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-tag-select
-        :selected.sync="form2.emails"
+        v-model="form2.emails"
         :options="emailsOptions"
         :search-keys="['email']"
         :allow-new="true"
@@ -95,9 +93,9 @@
         ],
         showSource: false,
         source:
-          `<fvl-tag-select \n` +
-          `   :selected.sync="form.emails" \n` +
-          `   :options="emailsOptions" \n` +
+          `<fvl-tag-select\n` +
+          `   v-model="form.emails"\n` +
+          `   :options="emailsOptions"\n` +
           `   :search-keys="['email']"\n` +
           `   :allow-new="true"\n` +
           `   :max="20"\n` +

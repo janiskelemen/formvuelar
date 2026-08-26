@@ -12,107 +12,117 @@
     "tailwind",
     "laravel"
   ],
-  "main": "./dist/formvuelar.umd.js",
-  "module": "./dist/formvuelar.es.js",
+  "type": "module",
+  "main": "./dist/formvuelar.umd.cjs",
+  "module": "./dist/formvuelar.js",
+  "style": "./dist/formvuelar.css",
   "exports": {
     ".": {
-      "import": "./dist/formvuelar.es.js",
-      "require": "./dist/formvuelar.umd.js"
-    }
+      "import": "./dist/formvuelar.js",
+      "require": "./dist/formvuelar.umd.cjs"
+    },
+    "./style.css": "./dist/formvuelar.css"
   },
-  "version": "1.8.15",
+  "version": "2.0.0",
   "private": false,
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview --port=8888",
     "build:examples": "vite build -c vite.config.examples.js",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "test:cypress": "vite test:e2e",
-    "test:e2e": "vite test:e2e --headless",
-    "test:unit": "vite test:unit"
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore src tests vite.config.js vite.config.examples.js",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:e2e": "start-server-and-test 'vite --host 127.0.0.1' http://127.0.0.1:5173 'cypress run'",
+    "test:unit": "vitest run"
+  },
+  "peerDependencies": {
+    "vue": "^3.2.25"
   },
   "dependencies": {
     "axios": "^1.18.0",
     "fuse.js": "^6.6.2",
     "lodash": "^4.18.1",
     "popper.js": "^1.16.1",
-    "vue": "^2.6.14",
-    "vue-color": "^2.8.1",
-    "vue-flatpickr-component": "^8.1.7",
-    "vue-router": "^3.5.3"
+    "vue-color": "^3.3.3",
+    "vue-flatpickr-component": "^12.0.0"
   },
   "devDependencies": {
-    "@cypress/webpack-preprocessor": "^5.17.1",
-    "@vue/test-utils": "^1.3.0",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vue/test-utils": "^2.4.11",
     "autoprefixer": "^10.5.0",
     "axios-mock-adapter": "^2.1.0",
-    "cypress": "^9.5.4",
-    "eslint": "^8.40.0",
+    "cypress": "^15.21.1",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^8.7.1",
-    "node-sass": "^7.0.1",
+    "eslint-plugin-vue": "^9.33.0",
+    "happy-dom": "^20.11.6",
+    "highlight.js": "^11.11.1",
     "postcss": "^8.5.15",
     "sass": "^1.101.0",
+    "start-server-and-test": "^2.0.13",
     "tailwindcss": "^3.3.2",
-    "tar": "^6.1.14",
-    "trim-newlines": ">=3.0.1",
-    "vite": "^2.9.5",
-    "vite-plugin-vue2": "1.9.3",
-    "vue-highlightjs": "^1.3.3"
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11",
+    "vue": "^3.5.41",
+    "vue-router": "^4.6.3"
   },
   "files": [
-    "dist/*",
-    "src/*",
-    "*.json"
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss"
   ],
   "eslintConfig": {
     "root": true,
     "env": {
-      "es2021": true
+      "browser": true,
+      "es2021": true,
+      "node": true
     },
     "extends": [
       "eslint:recommended",
-      "plugin:vue/recommended"
+      "plugin:vue/vue3-recommended"
     ],
     "rules": {
       "vue/html-self-closing": 0,
       "vue/html-indent": 1,
       "vue/max-attributes-per-line": 0,
+      "vue/multi-word-component-names": 0,
+      "vue/no-v-html": 0,
+      "vue/order-in-components": 0,
       "vue/require-prop-type-constructor": 0,
-      "import/no-unresolved": 0,
-      "import/no-unassigned-import": 0,
       "semi": 0
-    }
+    },
+    "overrides": [
+      {
+        "files": [
+          "tests/unit/**/*.js"
+        ],
+        "globals": {
+          "describe": "readonly",
+          "expect": "readonly",
+          "it": "readonly",
+          "vi": "readonly"
+        }
+      },
+      {
+        "files": [
+          "tests/e2e/**/*.js"
+        ],
+        "globals": {
+          "cy": "readonly",
+          "describe": "readonly",
+          "it": "readonly"
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "vue"
-    ],
-    "transform": {
-      "^.+\\.vue$": "vue-jest",
-      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
-      "^.+\\.jsx?$": "babel-jest",
-      "^.+\\.js$": "babel-jest"
-    },
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ],
-    "testMatch": [
-      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
-    ],
-    "testURL": "http://localhost/"
-  }
+  ]
 }

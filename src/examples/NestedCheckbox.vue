@@ -7,8 +7,7 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/NestedCheckbox.vue"
         target="_blank"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup Nested Checkbox -->
     <fvl-form :data="form" class="relative" url="/basic">
@@ -16,8 +15,8 @@
       <source-toggle class="-mt-1" @toggle="toggleSource('permissions')" />
       <!-- Checkbox component -->
       <fvl-multi-checkbox
-        :checked.sync="form.permissions"
-        :groups.sync="permissionsStructure"
+        v-model="form.permissions"
+        v-model:groups="permissionsStructure"
         label="Set your permissions"
         name="permissions"
       />
@@ -43,7 +42,7 @@
     data() {
       return {
         form: {
-          permissions: {},
+          permissions: [],
         },
         permissionsStructure: [
           {
@@ -72,10 +71,10 @@
         showSource: '',
         source: {
           permissions:
-            `<fvl-multi-checkbox \n` +
-            `    label="Set your permissions" \n` +
-            `    name="permissions" \n` +
-            `    :checked.sync="form.permissions" \n` +
+            `<fvl-multi-checkbox\n` +
+            `    label="Set your permissions"\n` +
+            `    name="permissions"\n` +
+            `    v-model="form.permissions"\n` +
             `/>`,
         },
       }

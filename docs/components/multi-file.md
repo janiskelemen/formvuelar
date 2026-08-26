@@ -6,7 +6,7 @@
 ### Template
 
 ```vue
-<fvl-multi-file :files.sync="form.gallery" label="Gallery" name="gallery" />
+<fvl-multi-file v-model="form.gallery" label="Gallery" name="gallery" />
 ```
 
 ### Import Name
@@ -19,7 +19,7 @@ import { FvlMultiFile } from 'formvuelar'
 
 | Property   | Description           | Type    | Default | Required |
 | ---------- | --------------------- | ------- | ------- | -------- |
-| files.sync | Array of File Objects | Array   |         | **true** |
+| v-model    | Array of File objects | Array   | `[]`    | **true** |
 | name       | Input name            | String  |         | **true** |
 | id         | Id                    | String  | null    |          |
 | label      | Label                 | String  | null    |          |

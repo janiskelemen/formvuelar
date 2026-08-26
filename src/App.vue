@@ -72,29 +72,31 @@
     </h1>
     <div class="flex flex-wrap justify-center">
       <div class="w-full text-center md:w-1/5 md:text-left">
-        <router-link tag="button" to="/" class="button-link md:border-l-2 md:border-b-0 md:flex"> Basic </router-link>
-        <router-link tag="button" to="/prefilled" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/" class="button-link md:border-l-2 md:border-b-0 md:flex">
+          Basic
+        </router-link>
+        <router-link to="/prefilled" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Prefilled
         </router-link>
-        <router-link tag="button" to="/advancedselects" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/advancedselects" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Selects
         </router-link>
-        <router-link tag="button" to="/tags" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/tags" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Tags
         </router-link>
-        <router-link tag="button" to="/nestedcheckbox" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/nestedcheckbox" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Multi Checkbox
         </router-link>
-        <router-link tag="button" to="/upload" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/upload" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Upload
         </router-link>
-        <router-link tag="button" to="/multiupload" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/multiupload" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Multi Upload
         </router-link>
-        <router-link tag="button" to="/dropzone" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/dropzone" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Dropzone
         </router-link>
-        <router-link tag="button" to="/datepicker" class="button-link md:border-l-2 md:border-b-0 md:flex">
+        <router-link to="/datepicker" class="button-link md:border-l-2 md:border-b-0 md:flex">
           Date Picker
         </router-link>
       </div>
@@ -106,67 +108,8 @@
 </template>
 
 <script>
-  import VueRouter from 'vue-router'
-  import BasicForm from './examples/BasicForm.vue'
-  import PrefilledForm from './examples/PrefilledForm.vue'
-  import AdvancedSelectsForm from './examples/AdvancedSelects.vue'
-  import DateTimePickersForm from './examples/DateTimePickers.vue'
-  import UploadForm from './examples/FileUpload.vue'
-  import MultiUploadForm from './examples/MultiFileUpload.vue'
-  import DropzoneForm from './examples/Dropzone.vue'
-  import NestedCheckboxForm from './examples/NestedCheckbox.vue'
-  import TagForm from './examples/TagForm.vue'
-
-  const router = new VueRouter({
-    routes: [
-      {
-        path: '/',
-        component: BasicForm,
-      },
-      {
-        path: '/prefilled',
-        component: PrefilledForm,
-        props: {
-          initFullname: 'John Doe',
-          initBio: 'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-          initPet: 'dog',
-        },
-      },
-      {
-        path: '/advancedselects',
-        component: AdvancedSelectsForm,
-      },
-      {
-        path: '/tags',
-        component: TagForm,
-      },
-      {
-        path: '/nestedcheckbox',
-        component: NestedCheckboxForm,
-      },
-      {
-        path: '/upload',
-        component: UploadForm,
-      },
-      {
-        path: '/multiupload',
-        component: MultiUploadForm,
-      },
-      {
-        path: '/dropzone',
-        component: DropzoneForm,
-      },
-      {
-        path: '/datepicker',
-        component: DateTimePickersForm,
-      },
-    ],
-  })
-
   export default {
-    router,
     name: 'App',
-    components: {},
     data() {
       return {
         showSource: '',

@@ -18,7 +18,7 @@
 ![](https://img.shields.io/github/license/janiskelemen/formvuelar.svg)
 
 <p>
-FormVuelar is a set of predefined vue form components which are designed to automatically display errors coming back from your backend. It works out of the box with the error message bag that is returned by Laravel when submitting an ajax form.
+FormVuelar is a set of Vue 3 form components designed to automatically display errors coming back from your backend. It works out of the box with the error message bag Laravel returns when submitting an AJAX form.
 </p>
 
 <h2>Examples</h2>
@@ -46,9 +46,29 @@ FormVuelar is a set of predefined vue form components which are designed to auto
 npm install formvuelar --save
 ```
 
-## TODO
+FormVuelar 2 targets Vue 3. Vue 2 projects should stay on the maintained 1.x release:
 
-    - Test coverage
+```bash
+npm install formvuelar@1.8.15 --save
+```
+
+Import components and the bundled styles:
+
+```js
+import { FvlForm, FvlInput, FvlSubmit } from 'formvuelar'
+import 'formvuelar/style.css'
+```
+
+All primary control values use Vue 3's default `v-model`:
+
+```vue
+<fvl-form :data="form" url="/users">
+  <fvl-input v-model="form.name" name="name" label="Name" />
+  <fvl-submit>Save</fvl-submit>
+</fvl-form>
+```
+
+See the [Vue 3 migration guide](docs/vue-3-migration.md) for the complete binding map.
 
 ## Credits
 

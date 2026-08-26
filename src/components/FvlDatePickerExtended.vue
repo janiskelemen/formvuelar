@@ -1,6 +1,6 @@
 <template>
   <on-click-outside @do="close()">
-    <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-input-wrapper">
+    <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-input-wrapper">
       <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label">
         <span v-html="label"></span>
         <slot name="label_suffix" />
@@ -49,15 +49,15 @@
                 :placeholder="placeholder"
                 :class="['hidden', fieldClass]"
                 :config="flatpickrConfig"
-                @on-change="$parent.dirty(name), $emit('changed')"
+                @on-change="handleChange"
               />
             </div>
           </div>
         </div>
       </transition>
       <slot name="hint" />
-      <slot :errors="$parent.getErrors(name)" name="errors">
-        <validation-errors :errors="$parent.getErrors(name)" />
+      <slot :errors="formGetErrors(name)" name="errors">
+        <validation-errors :errors="formGetErrors(name)" />
       </slot>
     </div>
   </on-click-outside>
@@ -68,12 +68,15 @@
   import OnClickOutside from './utilities/OnClickOutside.vue'
   import ValidationErrors from './FvlErrors.vue'
   import flatPickr from 'vue-flatpickr-component'
+  import { formControl } from './mixins/formControl'
   export default {
     components: {
       ValidationErrors,
       flatPickr,
       OnClickOutside,
     },
+    mixins: [formControl],
+    emits: ['changed', 'closed', 'update:end', 'update:modelValue', 'update:start'],
     props: {
       label: {
         type: String,
@@ -88,8 +91,8 @@
         type: String,
         default: null,
       },
-      value: {
-        type: String | Array | Object,
+      modelValue: {
+        type: [String, Array, Object],
         default: '',
       },
       start: {
@@ -166,18 +169,14 @@
     data() {
       return {
         isOpen: false,
-        inputvalue: this.start && this.end ? this.start + ' - ' + this.end : this.value,
+        inputvalue: this.start && this.end ? this.start + ' - ' + this.end : this.modelValue,
       }
     },
     computed: {
       flatpickrConfig() {
-        let config = this.config
-        /* Change range seperator */
-        if (this.config.mode == 'range' && config.locale) {
-          config.locale.rangeSeparator = ' - '
-        }
-        if (this.config.mode == 'range' && !config.locale) {
-          config.locale = { rangeSeparator: ' - ' }
+        const config = { ...this.config }
+        if (this.config.mode == 'range') {
+          config.locale = { ...(config.locale || {}), rangeSeparator: ' - ' }
         }
         return config
       },
@@ -194,7 +193,7 @@
       },
     },
     watch: {
-      value(newValue) {
+      modelValue(newValue) {
         if (this.config.mode != 'range') {
           this.inputvalue = newValue
         }
@@ -209,10 +208,10 @@
         } else {
           formatedValue = newValue
         }
-        this.$emit('update:value', formatedValue)
+        this.$emit('update:modelValue', formatedValue)
       },
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }
@@ -238,9 +237,9 @@
       close() {
         if (!this.isOpen) return
         this.isOpen = false
-        if (this.value && typeof this.value.end == 'undefined') {
+        if (this.modelValue && typeof this.modelValue.end == 'undefined') {
           this.inputvalue = ''
-          this.$emit('update:value', '')
+          this.$emit('update:modelValue', '')
           this.$emit('update:start', '')
           this.$emit('update:end', '')
         }
@@ -252,6 +251,10 @@
       toggle() {
         if (this.disabled) return
         this.isOpen ? this.close() : this.open()
+      },
+      handleChange() {
+        this.formDirty(this.name)
+        this.$emit('changed')
       },
       getRange(days) {
         let now = new Date()

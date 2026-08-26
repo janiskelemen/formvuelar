@@ -7,8 +7,7 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/PrefilledForm.vue"
         target="_blank"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/update">
@@ -16,7 +15,7 @@
       <source-toggle @toggle="toggleSource('fullname')" />
       <!-- Text input component -->
       <fvl-input
-        :value.sync="form.fullname"
+        v-model="form.fullname"
         autocomplete="fullname"
         label="Full Name"
         name="fullname"
@@ -28,12 +27,12 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('bio')" />
       <!-- Textarea component -->
-      <fvl-textarea :value.sync="form.bio" label="Bio" name="bio" placeholder="Type your story..." />
+      <fvl-textarea v-model="form.bio" label="Bio" name="bio" placeholder="Type your story..." />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'bio'" :source="source.bio" />
       <!-- Radio component with options -->
       <fvl-radio
-        :checked.sync="form.pet"
+        v-model="form.pet"
         :options="{ cat: 'Cat', dog: 'Dog' }"
         class="w-full lg:w-1/2"
         label="Favorite pet"
@@ -87,28 +86,28 @@
         showSource: '',
         source: {
           fullname:
-            `<fvl-input \n` +
-            `     label="Full Name" \n` +
-            `     name="fullname" \n` +
-            `     type="text"  \n` +
-            `     autocomplete="name"  \n` +
-            `     :value.sync="form.fullname"  \n` +
-            `     placeholder="Type your full name"  \n` +
+            `<fvl-input\n` +
+            `     label="Full Name"\n` +
+            `     name="fullname"\n` +
+            `     type="text"\n` +
+            `     autocomplete="name"\n` +
+            `     v-model="form.fullname"\n` +
+            `     placeholder="Type your full name"\n` +
             `/>`,
           bio:
-            `<fvl-textarea \n` +
-            `     label="Bio" \n` +
-            `     name="bio" \n` +
-            `     :value.sync="form.bio" \n` +
-            `     placeholder="Type your story..." \n` +
+            `<fvl-textarea\n` +
+            `     label="Bio"\n` +
+            `     name="bio"\n` +
+            `     v-model="form.bio"\n` +
+            `     placeholder="Type your story..."\n` +
             `/>`,
           pet:
-            `<fvl-radio \n` +
-            `    label="Select any option" \n` +
-            `    name="pet" \n` +
-            `    :options="{'cat': 'Cat', 'dog': 'Dog'}" \n` +
-            `    :checked.sync="form.pet" \n` +
-            `/> \n`,
+            `<fvl-radio\n` +
+            `    label="Select any option"\n` +
+            `    name="pet"\n` +
+            `    :options="{'cat': 'Cat', 'dog': 'Dog'}"\n` +
+            `    v-model="form.pet"\n` +
+            `/>\n`,
         },
       }
     },

@@ -1,7 +1,7 @@
 <template>
   <on-click-outside @do="close()">
     <div
-      :class="{ 'fvl-has-error': $parent.hasErrors(name), 'fvl-dropdown-is-open': isOpen }"
+      :class="{ 'fvl-has-error': formHasErrors(name), 'fvl-dropdown-is-open': isOpen }"
       class="fvl-search-select-wrapper"
     >
       <label v-if="label" :class="labelClass" class="fvl-select-label" @click="toggle()">
@@ -70,8 +70,8 @@
         </transition>
       </div>
       <slot name="hint" />
-      <slot :errors="$parent.getErrors(name)" name="errors">
-        <validation-errors :errors="$parent.getErrors(name)" />
+      <slot :errors="formGetErrors(name)" name="errors">
+        <validation-errors :errors="formGetErrors(name)" />
       </slot>
     </div>
   </on-click-outside>
@@ -88,15 +88,18 @@
   import ValidationErrors from './FvlErrors.vue'
   import OnClickOutside from './utilities/OnClickOutside.vue'
   import { config } from './mixins/config'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
       OnClickOutside,
     },
-    mixins: [config],
+    mixins: [config, formControl],
+    emits: ['changed', 'remoteError', 'remoteSuccess', 'update:modelValue'],
     props: {
-      selected: {
-        type: String | Number,
+      modelValue: {
+        type: [String, Number],
         default: null,
       },
       name: {
@@ -227,14 +230,14 @@
       selectedOptionValue() {
         let $this = this
         let option = _find(this.optionsList, function (o) {
-          return o[$this.optionKey] == $this.selected
+          return o[$this.optionKey] == $this.modelValue
         })
         return option ? option[this.optionValue] : ''
       },
       selectedOptionIndex() {
         let $this = this
         return _findKey(this.optionsList, function (o) {
-          return o[$this.optionKey] == $this.selected
+          return o[$this.optionKey] == $this.modelValue
         })
       },
     },
@@ -253,9 +256,9 @@
     },
     mounted() {
       if (!this.optionsUrl) return
-      if (!this.lazyLoad || this.selected) this.getRemoteOptions()
+      if (!this.lazyLoad || this.modelValue) this.getRemoteOptions()
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }
@@ -264,9 +267,9 @@
       select(option) {
         /* Return selected option key */
         if (this.optionIsDisabled(option)) return
-        this.$emit('update:selected', String(option[this.optionKey]))
+        this.$emit('update:modelValue', String(option[this.optionKey]))
         this.$emit('changed')
-        this.$parent.dirty(this.name)
+        this.formDirty(this.name)
         this.close()
       },
       reset() {
@@ -311,8 +314,9 @@
         this.isOpen ? this.close() : this.open()
       },
       scrollToIndex(index) {
-        if (typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
-        this.$refs.options.children[index].scrollIntoView({ block: 'nearest', inline: 'nearest' })
+        const option = this.$refs.options?.children?.[index]
+        if (!option) return
+        option.scrollIntoView({ block: 'nearest', inline: 'nearest' })
       },
       highlightNext() {
         this.highlightedIndex =
@@ -369,4 +373,3 @@
     },
   }
 </script>
-

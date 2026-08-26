@@ -1,17 +1,17 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-slider-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-slider-wrapper">
     <label v-if="label" :class="labelClass" :for="name" class="fvl-slider-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
     <div class="fvl-slider-group">
-      <slot :value="value" name="prefix">
-        <span v-if="valuePosition == 'left'" class="fvl-slider-value fvl-slider-value-left">{{ value }}</span>
+      <slot :value="modelValue" name="prefix">
+        <span v-if="valuePosition == 'left'" class="fvl-slider-value fvl-slider-value-left">{{ modelValue }}</span>
       </slot>
       <div class="fvl-slider-container">
         <input
           :id="id"
-          :value="value"
+          :value="modelValue"
           :name="name"
           :class="fieldClass"
           :min="min"
@@ -21,27 +21,31 @@
           :disabled="disabled"
           type="range"
           class="fvl-slider"
-          @change="$parent.dirty(name), $emit('changed')"
-          @input="$emit('update:value', $event.target.value)"
+          @change="handleChange"
+          @input="$emit('update:modelValue', $event.target.value)"
         />
       </div>
-      <slot :value="value" name="suffix">
-        <span v-if="valuePosition == 'right'" class="fvl-slider-value fvl-slider-value-right">{{ value }}</span>
+      <slot :value="modelValue" name="suffix">
+        <span v-if="valuePosition == 'right'" class="fvl-slider-value fvl-slider-value-right">{{ modelValue }}</span>
       </slot>
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
     },
+    mixins: [formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
       label: {
         type: String,
@@ -64,8 +68,8 @@
           return ['left', 'right', 'top', 'bottom'].indexOf(value) !== -1
         },
       },
-      value: {
-        validator: (prop) => typeof prop === 'string' || prop === null,
+      modelValue: {
+        validator: (prop) => typeof prop === 'string' || typeof prop === 'number' || prop === null,
         default: '0',
       },
       min: {
@@ -109,6 +113,11 @@
         default: false,
       },
     },
+    methods: {
+      handleChange() {
+        this.formDirty(this.name)
+        this.$emit('changed')
+      },
+    },
   }
 </script>
-

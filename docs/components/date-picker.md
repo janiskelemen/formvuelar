@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-date-picker :value.sync="form.date" name="date" label="Select Date" />
+<fvl-date-picker v-model="form.date" name="date" label="Select Date" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlDatePicker } from 'formvuelar'
 
 | Property    | Description                              | Type           | Default        | Required |
 | ----------- | ---------------------------------------- | -------------- | -------------- | -------- |
-| value.sync  | Date picker value                        | String         |                | **true** |
+| v-model     | Date picker value                        | String/Object  |                | **true** |
 | name        | Date picker name                         | String         |                | **true** |
 | id          | Id                                       | String         | null           |          |
 | label       | Label                                    | String         | null           |          |
@@ -34,11 +34,11 @@ import { FvlDatePicker } from 'formvuelar'
 
 ```vue
 <fvl-date-picker 
-  :start.sync="form.startDate" 
-  :end.sync="form.endDate" 
-  name="daterange" 
-  label="Select Date Range" 
-  :config="{mode: 'range'}" 
+  v-model:start="form.startDate"
+  v-model:end="form.endDate"
+  name="daterange"
+  label="Select Date Range"
+  :config="{ mode: 'range' }"
 />
 ```
 
@@ -48,14 +48,14 @@ The component uses [flatpickr](https://flatpickr.js.org/) for date selection. Yo
 
 ```vue
 <fvl-date-picker 
-  :value.sync="form.date" 
-  name="date" 
-  label="Select Date" 
+  v-model="form.date"
+  name="date"
+  label="Select Date"
   :config="{
     dateFormat: 'Y-m-d',
     minDate: 'today',
     allowInput: true
-  }" 
+  }"
 />
 ```
 

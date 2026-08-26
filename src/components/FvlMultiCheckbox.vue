@@ -1,32 +1,39 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-multi-checkbox-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-multi-checkbox-wrapper">
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-multi-checkbox-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
     </label>
-    <div v-for="group in allgroups" :key="group.name">
+    <div v-for="group in localGroups" :key="group.name">
       <fvl-checkbox
+        :model-value="groupAllChecked(group)"
         :label="group.label"
         :name="group.name"
+        :readonly="readonly"
+        :disabled="disabled"
         :class="{
           'fvl-multi-checkbox-all-checked': groupAllChecked(group),
           'fvl-multi-checkbox-any-checked': groupAnyChecked(group),
         }"
         class="fvl-multi-checkbox"
-        @click.prevent.native="toggleChildren(group)"
+        @update:model-value="toggleChildren(group, $event)"
       />
       <div v-for="nestedOption in group.options" :key="nestedOption.name" class="fvl-multi-checkbox-group">
         <fvl-checkbox
-          :checked.sync="nestedOption.checked"
+          :model-value="nestedOption.checked"
           :label="nestedOption.label"
           :name="nestedOption.name"
+          :required="required"
+          :readonly="readonly"
+          :disabled="disabled"
           class="fvl-multi-checkbox-nested"
+          @update:model-value="updateNested(group, nestedOption, $event)"
         />
       </div>
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
@@ -34,15 +41,25 @@
 <script>
   import ValidationErrors from './FvlErrors.vue'
   import FvlCheckbox from './FvlCheckbox.vue'
-  import _every from 'lodash/every'
-  import _filter from 'lodash/filter'
-  import _forEach from 'lodash/forEach'
+  import { formControl } from './mixins/formControl'
+
+  const cloneGroups = (groups) => groups.map((group) => ({
+    ...group,
+    options: group.options.map((option) => ({ ...option })),
+  }))
+
   export default {
     components: {
       ValidationErrors,
       FvlCheckbox,
     },
+    mixins: [formControl],
+    emits: ['update:groups', 'update:modelValue'],
     props: {
+      modelValue: {
+        type: Array,
+        default: () => [],
+      },
       label: {
         type: String,
         required: false,
@@ -88,49 +105,67 @@
       },
     },
     data() {
-      return {}
+      return {
+        localGroups: this.groupsWithModelValue(this.groups, this.modelValue),
+      }
+    },
+    watch: {
+      groups: {
+        deep: true,
+        handler(groups) {
+          this.localGroups = this.groupsWithModelValue(groups, this.modelValue)
+        },
+      },
+      modelValue: {
+        deep: true,
+        handler(modelValue) {
+          this.localGroups = this.groupsWithModelValue(this.localGroups, modelValue)
+        },
+      },
     },
     computed: {
-      allgroups() {
-        return this.groups
-      },
       values() {
-        let values = []
-        _forEach(this.allgroups, function (group) {
-          _forEach(group.options, function (field) {
-            values.push({ [field.name]: field.checked })
-          })
-        })
-        return values
+        return this.localGroups.flatMap((group) =>
+          group.options.map((field) => ({ [field.name]: Boolean(field.checked) }))
+        )
       },
     },
     methods: {
-      toggleChildren(group) {
-        let state = !_every(group.options, 'checked')
-        _forEach(group.options, function (value) {
-          value.checked = state
-        })
+      groupsWithModelValue(groups, modelValue) {
+        const values = Object.assign({}, ...(Array.isArray(modelValue) ? modelValue : []))
+        return cloneGroups(groups).map((group) => ({
+          ...group,
+          options: group.options.map((option) => ({
+            ...option,
+            checked: Object.prototype.hasOwnProperty.call(values, option.name)
+              ? Boolean(values[option.name])
+              : Boolean(option.checked),
+          })),
+        }))
+      },
+      toggleChildren(group, checked) {
+        group.options = group.options.map((option) => ({ ...option, checked }))
+        this.emitState()
+      },
+      updateNested(group, nestedOption, checked) {
+        nestedOption.checked = checked
+        this.emitState()
       },
       groupAllChecked(group) {
-        let allChecked = _every(group.options, 'checked')
-        group.checked = allChecked
-        return allChecked
+        return group.options.length > 0 && group.options.every((option) => option.checked)
       },
       groupAnyChecked(group) {
-        this.$emit('update:checked', this.values)
-        return _filter(group.options, 'checked').length
+        return group.options.some((option) => option.checked)
       },
-      dirty(name) {
-        this.$parent.errors[name] = false
-      },
-
-      getErrors(name) {
-        return this.$parent.errors[name] ? this.$parent.errors[name] : []
-      },
-      hasErrors(name) {
-        return this.$parent.errors[name] && this.$parent.errors[name] !== [] ? true : false
+      emitState() {
+        const groups = cloneGroups(this.localGroups).map((group) => ({
+          ...group,
+          checked: this.groupAllChecked(group),
+        }))
+        this.$emit('update:modelValue', this.values)
+        this.$emit('update:groups', groups)
+        this.formDirty(this.name)
       },
     },
   }
 </script>
-

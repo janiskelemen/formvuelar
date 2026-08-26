@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-image-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-image-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-image-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -30,15 +30,15 @@
         :required="required"
         :readonly="readonly"
         :accept="accept"
-        :disabled="disabled || $parent.isLoading"
+        :disabled="disabled || formIsLoading"
         type="file"
         class="fvl-image"
-        @change="handleFileChange(), $emit('changed'), $parent.dirty(name)"
+        @change="handleFileChange"
       />
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
@@ -46,15 +46,20 @@
 <script>
   import ValidationErrors from './FvlErrors.vue'
   import { config } from './mixins/config'
+  import { formControl } from './mixins/formControl'
+
+  const isFile = (value) => typeof File !== 'undefined' && value instanceof File
+
   export default {
     components: {
       ValidationErrors,
     },
-    mixins: [config],
+    mixins: [config, formControl],
+    emits: ['changed', 'previewchanged', 'processfinished', 'processstarted', 'update:modelValue'],
     props: {
-      file: {
-        type: File | String,
+      modelValue: {
         default: null,
+        validator: (value) => value === null || typeof value === 'string' || isFile(value),
       },
       label: {
         type: String,
@@ -112,50 +117,51 @@
     },
     data() {
       return {
-        fileName: '',
+        currentFile: isFile(this.modelValue) ? this.modelValue : null,
+        fileName: isFile(this.modelValue) ? this.modelValue.name : '',
         preview: {
           isimage: false,
           size: 0,
           loaded: false,
           percent: 0,
           status: 'initial',
-          src: this.file,
+          src: typeof this.modelValue === 'string' ? this.modelValue : '',
           ratioHeight: 0,
         },
       }
     },
     watch: {
-      file(newValue) {
-        /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof File)) {
+      modelValue(newValue) {
+        if (isFile(newValue)) {
+          this.currentFile = newValue
+          this.fileName = newValue.name
+        } else {
+          this.currentFile = null
+          this.fileName = ''
           if (typeof newValue == 'string' && newValue != '' && this.isValidURL(newValue)) {
             this.preview.src = newValue
           }
-          if (newValue === null) {
-            this.preview.src = ''
-          }
-          this.$emit('update:file', '')
+          if (newValue === null || newValue === '') this.preview.src = ''
         }
       },
     },
-    mounted() {
-      if (!(this.file instanceof File)) {
-        this.$emit('update:file', '')
-      }
-    },
     methods: {
       //Handles a change on the file upload
-      handleFileChange() {
+      handleFileChange(event) {
         this.$emit('processstarted')
-        let file = this.$refs[this.name].files[0]
+        const file = event.target.files[0]
+        if (!file) return
+        this.currentFile = file
         this.fileName = file.name
         let mime = file.type
         mime = mime.split('/')
         // Create preview image
         let reader = this.getFileReader(mime)
         reader.readAsDataURL(file)
-        this.$emit('update:file', file)
+        this.$emit('update:modelValue', file)
         this.$emit('processfinished')
+        this.$emit('changed')
+        this.formDirty(this.name)
       },
       getFileReader(mime) {
         let $this = this
@@ -180,11 +186,11 @@
         }
         reader.onabort = () => {
           $this.preview.status = 'failed'
-          alert($this.file.name + ' could not be loaded!')
+          alert($this.currentFile.name + ' could not be loaded!')
         }
         reader.onerror = () => {
           $this.preview.status = 'failed'
-          alert($this.file.name + ' could not be loaded!')
+          alert($this.currentFile.name + ' could not be loaded!')
           reader.abort()
         }
         reader.onload = () => {
@@ -211,7 +217,7 @@
           $this.preview.ratioHeight = percent < maxRatio ? percent : maxRatio
           $this.$emit('previewchanged', $this.preview)
         }
-        image.src = _URL.createObjectURL(this.file)
+        image.src = _URL.createObjectURL(this.currentFile)
         return image.src
       },
       resizeImageForPreview(img) {
@@ -243,4 +249,3 @@
     },
   }
 </script>
-

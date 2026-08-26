@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-slider :value.sync="form.amount" name="amount" label="Amount" />
+<fvl-slider v-model="form.amount" name="amount" label="Amount" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlSlider } from 'formvuelar'
 
 | Property       | Description                           | Type    | Default | Required |
 | -------------- | ------------------------------------- | ------- | ------- | -------- |
-| value.sync     | Slider value                          | String  |         | **true** |
+| v-model        | Slider value                          | String  |         | **true** |
 | name           | Slider name                           | String  |         | **true** |
 | id             | Id                                    | String  | null    |          |
 | label          | Label                                 | String  | null    |          |

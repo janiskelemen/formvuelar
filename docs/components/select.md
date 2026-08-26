@@ -9,7 +9,7 @@
   placeholder="-- Select any color --"
   :allowEmpty="true"
   :options="{ '#ffffff': 'White', '#000000': 'Black', blue: 'Blue', red: 'Red' }"
-  :selected.sync="form.color"
+  v-model="form.color"
 />
 ```
 
@@ -23,7 +23,7 @@ import { FvlSelect } from 'formvuelar'
 
 | Property      | Description                              | Type                        | Default | Required |
 | ------------- | ---------------------------------------- | --------------------------- | ------- | -------- |
-| selected.sync | Selected value                           | `String \| Number \| Array` |         | **true** |
+| v-model       | Selected value                           | `String \| Number` |         | **true** |
 | options       | Key value object `{'key': 'value', ...}` | Object                      |         | **true** |
 | name          | Input name                               | String                      |         | **true** |
 | allow-empty   | Allow selection to be empty              | Boolean                     | false   |          |

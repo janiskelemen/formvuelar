@@ -7,16 +7,15 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showFileSource = !showFileSource" />
       <!-- File input component -->
-      <fvl-file :file.sync="form.file" label="File" name="file">
-        <template slot="button">
+      <fvl-file v-model="form.file" label="File" name="file">
+        <template #button>
           <svg class="fill-current text-white mr-2" width="18" height="16" xmlns="http://www.w3.org/2000/svg">
             <g fill-rule="nonzero">
               <path
@@ -41,15 +40,14 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/FileUpload.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showImageSource = !showImageSource" />
       <!-- File input component -->
-      <fvl-image :file.sync="form.avatar" label="Avatar" name="avatar"></fvl-image>
+      <fvl-image v-model="form.avatar" label="Avatar" name="avatar"></fvl-image>
 
       <!-- Source code area (only for example) -->
       <source-box :show-source="showImageSource" :source="imageSource" />
@@ -61,7 +59,7 @@
       <source-toggle @toggle="showImageSource2 = !showImageSource2" />
       <!-- File input component -->
       <fvl-image
-        :file.sync="form.avatar2"
+        v-model="form.avatar2"
         :show-file-name="false"
         label="Avatar without file name"
         name="avatar2"
@@ -77,7 +75,7 @@
       <source-toggle @toggle="showImageSource3 = !showImageSource3" />
       <!-- File input component -->
       <fvl-image
-        :file.sync="form.customimage"
+        v-model="form.customimage"
         :show-file-name="false"
         label="Image with custom preview and button"
         name="customimage"
@@ -106,7 +104,9 @@
                 <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
                 <polyline points="16 16 12 12 8 16" />
               </svg>
-              <h2 class="mt-2 text-gray-500 font-bold">Click to select an image</h2>
+              <h2 class="mt-2 text-gray-500 font-bold">
+                Click to select an image
+              </h2>
             </div>
           </div>
         </template>
@@ -148,26 +148,26 @@
         },
         showFileSource: false,
         fileSource:
-          `<fvl-file \n` + `    label="File" \n` + `    name="file" \n` + `    :file.sync="form.file" \n` + `/> \n`,
+          `<fvl-file\n` + `    label="File"\n` + `    name="file"\n` + `    v-model="form.file"\n` + `/>\n`,
         showImageSource: false,
         imageSource:
-          `<fvl-image \n` +
-          `    label="Avatar" \n` +
-          `    name="avatar" \n` +
-          `    :file.sync="form.avatar" \n` +
-          `/> \n`,
+          `<fvl-image\n` +
+          `    label="Avatar"\n` +
+          `    name="avatar"\n` +
+          `    v-model="form.avatar"\n` +
+          `/>\n`,
         showImageSource2: false,
         imageSource2:
-          `<fvl-image \n` +
-          `    label="Avatar" \n` +
-          `    name="avatar" \n` +
-          `    :show-file-name="false" \n` +
-          `    :file.sync="form.avatar" \n` +
-          `/> \n`,
+          `<fvl-image\n` +
+          `    label="Avatar"\n` +
+          `    name="avatar"\n` +
+          `    :show-file-name="false"\n` +
+          `    v-model="form.avatar"\n` +
+          `/>\n`,
         showImageSource3: false,
         imageSource3:
-          `<fvl-image \n` +
-          `    :file.sync="form.customimage"\n` +
+          `<fvl-image\n` +
+          `    v-model="form.customimage"\n` +
           `    :show-file-name="false"\n` +
           `    label="Image with custom preview and button"\n` +
           `    name="customimage"\n` +

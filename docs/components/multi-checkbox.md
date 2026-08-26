@@ -6,8 +6,8 @@
 <fvl-multi-checkbox
   label="Set your permissions"
   name="permissions"
-  :checked.sync="form.permissions"
-  :groups.sync="permissionsStructure"
+  v-model="form.permissions"
+  v-model:groups="permissionsStructure"
 />
 ```
 
@@ -17,7 +17,7 @@
 data() {
       return {
         form: {
-          permissions: {}
+          permissions: []
         },
         permissionsStructure: [
           {
@@ -57,8 +57,8 @@ import { FvlMultiCheckbox } from 'formvuelar'
 
 | Property     | Description    | Type    | Default | Required |
 | ------------ | -------------- | ------- | ------- | -------- |
-| checked.sync | Checked values | Array   |         | **true** |
-| groups.sync  | Groups object  | Object  |         | **true** |
+| v-model      | Checked values | Array   | `[]`    | **true** |
+| v-model:groups | Groups array | Array   | `[]`    | **true** |
 | name         | Input name     | String  |         | **true** |
 | id           | Id             | String  | null    |          |
 | label        | Label          | String  | null    |          |

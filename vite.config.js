@@ -1,37 +1,38 @@
+import { fileURLToPath, URL } from 'node:url'
+import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-// import vue from '@vitejs/plugin-vue' // only for vue 3
-import { createVuePlugin as vue } from "vite-plugin-vue2";
 
-const path = require("path");
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  publicDir: command === 'build' ? false : 'public',
   plugins: [vue()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/formvuelar.js'),
+      entry: fileURLToPath(new URL('./src/formvuelar.js', import.meta.url)),
       name: 'FormVuelar',
-      fileName: (format) => `formvuelar.${format}.js`
+      cssFileName: 'formvuelar',
+      formats: ['es', 'umd'],
+      fileName: (format) => (format === 'es' ? 'formvuelar.js' : 'formvuelar.umd.cjs'),
     },
     rollupOptions: {
-      // make sure to externalize deps that shouldn't be bundled
-      // into your library
       external: ['vue'],
       output: {
-        // Provide global variables to use in the UMD build
-        // for externalized deps
         globals: {
-          vue: 'Vue'
+          vue: 'Vue',
         },
         assetFileNames: (assetInfo) => {
-            if (assetInfo.name == 'style.css')
-              return 'formvuelar.css';
-            return assetInfo.name;
-          },
-      }
-    }
-  }
-});
+          if (assetInfo.name === 'style.css') return 'formvuelar.css'
+          return assetInfo.name
+        },
+      },
+    },
+  },
+  test: {
+    environment: 'happy-dom',
+    globals: true,
+  },
+}))

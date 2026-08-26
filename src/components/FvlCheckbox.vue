@@ -1,17 +1,17 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-checkbox-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-checkbox-wrapper">
     <input
       :id="id ? id : name"
       :name="name"
-      :class="{ checked: checked, fieldClass }"
+      :class="[{ checked: modelValue }, fieldClass]"
       :required="required"
       :readonly="readonly"
       :disabled="disabled"
-      :checked="checked"
+      :checked="modelValue"
       :value="value"
       type="checkbox"
       class="fvl-checkbox"
-      @change="$emit('update:checked', $event.target.checked), $emit('changed'), $parent.dirty(name)"
+      @change="handleChange"
     />
     <label v-if="label" :class="labelClass" :for="id ? id : name" class="fvl-checkbox-label">
       <span class="fvl-checkbox-outer" />
@@ -20,18 +20,22 @@
       <slot name="label_suffix" />
     </label>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
     },
+    mixins: [formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
       label: {
         type: String,
@@ -47,7 +51,7 @@
         required: false,
         default: null,
       },
-      checked: {
+      modelValue: {
         type: Boolean,
         default: false,
       },
@@ -82,6 +86,12 @@
         default: false,
       },
     },
+    methods: {
+      handleChange(event) {
+        this.$emit('update:modelValue', event.target.checked)
+        this.$emit('changed')
+        this.formDirty(this.name)
+      },
+    },
   }
 </script>
-

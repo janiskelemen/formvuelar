@@ -15,7 +15,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-search-select
-        :selected.sync="form.genre"
+        v-model="form.genre"
         :options="genreOptions"
         :search-keys="['name']"
         option-key="name"
@@ -60,9 +60,9 @@ export default {
       ],
       showSource: false,
       source:
-        `<fvl-search-select \n` +
-        `   :selected.sync="form.genre" \n` +
-        `   :options="genreOptions" \n` +
+        `<fvl-search-select\n` +
+        `   v-model="form.genre"\n` +
+        `   :options="genreOptions"\n` +
         `   :search-keys="['name']"\n` +
         `   option-key="name"\n` +
         `   option-value="name"\n` +

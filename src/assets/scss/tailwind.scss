@@ -1,4 +1,7 @@
+@use 'sass:meta';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "formvuelar.scss"
+
+@include meta.load-css('formvuelar');

@@ -7,8 +7,7 @@
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/BasicForm.vue"
         target="_blank"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup basic form -->
     <fvl-form :data="form" class="relative" url="/basic" multipart>
@@ -16,7 +15,7 @@
       <source-toggle @toggle="toggleSource('name')" />
       <!-- Text input component -->
       <fvl-input
-        :value.sync="form.name"
+        v-model="form.name"
         autocomplete="name"
         label="Name"
         name="name"
@@ -28,14 +27,14 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('text')" />
       <!-- Textarea component -->
-      <fvl-textarea :value.sync="form.text" label="Text" name="text" placeholder="Type your story..." />
+      <fvl-textarea v-model="form.text" label="Text" name="text" placeholder="Type your story..." />
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'text'" :source="source.text" />
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('password')" />
       <!-- Password input component with custom strength meter -->
       <fvl-input
-        :value.sync="form.password"
+        v-model="form.password"
         autocomplete="new-password"
         class="w-full lg:w-1/2 relative"
         field-class="pr-8"
@@ -45,13 +44,13 @@
         type="password"
       >
         <!-- Optional password strength meter using the hint slot -->
-        <template slot="hint">
+        <template #hint>
           <div class="absolute right-0 top-0 mt-11 mr-4">
             <transition name="slide-down">
               <span v-if="form.password.length > 0 && form.password.length < 6">😔</span>
-              <span v-if="form.password.length >= 6 && form.password.length < 10">😌</span>
-              <span v-if="form.password.length >= 10 && form.password.length < 15">😃</span>
-              <span v-if="form.password.length >= 15">😍</span>
+              <span v-else-if="form.password.length < 10">😌</span>
+              <span v-else-if="form.password.length < 15">😃</span>
+              <span v-else>😍</span>
             </transition>
           </div>
         </template>
@@ -59,7 +58,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('slider')" />
       <fvl-slider
-        :value.sync="form.slider"
+        v-model="form.slider"
         value-position="left"
         class="w-full lg:w-1/2"
         label="Slider"
@@ -71,7 +70,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('colorpicker')" />
       <fvl-color-picker
-        :value.sync="form.colorPicker"
+        v-model="form.colorPicker"
         class="w-full lg:w-1/2"
         field-class="w-40"
         format="hex"
@@ -87,9 +86,9 @@
       <source-toggle @toggle="toggleSource('color')" />
       <!-- Select component -->
       <fvl-select
+        v-model="form.color"
         :allow-empty="true"
         :options="{ '#ffffff': 'White', '#000000': 'Black', blue: 'Blue', red: 'Red' }"
-        :selected.sync="form.color"
         class="w-full lg:w-1/2"
         label="Select your favorite color"
         name="color"
@@ -101,7 +100,7 @@
       <source-toggle @toggle="toggleSource('option')" />
       <!-- Radio component with options -->
       <fvl-radio
-        :checked.sync="form.option"
+        v-model="form.option"
         :options="{ opt1: 'Option 1', opt2: 'Option 2', opt3: 'Option 3' }"
         class="w-full lg:w-1/2"
         label="Select any option"
@@ -113,7 +112,7 @@
       <source-toggle @toggle="toggleSource('agree')" />
       <!-- Checkbox component -->
       <fvl-checkbox
-        :checked.sync="form.agree"
+        v-model="form.agree"
         class="w-full lg:w-1/2"
         label="I agree with your terms of use"
         name="agree"
@@ -124,7 +123,7 @@
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="toggleSource('switch')" />
       <!-- Switch component -->
-      <fvl-switch :checked.sync="form.switch" class="w-full lg:w-1/2" label="Enable this feature" name="switch" />
+      <fvl-switch v-model="form.switch" class="w-full lg:w-1/2" label="Enable this feature" name="switch" />
 
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource == 'switch'" :source="source.switch" />
@@ -133,7 +132,7 @@
       <source-toggle @toggle="toggleSource('textSwitch')" />
       <!-- Switch component -->
       <fvl-text-switch
-        :checked.sync="form.textSwitch"
+        v-model="form.textSwitch"
         class="w-auto"
         :options="['Private', 'Public']"
         name="textswitch"
@@ -199,97 +198,97 @@
         showSource: '',
         source: {
           name:
-            `<fvl-input \n` +
-            `     label="Name" \n` +
-            `     name="name" \n` +
-            `     type="text"  \n` +
-            `     autocomplete="name"  \n` +
-            `     :value.sync="form.name"  \n` +
-            `     placeholder="Type your name"  \n` +
+            `<fvl-input\n` +
+            `     label="Name"\n` +
+            `     name="name"\n` +
+            `     type="text"\n` +
+            `     autocomplete="name"\n` +
+            `     v-model="form.name"\n` +
+            `     placeholder="Type your name"\n` +
             `/>`,
           text:
-            `<fvl-textarea \n` +
-            `     label="Text" \n` +
-            `     name="text" \n` +
-            `     :value.sync="form.text" \n` +
-            `     placeholder="Type your story..." \n` +
+            `<fvl-textarea\n` +
+            `     label="Text"\n` +
+            `     name="text"\n` +
+            `     v-model="form.text"\n` +
+            `     placeholder="Type your story..."\n` +
             `/>`,
           password:
-            `<fvl-input \n` +
-            `    label="Password" \n` +
-            `    name="password" \n` +
-            `    type="password" \n` +
-            `    autocomplete="new-password" \n` +
-            `    :value.sync="form.password" \n` +
-            `    placeholder="Type password" \n` +
-            `    class="w-1/2 relative" \n` +
-            `    fieldClass="pr-8" \n` +
-            `> \n` +
-            `    <!-- Optional Password Meter --> \n` +
-            `    <template slot="hint"> \n` +
-            `    <div class="absolute right-0 top-0 mt-12 mr-4"> \n` +
-            `        <span v-if="form.password.length > 0 &&  \n` +
-            `                    form.password.length < 6">😔</span> \n` +
-            `        <span v-if="form.password.length >= 6 &&  \n` +
-            `                    form.password.length < 10">😌</span> \n` +
-            `        <span v-if="form.password.length >= 10 &&  \n` +
-            `                    form.password.length < 15">😃</span> \n` +
-            `        <span v-if="form.password.length >= 15">😍</span> \n` +
-            `    </div> \n` +
-            `    </template> \n` +
-            `</fvl-input> \n`,
+            `<fvl-input\n` +
+            `    label="Password"\n` +
+            `    name="password"\n` +
+            `    type="password"\n` +
+            `    autocomplete="new-password"\n` +
+            `    v-model="form.password"\n` +
+            `    placeholder="Type password"\n` +
+            `    class="w-1/2 relative"\n` +
+            `    fieldClass="pr-8"\n` +
+            `>\n` +
+            `    <!-- Optional Password Meter -->\n` +
+            `    <template #hint>\n` +
+            `    <div class="absolute right-0 top-0 mt-12 mr-4">\n` +
+            `        <span v-if="form.password.length > 0 &&\n` +
+            `                    form.password.length < 6">😔</span>\n` +
+            `        <span v-if="form.password.length >= 6 &&\n` +
+            `                    form.password.length < 10">😌</span>\n` +
+            `        <span v-if="form.password.length >= 10 &&\n` +
+            `                    form.password.length < 15">😃</span>\n` +
+            `        <span v-if="form.password.length >= 15">😍</span>\n` +
+            `    </div>\n` +
+            `    </template>\n` +
+            `</fvl-input>\n`,
           slider:
-            `<fvl-slider \n` +
-            `    label="Slider" \n` +
-            `    name="slider" \n` +
-            `    value-position="left" \n` +
-            `    :value.sync="form.slider" \n` +
-            `    class="w-full lg:w-1/2 relative" \n` +
-            `/> \n`,
+            `<fvl-slider\n` +
+            `    label="Slider"\n` +
+            `    name="slider"\n` +
+            `    value-position="left"\n` +
+            `    v-model="form.slider"\n` +
+            `    class="w-full lg:w-1/2 relative"\n` +
+            `/>\n`,
           colorpicker:
-            `<fvl-color-picker \n` +
-            `    label="Color" \n` +
-            `    name="color" \n` +
-            `    format="hex" \n` +
-            `    :value.sync="form.color" \n` +
-            `    class="w-full lg:w-1/2" \n` +
-            `/> \n`,
+            `<fvl-color-picker\n` +
+            `    label="Color"\n` +
+            `    name="color"\n` +
+            `    format="hex"\n` +
+            `    v-model="form.color"\n` +
+            `    class="w-full lg:w-1/2"\n` +
+            `/>\n`,
           color:
-            `<fvl-select \n` +
-            `    label="Select your favorite color" \n` +
-            `    name="color" \n` +
-            `    placeholder="-- Select any color --" \n` +
-            `    :allowEmpty="true" \n` +
-            `    :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}" \n` +
-            `    :selected.sync="form.color" \n` +
-            `    class="w-1/2" \n` +
-            `/> \n`,
+            `<fvl-select\n` +
+            `    label="Select your favorite color"\n` +
+            `    name="color"\n` +
+            `    placeholder="-- Select any color --"\n` +
+            `    :allowEmpty="true"\n` +
+            `    :options="{'#ffffff': 'White', '#000000': 'Black', 'blue': 'Blue', 'red': 'Red'}"\n` +
+            `    v-model="form.color"\n` +
+            `    class="w-1/2"\n` +
+            `/>\n`,
           option:
-            `<fvl-radio \n` +
-            `    label="Select any option" \n` +
-            `    name="option" \n` +
-            `    :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}" \n` +
-            `    :checked.sync="form.option" \n` +
-            `/> \n`,
+            `<fvl-radio\n` +
+            `    label="Select any option"\n` +
+            `    name="option"\n` +
+            `    :options="{'opt1': 'Option 1', 'opt2': 'Option 2', 'opt3': 'Option 3'}"\n` +
+            `    v-model="form.option"\n` +
+            `/>\n`,
 
           agree:
-            `<fvl-checkbox \n` +
-            `    label="I agree with your terms of use" \n` +
-            `    name="agree" \n` +
-            `    :checked.sync="form.agree" \n` +
+            `<fvl-checkbox\n` +
+            `    label="I agree with your terms of use"\n` +
+            `    name="agree"\n` +
+            `    v-model="form.agree"\n` +
             `/>`,
 
           switch:
-            `<fvl-switch \n` +
-            `    label="Enable this feature" \n` +
-            `    name="switch" \n` +
-            `    :checked.sync="form.switch" \n` +
+            `<fvl-switch\n` +
+            `    label="Enable this feature"\n` +
+            `    name="switch"\n` +
+            `    v-model="form.switch"\n` +
             `/>`,
           textSwitch:
-            `<fvl-text-switch \n` +
-            `    name="textswitch" \n` +
-            `    :options="['Private', 'Public']" \n` +
-            `    :checked.sync="form.textswitch" \n` +
+            `<fvl-text-switch\n` +
+            `    name="textswitch"\n` +
+            `    :options="['Private', 'Public']"\n` +
+            `    v-model="form.textswitch"\n` +
             `/>`,
         },
       }

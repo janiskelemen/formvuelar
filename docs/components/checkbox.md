@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-checkbox label="I agree with your terms of use" name="agree" :checked.sync="form.agree" />
+<fvl-checkbox v-model="form.agree" label="I agree with your terms of use" name="agree" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlCheckbox } from 'formvuelar'
 
 | Property     | Description   | Type    | Default | Required |
 | ------------ | ------------- | ------- | ------- | -------- |
-| checked.sync | Checked value | String  |         | **true** |
+| v-model      | Checked value | Boolean |         | **true** |
 | name         | Input name    | String  |         | **true** |
 | id           | Id            | String  | null    |          |
 | label        | Label         | String  | null    |          |

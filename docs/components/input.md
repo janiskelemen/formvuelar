@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-input :value.sync="form.lastname" name="lastname" label="Last name" />
+<fvl-input v-model="form.lastname" name="lastname" label="Last name" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlInput } from 'formvuelar'
 
 | Property     | Description                          | Type    | Default | Required |
 | ------------ | ------------------------------------ | ------- | ------- | -------- |
-| value.sync   | Input value                          | String  |         | **true** |
+| v-model      | Input value                          | String  |         | **true** |
 | name         | Input name                           | String  |         | **true** |
 | id           | Id                                   | String  | null    |          |
 | label        | Label                                | String  | null    |          |

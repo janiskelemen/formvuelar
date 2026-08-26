@@ -81,7 +81,7 @@
   transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
-.fvl-dropzone-fade-enter,
+.fvl-dropzone-fade-enter-from,
 .fvl-dropzone-fade-leave-to {
   opacity: 0;
 }

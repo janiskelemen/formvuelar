@@ -6,7 +6,7 @@
 
 ```vue
 <fvl-search-select
-  :selected.sync="form.genre"
+  v-model="form.genre"
   :options="genreOptions"
   :search-keys="['name']"
   option-key="name"
@@ -21,7 +21,7 @@
 
 ```vue
 <fvl-search-select
-  :selected.sync="form.user"
+  v-model="form.user"
   :search-keys="['name']"
   :lazy-load="true"
   options-url="https://jsonplaceholder.typicode.com/users"
@@ -37,7 +37,7 @@
 
 ```vue
 <fvl-search-select
-  :selected.sync="form.user"
+  v-model="form.user"
   :search-keys="['search']"
   :search-remote="true"
   :lazy-load="true"
@@ -60,7 +60,7 @@ import { FvlSearchSelect } from 'formvuelar'
 
 | Property           | Description                                                                                                            | Type                        | Default | Required |
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------- | -------- |
-| selected.sync      | Selected value                                                                                                         | `String \| Number \| Array` |         | **true** |
+| v-model            | Selected value                                                                                                         | `String \| Number` |         | **true** |
 | options            | Key value object `{'key': 'value', ...}`                                                                               | Object                      |         |          |
 | name               | Input name                                                                                                             | String                      |         | **true** |
 | options-url        | Optional url to load option data from                                                                                  | String                      | null    |          |

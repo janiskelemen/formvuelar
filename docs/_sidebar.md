@@ -13,6 +13,7 @@
 
   - [About](/)
   - [Get Started](get-started.md)
+  - [Vue 3 Migration](vue-3-migration.md)
   - [Config](config.md)
   - [Custom Style](styling.md)
 
@@ -33,4 +34,6 @@
   - **File Inputs**
     - [File Input](components/file.md)
     - [Multi File Input](components/multi-file.md)
-    - [Dropzone](components/dropzone.md)
+  - [Dropzone](components/dropzone.md)
+  - [Date Picker](components/date-picker.md)
+  - [Extended Date Picker](components/date-picker-extended.md)

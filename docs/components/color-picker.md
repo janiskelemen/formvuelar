@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-color-picker :value.sync="form.color" name="color" label="Color" />
+<fvl-color-picker v-model="form.color" name="color" label="Color" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlColorPicker } from 'formvuelar'
 
 | Property    | Description                                | Type    | Default | Required |
 | ----------- | ------------------------------------------ | ------- | ------- | -------- |
-| value.sync  | ColorPicker value                          | String  |         | **true** |
+| v-model     | ColorPicker value                          | String  |         | **true** |
 | name        | ColorPicker name                           | String  |         | **true** |
 | id          | Id                                         | String  | null    |          |
 | label       | Label                                      | String  | null    |          |

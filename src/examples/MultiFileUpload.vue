@@ -7,16 +7,15 @@
         href="https://github.com/janiskelemen/formvuelar/blob/master/src/examples/MultiFileUpload.vue"
         target="_blank"
         class="float-right text-gray-600 hover:text-teal-500 text-xs"
-        >Full Source Code</a
-      >
+      >Full Source Code</a>
     </h3>
     <!-- Setup multipart form to support file uploads -->
     <fvl-form :data="form" url="/upload" multipart class="relative">
       <!-- Add source code toggle button (only for example) -->
       <source-toggle @toggle="showSource = !showSource" />
       <!-- File input component -->
-      <fvl-multi-file :files.sync="form.gallery" label="Gallery" name="gallery">
-        <template slot="button">
+      <fvl-multi-file v-model="form.gallery" label="Gallery" name="gallery">
+        <template #button>
           <svg class="fill-current text-white mr-2" width="18" height="16" xmlns="http://www.w3.org/2000/svg">
             <g fill-rule="nonzero">
               <path
@@ -33,7 +32,9 @@
       <!-- Source code area (only for example) -->
       <source-box :show-source="showSource" :source="source" />
       <!-- Submit button with upload loader indicator enabled -->
-      <fvl-submit loader> Upload </fvl-submit>
+      <fvl-submit loader>
+        Upload
+      </fvl-submit>
     </fvl-form>
   </div>
 </template>
@@ -55,15 +56,15 @@
     data() {
       return {
         form: {
-          gallery: null,
+          gallery: [],
         },
         showSource: false,
         source:
-          `<fvl-multi-file \n` +
-          `    label="Gallery" \n` +
-          `    name="gallery" \n` +
-          `    :files.sync="form.gallery" \n` +
-          `/> \n`,
+          `<fvl-multi-file\n` +
+          `    label="Gallery"\n` +
+          `    name="gallery"\n` +
+          `    v-model="form.gallery"\n` +
+          `/>\n`,
       }
     },
   }

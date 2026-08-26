@@ -3,7 +3,7 @@
 ### Template
 
 ```vue
-<fvl-switch label="Enable that Feature" name="feature" :checked.sync="form.feature" />
+<fvl-switch v-model="form.feature" label="Enable that Feature" name="feature" />
 ```
 
 ### Import Name
@@ -16,7 +16,7 @@ import { FvlSwitch } from 'formvuelar'
 
 | Property     | Description   | Type    | Default | Required |
 | ------------ | ------------- | ------- | ------- | -------- |
-| checked.sync | Checked value | String  |         | **true** |
+| v-model      | Checked value | Boolean |         | **true** |
 | name         | Input name    | String  |         | **true** |
 | id           | Id            | String  | null    |          |
 | label        | Label         | String  | null    |          |

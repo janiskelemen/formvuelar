@@ -1,10 +1,14 @@
 ## Global Config
 
-You might want to change some defaults globally for all your forms, to do this you just can overwrite them as a global property before registering your main vue instance:
+You can change defaults globally before mounting your Vue 3 application:
 
 ```javascript
-/* Register optional global FormVuelar config */
-Vue.prototype.$formvuelar = {
+import { createApp } from 'vue'
+import App from './App.vue'
+
+const app = createApp(App)
+
+app.config.globalProperties.$formvuelar = {
   noResultsText: 'No results found!',
   pleaseWaitText: 'Please wait...',
   addFileText: 'Add File',
@@ -36,4 +40,6 @@ Vue.prototype.$formvuelar = {
     }
   }
 }
+
+app.mount('#app')
 ```

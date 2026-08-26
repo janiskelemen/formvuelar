@@ -40,7 +40,7 @@
             </svg>
           </span>
           <input
-            v-if="allowNew && !(max !== null && selected !== null && selected.length >= max)"
+            v-if="allowNew && !(max !== null && modelValue !== null && modelValue.length >= max)"
             ref="inlineinput"
             v-model="query"
             autocapitalize="off"
@@ -141,14 +141,17 @@
   import OnClickOutside from './utilities/OnClickOutside.vue'
   import { parseEmailAddresses } from './utilities/parseEmailAddresses'
   import { config } from './mixins/config'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
       OnClickOutside,
     },
-    mixins: [config],
+    mixins: [config, formControl],
+    emits: ['changed', 'remoteError', 'remoteSuccess', 'update:modelValue'],
     props: {
-      selected: {
+      modelValue: {
         type: Array,
         default: null,
       },
@@ -284,9 +287,9 @@
         let $this = this
         let options = this.searchRemote ? this.remoteOptions : this.optionsList
         /* Hide selected items from options list */
-        if (this.selected) {
+        if (this.modelValue) {
           options = _filter(options, function (o) {
-            return $this.selected.indexOf(o[$this.optionKey]) === -1
+            return $this.modelValue.indexOf(o[$this.optionKey]) === -1
           })
         }
         if (!this.query || this.searchRemote) {
@@ -302,8 +305,8 @@
       selectedOptionValues() {
         let $this = this
         let options = []
-        if (!this.selected) return options
-        this.selected.forEach(function (element) {
+        if (!this.modelValue) return options
+        this.modelValue.forEach(function (element) {
           let option = _find($this.optionsList, function (o) {
             return o[$this.optionKey] == element
           })
@@ -319,7 +322,7 @@
       selectedOptionIndex() {
         let $this = this
         return _findKey(this.optionsList, function (o) {
-          return o[$this.optionKey] == $this.selected
+          return o[$this.optionKey] == $this.modelValue
         })
       },
     },
@@ -338,9 +341,9 @@
     },
     mounted() {
       if (!this.optionsUrl) return
-      if (!this.lazyLoad || this.selected) this.getRemoteOptions()
+      if (!this.lazyLoad || this.modelValue) this.getRemoteOptions()
     },
-    beforeDestroy() {
+    beforeUnmount() {
       if (this.popper !== undefined) {
         this.popper.destroy()
       }
@@ -348,12 +351,12 @@
     methods: {
       getErrors(name) {
         let errors = []
-        if (this.selected == '' && this.$parent.getErrors(name).length) {
-          errors.push(this.$parent.getErrors(name))
+        if ((!this.modelValue || !this.modelValue.length) && this.formGetErrors(name).length) {
+          errors.push(...this.formGetErrors(name))
         }
-        this.selected?.forEach((item, index) => {
-          if (this.$parent.getErrors(name + '.' + index).length) {
-            errors.push(this.$parent.getErrors(name + '.' + index))
+        this.modelValue?.forEach((item, index) => {
+          if (this.formGetErrors(name + '.' + index).length) {
+            errors.push(...this.formGetErrors(name + '.' + index))
           }
         })
 
@@ -361,12 +364,12 @@
       },
       hasErrors(name) {
         let errors = []
-        if (this.selected == '' && this.$parent.getErrors(name).length) {
+        if ((!this.modelValue || !this.modelValue.length) && this.formGetErrors(name).length) {
           return true
         }
-        this.selected?.forEach((item, index) => {
-          if (this.$parent.getErrors(name + '.' + index).length) {
-            errors.push(this.$parent.getErrors(name + '.' + index))
+        this.modelValue?.forEach((item, index) => {
+          if (this.formGetErrors(name + '.' + index).length) {
+            errors.push(...this.formGetErrors(name + '.' + index))
           }
         })
         return errors.length
@@ -376,7 +379,7 @@
         if (this.optionIsDisabled(option)) return
         let $this = this
         /* Add the selected option key to selected array */
-        let selected = this.selected === null ? [] : this.selected
+        let selected = this.modelValue === null ? [] : [...this.modelValue]
 
         if (this.max !== null && selected.length >= this.max) return
 
@@ -387,9 +390,9 @@
         if (elementexists || (!option && !this.filteredOptionsList.length)) return
 
         selected.push(option)
-        this.$emit('update:selected', selected)
+        this.$emit('update:modelValue', selected)
         this.$emit('changed')
-        this.$parent.dirty(this.name)
+        this.formDirty(this.name)
 
         if (this.allowNew) {
           this.focusInlineInput()
@@ -401,22 +404,22 @@
       },
       unselect(option) {
         /* Remove the selected option key from selected array */
-        let selected = this.selected === null ? [] : this.selected
+        let selected = this.modelValue === null ? [] : [...this.modelValue]
         selected.splice(
           this.selectedOptionValues.findIndex((item) => {
             return item == option || item == option[this.optionKey]
           }),
           1
         )
-        this.$emit('update:selected', selected)
+        this.$emit('update:modelValue', selected)
         this.$emit('changed')
-        this.$parent.dirty(this.name)
+        this.formDirty(this.name)
         this.$nextTick(() => {
           if (this.allowNew) this.focusInlineInput()
         })
       },
       removeTag(event) {
-        let selected = this.selected === null ? [] : this.selected
+        let selected = this.modelValue === null ? [] : [...this.modelValue]
         if (selected && !this.query) {
           let selectedIndex = selected.length - 1
           let value = selected[selectedIndex]
@@ -426,9 +429,6 @@
             event.preventDefault()
             this.query = value
           }
-          this.$emit('update:selected', selected)
-          this.$emit('changed')
-          this.$parent.dirty(this.name)
           this.close()
         }
         /* Close dropdown*/
@@ -448,7 +448,6 @@
           this.highlightedIndex > this.filteredOptionsList.length - 1
         ) {
           if (this.allowNew && this.query !== null && this.query.trimLeft() != '') {
-            console.log(this.$refs.inlineinput.checkValidity())
             this.select(this.query)
             return
           }
@@ -468,7 +467,7 @@
       open() {
         if (this.isOpen) return
         if (this.lazyLoad) this.getRemoteOptions()
-        if (this.max !== null && this.selected !== null && this.selected.length >= this.max) return
+        if (this.max !== null && this.modelValue !== null && this.modelValue.length >= this.max) return
         this.isOpen = true
         this.$nextTick(() => {
           this.setupPopper()
@@ -504,7 +503,7 @@
         }
       },
       preventNative(event) {
-        let selected = this.selected === null ? [] : this.selected
+        let selected = this.modelValue === null ? [] : this.modelValue
         /* Prevent tab if max selected amount has not been reached yet */
         if (this.max !== null && selected.length < this.max && event.keyCode == 9) {
           event.preventDefault()
@@ -522,8 +521,9 @@
         this.isOpen ? this.close() : this.open()
       },
       scrollToIndex(index) {
-        if (typeof this.$refs.options == 'undefined' || typeof this.$refs.options.children[index] == 'undefined') return
-        this.$refs.options.children[index].scrollIntoView({ block: 'nearest', inline: 'nearest' })
+        const option = this.$refs.options?.children?.[index]
+        if (!option) return
+        option.scrollIntoView({ block: 'nearest', inline: 'nearest' })
       },
       highlightNext() {
         this.highlightedIndex =
@@ -560,7 +560,7 @@
       addPastedEmails(text, event) {
         const input = event.target
         const emails = parseEmailAddresses(text)
-        let selected = this.selected === null ? [] : [...this.selected]
+        let selected = this.modelValue === null ? [] : [...this.modelValue]
         let addedAny = false
 
         for (const email of emails) {
@@ -577,9 +577,9 @@
         }
 
         if (addedAny) {
-          this.$emit('update:selected', selected)
+          this.$emit('update:modelValue', selected)
           this.$emit('changed')
-          this.$parent.dirty(this.name)
+          this.formDirty(this.name)
           this.reset()
           return true
         }
@@ -628,4 +628,3 @@
     },
   }
 </script>
-

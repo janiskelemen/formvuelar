@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-textarea-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-textarea-wrapper">
     <label v-if="label" :class="labelClass" :for="name" class="fvl-textarea-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -7,7 +7,7 @@
     <div class="fvl-input-group">
       <textarea
         :id="id"
-        :value="value"
+        :value="modelValue"
         :name="name"
         :placeholder="placeholder"
         :autocomplete="autocomplete"
@@ -20,23 +20,27 @@
         :readonly="readonly"
         :disabled="disabled"
         class="fvl-textarea"
-        @change="$parent.dirty(name), $emit('changed')"
-        @input="$parent.dirty(name), $emit('update:value', $event.target.value), $emit('input', $event)"
+        @change="handleChange"
+        @input="handleInput"
       ></textarea>
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
 
 <script>
   import ValidationErrors from './FvlErrors.vue'
+  import { formControl } from './mixins/formControl'
+
   export default {
     components: {
       ValidationErrors,
     },
+    mixins: [formControl],
+    emits: ['changed', 'input', 'update:modelValue'],
     props: {
       label: {
         type: String,
@@ -51,7 +55,7 @@
         type: String,
         default: null,
       },
-      value: {
+      modelValue: {
         validator: (prop) => typeof prop === 'string' || prop === null,
         default: '',
       },
@@ -111,6 +115,16 @@
         default: false,
       },
     },
+    methods: {
+      handleChange() {
+        this.formDirty(this.name)
+        this.$emit('changed')
+      },
+      handleInput(event) {
+        this.formDirty(this.name)
+        this.$emit('update:modelValue', event.target.value)
+        this.$emit('input', event)
+      },
+    },
   }
 </script>
-

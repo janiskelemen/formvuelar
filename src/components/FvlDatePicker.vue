@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-input-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-input-wrapper">
     <label v-if="label" :class="labelClass" :for="name" class="fvl-input-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -15,14 +15,14 @@
         :required="required"
         :readonly="readonly"
         :disabled="disabled"
-        @on-change="$parent.dirty(name), $emit('changed')"
+        @on-change="handleChange"
         @on-close="$emit('closed')"
       />
       <slot name="suffix" />
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
@@ -30,12 +30,15 @@
 <script>
   import ValidationErrors from './FvlErrors.vue'
   import flatPickr from 'vue-flatpickr-component'
+  import { formControl } from './mixins/formControl'
 
   export default {
     components: {
       ValidationErrors,
       flatPickr,
     },
+    mixins: [formControl],
+    emits: ['changed', 'closed', 'update:end', 'update:modelValue', 'update:start'],
     props: {
       label: {
         type: String,
@@ -50,8 +53,8 @@
         type: String,
         default: null,
       },
-      value: {
-        type: String | Array,
+      modelValue: {
+        type: [String, Array, Object],
         default: '',
       },
       start: {
@@ -115,24 +118,23 @@
     },
     data() {
       return {
-        inputvalue: this.config.mode == 'range' && this.start && this.end ? this.start + ' - ' + this.end : this.value,
+        inputvalue:
+          this.config.mode == 'range' && this.start && this.end
+            ? this.start + ' - ' + this.end
+            : this.modelValue,
       }
     },
     computed: {
       flatpickrConfig() {
-        let config = this.config
-        /* Change range seperator */
-        if (this.config.mode == 'range' && config.locale) {
-          config.locale.rangeSeparator = ' - '
-        }
-        if (this.config.mode == 'range' && !config.locale) {
-          config.locale = { rangeSeparator: ' - ' }
+        const config = { ...this.config }
+        if (this.config.mode == 'range') {
+          config.locale = { ...(config.locale || {}), rangeSeparator: ' - ' }
         }
         return config
       },
     },
     watch: {
-      value(newValue, oldValue) {
+      modelValue(newValue, oldValue) {
         if (this.config.mode != 'range' && oldValue != newValue) {
           this.inputvalue = newValue
         }
@@ -144,14 +146,17 @@
           formatedValue = { start: newValueParts[0], end: newValueParts[1] }
           this.$emit('update:start', formatedValue.start)
           this.$emit('update:end', formatedValue.end)
-          if (oldValue != formatedValue) {
-            // console.log(oldValue, formatedValue)
-            this.$emit('update:value', formatedValue)
-          }
+          if (oldValue != formatedValue) this.$emit('update:modelValue', formatedValue)
         } else {
           formatedValue = newValue
-          this.$emit('update:value', formatedValue)
+          this.$emit('update:modelValue', formatedValue)
         }
+      },
+    },
+    methods: {
+      handleChange() {
+        this.formDirty(this.name)
+        this.$emit('changed')
       },
     },
   }

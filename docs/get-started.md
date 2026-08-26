@@ -4,6 +4,8 @@
 npm install formvuelar --save
 ```
 
+FormVuelar 2 requires Vue 3. Vue 2 applications should install `formvuelar@1.8.15`.
+
 ## Styling
 
 I'm using <a href="https://tailwindcss.com">Tailwind CSS</a> for the examples.
@@ -11,7 +13,7 @@ Feel free to use the predefined css component classes for your own projects.
 You can import them like this:
 
 ```css
-@import '~formvuelar/dist/formvuelar.css';
+@import 'formvuelar/style.css';
 ```
 
 ## Available Components
@@ -28,10 +30,13 @@ The following components are shipped with FormVuelar:
 | `<fvl-multi-checkbox />` | Nested checkbox input field | `import { FvlMultiCheckbox } from 'formvuelar'` |
 | `<fvl-select />`         | Select input field          | `import { FvlSelect } from 'formvuelar'`        |
 | `<fvl-search-select />`  | Select with search          | `import { FvlSearchSelect } from 'formvuelar'`  |
+| `<fvl-tag-select />`     | Multi-select with tags      | `import { FvlTagSelect } from 'formvuelar'`     |
 | `<fvl-file />`           | File input field            | `import { FvlFile } from 'formvuelar'`          |
+| `<fvl-image />`          | Image input with preview    | `import { FvlImage } from 'formvuelar'`         |
 | `<fvl-slider />`         | Slider input field          | `import { FvlSlider } from 'formvuelar'`        |
 | `<fvl-multi-file />`     | Multi file input field      | `import { FvlMultiFile } from 'formvuelar'`     |
 | `<fvl-dropzone />`       | Dropzone field              | `import { FvlDropzone } from 'formvuelar'`      |
+| `<fvl-date-picker />`    | Flatpickr date input        | `import { FvlDatePicker } from 'formvuelar'`    |
 | `<fvl-submit />`         | Submit button               | `import { FvlSubmit } from 'formvuelar'`        |
 
 ## Basic Form Template
@@ -42,13 +47,13 @@ Create a form and sent it via post request to your server.
 <!-- form wrapper -->
 <fvl-form method="post" :data="form" url="/create">
   <!-- Text input component -->
-  <fvl-input :value.sync="form.fullname" label="Full Name" name="fullname" />
+  <fvl-input v-model="form.fullname" label="Full Name" name="fullname" />
 
   <!-- Textarea component -->
-  <fvl-textarea :value.sync="form.bio" label="Bio" name="bio" />
+  <fvl-textarea v-model="form.bio" label="Bio" name="bio" />
 
   <!-- Radio component with options -->
-  <fvl-radio :checked.sync="form.pet" :options="{'cat': 'Cat', 'dog': 'Dog'}" label="Favorite pet" name="pet" />
+  <fvl-radio v-model="form.pet" :options="{ cat: 'Cat', dog: 'Dog' }" label="Favorite pet" name="pet" />
 
   <!-- Submit button -->
   <fvl-submit>Validate</fvl-submit>
@@ -102,5 +107,5 @@ The response from your Backend should contain a Json error object and have a sta
 You can still use the default HTML5 validation rules for all input fields like 'accept' and 'required' for file inputs:
 
 ```html
-<fvl-file label="Avatar" name="avatar" :file.sync="form.avatar" accept="image/*" required />
+<fvl-file v-model="form.avatar" label="Avatar" name="avatar" accept="image/*" required />
 ```

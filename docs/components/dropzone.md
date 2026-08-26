@@ -6,7 +6,7 @@
 ### Template
 
 ```vue
-<fvl-dropzone label="Media" name="media" :files.sync="form.media" />
+<fvl-dropzone v-model="form.media" label="Media" name="media" />
 ```
 
 ### Import Name
@@ -19,7 +19,7 @@ import { FvlDropzone } from 'formvuelar'
 
 | Property   | Description           | Type    | Default | Required |
 | ---------- | --------------------- | ------- | ------- | -------- |
-| files.sync | Array of File Objects | Array   |         | **true** |
+| v-model    | Array of File objects | Array   | `[]`    | **true** |
 | name       | Input name            | String  |         | **true** |
 | id         | Id                    | String  | null    |          |
 | label      | Label                 | String  | null    |          |

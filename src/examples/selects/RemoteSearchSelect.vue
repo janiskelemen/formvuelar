@@ -15,7 +15,7 @@
       <source-toggle @toggle="showSource = !showSource" />
       <!-- Search Select input component -->
       <fvl-search-select
-        :selected.sync="form.user"
+        v-model="form.user"
         :search-keys="['name']"
         :lazy-load="true"
         :select-first="true"
@@ -53,16 +53,16 @@
         },
         showSource: false,
         source:
-          `<fvl-search-select  \n` +
-          `   :selected.sync="form.user"  \n` +
-          `   :search-keys="['name']" \n` +
-          `   :lazy-load="true" \n` +
-          `   options-url="https://jsonplaceholder.typicode.com/users"  \n` +
-          `   option-key="id" \n` +
-          `   option-value="name" \n` +
-          `   name="user" \n` +
-          `   label="Select a user" \n` +
-          `   placeholder="Select user..." \n` +
+          `<fvl-search-select\n` +
+          `   v-model="form.user"\n` +
+          `   :search-keys="['name']"\n` +
+          `   :lazy-load="true"\n` +
+          `   options-url="https://jsonplaceholder.typicode.com/users"\n` +
+          `   option-key="id"\n` +
+          `   option-value="name"\n` +
+          `   name="user"\n` +
+          `   label="Select a user"\n` +
+          `   placeholder="Select user..."\n` +
           `/>\n`
       }
     }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'fvl-has-error': $parent.hasErrors(name) }" class="fvl-file-wrapper">
+  <div :class="{ 'fvl-has-error': formHasErrors(name) }" class="fvl-file-wrapper">
     <label v-if="label" :for="name" :class="labelClass" class="fvl-file-label">
       <span v-html="label"></span>
       <slot name="label_suffix" />
@@ -20,15 +20,15 @@
         :required="required"
         :readonly="readonly"
         :accept="accept"
-        :disabled="disabled || $parent.isLoading"
+        :disabled="disabled || formIsLoading"
         type="file"
         class="fvl-file"
-        @change="handleFileChange(), $emit('changed'), $parent.dirty(name)"
+        @change="handleFileChange"
       />
     </div>
     <slot name="hint" />
-    <slot :errors="$parent.getErrors(name)" name="errors">
-      <validation-errors :errors="$parent.getErrors(name)" />
+    <slot :errors="formGetErrors(name)" name="errors">
+      <validation-errors :errors="formGetErrors(name)" />
     </slot>
   </div>
 </template>
@@ -36,15 +36,20 @@
 <script>
   import ValidationErrors from './FvlErrors.vue'
   import { config } from './mixins/config'
+  import { formControl } from './mixins/formControl'
+
+  const isFile = (value) => typeof File !== 'undefined' && value instanceof File
+
   export default {
     components: {
       ValidationErrors,
     },
-    mixins: [config],
+    mixins: [config, formControl],
+    emits: ['changed', 'update:modelValue'],
     props: {
-      file: {
-        type: File | String,
+      modelValue: {
         default: null,
+        validator: (value) => value === null || typeof value === 'string' || isFile(value),
       },
       label: {
         type: String,
@@ -97,28 +102,23 @@
     },
     data() {
       return {
-        fileName: '',
+        fileName: isFile(this.modelValue) ? this.modelValue.name : '',
       }
     },
     watch: {
-      file(newValue) {
-        /* Emit null up if given value is not a File object */
-        if (!(newValue instanceof File)) this.$emit('update:file', '')
+      modelValue(newValue) {
+        this.fileName = isFile(newValue) ? newValue.name : ''
       },
     },
-    mounted() {
-      if (!(this.file instanceof File)) {
-        this.$emit('update:file', '')
-      }
-    },
     methods: {
-      //Handles a change on the file upload
-      handleFileChange() {
-        let file = this.$refs[this.name].files[0]
+      handleFileChange(event) {
+        const file = event.target.files[0]
+        if (!file) return
         this.fileName = file.name
-        this.$emit('update:file', file)
+        this.$emit('update:modelValue', file)
+        this.$emit('changed')
+        this.formDirty(this.name)
       },
     },
   }
 </script>
-
