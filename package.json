@@ -57,7 +57,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.33.0",
-    "happy-dom": "^20.11.6",
+    "happy-dom": "^21.0.4",
     "highlight.js": "^11.11.1",
     "postcss": "^8.5.15",
     "sass": "^1.101.0",
